@@ -1,0 +1,19 @@
+model:
+  name: mlp               # mlp | lstm | gru  (override with --model.name)
+  dropout: 0.1
+  hidden: 128             # RNN hidden size
+  n_layers: 2
+train:
+  lr: 1e-3
+  weight_decay: 1e-4
+  batch_size: 256
+  accum_steps: 1
+  epochs: 30
+  warmup_steps: 300
+  patience: 8
+  grad_clip: 1.0
+  weighted_sampler: true
+  num_workers: 4
+data:
+  norm_mode: global
+seed_list: [42, 43, 44]

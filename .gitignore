@@ -1,0 +1,21 @@
+# data artifacts
+data/raw/
+data/processed/
+
+# experiment artifacts (results/*.json + tables are committed)
+experiments/runs/
+experiments/results/**/*.pt
+experiments/results/**/*.ckpt
+
+# third party clones
+third_party/
+
+# python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+
+# misc
+*.log
+.DS_Store

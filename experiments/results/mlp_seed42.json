@@ -1,0 +1,58 @@
+{
+  "model": "mlp",
+  "llm": null,
+  "seed": 42,
+  "norm_mode": "global",
+  "smoke": false,
+  "config": {
+    "model": {
+      "name": "mlp",
+      "dropout": 0.1,
+      "hidden": 128,
+      "n_layers": 2
+    },
+    "train": {
+      "lr": "1e-3",
+      "weight_decay": "1e-4",
+      "batch_size": 256,
+      "accum_steps": 1,
+      "epochs": 30,
+      "warmup_steps": 300,
+      "patience": 8,
+      "grad_clip": 1.0,
+      "weighted_sampler": true,
+      "num_workers": 4
+    },
+    "data": {
+      "norm_mode": "global"
+    },
+    "seed_list": [
+      42,
+      43,
+      44
+    ]
+  },
+  "val_metrics": {
+    "acc": 0.7874505370265686,
+    "f1_bin": 0.7907623817473567,
+    "f1_macro": 0.7873972735847639,
+    "auc": 0.90559400062618
+  },
+  "test_metrics": {
+    "acc": 0.629904176459953,
+    "f1_bin": 0.7139463387367244,
+    "f1_macro": 0.594940399271076,
+    "auc": 0.6681262249927675
+  },
+  "val_macro_f1_best": 0.7873972735847639,
+  "epochs_run": 9,
+  "train_wall_s": 10.3,
+  "peak_vram_gb": 0.0,
+  "n_params_trainable": 135810,
+  "n_params_total": 135810,
+  "majority_baseline_test": {
+    "acc": 0.5858795877779787,
+    "f1_bin": 0.7388702046400274,
+    "f1_macro": 0.3694351023200137
+  }
+}

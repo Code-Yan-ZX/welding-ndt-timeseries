@@ -1,0 +1,58 @@
+{
+  "model": "gru",
+  "llm": null,
+  "seed": 42,
+  "norm_mode": "global",
+  "smoke": true,
+  "config": {
+    "model": {
+      "name": "gru",
+      "dropout": 0.1,
+      "hidden": 128,
+      "n_layers": 2
+    },
+    "train": {
+      "lr": "1e-3",
+      "weight_decay": "1e-4",
+      "batch_size": 256,
+      "accum_steps": 1,
+      "epochs": 1,
+      "warmup_steps": 300,
+      "patience": 8,
+      "grad_clip": 1.0,
+      "weighted_sampler": true,
+      "num_workers": 4
+    },
+    "data": {
+      "norm_mode": "global"
+    },
+    "seed_list": [
+      42,
+      43,
+      44
+    ]
+  },
+  "val_metrics": {
+    "acc": 0.5234375,
+    "f1_bin": 0.0,
+    "f1_macro": 0.3435897435897436,
+    "auc": 0.13363942454851546
+  },
+  "test_metrics": {
+    "acc": 0.4140625,
+    "f1_bin": 0.0,
+    "f1_macro": 0.292817679558011,
+    "auc": 0.31522012578616354
+  },
+  "val_macro_f1_best": 0.3435897435897436,
+  "epochs_run": 1,
+  "train_wall_s": 0.5,
+  "peak_vram_gb": 0.0,
+  "n_params_trainable": 150018,
+  "n_params_total": 150018,
+  "majority_baseline_test": {
+    "acc": 0.5859375,
+    "f1_bin": 0.7389162561576355,
+    "f1_macro": 0.3694581280788177
+  }
+}

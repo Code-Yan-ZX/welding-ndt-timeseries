@@ -1,0 +1,93 @@
+{
+  "model": "official_mlp",
+  "llm": null,
+  "seed": 42,
+  "norm_mode": "official(MyScaler/global)",
+  "smoke": false,
+  "config": {
+    "ckpt": "/media/disk2/YZX/research/welding-ndt-timeseries/third_party/VQ-VAE-Transformer-Arc-Welding/model_checkpoints/MLP-asimow-best.ckpt",
+    "vqvae_ckpt": null,
+    "n_cycles": 5,
+    "canonical_val_pairs": [
+      [
+        3,
+        32
+      ],
+      [
+        3,
+        18
+      ],
+      [
+        1,
+        27
+      ],
+      [
+        3,
+        19
+      ],
+      [
+        3,
+        17
+      ],
+      [
+        2,
+        21
+      ],
+      [
+        1,
+        20
+      ],
+      [
+        1,
+        11
+      ]
+    ],
+    "canonical_test_pairs": [
+      [
+        3,
+        3
+      ],
+      [
+        2,
+        10
+      ],
+      [
+        1,
+        24
+      ],
+      [
+        3,
+        24
+      ],
+      [
+        1,
+        32
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        1,
+        10
+      ],
+      [
+        1,
+        16
+      ]
+    ]
+  },
+  "note": "official tmdt-buw checkpoint re-evaluated on canonical (paper-convention) splits",
+  "val_metrics": {
+    "acc": 0.7475378787878788,
+    "f1_bin": 0.678562816493851,
+    "f1_macro": 0.7353518900807006,
+    "auc": 0.8769680125345402
+  },
+  "test_metrics": {
+    "acc": 0.7150254360465116,
+    "f1_bin": 0.7514853838231799,
+    "f1_macro": 0.7087566384675359,
+    "auc": 0.7356699463886109
+  }
+}

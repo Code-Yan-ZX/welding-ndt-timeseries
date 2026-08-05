@@ -1,0 +1,21 @@
+model:
+  name: dlinear           # dlinear | timesnet  (override with --model.name)
+  kernel_size: 25         # dlinear moving-average kernel
+  top_k: 3                # timesnet
+  e_layers: 2             # timesnet
+  d_model: 64             # timesnet
+  d_ff: 128               # timesnet
+train:
+  lr: 1e-3
+  weight_decay: 1e-4
+  batch_size: 256
+  accum_steps: 1
+  epochs: 30
+  warmup_steps: 300
+  patience: 8
+  grad_clip: 1.0
+  weighted_sampler: true
+  num_workers: 4
+data:
+  norm_mode: global
+seed_list: [42, 43, 44]

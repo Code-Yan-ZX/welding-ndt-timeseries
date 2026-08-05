@@ -1,0 +1,60 @@
+{
+  "model": "dlinear",
+  "llm": null,
+  "seed": 42,
+  "norm_mode": "global",
+  "smoke": true,
+  "config": {
+    "model": {
+      "name": "dlinear",
+      "kernel_size": 25,
+      "top_k": 3,
+      "e_layers": 2,
+      "d_model": 64,
+      "d_ff": 128
+    },
+    "train": {
+      "lr": "1e-3",
+      "weight_decay": "1e-4",
+      "batch_size": 256,
+      "accum_steps": 1,
+      "epochs": 1,
+      "warmup_steps": 300,
+      "patience": 8,
+      "grad_clip": 1.0,
+      "weighted_sampler": true,
+      "num_workers": 4
+    },
+    "data": {
+      "norm_mode": "global"
+    },
+    "seed_list": [
+      42,
+      43,
+      44
+    ]
+  },
+  "val_metrics": {
+    "acc": 0.5546875,
+    "f1_bin": 0.109375,
+    "f1_macro": 0.40625,
+    "auc": 0.5718396082032445
+  },
+  "test_metrics": {
+    "acc": 0.453125,
+    "f1_bin": 0.13580246913580246,
+    "f1_macro": 0.36790123456790125,
+    "auc": 0.5231446540880504
+  },
+  "val_macro_f1_best": 0.40625,
+  "epochs_run": 1,
+  "train_wall_s": 0.5,
+  "peak_vram_gb": 0.0,
+  "n_params_trainable": 161602,
+  "n_params_total": 161602,
+  "majority_baseline_test": {
+    "acc": 0.5859375,
+    "f1_bin": 0.7389162561576355,
+    "f1_macro": 0.3694581280788177
+  }
+}

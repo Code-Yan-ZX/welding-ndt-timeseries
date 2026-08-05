@@ -1,0 +1,63 @@
+{
+  "model": "itformer_qa",
+  "llm": "/media/disk2/YZX/doct/LLaMA-Factory/Qwen3-1.7B-Base",
+  "seed": 42,
+  "norm_mode": "global",
+  "smoke": false,
+  "config": {
+    "model": {
+      "name": "itformer_qa",
+      "llm_path": "/media/disk2/YZX/doct/LLaMA-Factory/Qwen3-1.7B-Base",
+      "prefix_num": 25,
+      "d_model": 512,
+      "n_heads": 8,
+      "it_layers": 2,
+      "enc_layers": 4,
+      "patch_len": 20,
+      "dropout": 0.1
+    },
+    "train": {
+      "lr": 1e-05,
+      "weight_decay": 0.01,
+      "batch_size": 32,
+      "accum_steps": 1,
+      "epochs": 1,
+      "warmup_steps": 300,
+      "patience": 2,
+      "grad_clip": 1.0,
+      "weighted_sampler": true,
+      "num_workers": 0
+    },
+    "data": {
+      "norm_mode": "global"
+    },
+    "seed_list": [
+      42,
+      43,
+      44
+    ]
+  },
+  "val_metrics": {
+    "acc": 0.7594686263425664,
+    "f1_bin": 0.7291246684350132,
+    "f1_macro": 0.7564118639980708,
+    "auc": 0.8960542893002861
+  },
+  "test_metrics": {
+    "acc": 0.6456337009582354,
+    "f1_bin": 0.6524822695035462,
+    "f1_macro": 0.6454960222471622,
+    "auc": 0.6673804889890051
+  },
+  "val_macro_f1_best": 0.7564118639980708,
+  "epochs_run": 1,
+  "train_wall_s": 975.7,
+  "peak_vram_gb": 5.15,
+  "n_params_trainable": 33631744,
+  "n_params_total": 1754206720,
+  "majority_baseline_test": {
+    "acc": 0.5858795877779787,
+    "f1_bin": 0.7388702046400274,
+    "f1_macro": 0.3694351023200137
+  }
+}

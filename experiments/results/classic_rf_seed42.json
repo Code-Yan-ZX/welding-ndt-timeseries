@@ -1,0 +1,33 @@
+{
+  "model": "classic_rf",
+  "llm": null,
+  "seed": 42,
+  "norm_mode": "raw+features",
+  "smoke": false,
+  "config": {
+    "n_features": 48
+  },
+  "val_metrics": {
+    "acc": 0.7359148294705107,
+    "f1_bin": 0.6635457928219901,
+    "f1_macro": 0.7231042137716215,
+    "auc": 0.9065318475663
+  },
+  "test_metrics": {
+    "acc": 0.7029470258542759,
+    "f1_bin": 0.7547028963869812,
+    "f1_macro": 0.6891067185876244,
+    "auc": 0.8037735511601238
+  },
+  "val_macro_f1_best": 0.7231042137716215,
+  "epochs_run": null,
+  "train_wall_s": 10.9,
+  "peak_vram_gb": 0.0,
+  "n_params_trainable": 0,
+  "n_params_total": 0,
+  "majority_baseline_test": {
+    "acc": 0.5858795877779787,
+    "f1_bin": 0.7388702046400274,
+    "f1_macro": 0.3694351023200137
+  }
+}

@@ -1,0 +1,24 @@
+model:
+  name: itformer_qa
+  llm_path: /media/disk2/YZX/doct/LLaMA-Factory/Qwen3-8B
+  prefix_num: 25
+  d_model: 512
+  n_heads: 8
+  it_layers: 2
+  enc_layers: 4
+  patch_len: 20
+  dropout: 0.1
+train:
+  lr: 5e-5
+  weight_decay: 0.01
+  batch_size: 16
+  accum_steps: 2          # effective batch 32
+  epochs: 5
+  warmup_steps: 300
+  patience: 2
+  grad_clip: 1.0
+  weighted_sampler: true
+  num_workers: 2
+data:
+  norm_mode: global
+seed_list: [42, 43, 44]

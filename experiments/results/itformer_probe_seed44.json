@@ -1,0 +1,62 @@
+{
+  "model": "itformer_probe",
+  "llm": null,
+  "seed": 44,
+  "norm_mode": "global",
+  "smoke": false,
+  "config": {
+    "model": {
+      "name": "itformer_probe",
+      "prefix_num": 25,
+      "d_model": 512,
+      "n_heads": 8,
+      "it_layers": 2,
+      "enc_layers": 4,
+      "patch_len": 20,
+      "dropout": 0.1
+    },
+    "train": {
+      "lr": "1e-4",
+      "weight_decay": "1e-4",
+      "batch_size": 256,
+      "accum_steps": 1,
+      "epochs": 20,
+      "warmup_steps": 300,
+      "patience": 5,
+      "grad_clip": 1.0,
+      "weighted_sampler": true,
+      "num_workers": 4
+    },
+    "data": {
+      "norm_mode": "global"
+    },
+    "seed_list": [
+      42,
+      43,
+      44
+    ]
+  },
+  "val_metrics": {
+    "acc": 0.7959299039005088,
+    "f1_bin": 0.7714707744249841,
+    "f1_macro": 0.7935651744465346,
+    "auc": 0.9143985427131691
+  },
+  "test_metrics": {
+    "acc": 0.6634424154764057,
+    "f1_bin": 0.6699760659516001,
+    "f1_macro": 0.6633104529702665,
+    "auc": 0.6900914604007126
+  },
+  "val_macro_f1_best": 0.7935651744465346,
+  "epochs_run": 7,
+  "train_wall_s": 312.2,
+  "peak_vram_gb": 0.0,
+  "n_params_trainable": 31535618,
+  "n_params_total": 31535618,
+  "majority_baseline_test": {
+    "acc": 0.5858795877779787,
+    "f1_bin": 0.7388702046400274,
+    "f1_macro": 0.3694351023200137
+  }
+}

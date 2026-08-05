@@ -1,0 +1,23 @@
+model:
+  name: itformer_probe
+  prefix_num: 25
+  d_model: 512
+  n_heads: 8
+  it_layers: 2
+  enc_layers: 4
+  patch_len: 20
+  dropout: 0.1
+train:
+  lr: 1e-4
+  weight_decay: 1e-4
+  batch_size: 256
+  accum_steps: 1
+  epochs: 20
+  warmup_steps: 300
+  patience: 5
+  grad_clip: 1.0
+  weighted_sampler: true
+  num_workers: 4
+data:
+  norm_mode: global
+seed_list: [42, 43, 44]

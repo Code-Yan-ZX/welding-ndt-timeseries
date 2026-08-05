@@ -1,0 +1,93 @@
+{
+  "model": "official_vqvae_mlp",
+  "llm": null,
+  "seed": 42,
+  "norm_mode": "official(MyScaler/global)",
+  "smoke": false,
+  "config": {
+    "ckpt": "/media/disk2/YZX/research/welding-ndt-timeseries/third_party/VQ-VAE-Transformer-Arc-Welding/model_checkpoints/MLP-latent_vq_vae-best.ckpt",
+    "vqvae_ckpt": "/media/disk2/YZX/research/welding-ndt-timeseries/third_party/VQ-VAE-Transformer-Arc-Welding/model_checkpoints/VQ-VAE-Patch/VQ-VAE-Patch-best.ckpt",
+    "n_cycles": 5,
+    "canonical_val_pairs": [
+      [
+        3,
+        32
+      ],
+      [
+        3,
+        18
+      ],
+      [
+        1,
+        27
+      ],
+      [
+        3,
+        19
+      ],
+      [
+        3,
+        17
+      ],
+      [
+        2,
+        21
+      ],
+      [
+        1,
+        20
+      ],
+      [
+        1,
+        11
+      ]
+    ],
+    "canonical_test_pairs": [
+      [
+        3,
+        3
+      ],
+      [
+        2,
+        10
+      ],
+      [
+        1,
+        24
+      ],
+      [
+        3,
+        24
+      ],
+      [
+        1,
+        32
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        1,
+        10
+      ],
+      [
+        1,
+        16
+      ]
+    ]
+  },
+  "note": "official tmdt-buw checkpoint re-evaluated on canonical (paper-convention) splits",
+  "val_metrics": {
+    "acc": 0.7098689791686305,
+    "f1_bin": 0.6992378346687512,
+    "f1_macro": 0.7095060258558614,
+    "auc": 0.8229415122527515
+  },
+  "test_metrics": {
+    "acc": 0.6448403726146332,
+    "f1_bin": 0.7228456489519374,
+    "f1_macro": 0.6142862605993167,
+    "auc": 0.6752526279075037
+  }
+}

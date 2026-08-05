@@ -1,0 +1,60 @@
+{
+  "model": "timesnet",
+  "llm": null,
+  "seed": 44,
+  "norm_mode": "global",
+  "smoke": false,
+  "config": {
+    "model": {
+      "name": "timesnet",
+      "kernel_size": 25,
+      "top_k": 3,
+      "e_layers": 2,
+      "d_model": 64,
+      "d_ff": 128
+    },
+    "train": {
+      "lr": "1e-3",
+      "weight_decay": "1e-4",
+      "batch_size": 256,
+      "accum_steps": 1,
+      "epochs": 30,
+      "warmup_steps": 300,
+      "patience": 8,
+      "grad_clip": 1.0,
+      "weighted_sampler": true,
+      "num_workers": 4
+    },
+    "data": {
+      "norm_mode": "global"
+    },
+    "seed_list": [
+      42,
+      43,
+      44
+    ]
+  },
+  "val_metrics": {
+    "acc": 0.8119464857735067,
+    "f1_bin": 0.8089220754355734,
+    "f1_macro": 0.8118993608489311,
+    "auc": 0.8832329498718194
+  },
+  "test_metrics": {
+    "acc": 0.569788465015368,
+    "f1_bin": 0.6535633690034214,
+    "f1_macro": 0.5430687955068376,
+    "auc": 0.6212830876249319
+  },
+  "val_macro_f1_best": 0.8118993608489311,
+  "epochs_run": 9,
+  "train_wall_s": 528.6,
+  "peak_vram_gb": 0.0,
+  "n_params_trainable": 4704450,
+  "n_params_total": 4704450,
+  "majority_baseline_test": {
+    "acc": 0.5858795877779787,
+    "f1_bin": 0.7388702046400274,
+    "f1_macro": 0.3694351023200137
+  }
+}

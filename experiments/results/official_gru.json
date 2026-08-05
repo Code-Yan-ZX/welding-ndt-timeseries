@@ -1,0 +1,93 @@
+{
+  "model": "official_gru",
+  "llm": null,
+  "seed": 42,
+  "norm_mode": "official(MyScaler/global)",
+  "smoke": false,
+  "config": {
+    "ckpt": "/media/disk2/YZX/research/welding-ndt-timeseries/third_party/VQ-VAE-Transformer-Arc-Welding/model_checkpoints/GRU-asimow-best.ckpt",
+    "vqvae_ckpt": null,
+    "n_cycles": 5,
+    "canonical_val_pairs": [
+      [
+        3,
+        32
+      ],
+      [
+        3,
+        18
+      ],
+      [
+        1,
+        27
+      ],
+      [
+        3,
+        19
+      ],
+      [
+        3,
+        17
+      ],
+      [
+        2,
+        21
+      ],
+      [
+        1,
+        20
+      ],
+      [
+        1,
+        11
+      ]
+    ],
+    "canonical_test_pairs": [
+      [
+        3,
+        3
+      ],
+      [
+        2,
+        10
+      ],
+      [
+        1,
+        24
+      ],
+      [
+        3,
+        24
+      ],
+      [
+        1,
+        32
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        1,
+        10
+      ],
+      [
+        1,
+        16
+      ]
+    ]
+  },
+  "note": "official tmdt-buw checkpoint re-evaluated on canonical (paper-convention) splits",
+  "val_metrics": {
+    "acc": 0.7392992424242424,
+    "f1_bin": 0.6766881972988843,
+    "f1_macro": 0.7291414013071177,
+    "auc": 0.89500740844701
+  },
+  "test_metrics": {
+    "acc": 0.6713299418604651,
+    "f1_bin": 0.7417558886509636,
+    "f1_macro": 0.6449224109754943,
+    "auc": 0.7367136659436008
+  }
+}

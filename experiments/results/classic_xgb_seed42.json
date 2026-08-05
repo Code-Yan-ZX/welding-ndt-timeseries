@@ -1,0 +1,33 @@
+{
+  "model": "classic_xgb",
+  "llm": null,
+  "seed": 42,
+  "norm_mode": "raw+features",
+  "smoke": false,
+  "config": {
+    "n_features": 48
+  },
+  "val_metrics": {
+    "acc": 0.7379875635952515,
+    "f1_bin": 0.6677022344366113,
+    "f1_macro": 0.7257167366288353,
+    "auc": 0.8987215328298203
+  },
+  "test_metrics": {
+    "acc": 0.701952630627373,
+    "f1_bin": 0.750018955189931,
+    "f1_macro": 0.6905103169906006,
+    "auc": 0.7869465363483695
+  },
+  "val_macro_f1_best": 0.7257167366288353,
+  "epochs_run": null,
+  "train_wall_s": 2.0,
+  "peak_vram_gb": 0.0,
+  "n_params_trainable": 0,
+  "n_params_total": 0,
+  "majority_baseline_test": {
+    "acc": 0.5858795877779787,
+    "f1_bin": 0.7388702046400274,
+    "f1_macro": 0.3694351023200137
+  }
+}

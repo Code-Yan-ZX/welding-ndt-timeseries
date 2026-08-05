@@ -1,0 +1,13 @@
+root: null            # filled at runtime: repo root
+csv_path: data/raw/processed_asimow_dataset.csv
+processed_dir: data/processed
+norm_mode: global     # global | cycle_z | none
+chunksize: 50000
+seed: 42
+
+splits:
+  # canonical = paper / Zenodo README convention (NOT the official repo's
+  # variable names, which are swapped -- see src/wndt/data/splits.py)
+  val_pairs:  [[3,32],[3,18],[1,27],[3,19],[3,17],[2,21],[1,20],[1,11]]
+  test_pairs: [[3,3],[2,10],[1,24],[3,24],[1,32],[2,1],[1,10],[1,16]]
+  expected_counts: {train: 74732, val: 10614, test: 11062}   # v2 labeled rows
