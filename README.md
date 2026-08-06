@@ -64,6 +64,21 @@ python scripts/saw_classic_ml.py            # RF / XGBoost
 python scripts/saw_make_table.py            # 汇总表
 ```
 
+## PAUT 相控阵超声缺陷检测实验（NDT 信号，本轮新进展）
+
+延续项目方向，把输入从工艺信号推进到**真正的无损检测信号**。解析 SAW 数据集里的 **PAUT `.nde` 文件**（Evident/OmniScan X3 的 HDF5 容器，11 个，PP3–PP7 的 `2. ndt_data` 目录），提取每扫描位置的 49 波束 A-scan/B-scan（Group 0，71°，3500 采样 max-pool 降至 512），以 `defects_xlocation` 的局部缺陷（轴向 < 50 mm）为监督做**位置级缺陷检测**（贯穿型大裂纹 ≥ 50 mm 作背景，避免位置级退化）。划分与 SAW 一致（train PP3/4/5、val PP6、test PP7）以利跨模态对照。
+
+模型：经典 ML（RF/XGB，包络手工特征）、从零 PatchTST 编码器（49 波束 B-scan，VarAttention 作注意力 MIL）、**谱-空-频 SSF 模型**（Alliance 启发，空间/时间谱/波束谱三分支）、冻结 MOMENT 探针。**结果（test AUC，主指标）**：SSF 最优且最稳 0.626±0.009，encoder 0.54±0.12（小数据下方差大），MOMENT 0.46（不迁移，与 SAW 互证），经典 ML ~0.49。跨模态对照：PAUT SSF(0.626) 与 SAW encoder(0.636) 相当；PAUT 经典特征(0.49)优于 SAW(0.22)；MOMENT 两模态均失败。详见 [`reports/PAUT相控阵缺陷检测实验报告.md`](reports/PAUT相控阵缺陷检测实验报告.md)。
+
+```bash
+python scripts/paut_preprocess.py            # 解析 .nde -> A-scan/B-scan + 标签 + 划分
+python scripts/paut_classic_ml.py            # RF / XGBoost
+python scripts/paut_train.py --config configs/paut_encoder.yaml --seed 42   # 从零编码器
+python scripts/paut_train.py --config configs/paut_ssf.yaml --seed 42       # 谱-空-频模型
+python scripts/paut_moment_probe.py          # MOMENT 冻结探针
+python scripts/paut_make_table.py            # 汇总表 + 跨模态对照
+```
+
 ## 目录结构
 
 ```

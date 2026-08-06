@@ -52,7 +52,7 @@ class ClassificationTrainer:
                  lr: float = 1e-3, weight_decay: float = 1e-4, batch_size: int = 256,
                  epochs: int = 30, warmup_steps: int = 300, patience: int = 8,
                  grad_clip: float = 1.0, weighted_sampler: bool = True,
-                 num_workers: int = 4, seed: int = 42):
+                 num_workers: int = 4, seed: int = 42, monitor: str = "f1_macro"):
         self.model = model.to(device)
         self.device = device
         self.run_dir = Path(run_dir)
@@ -64,6 +64,7 @@ class ClassificationTrainer:
         self.weighted_sampler = weighted_sampler
         self.num_workers = num_workers
         self.seed = seed
+        self.monitor = monitor  # val metric for early stopping (f1_macro | auc | acc)
         self.history: list[dict] = []
 
     def _make_loader(self, ds: Dataset, train: bool) -> DataLoader:
@@ -109,10 +110,12 @@ class ClassificationTrainer:
             train_loss = tot_loss / max(1, n)
             self.history.append({"epoch": epoch, "train_loss": train_loss, **
                                  {f"val_{k}": v for k, v in val_m.items()}})
-            log.info("epoch %d | loss %.4f | val acc %.4f f1m %.4f",
-                     epoch, train_loss, val_m["acc"], val_m["f1_macro"])
-            if val_m["f1_macro"] > best_f1 + 1e-4:
-                best_f1 = val_m["f1_macro"]
+            log.info("epoch %d | loss %.4f | val acc %.4f f1m %.4f auc %.4f",
+                     epoch, train_loss, val_m["acc"], val_m["f1_macro"],
+                     val_m.get("auc", float("nan")))
+            score = val_m.get(self.monitor, val_m["f1_macro"])
+            if score > best_f1 + 1e-4:
+                best_f1 = score
                 best_state = {k: v.detach().cpu().clone()
                               for k, v in self.model.state_dict().items()}
                 bad_epochs = 0

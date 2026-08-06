@@ -1,0 +1,24 @@
+# Spectral-Spatial-Frequency (SSF) model on PAUT B-scan (Alliance-inspired).
+# Input per position: full (49, 512) B-scan; 3 branches (spatial CNN / time-FFT
+# spectral / beam-FFT frequency) fused. Trains on N_pos (≈1800) positions, so a
+# small model + strong regularization is used. Eval is position-level, test=PP7.
+model:
+  name: ssf
+  d_model: 128
+  dropout: 0.3
+  n_classes: 2
+data:
+  processed_dir: data/processed/paut
+  norm_mode: per_timestep
+train:
+  lr: 1.0e-3
+  weight_decay: 1.0e-4
+  batch_size: 128
+  epochs: 80
+  warmup_steps: 100
+  patience: 20
+  grad_clip: 1.0
+  weighted_sampler: true
+  monitor: auc
+  num_workers: 8
+seed_list: [42, 43, 44]

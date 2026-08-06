@@ -1,0 +1,13 @@
+# MOMENT time-series foundation model (frozen encoder + linear probe head)
+# on PAUT per-beam A-scan defect detection. Probe trains on all 49 beams per
+# position (beam augmentation); eval averages beam embeddings -> position-level.
+model:
+  name: moment
+  ckpt: AutonLab/MOMENT-1-large
+  freeze: true
+  dropout: 0.1
+  n_classes: 2
+data:
+  processed_dir: data/processed/paut
+  norm_mode: per_timestep
+seed_list: [42, 43, 44]

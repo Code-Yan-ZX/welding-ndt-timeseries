@@ -1,0 +1,32 @@
+{
+  "dataset": "paut",
+  "model": "moment",
+  "seed": 43,
+  "mode": "frozen_linear_probe_env",
+  "n_classes": 2,
+  "feat_dim": 1024,
+  "input": "envelope(1,512)",
+  "epochs": 50,
+  "val_metrics": {
+    "acc": 0.7038269550748752,
+    "f1_bin": 0.8172484599589322,
+    "f1_macro": 0.5182733527864837,
+    "auc": 0.47512964497222987
+  },
+  "test_metrics": {
+    "acc": 0.17637271214642264,
+    "f1_bin": 0.23255813953488372,
+    "f1_macro": 0.17193436599724438,
+    "auc": 0.43180443782853417,
+    "threshold": 0.19350782194029745
+  },
+  "val_macro_f1_best": 0.47512964497222987,
+  "train_wall_s": 0.9,
+  "n_params_trainable": 6144,
+  "n_params_total": 341000000,
+  "majority_baseline_test": {
+    "acc": 0.8618968386023295,
+    "f1_bin": 0.0,
+    "f1_macro": 0.46291331546023234
+  }
+}

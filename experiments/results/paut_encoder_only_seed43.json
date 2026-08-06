@@ -1,0 +1,67 @@
+{
+  "dataset": "paut",
+  "model": "encoder_only",
+  "seed": 43,
+  "norm_mode": "per_timestep",
+  "smoke": false,
+  "beam_train": "bscan",
+  "eval_mode": "bscan",
+  "n_channels": 49,
+  "seq_len": 512,
+  "n_classes": 2,
+  "config": {
+    "model": {
+      "name": "encoder_only",
+      "d_model": 128,
+      "n_heads": 8,
+      "enc_layers": 3,
+      "patch_len": 64,
+      "dropout": 0.3,
+      "n_classes": 2
+    },
+    "data": {
+      "processed_dir": "data/processed/paut",
+      "norm_mode": "per_timestep"
+    },
+    "train": {
+      "lr": 0.001,
+      "weight_decay": 0.0001,
+      "batch_size": 128,
+      "epochs": 60,
+      "warmup_steps": 100,
+      "patience": 15,
+      "grad_clip": 1.0,
+      "weighted_sampler": true,
+      "monitor": "auc",
+      "num_workers": 8
+    },
+    "seed_list": [
+      42,
+      43,
+      44
+    ]
+  },
+  "val_metrics": {
+    "acc": 0.5058236272878536,
+    "f1_bin": 0.6364749082007344,
+    "f1_macro": 0.43252316838608146,
+    "auc": 0.3871244898585412
+  },
+  "test_metrics": {
+    "acc": 0.22628951747088186,
+    "f1_bin": 0.18563922942206654,
+    "f1_macro": 0.2243568571832995,
+    "auc": 0.36153881937014465,
+    "threshold": 0.6572399124428255
+  },
+  "val_macro_f1_best": 0.42785142225904443,
+  "epochs_run": 19,
+  "train_wall_s": 26.0,
+  "n_params_trainable": 806402,
+  "n_params_total": 806402,
+  "majority_baseline_test": {
+    "acc": 0.8618968386023295,
+    "f1_bin": 0.0,
+    "f1_macro": 0.46291331546023234
+  }
+}

@@ -1,0 +1,28 @@
+# From-scratch PatchTST-style encoder on PAUT B-scan defect detection.
+# Input per position: full (49, 512) B-scan.  The encoder's variable-attention
+# over the 49 beams acts as attention-MIL: it learns to spotlight the
+# echo-bearing beam(s) under a position-level label (no per-beam labels exist).
+# Position-level train/eval (N_pos ≈ 1798); small model + strong regularization.
+model:
+  name: encoder_only
+  d_model: 128
+  n_heads: 8
+  enc_layers: 3
+  patch_len: 64        # 512 / 64 = 8 patches per beam
+  dropout: 0.3
+  n_classes: 2
+data:
+  processed_dir: data/processed/paut
+  norm_mode: per_timestep
+train:
+  lr: 1.0e-3
+  weight_decay: 1.0e-4
+  batch_size: 128
+  epochs: 60
+  warmup_steps: 100
+  patience: 15
+  grad_clip: 1.0
+  weighted_sampler: true
+  monitor: auc
+  num_workers: 8
+seed_list: [42, 43, 44]

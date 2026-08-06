@@ -1,0 +1,64 @@
+{
+  "dataset": "paut",
+  "model": "ssf",
+  "seed": 44,
+  "norm_mode": "per_timestep",
+  "smoke": false,
+  "beam_train": "bscan",
+  "eval_mode": "bscan",
+  "n_channels": 49,
+  "seq_len": 512,
+  "n_classes": 2,
+  "config": {
+    "model": {
+      "name": "ssf",
+      "d_model": 128,
+      "dropout": 0.3,
+      "n_classes": 2
+    },
+    "data": {
+      "processed_dir": "data/processed/paut",
+      "norm_mode": "per_timestep"
+    },
+    "train": {
+      "lr": 0.001,
+      "weight_decay": 0.0001,
+      "batch_size": 128,
+      "epochs": 80,
+      "warmup_steps": 100,
+      "patience": 20,
+      "grad_clip": 1.0,
+      "weighted_sampler": true,
+      "monitor": "auc",
+      "num_workers": 8
+    },
+    "seed_list": [
+      42,
+      43,
+      44
+    ]
+  },
+  "val_metrics": {
+    "acc": 0.610648918469218,
+    "f1_bin": 0.7328767123287672,
+    "f1_macro": 0.5075426506429112,
+    "auc": 0.4901193654300531
+  },
+  "test_metrics": {
+    "acc": 0.39767054908485855,
+    "f1_bin": 0.2612244897959184,
+    "f1_macro": 0.3763987617518918,
+    "auc": 0.6302507326603711,
+    "threshold": 0.5183768326313651
+  },
+  "val_macro_f1_best": 0.5571741998833962,
+  "epochs_run": 21,
+  "train_wall_s": 34.9,
+  "n_params_trainable": 748994,
+  "n_params_total": 748994,
+  "majority_baseline_test": {
+    "acc": 0.8618968386023295,
+    "f1_bin": 0.0,
+    "f1_macro": 0.46291331546023234
+  }
+}
