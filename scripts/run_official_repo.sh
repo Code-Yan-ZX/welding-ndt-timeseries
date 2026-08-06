@@ -14,7 +14,15 @@ ENV_NAME="vqvae-welding"
 LOG_DIR="${REPO_ROOT}/experiments/runs/official"
 mkdir -p "${LOG_DIR}"
 
+# --- clone + patch if not present ---
+if [ ! -d "${OFFICIAL}" ]; then
+  echo "cloning official repo..."
+  git clone --depth 1 https://github.com/tmdt-buw/VQ-VAE-Transformer-Arc-Welding "${OFFICIAL}"
+fi
+echo "applying patches (logging-tag fix + transformer checkpoint)..."
 cd "${OFFICIAL}"
+git apply "${REPO_ROOT}/scripts/official_repo.patch" 2>/dev/null || echo "  (patch already applied or not needed)"
+
 mkdir -p data
 ln -sf "${REPO_ROOT}/data/raw/processed_asimow_dataset.csv" data/processed_asimow_dataset.csv
 
@@ -30,10 +38,10 @@ CKPT="$(ls model_checkpoints/VQ-VAE-Patch/*best*.ckpt 2>/dev/null | head -1)"
 if [ -z "${CKPT}" ]; then echo "no VQ-VAE checkpoint found"; exit 1; fi
 echo "VQ-VAE ckpt: ${CKPT}"
 
-run mlp_raw    train_classification_model.py --model-name MLP
-run gru_raw    train_classification_model.py --model-name GRU
-run vqvae_mlp  train_classification_model.py --model-name MLP --dataset latent_vq_vae --vqvae-model "${CKPT}"
-run vqvae_gru  train_classification_model.py --model-name GRU --dataset latent_vq_vae --vqvae-model "${CKPT}"
+run mlp_raw    train_classification_model.py --model-name MLP --logging-tag repro
+run gru_raw    train_classification_model.py --model-name GRU --logging-tag repro
+run vqvae_mlp  train_classification_model.py --model-name MLP --dataset latent_vq_vae --vqvae-model "${CKPT}" --logging-tag repro
+run vqvae_gru  train_classification_model.py --model-name GRU --dataset latent_vq_vae --vqvae-model "${CKPT}" --logging-tag repro
 run vqvae_transformer train_transformer_mtasks.py --vqvae-model "${CKPT}" \
     --n-blocks 8 --n-heads 8 --finetune-epochs 10 --epoch_iter 3
 

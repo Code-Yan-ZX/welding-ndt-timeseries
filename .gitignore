@@ -10,6 +10,9 @@ experiments/results/**/*.ckpt
 # third party clones
 third_party/
 
+# local model weights (symlink or download Qwen3 here)
+models/
+
 # python
 __pycache__/
 *.py[cod]

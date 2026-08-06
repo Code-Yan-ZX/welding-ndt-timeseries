@@ -1,6 +1,6 @@
 model:
   name: itformer_qa
-  llm_path: /media/disk2/YZX/doct/LLaMA-Factory/Qwen3-8B
+  llm_path: models/Qwen3-8B    # symlink your local weights: ln -s /path/to/Qwen3-8B models/Qwen3-8B
   prefix_num: 25
   d_model: 512
   n_heads: 8

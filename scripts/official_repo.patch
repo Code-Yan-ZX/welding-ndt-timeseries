@@ -1,0 +1,37 @@
+diff --git a/train_classification_model.py b/train_classification_model.py
+index 31f3c72..28ab5da 100644
+--- a/train_classification_model.py
++++ b/train_classification_model.py
+@@ -40,7 +40,7 @@ def main(hparams):
+     use_mlflow = hparams.use_mlflow
+     mlflow_url = hparams.mlflow_url 
+ 
+-    tags = logging_tag.split(",")
++    tags = (logging_tag or "").split(",")  # wndt patch: handle missing --logging-tag
+ 
+     if use_wandb:
+         assert logging_entity is not None, "Wandb entity must be set"
+diff --git a/train_transformer_mtasks.py b/train_transformer_mtasks.py
+index a6583e4..1345baa 100644
+--- a/train_transformer_mtasks.py
++++ b/train_transformer_mtasks.py
+@@ -68,14 +68,16 @@ def load_dataset(hparams, only_classify=False) -> tuple[int, int, LatentPredData
+ def classification_finetuning(model, classification_epoch, logger, class_task_data_module, no_early_stopping=False, n_gpus=1):
+     score = "val/cl/f1_score"
+     mode = "max"
+-    # checkpoint_callback = ModelCheckpoint(dirpath='model_checkpoints/VQ-VAE-transformer/', monitor=score, mode=mode, save_last=True)
++    # wndt patch: uncommented the checkpoint callback (was commented upstream);
++    # without it no transformer checkpoint survives the script for re-evaluation
++    checkpoint_callback = ModelCheckpoint(dirpath='model_checkpoints/VQ-VAE-transformer/', monitor=score, mode=mode, save_last=True)
+     early_stop_callback = EarlyStopping(monitor=score, min_delta=0.001, patience=5, verbose=False, mode=mode)
+     model.switch_to_classification()
+ 
+     if no_early_stopping:
+-        callbacks = []
++        callbacks = [checkpoint_callback]
+     else:
+-        callbacks = early_stop_callback
++        callbacks = [checkpoint_callback, early_stop_callback]
+ 
+     trainer = Trainer(
+         devices=n_gpus,

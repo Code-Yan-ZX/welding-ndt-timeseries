@@ -52,6 +52,25 @@ experiments/   runs/ (checkpoints, logs) + results/*.json + comparison table
 third_party/   official tmdt-buw repo (cloned, minimal patch noted in scripts)
 ```
 
+## Local resources (not in git -- set up once per machine)
+
+- **Dataset**: auto-downloaded by `scripts/01_download_data.sh` into `data/raw/`
+  (1.3 GB, MD5-verified). No manual setup needed.
+- **Qwen3 weights**: the configs reference `models/Qwen3-8B` and
+  `models/Qwen3-1.7B-Base` (relative). Symlink your local copies or download
+  from HuggingFace:
+  ```bash
+  ln -s /path/to/Qwen3-8B         models/Qwen3-8B
+  ln -s /path/to/Qwen3-1.7B-Base  models/Qwen3-1.7B-Base
+  # or: huggingface-cli download Qwen/Qwen3-8B --local-dir models/Qwen3-8B
+  ```
+  Override per-run with `--model.llm_path /your/path` if needed.
+- **Conda envs**: base env needs `pip install -e .` (+ `xgboost`); the official
+  repo env is built by `bash scripts/setup_official_env.sh`.
+- **Official repo**: `scripts/run_official_repo.sh` auto-clones
+  `tmdt-buw/VQ-VAE-Transformer-Arc-Welding` into `third_party/` and applies
+  `scripts/official_repo.patch` (logging-tag fix + transformer checkpoint).
+
 ## Reproduce
 
 ```bash

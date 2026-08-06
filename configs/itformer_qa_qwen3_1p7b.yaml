@@ -1,6 +1,6 @@
 model:
   name: itformer_qa
-  llm_path: /media/disk2/YZX/doct/LLaMA-Factory/Qwen3-1.7B-Base
+  llm_path: models/Qwen3-1.7B-Base  # symlink: ln -s /path/to/Qwen3-1.7B-Base models/Qwen3-1.7B-Base
   prefix_num: 25
   d_model: 512
   n_heads: 8

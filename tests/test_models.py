@@ -4,6 +4,7 @@ Run:  python tests/test_models.py   (or pytest tests/)
 """
 from __future__ import annotations
 
+import os
 import sys
 from pathlib import Path
 
@@ -24,7 +25,9 @@ from wndt.models.simple_dl import MLPClassifier, RNNClassifier
 from wndt.models.timesnet import TimesNetClassifier
 
 B = 4
-QWEN_1P7B = "/media/disk2/YZX/doct/LLaMA-Factory/Qwen3-1.7B-Base"
+# Qwen3 1.7B path: env var or symlink under models/. Override with:
+#   export QWEN_1P7B=/your/path/Qwen3-1.7B-Base
+QWEN_1P7B = os.environ.get("QWEN_1P7B", str(REPO / "models/Qwen3-1.7B-Base"))
 
 
 def test_encoder_shapes():
