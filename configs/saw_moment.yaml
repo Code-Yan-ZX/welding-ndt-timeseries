@@ -1,0 +1,22 @@
+# MOMENT time-series foundation model (frozen encoder + linear probe head)
+# on SAW window-level defect detection
+model:
+  name: moment
+  ckpt: AutonLab/MOMENT-1-large
+  freeze: true
+  dropout: 0.1
+  n_classes: 2
+data:
+  processed_dir: data/processed/saw
+  norm_mode: global
+train:
+  lr: 1.0e-3
+  weight_decay: 1.0e-4
+  batch_size: 1024
+  epochs: 15
+  warmup_steps: 200
+  patience: 5
+  grad_clip: 1.0
+  weighted_sampler: true
+  num_workers: 8
+seed_list: [42, 43, 44]

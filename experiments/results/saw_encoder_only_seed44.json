@@ -1,0 +1,63 @@
+{
+  "dataset": "saw",
+  "model": "encoder_only",
+  "seed": 44,
+  "norm_mode": "global",
+  "smoke": false,
+  "n_channels": 4,
+  "seq_len": 512,
+  "n_classes": 2,
+  "config": {
+    "model": {
+      "name": "encoder_only",
+      "d_model": 256,
+      "n_heads": 8,
+      "enc_layers": 4,
+      "patch_len": 64,
+      "dropout": 0.1,
+      "n_classes": 2
+    },
+    "data": {
+      "processed_dir": "data/processed/saw",
+      "norm_mode": "global"
+    },
+    "train": {
+      "lr": 0.001,
+      "weight_decay": 0.0001,
+      "batch_size": 512,
+      "epochs": 20,
+      "warmup_steps": 500,
+      "patience": 6,
+      "grad_clip": 1.0,
+      "weighted_sampler": true,
+      "num_workers": 8
+    },
+    "seed_list": [
+      42,
+      43,
+      44
+    ]
+  },
+  "val_metrics": {
+    "acc": 0.777193950126281,
+    "f1_bin": 0.4289859385462391,
+    "f1_macro": 0.645290220999807,
+    "auc": 0.8213334960769243
+  },
+  "test_metrics": {
+    "acc": 0.8886096662965344,
+    "f1_bin": 0.11224965067536097,
+    "f1_macro": 0.526413211931601,
+    "auc": 0.6241289737764846
+  },
+  "val_macro_f1_best": 0.645290220999807,
+  "epochs_run": 15,
+  "train_wall_s": 185.8,
+  "n_params_trainable": 4226050,
+  "n_params_total": 4226050,
+  "majority_baseline_test": {
+    "acc": 0.9530126819005318,
+    "f1_bin": 0.0,
+    "f1_macro": 0.4879705547908313
+  }
+}

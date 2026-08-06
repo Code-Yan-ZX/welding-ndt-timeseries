@@ -1,0 +1,30 @@
+{
+  "dataset": "saw",
+  "model": "moment",
+  "seed": 42,
+  "mode": "frozen_linear_probe",
+  "n_classes": 2,
+  "feat_dim": 4096,
+  "epochs": 30,
+  "val_metrics": {
+    "acc": 0.8088657938281999,
+    "f1_bin": 0.39070886544512307,
+    "f1_macro": 0.6386817980992314,
+    "auc": 0.7641326826168621
+  },
+  "test_metrics": {
+    "acc": 0.9165449126293028,
+    "f1_bin": 0.009021512838306732,
+    "f1_macro": 0.48272984674586705,
+    "auc": 0.4664031897909118
+  },
+  "val_macro_f1_best": 0.6386817980992314,
+  "train_wall_s": 4.1,
+  "n_params_trainable": 24576,
+  "n_params_total": 341000000,
+  "majority_baseline_test": {
+    "acc": 0.9530126819005318,
+    "f1_bin": 0.0,
+    "f1_macro": 0.4879705547908313
+  }
+}

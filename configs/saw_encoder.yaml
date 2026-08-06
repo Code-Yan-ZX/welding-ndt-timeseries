@@ -1,0 +1,23 @@
+# From-scratch PatchTST-style encoder baseline on SAW window-level defect detection
+model:
+  name: encoder_only
+  d_model: 256
+  n_heads: 8
+  enc_layers: 4
+  patch_len: 64        # 512 / 64 = 8 patches per channel
+  dropout: 0.1
+  n_classes: 2
+data:
+  processed_dir: data/processed/saw
+  norm_mode: global
+train:
+  lr: 1.0e-3
+  weight_decay: 1.0e-4
+  batch_size: 512
+  epochs: 20
+  warmup_steps: 500
+  patience: 6
+  grad_clip: 1.0
+  weighted_sampler: true
+  num_workers: 8
+seed_list: [42, 43, 44]

@@ -50,6 +50,20 @@
 - 文献锚点（Hahn et al., CIKM 2024）：VQ-VAE + Transformer ≈ 79.7% acc / 77% F1。
 - ITFormer-QA 的 3 种子计划**未完成**（长时训练已按用户要求暂停），恢复方式见 [`reports/实验报告.md`](reports/实验报告.md) 第六节。
 
+## SAW 时序基础模型实验
+
+在 Zenodo [Submerged Arc Welding](https://doi.org/10.5281/zenodo.15083865) 数据集上尝试**时序基础模型**：将每道焊缝的 5 kHz 4 通道信号（电流/电压的 a/b 电极）切成 512 样本窗口，做**窗口级缺陷检测**（标签来自 `defects_xlocation.xlsx` 的缺陷采样区间），按试件划分（train PP3/4/5、val PP6、test PP7）。
+
+对比：从零训练的 PatchTST 编码器（4.2M）vs 冻结的 **MOMENT-1-large** 时序基础模型（341M + 16K 线性探针）vs 经典 ML（RF）。**结果：从零小编码器最强（test AUC 0.635），冻结 MOMENT 跨试件泛化反而接近随机（AUC 0.489）**——预训练时序大模型的冻结特征未能迁移到焊缝 NDT。详见 [`reports/SAW时序基础模型实验报告.md`](reports/SAW时序基础模型实验报告.md)。
+
+```bash
+python scripts/saw_preprocess.py            # 窗口化 + 标签 + 划分
+python scripts/saw_train.py --config configs/saw_encoder.yaml --seed 42   # 从零编码器
+python scripts/saw_moment_probe.py          # MOMENT 冻结嵌入 + 线性探针
+python scripts/saw_classic_ml.py            # RF / XGBoost
+python scripts/saw_make_table.py            # 汇总表
+```
+
 ## 目录结构
 
 ```

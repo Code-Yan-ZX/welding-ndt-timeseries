@@ -10,14 +10,15 @@ experiments/results/**/*.ckpt
 # third party clones
 third_party/
 
-# local model weights (symlink or download Qwen3 here)
-models/
+# local model weights (symlink or download Qwen3 here) - root only, not src/wndt/models/
+/models/
 
 # python
 __pycache__/
 *.py[cod]
 *.egg-info/
 .ipynb_checkpoints/
+.venv/
 
 # misc
 *.log
