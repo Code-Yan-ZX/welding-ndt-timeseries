@@ -1,108 +1,101 @@
 # welding-ndt-timeseries
 
-Welding NDT Time Series Foundation Models — first experiment: **ITFormer**
-(ICML 2025, [arXiv:2506.20093](https://arxiv.org/abs/2506.20093)) as a baseline
-on the **Metal Arc Welding** dataset
-([Zenodo 10017718](https://zenodo.org/records/10017718), CC-BY-4.0,
-Hahn et al., Univ. Wuppertal).
+大模型 + 焊缝无损检测（NDT）--智能无损检测的时序基础模型研究仓库。
 
-## Task
+## 项目背景与长期目标
 
-Single-cycle binary weld-quality classification:
+本项目探索**时序基础模型**与**时序–语言多模态模型**在焊接无损检测质量评估中的应用，长期目标是构建面向 NDT 信号的智能检测方法。
 
-- input: one welding cycle = 200 voltage + 200 current samples (100 kHz, GMAW)
-- target: `labels` ∈ {0 = bad, 1 = good}; `-1` = unlabeled (excluded)
-- splits: official `(experiment, welding_run)` pairs (paper convention)
-  - val: `(3,32),(3,18),(1,27),(3,19),(3,17),(2,21),(1,20),(1,11)`
-  - test: `(3,3),(2,10),(1,24),(3,24),(1,32),(2,1),(1,10),(1,16)` (T-joints →
-    deliberate train→test distribution shift)
-  - train: everything else
-- dataset v2 labeled rows: train 74,732 / val 10,614 / test 11,062
+- **当前输入**：GMAW（熔化极气体保护电弧焊）工艺过程中的电压 / 电流信号--本质属于**工艺参数 / 电信号**。第一阶段的 ITFormer 基线实验即基于此（见下文）。
+- **方向调整**：后续工作将把输入从“工艺参数”转向**相控阵（phased array）超声信号**或其它真正意义上的无损检测信号。现有 GMAW 电信号基线作为对照保留。
+- **参考论文**：
+  1. **ITFormer**: Bridging Time Series and Natural Language for Multi-Modal QA with Large-Scale Multitask Dataset, ICML 2025，[arXiv:2506.20093](https://arxiv.org/abs/2506.20093)；代码 [Pandalin98/ITFormer-ICML25](https://github.com/Pandalin98/ITFormer-ICML25)。
+  2. **Alliance**: All-in-One Spectral-Spatial-Frequency Awareness Foundation Model（谱-空-频联合感知基础模型，相控阵信号建模的重要参考）。
 
-⚠ The official `tmdt-buw/VQ-VAE-Transformer-Arc-Welding` code returns these two
-pair lists under **swapped names** (`dataloader/utils.py::get_val_test_ids`);
-this repo always maps by pair set and asserts row counts.
+## 当前实验：ITFormer 基线
 
-## ITFormer adaptation (QA-style likelihood scoring)
+将 ITFormer（ICML 2025）适配到焊接质量二分类任务作为时序基础模型方向的 baseline，并与经典机器学习、简单深度学习、近期时序模型、文献 SOTA 官方复现四族方法系统对比。**详细实验报告见 [`reports/实验报告.md`](reports/实验报告.md)。**
 
-- PatchTST-style encoder (patch 20 → 10 patches/channel, d_model 512, 4 layers)
-- ITFormer bridge: 25 Learnable Instruct Tokens + two-stage Instruct Time
-  Attention (channel-wise → time-wise), 2 layers
-- frozen local **Qwen3** LLM (user requirement; paper uses Qwen2.5): the 25
-  fused tokens replace 25 placeholder tokens in the prompt
-  `"<context> <25 ts tokens> Question: Is this weld good or bad? Answer:"`
-- training: cross-entropy at the answer position only (trainable ≈ 34M params)
-- eval: single forward; score = logit(`good`) − logit(`bad`); **no free
-  generation** (base-model outputs are scored, not sampled)
+### 任务
 
-Protocol matches the official repo where applicable: per-channel
-StandardScaler fit on train only, WeightedRandomSampler, early stopping on
-val macro-F1, test evaluated once per seed. Metrics: accuracy, binary F1
-(pos=good), macro F1, AUC; 3 seeds (42/43/44) → mean±std.
+单周期焊接质量二分类：
 
-## Layout
+- 输入：一个焊接周期 = 200 个电压采样 + 200 个电流采样（100 kHz，GMAW）
+- 目标：`labels` ∈ {0 = 质量差, 1 = 质量好}；`-1` = 无标签（全部排除）
+- 划分：官方 `(experiment, welding_run)` 实验对（论文惯例）
+  - val：(3,32),(3,18),(1,27),(3,19),(3,17),(2,21),(1,20),(1,11)
+  - test：(3,3),(2,10),(1,24),(3,24),(1,32),(2,1),(1,10),(1,16)（T 型接头 -> 刻意的 train->test 分布漂移）
+  - train：其余全部实验对
+- 数据集 v2 有标签行数：train 74,732 / val 10,614 / test 11,062
+
+⚠ 官方 `tmdt-buw/VQ-VAE-Transformer-Arc-Welding` 代码中这两组实验对的变量名与论文**互换**（`dataloader/utils.py::get_val_test_ids`）；本仓库一律按 (exp, run) **对集合 + 行数断言**对齐，不照抄官方变量名。
+
+### ITFormer 适配（QA 式似然打分）
+
+- PatchTST 风格编码器（patch 20 -> 每通道 10 个 patch，d_model 512，4 层）
+- ITFormer 桥接：25 个可学习指令 token + 两级 Instruct Time Attention（先通道维、后时间维），2 层
+- 冻结本地 **Qwen3** LLM（项目要求用 Qwen3；论文原用 Qwen2.5）：25 个融合 token 替换 prompt 中的占位 token
+- 训练：仅在答案 token 位置计算交叉熵（可训练 ≈ 34M 参数）
+- 评测：单次前向，分数 = logit(good) − logit(bad)；**不做自由生成**（base 模型采样输出不可靠，似然打分是唯一可靠用法）
+
+协议在适用处与官方仓库一致：逐通道 StandardScaler 只在 train 上 fit、WeightedRandomSampler、val macro-F1 早停、测试集每种子只评一次。指标：accuracy、binary F1（正类 = good）、macro F1、AUC；3 个种子（42/43/44）-> mean±std。
+
+### 当前结果（test 集，截至 2026-08-06）
+
+完整对比表见 `experiments/results/comparison_table.md`（可用 `python scripts/make_table.py` 重新生成）。要点：
+
+- **经典 ML（RF / XGBoost + 48 维手工特征）目前最强**：test acc ≈ 0.70、AUC 0.79–0.80。
+- **分布漂移是本基准的核心难度**：所有模型 val->test 显著跌落；test 集 good 占比（0.586）高于 train（0.470），多数类翻转。
+- **ITFormer-QA（冻结 Qwen3 + 桥接）**：8B 两种子 test acc 0.6472±0.0204 / AUC 0.7166±0.0344；1.7B 单种子 test acc 0.6591 / AUC 0.7034。范式可行（仅训练 ≈34M 桥接参数，LLM 全冻结），但单周期输入下冻结 LLM 的语言先验未能补偿分布漂移，与 probe 消融、DLinear 等小模型大体同级。
+- 文献锚点（Hahn et al., CIKM 2024）：VQ-VAE + Transformer ≈ 79.7% acc / 77% F1。
+- ITFormer-QA 的 3 种子计划**未完成**（长时训练已按用户要求暂停），恢复方式见 [`reports/实验报告.md`](reports/实验报告.md) 第六节。
+
+## 目录结构
 
 ```
-configs/       YAML configs per model family
-data/          raw CSV + processed memmaps (not in git)
-src/wndt/      package: data pipeline, models, trainers, metrics
-scripts/       download/preprocess/train/eval entrypoints
-tests/         unit tests (python tests/test_models.py [--with-llm])
-experiments/   runs/ (checkpoints, logs) + results/*.json + comparison table
-third_party/   official tmdt-buw repo (cloned, minimal patch noted in scripts)
+configs/       每个模型族一份 YAML 配置
+data/          原始 CSV + 预处理 memmap（不入 git）
+src/wndt/      包：数据管线、模型、训练器、指标
+scripts/       下载 / 预处理 / 训练 / 评测入口
+tests/         单元测试（python tests/test_models.py [--with-llm]）
+experiments/   runs/（checkpoint、日志）+ results/*.json + 汇总表
+reports/       实验报告（中文，便于在 GitHub 上查看）
+third_party/   官方 tmdt-buw 仓库 clone（仅一处必要补丁）
 ```
 
-## Local resources (not in git -- set up once per machine)
+## 本地资源（不入 git，每台机器配置一次）
 
-- **Dataset**: auto-downloaded by `scripts/01_download_data.sh` into `data/raw/`
-  (1.3 GB, MD5-verified). No manual setup needed.
-- **Qwen3 weights**: the configs reference `models/Qwen3-8B` and
-  `models/Qwen3-1.7B-Base` (relative). Symlink your local copies or download
-  from HuggingFace:
+- **数据集**：由 `scripts/01_download_data.sh` 自动下载到 `data/raw/`（1.3 GB，MD5 校验），无需手动配置。
+- **Qwen3 权重**：configs 中引用 `models/Qwen3-8B` 与 `models/Qwen3-1.7B-Base`（相对路径）。软链本地副本或从 HuggingFace 下载：
   ```bash
   ln -s /path/to/Qwen3-8B         models/Qwen3-8B
   ln -s /path/to/Qwen3-1.7B-Base  models/Qwen3-1.7B-Base
-  # or: huggingface-cli download Qwen/Qwen3-8B --local-dir models/Qwen3-8B
+  # 或：huggingface-cli download Qwen/Qwen3-8B --local-dir models/Qwen3-8B
   ```
-  Override per-run with `--model.llm_path /your/path` if needed.
-- **Conda envs**: base env needs `pip install -e .` (+ `xgboost`); the official
-  repo env is built by `bash scripts/setup_official_env.sh`.
-- **Official repo**: `scripts/run_official_repo.sh` auto-clones
-  `tmdt-buw/VQ-VAE-Transformer-Arc-Welding` into `third_party/` and applies
-  `scripts/official_repo.patch` (logging-tag fix + transformer checkpoint).
+  需要时可用 `--model.llm_path /your/path` 单次覆盖；亦可设置 `QWEN_1P7B` 环境变量。
+- **Conda 环境**：基础环境执行 `pip install -e .`（+ `xgboost`）；官方仓库环境由 `bash scripts/setup_official_env.sh` 构建。
+- **官方仓库**：`scripts/run_official_repo.sh` 会自动 clone `tmdt-buw/VQ-VAE-Transformer-Arc-Welding` 到 `third_party/` 并应用 `scripts/official_repo.patch`（logging-tag 修复 + transformer checkpoint）。
 
-## Reproduce
+## 复现
 
 ```bash
-bash scripts/01_download_data.sh          # Zenodo CSV + MD5 gate
-python scripts/02_preprocess.py           # memmap + splits + norm stats
-python tests/test_models.py --with-llm    # unit tests (GPU, Qwen3-1.7B)
-bash scripts/smoke_test.sh                # 1-epoch tiny-subset pipeline check
-bash scripts/run_baselines.sh             # our baselines, 3 seeds
-python scripts/run_classic_ml.py          # RF/XGBoost/SVM (also in the batch)
-bash scripts/setup_official_env.sh        # py3.11 env for the official repo
-bash scripts/run_official_repo.sh         # reproduce official pipeline
-python scripts/eval_official_ckpt.py ...  # canonical-split re-evaluation
-bash scripts/run_itformer_qa.sh sweep     # 1.7B lr probes
-bash scripts/run_itformer_qa.sh full 8b   # headline ITFormer-QA runs
+bash scripts/01_download_data.sh          # Zenodo CSV 下载 + MD5 校验
+python scripts/02_preprocess.py           # 生成 memmap + 划分 + 归一化统计
+python tests/test_models.py --with-llm    # 单元测试（GPU，Qwen3-1.7B）
+bash scripts/smoke_test.sh                # 1-epoch 小子集管线冒烟
+bash scripts/run_baselines.sh             # 我方 baseline，3 个种子
+python scripts/run_classic_ml.py          # RF / XGBoost / SVM
+bash scripts/setup_official_env.sh        # 官方仓库的 py3.11 环境
+bash scripts/run_official_repo.sh         # 复现官方管线（自动 clone + 打补丁）
+python scripts/eval_official_ckpt.py ...  # 在 canonical split 上重评官方 ckpt
+bash scripts/run_itformer_qa.sh sweep     # 1.7B 学习率探针
+bash scripts/run_itformer_qa.sh full 8b   # ITFormer-QA 正式运行
 python scripts/make_table.py              # -> experiments/results/comparison_table.md
 ```
 
-## Results
+## 参考文献
 
-See `experiments/results/comparison_table.md` (regenerate with
-`python scripts/make_table.py`). Reference anchor from the literature
-(Hahn et al., CIKM 2024): VQ-VAE + Transformer ≈ 79.7% acc / 77% F1.
-
-## References
-
-- Dataset: Hahn et al., "Metal Arc Welding – Predictive Quality Arc Welding
-  Dataset", Zenodo, DOI [10.5281/zenodo.10017718](https://doi.org/10.5281/zenodo.10017718)
-- Benchmark: Hahn et al., "Quality Prediction in Arc Welding: Leveraging
-  Transformer Models and Discrete Representations from Vector Quantised-VAE",
-  CIKM 2024, DOI [10.1145/3627673.3680031](https://doi.org/10.1145/3627673.3680031);
-  code: [tmdt-buw/VQ-VAE-Transformer-Arc-Welding](https://github.com/tmdt-buw/VQ-VAE-Transformer-Arc-Welding)
-- Model: Wang et al., "ITFormer: Bridging Time Series and Natural Language for
-  Multi-Modal QA with Large-Scale Multitask Dataset", ICML 2025,
-  [arXiv:2506.20093](https://arxiv.org/abs/2506.20093);
-  code: [Pandalin98/ITFormer-ICML25](https://github.com/Pandalin98/ITFormer-ICML25)
+- 数据集：Hahn et al., *Metal Arc Welding – Predictive Quality Arc Welding Dataset*, Zenodo, DOI [10.5281/zenodo.10017718](https://doi.org/10.5281/zenodo.10017718)（CC-BY-4.0，v2）。
+- 基准论文：Hahn et al., *Quality Prediction in Arc Welding: Leveraging Transformer Models and Discrete Representations from Vector Quantised-VAE*, CIKM 2024, DOI [10.1145/3627673.3680031](https://doi.org/10.1145/3627673.3680031)；代码 [tmdt-buw/VQ-VAE-Transformer-Arc-Welding](https://github.com/tmdt-buw/VQ-VAE-Transformer-Arc-Welding)。
+- 模型论文：Wang et al., *ITFormer: Bridging Time Series and Natural Language for Multi-Modal QA with Large-Scale Multitask Dataset*, ICML 2025, [arXiv:2506.20093](https://arxiv.org/abs/2506.20093)；代码 [Pandalin98/ITFormer-ICML25](https://github.com/Pandalin98/ITFormer-ICML25)。
+- LLM：Qwen3-8B / Qwen3-1.7B-Base（本地权重，bf16）。

@@ -22,3 +22,6 @@ __pycache__/
 # misc
 *.log
 .DS_Store
+
+# local agent memory (contains secrets — never commit)
+CLAUDE.md
