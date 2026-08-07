@@ -1,0 +1,54 @@
+{
+  "auc_weibull_mean": 0.4290581648770611,
+  "auc_weibull_std": 0.11965382620764403,
+  "auc_raw_mean": 0.5709740545834929,
+  "auc_weibull_nonpp4": 0.47291690899487704,
+  "auc_raw_nonpp4": 0.5271233653308156,
+  "rows": [
+    {
+      "test_coupon": "PP3",
+      "n_pos": 345,
+      "auc_weibull": 0.5568161231884058,
+      "auc_raw": 0.4431838768115942,
+      "weibull_shape": 1.7705674183643685,
+      "defect_rate": 0.5740432612312812,
+      "pred_rate": 0.5790349417637272
+    },
+    {
+      "test_coupon": "PP4",
+      "n_pos": 3,
+      "auc_weibull": 0.2536231884057971,
+      "auc_raw": 0.7463768115942029,
+      "weibull_shape": 1.8575348941437793,
+      "defect_rate": 0.004991680532445923,
+      "pred_rate": 0.908485856905158
+    },
+    {
+      "test_coupon": "PP5",
+      "n_pos": 261,
+      "auc_weibull": 0.524012123291588,
+      "auc_raw": 0.47598787670841197,
+      "weibull_shape": 1.7162694073465952,
+      "defect_rate": 0.43791946308724833,
+      "pred_rate": 0.7835570469798657
+    },
+    {
+      "test_coupon": "PP6",
+      "n_pos": 459,
+      "auc_weibull": 0.40124735340145445,
+      "auc_raw": 0.5989137439013164,
+      "weibull_shape": 1.8995531135530443,
+      "defect_rate": 0.7637271214642263,
+      "pred_rate": 0.11148086522462562
+    },
+    {
+      "test_coupon": "PP7",
+      "n_pos": 83,
+      "auc_weibull": 0.40959203609806016,
+      "auc_raw": 0.5904079639019397,
+      "weibull_shape": 1.700757385074553,
+      "defect_rate": 0.13810316139767054,
+      "pred_rate": 0.2612312811980033
+    }
+  ]
+}

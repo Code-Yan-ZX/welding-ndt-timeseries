@@ -45,13 +45,15 @@ log = get_logger("paut_loocv")
 COUPONS = ["PP3", "PP4", "PP5", "PP6", "PP7"]
 CONFIGS = {"ssf": "configs/paut_ssf.yaml", "encoder_only": "configs/paut_encoder.yaml",
            "dann": "configs/paut_ssf.yaml",  # DANN 复用 SSF 的架构与训练超参
-           "ssf_mv": "configs/paut_ssf.yaml"}  # 多视角 SSF (4 通道: 90/270 × G0/G1)
+           "ssf_mv": "configs/paut_ssf.yaml",  # 多视角 SSF (4 通道: 90/270 × G0/G1)
+           "ssl": "configs/paut_ssf.yaml", "ssl_scratch": "configs/paut_ssf.yaml"}  # P1 SSL
 
 
 def parse_args():
     ap = argparse.ArgumentParser()
     ap.add_argument("--models", nargs="+", default=["ssf", "encoder_only", "classic_rf"],
-                    choices=["ssf", "encoder_only", "classic_rf", "dann", "ssf_mv"])
+                    choices=["ssf", "encoder_only", "classic_rf", "dann", "ssf_mv",
+                             "ssl", "ssl_scratch"])
     ap.add_argument("--seed", type=int, default=42)
     ap.add_argument("--val-frac", type=float, default=0.15)
     ap.add_argument("--tag", type=str, default="")
@@ -100,7 +102,19 @@ def run_deep_fold(model_name, cfg, processed, train_idx, val_idx, test_idx,
             ds.labels = ds.labels[sel]
 
     from wndt.train.trainer_cls import ClassificationTrainer
-    model = build_model(cfg, device, n_channels, seq_len)
+    if model_name in ("ssl", "ssl_scratch"):
+        from wndt.models.ssl_ae import MAEEncoder, SSLClassifier
+        enc = MAEEncoder(d_model=int(cfg.model.d_model), dropout=float(cfg.model.dropout))
+        if model_name == "ssl":
+            ssl_ckpt = torch.load(REPO / "experiments/runs/ssl_ae/encoder.pt",
+                                  map_location=device)
+            enc.load_state_dict(ssl_ckpt["encoder_state"])
+            log.info("  已加载 SSL 预训练编码器 (freeze)")
+        model = SSLClassifier(enc, d_model=int(cfg.model.d_model),
+                              n_classes=int(cfg.model.get("n_classes", 2)),
+                              freeze_encoder=True).to(device)
+    else:
+        model = build_model(cfg, device, n_channels, seq_len)
     tr = cfg.train
     epochs = epochs_override if epochs_override else int(tr.epochs)
     patience = int(tr.get("patience", 20))
