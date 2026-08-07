@@ -31,10 +31,10 @@ class ConvBranch(nn.Module):
     """Small 2-D conv stack -> global average pool -> (B, d_model)."""
 
     def __init__(self, in_h: int, in_w: int, channels=(32, 64, 128),
-                 d_model: int = 128, dropout: float = 0.2):
+                 d_model: int = 128, dropout: float = 0.2, in_channels: int = 1):
         super().__init__()
         layers = []
-        c = 1
+        c = in_channels
         for ch in channels:
             layers.append(nn.Conv2d(c, ch, kernel_size=(3, 7), padding=(1, 3)))
             layers.append(nn.BatchNorm2d(ch))
@@ -47,29 +47,36 @@ class ConvBranch(nn.Module):
                                   nn.Linear(c, d_model))
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        # x: (B, 1, H, W)
+        # x: (B, in_channels, H, W)
         z = self.net(x)
         z = self.pool(z)
         return self.proj(z)
 
 
 class SSFClassifier(nn.Module):
-    """Spectral-spatial-frequency classifier on a PAUT B-scan."""
+    """Spectral-spatial-frequency classifier on a PAUT B-scan.
+
+    ``in_channels`` > 1 enables multi-view input: each channel is a different
+    PAUT view (e.g. 90/270 skew, 71°/47° refracted), and all three branches
+    convolve over the stacked channels jointly."""
 
     def __init__(self, *, n_beams: int = 49, seq_len: int = 512,
-                 d_model: int = 128, dropout: float = 0.2, n_classes: int = 2):
+                 d_model: int = 128, dropout: float = 0.2, n_classes: int = 2,
+                 in_channels: int = 1):
         super().__init__()
         self.n_beams = n_beams
         self.seq_len = seq_len
+        self.in_channels = in_channels
         h_t = n_beams            # spatial branch input H
         w_t = seq_len            # W
-        self.spatial = ConvBranch(h_t, w_t, d_model=d_model, dropout=dropout)
+        self.spatial = ConvBranch(h_t, w_t, d_model=d_model, dropout=dropout,
+                                  in_channels=in_channels)
         # spectral (FFT along time): magnitude -> (n_beams, seq_len//2 + 1)
         self.spectral = ConvBranch(n_beams, seq_len // 2 + 1, d_model=d_model,
-                                   dropout=dropout)
+                                   dropout=dropout, in_channels=in_channels)
         # frequency (FFT along beam): magnitude -> (n_beams//2 + 1, seq_len)
         self.frequency = ConvBranch(n_beams // 2 + 1, seq_len, d_model=d_model,
-                                    dropout=dropout)
+                                    dropout=dropout, in_channels=in_channels)
         self.head = nn.Sequential(
             nn.LayerNorm(3 * d_model),
             nn.Dropout(dropout),
@@ -81,24 +88,23 @@ class SSFClassifier(nn.Module):
 
     @staticmethod
     def _mag_fft(x: torch.Tensor, dim: int) -> torch.Tensor:
-        """Return log-magnitude of rfft along ``dim`` (B, H, W) -> (B, H', W')."""
+        """Return log-magnitude of rfft along ``dim`` (B, C, H, W) -> (B, C, H', W')."""
         xf = torch.fft.rfft(x, dim=dim, norm="ortho")
         mag = torch.log1p(xf.abs())
-        # fftshift along the non-transformed axis is unnecessary; keep raw order
         return mag
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        # x: (B, n_beams, seq_len) -> add channel dim
+        # x: (B, in_channels, n_beams, seq_len) or (B, n_beams, seq_len)
         x = x.float()
         if x.dim() == 3:
             x = x.unsqueeze(1)                                  # (B, 1, Bm, L)
-        # 1. spatial: raw B-scan
+        # 1. spatial: raw B-scan (all channels)
         z_sp = self.spatial(x)
-        # 2. spectral: FFT along time (last axis)
-        sp_t = self._mag_fft(x[:, 0], dim=-1).unsqueeze(1)      # (B,1,Bm,L/2+1)
+        # 2. spectral: FFT along time (last axis), all channels
+        sp_t = self._mag_fft(x, dim=-1)                         # (B, C, Bm, L/2+1)
         z_spec = self.spectral(sp_t)
-        # 3. frequency: FFT along beam axis
-        sp_b = self._mag_fft(x[:, 0], dim=-2).unsqueeze(1)      # (B,1,Bm/2+1,L)
+        # 3. frequency: FFT along beam axis, all channels
+        sp_b = self._mag_fft(x, dim=-2)                         # (B, C, Bm/2+1, L)
         z_freq = self.frequency(sp_b)
         z = torch.cat([z_sp, z_spec, z_freq], dim=1)
         return self.head(z)
