@@ -1,0 +1,7 @@
+{
+  "test_coupon": "PP7",
+  "auc": 0.5866051076894451,
+  "n_train": 400,
+  "n_test": 601,
+  "image_type": "bscan"
+}

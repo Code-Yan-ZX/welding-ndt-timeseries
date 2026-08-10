@@ -1,0 +1,162 @@
+[
+  {
+    "img_type": "bscan",
+    "group": "defect",
+    "idx": 2173,
+    "coupon": "PP6",
+    "label": 1,
+    "response": "The user wants me to act as an expert ultrasonic weld NDT inspector.\nI need to analyze the provided PAUT B-scan image.\nThe image shows a grayscale scan.\n- The x-axis represents the beam axis (lateral position).\n- The y-axis represents depth or time of flight.\n- There are bright, linear features.\n- On the left, there's a dark area with some faint, diagonal lines.\n- In the center/right, there are very bright, distinct, parallel diagonal lines. These look like the back wall reflection or a strong interface"
+  },
+  {
+    "img_type": "bscan",
+    "group": "defect",
+    "idx": 1688,
+    "coupon": "PP5",
+    "label": 1,
+    "response": "The user wants me to act as an expert ultrasonic weld NDT inspector and analyze a PAUT B-scan image.\n\n1.  **Analyze the Image:**\n    *   **Type:** It's a B-scan (cross-sectional view) from Phased Array Ultrasonic Testing (PAUT).\n    *   **Axes:** The prompt specifies \"beam axis x depth/time axis\". This usually means the horizontal axis is the scan position (beam axis) and the vertical axis is time/depth. Wait, let me re-read. \"beam axis x depth/time axis\"."
+  },
+  {
+    "img_type": "bscan",
+    "group": "defect",
+    "idx": 1984,
+    "coupon": "PP6",
+    "label": 1,
+    "response": "The user wants me to act as an expert ultrasonic weld NDT inspector.\nI need to analyze the provided PAUT B-scan image.\nThe image shows a grayscale display.\n- The x-axis represents the beam axis (scan position).\n- The y-axis represents depth or time of flight.\n- There are bright, linear features.\n- On the left, there's a very bright, vertical-ish line, likely the back wall or a strong reflector near the surface, but given the angle, it looks like a side wall or a strong reflection from the probe entry"
+  },
+  {
+    "img_type": "bscan",
+    "group": "defect",
+    "idx": 201,
+    "coupon": "PP3",
+    "label": 1,
+    "response": "The user wants me to act as an expert ultrasonic weld NDT inspector.\nI need to analyze the provided PAUT B-scan image.\nThe image shows a grayscale display.\n- The x-axis represents the beam axis (scan position).\n- The y-axis represents depth or time of flight.\n- There are distinct, bright, linear features.\n\n**Visual Analysis:**\n1.  **Background:** The background is dark with some grainy texture, typical of ultrasonic noise or material grain.\n2.  **Linear Features:** There are several bright, diagonal lines"
+  },
+  {
+    "img_type": "bscan",
+    "group": "defect",
+    "idx": 1682,
+    "coupon": "PP5",
+    "label": 1,
+    "response": "The user wants me to act as an expert ultrasonic weld NDT inspector.\nI need to analyze the provided PAUT B-scan image.\nThe image shows a grayscale scan.\n- **Axes:** The prompt specifies \"beam axis x depth/time axis\". This is a standard B-scan view. The horizontal axis represents the position along the weld (beam axis), and the vertical axis represents depth (time of flight).\n- **Visual features:**\n    - The left side is very dark, almost black. This usually indicates a lack of signal return, possibly due to the probe"
+  },
+  {
+    "img_type": "bscan",
+    "group": "clean",
+    "idx": 2952,
+    "coupon": "PP7",
+    "label": 0,
+    "response": "The user wants me to act as an expert ultrasonic weld NDT inspector.\nI need to analyze the provided PAUT B-scan image.\nThe image shows a grayscale display.\n- **Axes:** The prompt specifies \"beam axis x depth/time axis\". This is a standard B-scan view. The horizontal axis represents the position along the weld (beam axis), and the vertical axis represents depth or time of flight.\n- **Visual Features:**\n    - There are two distinct, bright, parallel diagonal lines running from the top right towards the bottom center. These look like the"
+  },
+  {
+    "img_type": "bscan",
+    "group": "clean",
+    "idx": 393,
+    "coupon": "PP3",
+    "label": 0,
+    "response": "The user wants me to act as an expert ultrasonic weld NDT inspector.\nI need to analyze the provided PAUT B-scan image.\nThe image shows a grayscale display.\n- The x-axis represents the beam axis (scan position).\n- The y-axis represents depth or time of flight.\n- The image is very dark on the left side, suggesting a strong signal or perhaps the near field/entry point, but it looks more like a \"blackout\" or saturation area, possibly the weld cap or a strong reflection.\n- There are distinct, bright, linear"
+  },
+  {
+    "img_type": "bscan",
+    "group": "clean",
+    "idx": 1377,
+    "coupon": "PP5",
+    "label": 0,
+    "response": "The user wants me to act as an expert ultrasonic weld NDT inspector.\nI need to analyze the provided PAUT B-scan image.\nThe image shows a grayscale scan.\n- **Axes:** The prompt specifies \"beam axis x depth/time axis\". This is a standard B-scan orientation. The horizontal axis represents the position along the weld (beam axis), and the vertical axis represents depth or time of flight.\n- **Visual features:**\n    - There is a large, dark area on the left side. This looks like a lack of signal or a very strong attenuation"
+  },
+  {
+    "img_type": "bscan",
+    "group": "clean",
+    "idx": 2475,
+    "coupon": "PP7",
+    "label": 0,
+    "response": "The user wants me to act as an expert ultrasonic weld NDT inspector and analyze a PAUT B-scan image.\n\n1.  **Analyze the Image:**\n    *   **Type:** It's a B-scan (cross-section view). The x-axis is beam position (lateral), and the y-axis is depth/time.\n    *   **Visual Features:**\n        *   There are two distinct, bright, linear features running diagonally from the top right towards the bottom left. These look like the weld cap or perhaps the fusion line, but given their straight"
+  },
+  {
+    "img_type": "bscan",
+    "group": "clean",
+    "idx": 2427,
+    "coupon": "PP7",
+    "label": 0,
+    "response": "The user wants me to act as an expert ultrasonic weld NDT inspector and analyze a PAUT B-scan image.\n\n1.  **Analyze the Image:**\n    *   **Type:** It's a B-scan (cross-sectional view). The x-axis is beam position (lateral), and the y-axis is depth/time.\n    *   **Visuals:**\n        *   There is a very bright, curved line on the far left. This looks like the front wall echo or perhaps the probe footprint/surface reflection, but given the curvature, it's likely"
+  },
+  {
+    "img_type": "spec",
+    "group": "defect",
+    "idx": 2173,
+    "coupon": "PP6",
+    "label": 1,
+    "response": "The user wants me to act as an expert ultrasonic weld NDT inspector and analyze a PAUT B-scan image.\n\n1.  **Analyze the Image:**\n    *   **Type:** It's a PAUT (Phased Array Ultrasonic Testing) B-scan.\n    *   **Axes:** The prompt specifies \"beam axis x depth/time axis\". This usually means the horizontal axis is the beam angle (or lateral position depending on the specific scan type, but \"beam axis\" implies angle) and the vertical axis is depth/time. Wait, let me re-read"
+  },
+  {
+    "img_type": "spec",
+    "group": "defect",
+    "idx": 1688,
+    "coupon": "PP5",
+    "label": 1,
+    "response": "The user wants me to act as an expert ultrasonic weld NDT inspector and analyze a PAUT B-scan image.\n\n1.  **Analyze the Image:**\n    *   **Type:** It's a PAUT (Phased Array Ultrasonic Testing) B-scan.\n    *   **Axes:** The prompt specifies \"beam axis x depth/time axis\". This usually means the horizontal axis is the scan position (beam axis along the weld) and the vertical axis is time-of-flight (depth). Wait, let me re-read carefully. \"beam axis x depth/time axis"
+  },
+  {
+    "img_type": "spec",
+    "group": "defect",
+    "idx": 1984,
+    "coupon": "PP6",
+    "label": 1,
+    "response": "The user wants me to act as an expert ultrasonic weld NDT inspector and analyze a PAUT B-scan image.\n\n1.  **Analyze the Image:**\n    *   **Type:** It's a PAUT (Phased Array Ultrasonic Testing) B-scan.\n    *   **Axes:** The prompt specifies \"beam axis x depth/time axis\". This usually means the horizontal axis is the scan position (beam axis along the weld) and the vertical axis is time-of-flight (depth). Wait, let me re-read carefully. \"beam axis x depth/time axis"
+  },
+  {
+    "img_type": "spec",
+    "group": "defect",
+    "idx": 201,
+    "coupon": "PP3",
+    "label": 1,
+    "response": "The user wants me to act as an expert ultrasonic weld NDT inspector and analyze a PAUT B-scan image.\n\n1.  **Analyze the Image:**\n    *   **Type:** It's a PAUT (Phased Array Ultrasonic Testing) B-scan.\n    *   **Axes:** The prompt specifies \"beam axis x depth/time axis\". This usually means the horizontal axis is the scan position (beam axis along the weld) and the vertical axis is time-of-flight (depth). Wait, let me re-read carefully. \"beam axis x depth/time axis"
+  },
+  {
+    "img_type": "spec",
+    "group": "defect",
+    "idx": 1682,
+    "coupon": "PP5",
+    "label": 1,
+    "response": "The user wants me to act as an expert ultrasonic weld NDT inspector and analyze a PAUT B-scan image.\n\n1.  **Analyze the Image:**\n    *   **Type:** It's a PAUT (Phased Array Ultrasonic Testing) B-scan.\n    *   **Axes:** The prompt specifies \"beam axis x depth/time axis\". This usually means the horizontal axis is the scan position (beam axis along the weld) and the vertical axis is time-of-flight (depth). Wait, let me re-read carefully. \"beam axis x depth/time axis"
+  },
+  {
+    "img_type": "spec",
+    "group": "clean",
+    "idx": 2952,
+    "coupon": "PP7",
+    "label": 0,
+    "response": "The user wants me to act as an expert ultrasonic weld NDT inspector and analyze a PAUT B-scan image.\n\n1.  **Analyze the Image:**\n    *   **Type:** It's a PAUT (Phased Array Ultrasonic Testing) B-scan.\n    *   **Axes:** The prompt specifies \"beam axis x depth/time axis\". This usually means the horizontal axis is the beam angle (or lateral position depending on the specific scan type, but \"beam axis\" implies angle) and the vertical axis is depth/time. Wait, let me re-read"
+  },
+  {
+    "img_type": "spec",
+    "group": "clean",
+    "idx": 393,
+    "coupon": "PP3",
+    "label": 0,
+    "response": "The user wants me to act as an expert ultrasonic weld NDT inspector and analyze a PAUT B-scan image.\n\n1.  **Analyze the Image:**\n    *   **Type:** It's a PAUT (Phased Array Ultrasonic Testing) B-scan.\n    *   **Axes:** The prompt specifies \"beam axis x depth/time axis\". This usually means the horizontal axis is the scan position (beam axis along the weld) and the vertical axis is time-of-flight (depth). Wait, let me re-read carefully. \"beam axis x depth/time axis"
+  },
+  {
+    "img_type": "spec",
+    "group": "clean",
+    "idx": 1377,
+    "coupon": "PP5",
+    "label": 0,
+    "response": "The user wants me to act as an expert ultrasonic weld NDT inspector and analyze a PAUT B-scan image.\n\n1.  **Analyze the Image:**\n    *   **Type:** It's a PAUT (Phased Array Ultrasonic Testing) B-scan.\n    *   **Axes:** The prompt specifies \"beam axis x depth/time axis\". This usually means the horizontal axis is the beam angle (or lateral position depending on the specific scan type, but \"beam axis\" implies angle) and the vertical axis is depth/time. Wait, let me re-read"
+  },
+  {
+    "img_type": "spec",
+    "group": "clean",
+    "idx": 2475,
+    "coupon": "PP7",
+    "label": 0,
+    "response": "The user wants me to act as an expert ultrasonic weld NDT inspector and analyze a PAUT B-scan image.\n\n1.  **Analyze the Image:**\n    *   **Type:** It's a PAUT (Phased Array Ultrasonic Testing) B-scan.\n    *   **Axes:** The prompt specifies \"beam axis x depth/time axis\". This usually means the horizontal axis is the beam angle (or scan position, but \"beam axis\" implies angle sector) and the vertical axis is depth/time. Wait, let me re-read carefully. \"beam axis"
+  },
+  {
+    "img_type": "spec",
+    "group": "clean",
+    "idx": 2427,
+    "coupon": "PP7",
+    "label": 0,
+    "response": "The user wants me to act as an expert ultrasonic weld NDT inspector and analyze a PAUT B-scan image.\n\n1.  **Analyze the Image:**\n    *   **Type:** It's a PAUT (Phased Array Ultrasonic Testing) B-scan.\n    *   **Axes:** The prompt specifies \"beam axis x depth/time axis\". This usually means the horizontal axis is the scan position (beam axis along the weld) and the vertical axis is time-of-flight (depth). Wait, let me re-read carefully. \"beam axis x depth/time axis"
+  }
+]

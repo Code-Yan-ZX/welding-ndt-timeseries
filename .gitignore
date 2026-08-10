@@ -26,3 +26,6 @@ __pycache__/
 
 # local agent memory (contains secrets — never commit)
 CLAUDE.md
+
+# P2 multimodal LLM venv (vLLM/torch, 不提交)
+.venv_p2/
