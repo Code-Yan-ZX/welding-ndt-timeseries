@@ -24,6 +24,22 @@ per-fold 归一化 (无泄漏, 单次归一化), val 调阈值+早停。seed=42�
 | ssl | 0.599±0.092 | 0.572 | +0.035 | 0.403 | 0.494 | 0.707 | 0.542 | 0.569 | 0.684 | `paut_loocv_seed42_ssl.json` |
 | ssl_scratch | 0.549±0.086 | 0.542 | +0.004 | 0.422 | 0.445 | 0.575 | 0.479 | 0.589 | 0.656 | `paut_loocv_seed42_ssl.json` |
 
+## P3 多模态 LLM 物理条件化零样本 (Qwen3.6-27B, 2026-08-11)
+
+零样本 QA 似然打分 (yes/no 首 token logprob 差), 全量 3000 位置, 按 coupon 切片算 per-coupon AUC。
+image=灰度 B-scan。bare=P2 原 prompt 复现; physics=+物理条件化前文 (组件 A)。
+
+| 模式 | 非PP4 AUC | Δ vs bare | PP3 | PP4 | PP5 | PP6 | PP7 | 来源 |
+|---|---|---|---|---|---|---|---|---|
+| P2 VLM zeroshot (bare) | 0.593 | - | 0.571 | 0.208 | 0.571 | 0.480 | 0.504 | `paut_vlm_zeroshot_summary.json` |
+| P3 bare (复现) | **0.600** | +0.000 | 0.586 | 0.497 | 0.592 | 0.472 | 0.493 | `paut_vlm_physics_bare_full.json` |
+| P3 physics (组件 A) | 0.512 | **-0.088** | 0.478 | 0.556 | 0.473 | 0.514 | 0.479 | `paut_vlm_physics_physics_full.json` |
+| P3 physics_cot (组件 B, 子采样 400) | 0.508 | -0.092 | 0.543 | 0.137 | 0.612 | 0.498 | 0.464 | `paut_vlm_physics_physics_cot_full.json` |
+| P3 LoRA 5折 bare (组件 C, 逐折均值) | 0.510 | -0.026(同口径 -0.090) | 0.513 | 0.419 | 0.465 | 0.456 | 0.606 | `paut_vlm_physics_lora_full.json` |
+
+**组件 A/B/C 均负面**: 物理条件化 (0.512)、CoT 推理 (0.508)、LoRA 5折 (0.510 逐折均值) 均低于 bare (0.600); VLM 在 PAUT 的瓶颈是感知而非推理, 文本条件/CoT/少量微调均稀释或过拟合视觉先验。
+LoRA 用逐折均值(每折不同模型, 跨折池化 0.324 无效); P2 单折 PP7=0.587 是幸运折, 完整 5 折后非PP4 均值 0.510 < 零样本 0.536。
+
 ## 备注
 
 - PP4 仅 3 个局部缺陷位置 (0.5%): 作 test 时 AUC 纯噪声 (±0.03 随机波动), 使含 PP4 的 mean±std 不可靠。**非PP4 AUC** (剔除 PP4) 是更可信的跨试件泛化指标。
