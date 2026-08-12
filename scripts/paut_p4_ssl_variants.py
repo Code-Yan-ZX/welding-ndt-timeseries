@@ -290,15 +290,16 @@ def run_exp(exp, args, device):
     pooled_scores = np.concatenate(pooled_scores)
     pooled_labels = np.concatenate(pooled_labels)
     pooled_auc = float(roc_auc_score(pooled_labels, pooled_scores))
-    summary = {"exp": exp, "nonPP4_fold_mean": float(np.mean(np4)),
+    summary = {"exp": exp, "seed": args.seed,
+               "nonPP4_fold_mean": float(np.mean(np4)),
                "nonPP4_pooled": pooled_auc,
                "folds": [{k: v for k, v in f.items() if k != "scores"} for f in folds]}
     print(f"[{exp}] nonPP4 逐折均值={np.mean(np4):.3f}  pooled={pooled_auc:.3f}")
-    out = RES / f"paut_p4a_{exp}.json"
-    # 存分数到单独文件, 主 json 只存摘要
+    ckpt_tag = Path(args.ckpt).parent.name  # e.g. ssl_ae / ssl_ae_depth / ssl_ae_both
     full = dict(summary)
+    full["ckpt"] = args.ckpt
     full["folds"] = folds
-    with open(RES / f"paut_p4a_{exp}_full.json", "w") as fh:
+    with open(RES / f"paut_p4a_{exp}_{ckpt_tag}_s{args.seed}_full.json", "w") as fh:
         json.dump(full, fh, indent=2, ensure_ascii=False)
     return summary
 

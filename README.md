@@ -92,10 +92,12 @@ python scripts/paut_make_table.py            # 汇总表 + 跨模态对照
 |---|---|---|---|---|
 | P0 | LOOCV 上线 + 物理增强 / DANN 域对抗 / 多视角 / 温度缩放 | 0.538（裸 SSF） | **负面**：跨试件泛化差（远低于单点 0.626），增强/域对抗/多视角均未达 +0.03 门槛 | [`PAUT_P0`](reports/PAUT_P0_LOOCV实验报告.md) |
 | P1 | SSL 掩码自编码器预训练 + McKnight Weibull 异常检测 | 0.572（+0.034） | **正面**：域内 SSL 预训练超基线，绕开有监督跨试件困难 | [`PAUT_P1`](reports/PAUT_P1_SSL预训练实验报告.md) |
-| P2 | 多模态 LLM（Qwen3.6-27B）零样本 B-scan QA + LoRA | 0.593（+0.055） | **正面**：通用 VLM 视觉先验有效，三阶段最优 | [`PAUT_P2`](reports/PAUT_P2_多模态LLM实验报告.md) |
+| P2 | 多模态 LLM（Qwen3.6-27B）零样本 B-scan QA + LoRA | 0.593*（pooled） | **修正**：原"三阶段最优"是混口径伪影，统一口径后 SSL ≥ VLM（见 P4a 行） | [`PAUT_P2`](reports/PAUT_P2_多模态LLM实验报告.md) |
 | P3 | 物理条件化 + 推理 CoT + LoRA 5 折 | 0.512 / 0.508 / 0.510 | **负面**：物理/CoT/微调均低于 bare(0.600)，瓶颈在感知而非推理 | [`PAUT_P3`](reports/PAUT_P3_物理条件化多模态LLM实验报告.md) |
+| **P4a** | 信号原生表征变体（融合/微调/类型多任务/TTA）+ 天花板定位 | 0.579±0.007（SSL baseline 多seed） | **混合**：全杠杆多 seed 证伪；统一口径修正（SSL≥VLM）；天花板=表征级跨试件可判别性（+20% 标签无效） | [`PAUT_P4`](reports/PAUT_P4_信号原生表征LOOCV实验报告.md) |
+| **P4b** | 深度掩码 SSL 预训练（depth 深度块 / both beam+depth） | 0.567±0.001（both）/ 0.513（depth） | **负面**：掩码目标不是杠杆，P1 beam-mask 已近表征上限；P4 证据图景完整，翻盘须新数据/合成数据（资源型） | [`PAUT_P4b`](reports/PAUT_P4b_深度掩码SSL预训练实验报告.md) |
 
-**主线结论**：PAUT 跨试件泛化困难（裸 SSF 非PP4 0.538）；域内 SSL 预训练（0.572）与通用多模态 LLM 视觉先验（0.593）两路有效，但注入物理/文本条件或微调反而退化--VLM 瓶颈是感知而非推理。汇总对比表见 [`experiments/results/paut_loocv_table.md`](experiments/results/paut_loocv_table.md)。
+**主线结论**：PAUT 跨试件泛化困难（裸 SSF 非PP4 0.538）；域内 SSL 预训练（0.572）与通用多模态 LLM 视觉先验（0.593）两路有效，但注入物理/文本条件或微调反而退化--VLM 瓶颈是感知而非推理。**口径修正（P4a）**：P2 的 0.593（pooled）与 P1 的 0.572（逐折均值）不可比；统一口径下 SSL ≥ VLM。**天花板定位（P4a/P4b）**：+20% test 折标签无效（0.583）、融合/微调/TTA/形态头/掩码目标全部多 seed 证伪 → 瓶颈是 5 试件数据结构（缺陷率 0.5%–76% 与试件身份强耦合）下的表征级上限 ~0.58–0.60（逐折均值）。**翻盘路径（资源型）**：新试件数据解耦"缺陷存在"与"试件缺陷率"、或物理保真合成数据教"缺陷回波物理"（H5 已证同分布加标签无效）。汇总对比表见 [`experiments/results/paut_loocv_table.md`](experiments/results/paut_loocv_table.md)。
 
 ## 目录结构
 
