@@ -76,7 +76,7 @@ case "${1:-}" in
       s.env=s.env||{};
       s.env.ANTHROPIC_BASE_URL="http://127.0.0.1:"+port;
       s.env.ANTHROPIC_AUTH_TOKEN="local-proxy";
-      s.env.ANTHROPIC_MODEL=s.env.ANTHROPIC_MODEL||"glm-5.2[1m]";
+      s.env.ANTHROPIC_MODEL=s.env.ANTHROPIC_MODEL||"deepseek-v4-flash[1m]";
       s.model=s.env.ANTHROPIC_MODEL;
       fs.writeFileSync(p, JSON.stringify(s,null,2)+"\n","utf8");
       console.log("已将 settings.json 指向本地代理:");

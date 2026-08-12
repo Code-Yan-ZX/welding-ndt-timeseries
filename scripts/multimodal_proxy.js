@@ -6,7 +6,7 @@
  * Claude Code 与上游之间, 按「请求体里是否含图片/文档块」自动分流:
  *
  *   含 image/document 块  ->  image 路由 (你的多模态模型)
- *   纯文字                ->  text  路由 (火山方舟 glm-5.2, 原样透传)
+ *   纯文字                ->  text  路由 (火山方舟 deepseek-v4-flash[1m], 原样透传)
  *
  * 两侧都是 Anthropic /v1/messages 协议, 因此无需协议翻译, 只做:
  *   1. 解析 body 检测图片块
@@ -57,7 +57,7 @@ function seedConfig(force) {
   const authHeader = env.ANTHROPIC_AUTH_TOKEN ? 'bearer'
                    : env.ANTHROPIC_API_KEY  ? 'x-api-key' : 'bearer';
   const base = env.ANTHROPIC_BASE_URL || 'https://ark.cn-beijing.volces.com/api/coding';
-  const model = env.ANTHROPIC_MODEL || s.model || 'glm-5.2[1m]';
+  const model = env.ANTHROPIC_MODEL || s.model || 'deepseek-v4-flash[1m]';
   const cfg = {
     _comment: '本地多模态路由代理配置。仅存于 ~/.claude/ 下, 不进仓库。image 路由用于含图片/文档的请求, text 路由用于纯文字。',
     port: 8787,
@@ -183,7 +183,7 @@ function forward(req, res, cfg) {
       outBody = Buffer.from(JSON.stringify(parsed));
     } else {
       routeName = 'text'; upstream = cfg.text;
-      // text 路由: Claude Code 发来的 model 已是 glm-5.2[1m], 直接原样透传, 零改写风险
+      // text 路由: Claude Code 发来的 model 已是 deepseek-v4-flash[1m], 直接原样透传, 零改写风险
       outBody = raw;
       if (parsed && parsed.model && parsed.model !== upstream.model) {
         parsed.model = upstream.model;
