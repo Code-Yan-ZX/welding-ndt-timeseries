@@ -70,6 +70,8 @@ python scripts/saw_make_table.py            # 汇总表
 
 模型：经典 ML（RF/XGB，包络手工特征）、从零 PatchTST 编码器（49 波束 B-scan，VarAttention 作注意力 MIL）、**谱-空-频 SSF 模型**（Alliance 启发，空间/时间谱/波束谱三分支）、冻结 MOMENT 探针。**结果（test AUC，主指标）**：SSF 最优且最稳 0.626±0.009，encoder 0.54±0.12（小数据下方差大），MOMENT 0.46（不迁移，与 SAW 互证），经典 ML ~0.49。跨模态对照：PAUT SSF(0.626) 与 SAW encoder(0.636) 相当；PAUT 经典特征(0.49)优于 SAW(0.22)；MOMENT 两模态均失败。详见 [`reports/PAUT相控阵缺陷检测实验报告.md`](reports/PAUT相控阵缺陷检测实验报告.md)。
 
+> ⚠ 此为 **PP7 单点评估**。后续 LOOCV（见下节）显示跨试件泛化非PP4 AUC 仅 0.538，单点 0.626 偏乐观。
+
 ```bash
 python scripts/paut_preprocess.py            # 解析 .nde -> A-scan/B-scan + 标签 + 划分
 python scripts/paut_classic_ml.py            # RF / XGBoost
@@ -78,6 +80,22 @@ python scripts/paut_train.py --config configs/paut_ssf.yaml --seed 42       # �
 python scripts/paut_moment_probe.py          # MOMENT 冻结探针
 python scripts/paut_make_table.py            # 汇总表 + 跨模态对照
 ```
+
+## PAUT 跨试件鲁棒性推进（P0–P3）
+
+初始 PAUT 实验只在 PP7 单点评估，无法反映跨试件泛化。后续 4 个阶段改为 **5 折留一试件交叉验证（LOOCV）**，以 **非PP4 AUC**（剔除近零缺陷的 PP4 试件，4 折均值）为可信指标。
+
+> **PP4 数据完整性已核实**：PP4 不是下载失败/解析 bug/标注遗漏。官方 AIMEN UT 报告证实 PP4 仅 1 个 2mm 可接受气孔、试件被接收，是 PENELOPE 零缺陷制造工作包下的近零缺陷试件。PP4 仅 3 个正样本，作 test 折时 AUC 纯噪声，故剔除。各试件缺陷标注数：PP3=68 / PP4=1 / PP5=50 / PP6=112 / PP7=12。
+> 另：PP5 标注有 1 行 x_init>x_end 录入反转，旧版 `position_labels` 静默跳过（PP5 少计 18 个缺陷位置，占全量 0.6%，在 seed 噪声内）；`paut_preprocess.py` 已修复，P0–P3 结果沿用修复前标签，下次运行自动生效，结论不变。
+
+| 阶段 | 方法 | 非PP4 AUC | 结论 | 报告 |
+|---|---|---|---|---|
+| P0 | LOOCV 上线 + 物理增强 / DANN 域对抗 / 多视角 / 温度缩放 | 0.538（裸 SSF） | **负面**：跨试件泛化差（远低于单点 0.626），增强/域对抗/多视角均未达 +0.03 门槛 | [`PAUT_P0`](reports/PAUT_P0_LOOCV实验报告.md) |
+| P1 | SSL 掩码自编码器预训练 + McKnight Weibull 异常检测 | 0.572（+0.034） | **正面**：域内 SSL 预训练超基线，绕开有监督跨试件困难 | [`PAUT_P1`](reports/PAUT_P1_SSL预训练实验报告.md) |
+| P2 | 多模态 LLM（Qwen3.6-27B）零样本 B-scan QA + LoRA | 0.593（+0.055） | **正面**：通用 VLM 视觉先验有效，三阶段最优 | [`PAUT_P2`](reports/PAUT_P2_多模态LLM实验报告.md) |
+| P3 | 物理条件化 + 推理 CoT + LoRA 5 折 | 0.512 / 0.508 / 0.510 | **负面**：物理/CoT/微调均低于 bare(0.600)，瓶颈在感知而非推理 | [`PAUT_P3`](reports/PAUT_P3_物理条件化多模态LLM实验报告.md) |
+
+**主线结论**：PAUT 跨试件泛化困难（裸 SSF 非PP4 0.538）；域内 SSL 预训练（0.572）与通用多模态 LLM 视觉先验（0.593）两路有效，但注入物理/文本条件或微调反而退化--VLM 瓶颈是感知而非推理。汇总对比表见 [`experiments/results/paut_loocv_table.md`](experiments/results/paut_loocv_table.md)。
 
 ## 目录结构
 

@@ -19,6 +19,17 @@ P0 改为 **5 折留一试件交叉验证 (LOOCV)**：PP3-PP7 轮流作 test，�
 随机波动（±0.03 纯噪声），使含 PP4 的 mean±std 不可信。本报告以 **非PP4 AUC**
 （剔除 PP4，4 折均值）作为更可信的跨试件泛化指标，含 PP4 数值仅作记录。
 
+> **PP4 数据完整性已核实（2026-08-11）**：PP4 不是下载失败/解析 bug/标注遗漏。官方 AIMEN
+> UT 报告（`PP4/2. ndt_data/UT.pdf`）证实 PP4 仅 1 个 2mm 可接受气孔（X=229mm），试件被
+> 接收（ACEPTADO），报告抬头 "PENELOPE-WP4 ZERO-DEFECT MANUFACTURING"--PP4 是数据集设计的
+> 近零缺陷试件。各试件 xlsx 缺陷数 PP3=68/PP5=50/PP6=112/PP7=12/PP4=1。
+>
+> **PP5 标注录入反转（已修代码）**：`defects_xlocation.xlsx` PP5 sheet 有 1 行 x_init=177 >
+> x_end=160（长度 -17mm，数据集本身录入反转），旧版 `position_labels` 静默跳过，致 PP5 少计
+> 18 个缺陷位置（全量 3000 中占 0.6%，在 seed 噪声内）。`scripts/paut_preprocess.py` 已修复
+> （swap 恢复 + warning）；本报告及 P1-P3 结果沿用修复前标签，下次运行 preprocess 自动生效，
+> 定性结论不变。
+
 ## 2. 基线 LOOCV 结果（P0-1）
 
 | 模型 | AUC mean±std | 非PP4 AUC | F1m | PP3 | PP4 | PP5 | PP6 | PP7 |

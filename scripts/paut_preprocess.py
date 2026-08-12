@@ -45,6 +45,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import warnings
 from pathlib import Path
 
 import h5py
@@ -132,13 +133,26 @@ def position_labels(defects: pd.DataFrame, offset_mm: float, res_mm: float,
     A position is defect(1) if its x-range overlaps any defect with axial
     extent < big_mm.  Defects >= big_mm (blanket cracks/regions) are ignored
     (treated as background).  Returns (label[n_pos], type[n_pos]).
+
+    Data-entry robustness: a few dataset rows have ``x_init > x_end`` (reversed
+    extent, e.g. PP5 bead 3 -> x_init=177/x_end=160); these are swapped back
+    before mapping so the defect is recovered instead of silently dropped.
     """
     lab = np.zeros(n_pos, dtype=np.int64)
     typ = np.zeros(n_pos, dtype=np.int64)
-    local = defects[defects["len_mm"] < big_mm]
+    # abs(len) so reversed (negative-length) entries are classified by their
+    # true axial extent rather than slipping through the < big_mm filter.
+    local = defects[defects["len_mm"].abs() < big_mm]
     for _, r in local.iterrows():
-        s = (float(r["x_init [mm]"]) - offset_mm) / res_mm
-        e = (float(r["x_end [mm]"]) - offset_mm) / res_mm
+        xi, xe = float(r["x_init [mm]"]), float(r["x_end [mm]"])
+        if xe < xi:                       # dataset data-entry reversal -> swap
+            warnings.warn(
+                f"defect row with x_init={xi} > x_end={xe} (reversed); "
+                f"swapping to recover the defect extent.",
+                stacklevel=2)
+            xi, xe = xe, xi
+        s = (xi - offset_mm) / res_mm
+        e = (xe - offset_mm) / res_mm
         i0, i1 = max(0, int(round(s))), min(n_pos - 1, int(round(e)))
         if i1 < i0:
             continue

@@ -4,6 +4,10 @@
 > 日期：2026-08-07 ｜ 模型：Qwen3.6-27B (Qwen3_5ForConditionalGeneration, 视觉语言模型, 64层)
 > 动机：P1 SSL 验证域内预训练有效。P2 验证通用多模态 LLM (视觉理解) 是否能从 B-scan 图像
 > 迁移到 PAUT 缺陷检测--零样本 QA 似然打分, 若有效则微调。
+>
+> ⚠ 标签版本：本阶段结果使用 PP5 修复前标签（`position_labels` 旧版静默跳过 1 行 x_init>x_end
+> 录入反转，PP5 少计 18 个缺陷位置，占全量 0.6%，在 seed 噪声内）。`paut_preprocess.py` 已修复，
+> 下次运行生效，定性结论不变。
 
 ## 1. 部署 (P2-①)
 
