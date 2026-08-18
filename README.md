@@ -12,6 +12,37 @@
   1. **ITFormer**: Bridging Time Series and Natural Language for Multi-Modal QA with Large-Scale Multitask Dataset, ICML 2025，[arXiv:2506.20093](https://arxiv.org/abs/2506.20093)；代码 [Pandalin98/ITFormer-ICML25](https://github.com/Pandalin98/ITFormer-ICML25)。
   2. **Alliance**: All-in-One Spectral-Spatial-Frequency Awareness Foundation Model（谱-空-频联合感知基础模型，相控阵信号建模的重要参考）。
 
+## 大课题定位与公开数据预研阶段（M0）
+
+> 新增于 2026-08-18。**不删除、不改写上文 P0–P5d 既有历史结果**；M0 是在其上建立的
+> 新阶段，用于把 PAUT 小数据预研扩展为面向未来合作单位数据的可扩展底座。
+
+本项目属于**无损检测 AI 模型研究**大课题，正式研究对象包括：超声无损检测
+（UT / PAUT / FMC / TFM）、涡流无损检测（ECT / ECA / 多频涡流）、以及超声+涡流
+等多模态融合（后续可加入工艺、几何、检验报告等模态）。未来将有合作单位提供正式
+的超声、涡流和配对多模态数据，但当前正式数据尚未到位。
+
+因此现阶段目标**不是**在某公开小数据集上寻找最终 SOTA，而是：
+
+> 利用公开 NDT 数据集，建立**可扩展的数据底座、评估协议、单模态基线、预训练方法
+> 和多模态融合接口**，为未来接入合作单位数据做好技术准备。
+
+### M0 阶段划分
+
+- **M0-1（当前，已完成）**：公开数据集审计 + 统一数据架构设计（不训练）。
+  - 交付物：`docs/M0_public_ndt_dataset_audit.md`（数据审计）、
+    `docs/M0_unified_ndt_schema.md`（统一 schema）、
+    `docs/M0_experiment_roadmap.md`（后续实验路线）、
+    `data/manifests/templates/ndt_manifest_schema.json`（manifest 模板）、
+    `src/wndt/data/adapters/base.py` 与 `src/wndt/models/multimodal/interfaces.py`
+    （接口草案）、`tests/test_nd_interfaces.py`（接口单测，已通过）。
+- **M0-2（待用户审核后启动）**：按审计优先级接入数据集 + 单模态基线。**在获得
+  可验证的同试件、同坐标、成对 UT+ECT 公共数据之前，不做真正的融合训练**，严禁
+  把不同试件/材料/任务的 UT 与 ECT 强行拼接后称为"多模态融合"。
+
+> ⚠ 限制：本阶段不进行超 10 GB 的新下载、不自动下载全部 LOTSA/UTSD、不做正式
+> 训练、不跑长时 GPU 任务。公开小数据实验不代表最终课题结论。
+
 ## 当前实验：ITFormer 基线
 
 将 ITFormer（ICML 2025）适配到焊接质量二分类任务作为时序基础模型方向的 baseline，并与经典机器学习、简单深度学习、近期时序模型、文献 SOTA 官方复现四族方法系统对比。**详细实验报告见 [`reports/实验报告.md`](reports/实验报告.md)。**
@@ -101,17 +132,19 @@ python scripts/paut_make_table.py            # 汇总表 + 跨模态对照
 | **P5** | 缺陷注入 SSL 预训练（注入 2D 高斯峰 + 多任务：MAE 重建 + 注入检测 + 注入定位） | 0.545±0.003（3 seed, 规范头） | **负面 + 关键诊断**：注入任务本身可学到 ~100% 准确率 (inj_acc 0.998)，但学到的"高斯峰"特征不能迁移到真实缺陷；val-test gap ~0.34（比 P1 更严重）。H5 oracle 关键扩展：物理保真合成标签也无效 → 瓶颈是"真实缺陷形态空间"在 5 试件间的强变异 | [`PAUT_P5`](reports/PAUT_P5_缺陷注入SSL预训练实验报告.md) |
 | **P5b** | 跨试件监督对比学习 (SupCon + 跨试件 batch 采样, per-fold 严格) | **0.487（1 seed, 规范头）** | **负面**：per-fold 严格 (cold-start) 0.487 < baseline 0.579 (-0.092)，val-test gap 0.51 (过拟合到训练试件)；监督 SSL 评估必须 per-fold 严格 pretrain | [`PAUT_P5b`](reports/PAUT_P5b_跨试件监督对比学习实验报告.md) |
 | **P5d** | 推理时 Test-Time Training：P1 SSL MAE 在 test 试件**无标签**数据上微调编码器（表征级适配, 固定预算不调参） | **0.551±0.018（3 seed）** | **负面**：TTT 三档预算全负（-0.01~-0.04，PP7 崩塌 -0.16 驱动）；val-domain 对照 ≈0（非 test 特异）。recon 一致下降（适配真实发生）但跨试件判别力未增 → 与 H5 oracle 互证：天花板是表征级, 不是"模型没见过 test 试件" | [`PAUT_P5d`](reports/PAUT_P5d_TestTimeTraining实验报告.md) |
+| **P6** | 文献驱动 SSL 预训练创新（batch=128 同 env base 0.556）
+| **P7** | **新方向启动**: 程序生成物理保真超声 B-scan (Synth-UT) + 联合预训练 → 真实 LOOCV。P0-P6 天花板 0.579 收口后, 探索"大模型编码器+大预训练数据"翻盘路径。P7a 纯合成12k: **0.512±0.078**（负向, val-test gap 0.83→0.46）→ 编码器学到合成 cfg 风格捷径, 真实失效; **P7b 联合 12k合成+3k真实** (StorSeismic 模板): **0.559±0.063** (vs P4a 0.579, -0.020 接近) → 联合预训练有效 (+0.047), 全5折 0.578 ≈ P4a 0.579, PP4 显著恢复 0.32→0.65; P7c 联合 100k合成(50试件)+3k真实: 跑中 | **进行中**: 联合预训练范式首次验证有效, 但单靠程序生成仍未翻盘 0.579; 下一步必走外部超声数据 (UGW-3Mat-2SN 43.5GB 公开导波数据集) 或 SimNDT 真仿真。关键诊断: 程序生成天然强化"缺陷强度-试件身份耦合"——每个 cfg 独立一套物理参数, 编码器被迫把 cfg 与缺陷混在一起; 仿真→真实的 sim2real gap 需要工艺噪声层或真仿真数据。 | [`PAUT_P7`](reports/PAUT_P7_程序生成超声合成数据预训练报告.md) |：BSS 傅里叶幅值标准化 / 模糊目标 MAE / DiMAE 跨试件重建 / 逐试件解码器 | 0.554 / 0.551 / **0.521** / **0.517**（seed42, 同 env base 0.556） | **负面**：4 个文献创新全部未突破基线（中性到显著负）；**PP7 稀疏缺陷折系统性崩塌**（-0.03~-0.15）——任何"去试件样式/统计"的预训练改动都同时洗掉与试件耦合的缺陷强度信号（P4a 归因第三次验证）。DiMAE 式重建域不变（DANN 的合理替代）同样失败。附带发现：预训练 batch 256→128 使基线 0.571→0.556（batch 是显著超参） | [`PAUT_P6`](reports/PAUT_P6_文献创新SSL实验报告.md) |
 
-**主线结论**：PAUT 跨试件泛化困难（裸 SSF 非PP4 0.538）；**域内 SSL 预训练是唯一有效路线**（P1 0.572 → P4a 规范基线 0.579±0.007），VLM 视觉先验（0.593 pooled）曾被误判为最优，统一口径后 **SSL ≥ VLM**、VLM 从未超过 SSL；注入物理/文本条件或微调反而退化（VLM 瓶颈是感知而非推理）。**评估统一规范头协议**（冻结 SSL 编码器 + 分类头 lr=1e-3/80ep，即 P1 SSL 同超参；P4a–P5d 数字均为该口径；P0 的 SSF 与 P2/P3 的 VLM 为各自独立协议，仅同 LOOCV 非PP4 指标可比）。**天花板被完整验证（P0–P5d 全部证伪）**：所有廉价杠杆（增强/微调/TTA/融合/形态头/掩码目标/合成注入/监督对比 per-fold 严格/**推理时 SSL-MAE TTT**）均未突破 0.58（P4a 0.579 / P4b both 0.566、depth 0.511 / P5 0.545 / P5b 0.487 / P5d 0.551）。**P5b 失败诊断**：跨试件监督对比学习在 per-fold 严格 (cold-start) 设定下 0.487 < baseline 0.579 (-0.092)，val-test gap 0.51 = 4 试件过拟合；监督 SSL 评估必须 per-fold 严格 pretrain 避免信息泄露。**P5d 关键诊断**：TTT 机制成立（recon 一致下降=编码器真适配 test 分布）但跨试件判别力未增；三档预算全负（PP7 缺陷稀疏试件崩塌），val-domain 对照 ≈0（非 test 特异）→ 天花板是表征级，不是"模型没见过 test 试件"。**目标'超过 VLM 0.59+'未达成**。翻盘路径（资源型）：新试件数据解耦"缺陷存在"与"试件缺陷率"、或 CIVA 级合成教"缺陷回波物理"。汇总对比表见 [`experiments/results/paut_loocv_table.md`](experiments/results/paut_loocv_table.md)。
+**主线结论**：PAUT 跨试件泛化困难（裸 SSF 非PP4 0.538）；**域内 SSL 预训练是唯一有效路线**（P1 0.572 → P4a 规范基线 0.579±0.007），VLM 视觉先验（0.593 pooled）曾被误判为最优，统一口径后 **SSL ≥ VLM**、VLM 从未超过 SSL；注入物理/文本条件或微调反而退化（VLM 瓶颈是感知而非推理）。**评估统一规范头协议**（冻结 SSL 编码器 + 分类头 lr=1e-3/80ep，即 P1 SSL 同超参；P4a–P5d 数字均为该口径；P0 的 SSF 与 P2/P3 的 VLM 为各自独立协议，仅同 LOOCV 非PP4 指标可比）。**天花板被完整验证（P0–P6 全部证伪）**：所有廉价杠杆（增强/微调/TTA/融合/形态头/掩码目标/合成注入/监督对比 per-fold 严格/推理时 SSL-MAE TTT/**文献驱动的样式不变 SSL 预训练**）均未突破 0.58（P4a 0.579 / P4b both 0.566、depth 0.511 / P5 0.545 / P5b 0.487 / P5d 0.551 / P6 dimae 0.521、multidec 0.517）。**P6 关键诊断**：BSS/去模糊/DiMAE 三机制独立验证——任何"移除试件样式/统计"的预训练改动都使稀疏缺陷试件（PP7, 缺陷率 12%）崩塌（-0.03~-0.15），因缺陷强度与试件身份强耦合；DiMAE 重建式域不变（理论上是 DANN 对抗式的替代）同样失败。**P5b 失败诊断**：跨试件监督对比学习在 per-fold 严格 (cold-start) 设定下 0.487 < baseline 0.579 (-0.092)，val-test gap 0.51 = 4 试件过拟合；监督 SSL 评估必须 per-fold 严格 pretrain 避免信息泄露。**P5d 关键诊断**：TTT 机制成立（recon 一致下降=编码器真适配 test 分布）但跨试件判别力未增；三档预算全负（PP7 缺陷稀疏试件崩塌），val-domain 对照 ≈0（非 test 特异）→ 天花板是表征级，不是"模型没见过 test 试件"。**目标'超过 VLM 0.59+'未达成**。翻盘路径（资源型）：新试件数据解耦"缺陷存在"与"试件缺陷率"、或 CIVA 级合成教"缺陷回波物理"。汇总对比表见 [`experiments/results/paut_loocv_table.md`](experiments/results/paut_loocv_table.md)。
 
 ## 目录结构
 
 ```
 configs/       每个模型族一份 YAML 配置
-data/          原始 CSV + 预处理 memmap（不入 git）
-src/wndt/      包：数据管线、模型、训练器、指标
+data/          原始数据 + 预处理（raw/、processed/ 不入 git）+ manifests/（入 git）
+src/wndt/      包：数据管线（data/adapters/ 为 M0 统一适配器）、模型（models/multimodal/ 为 M0 融合接口）、训练器、指标
 scripts/       下载 / 预处理 / 训练 / 评测入口
-tests/         单元测试（python tests/test_models.py [--with-llm]）
+tests/         单元测试（python tests/test_models.py [--with-llm]；tests/test_nd_interfaces.py 为 M0 接口单测）
 experiments/   runs/（checkpoint、日志）+ results/*.json + 汇总表
 reports/       实验报告（中文，便于在 GitHub 上查看）
 third_party/   官方 tmdt-buw 仓库 clone（仅一处必要补丁）
