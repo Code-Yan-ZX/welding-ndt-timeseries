@@ -1,0 +1,59 @@
+{
+  "exp": "synth_to_real_p7_mix",
+  "seed": 42,
+  "pretrain": {
+    "n_samples": 15000,
+    "epochs": 60,
+    "batch": 256,
+    "lr": 0.001,
+    "mask_ratio": 0.3,
+    "d_model": 128,
+    "mix_real": true
+  },
+  "head": {
+    "epochs": 80,
+    "batch": 128,
+    "lr": 0.001
+  },
+  "all_folds_mean_auc": 0.57758,
+  "all_folds_std_auc": 0.06712190104578385,
+  "nonPP4_mean_auc": 0.55935,
+  "nonPP4_std_auc": 0.06300811455677753,
+  "folds": [
+    {
+      "test_coupon": "PP3",
+      "n_test": 601,
+      "def_rate": 0.574,
+      "val_auc": 0.8141,
+      "test_auc": 0.4913
+    },
+    {
+      "test_coupon": "PP4",
+      "n_test": 601,
+      "def_rate": 0.005,
+      "val_auc": 0.6091,
+      "test_auc": 0.6505
+    },
+    {
+      "test_coupon": "PP5",
+      "n_test": 596,
+      "def_rate": 0.438,
+      "val_auc": 0.6635,
+      "test_auc": 0.5102
+    },
+    {
+      "test_coupon": "PP6",
+      "n_test": 601,
+      "def_rate": 0.764,
+      "val_auc": 0.6061,
+      "test_auc": 0.5866
+    },
+    {
+      "test_coupon": "PP7",
+      "n_test": 601,
+      "def_rate": 0.138,
+      "val_auc": 0.7013,
+      "test_auc": 0.6493
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "exp": "synth_ssl_p7",
+  "seed": 42,
+  "n_samples": 1024,
+  "n_coupons": 12,
+  "defect_rate": 0.1162109375,
+  "pretrain": {
+    "epochs": 2,
+    "batch": 256,
+    "lr": 0.001,
+    "mask_ratio": 0.3,
+    "d_model": 128
+  },
+  "head": {
+    "epochs": 4,
+    "batch": 128,
+    "lr": 0.001
+  },
+  "all_folds_mean_auc": 0.997325,
+  "all_folds_std_auc": 0.006003210946374173,
+  "non_near_zero_folds_mean_auc": 0.997325,
+  "folds": [
+    {
+      "test_coupon": 0,
+      "n_test": 86,
+      "def_rate": 0.07,
+      "val_auc": 0.6716,
+      "test_auc": 1.0
+    },
+    {
+      "test_coupon": 1,
+      "n_test": 85,
+      "def_rate": 0.141,
+      "val_auc": 0.5867,
+      "test_auc": 1.0
+    },
+    {
+      "test_coupon": 2,
+      "n_test": 85,
+      "def_rate": 0.129,
+      "val_auc": 0.5584,
+      "test_auc": 1.0
+    },
+    {
+      "test_coupon": 3,
+      "n_test": 86,
+      "def_rate": 0.081,
+      "val_auc": 0.6628,
+      "test_auc": 1.0
+    },
+    {
+      "test_coupon": 4,
+      "n_test": 85,
+      "def_rate": 0.094,
+      "val_auc": 0.5717,
+      "test_auc": 1.0
+    },
+    {
+      "test_coupon": 5,
+      "n_test": 85,
+      "def_rate": 0.071,
+      "val_auc": 0.6245,
+      "test_auc": 1.0
+    },
+    {
+      "test_coupon": 6,
+      "n_test": 85,
+      "def_rate": 0.118,
+      "val_auc": 0.6173,
+      "test_auc": 0.9827
+    },
+    {
+      "test_coupon": 7,
+      "n_test": 86,
+      "def_rate": 0.151,
+      "val_auc": 0.7005,
+      "test_auc": 1.0
+    },
+    {
+      "test_coupon": 8,
+      "n_test": 85,
+      "def_rate": 0.141,
+      "val_auc": 0.6986,
+      "test_auc": 0.9852
+    },
+    {
+      "test_coupon": 9,
+      "n_test": 85,
+      "def_rate": 0.118,
+      "val_auc": 0.6675,
+      "test_auc": 1.0
+    },
+    {
+      "test_coupon": 10,
+      "n_test": 85,
+      "def_rate": 0.094,
+      "val_auc": 0.6055,
+      "test_auc": 1.0
+    },
+    {
+      "test_coupon": 11,
+      "n_test": 86,
+      "def_rate": 0.186,
+      "val_auc": 0.6693,
+      "test_auc": 1.0
+    }
+  ]
+}
