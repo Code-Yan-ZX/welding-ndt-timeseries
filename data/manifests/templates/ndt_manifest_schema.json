@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://wndt.local/manifests/templates/ndt_manifest_schema.json",
-  "title": "NDT Manifest Schema (M0-1 统一数据底座)",
-  "description": "统一的 NDT 数据集 manifest 结构。每个公开数据集对应一份 manifest JSON，描述其 specimen、独立缺陷实例与每个数据单元（记录）的元数据，同时保留模态专属 tensor（A-scan/B-scan/C-scan、I/Q 曲线等）按原样存储、不强制插值成图片。manifest 只做 metadata/manifest 层，tensor 通过 tensor_path 指向 data/processed/ 下的原生数组文件。",
+  "title": "NDT Manifest Schema (M0-1.5 统一数据底座)",
+  "description": "统一的 NDT 数据集 manifest 结构。每个公开数据集对应一份 manifest，描述其 specimen、独立缺陷实例与每个数据单元（记录）的元数据，同时保留模态专属 tensor（A-scan/B-scan/C-scan、I/Q 曲线等）按原样存储、不强制插值成图片。manifest 只做 metadata/manifest 层，tensor 通过 tensor_path 指向 data/processed/ 下的原生数组文件。M0-1.5 起：is_simulated 拆分为 data_origin / defect_origin；新增 label_status；tensor 引用支持 tensor_key / record_index / slice；按 modality 用 if/then 约束专属字段；原始文件带 checksum / size_bytes / provenance。大规模 records 建议放 records.parquet / JSONL，顶层 dataset card JSON 不内嵌数万/数百万条记录（见 records_ref）。",
   "type": "object",
   "definitions": {
     "Modality": {
@@ -13,6 +13,62 @@
     "DefectType": {
       "description": "缺陷类型采用自由字符串（如 porosities / solidification_crack / lack_of_fusion / edm_notch），不强制枚举以兼容各数据集原始命名。",
       "type": "string"
+    },
+    "DataOrigin": {
+      "description": "数据（信号本身）的来源。measured=实测；simulated=仿真/程序生成；derived=由原始数据派生（如包络、降采样、拼接视图）。",
+      "type": "string",
+      "enum": ["measured", "simulated", "derived"]
+    },
+    "DefectOrigin": {
+      "description": "缺陷的物理来源。manufacturing=制造工艺缺陷（真实）；service=服役中产生（真实）；artificial_edm=EDM 电火花加工人工缺陷；artificial_sdh=侧钻孔（SDH）人工缺陷；simulated=仿真/程序生成缺陷；unknown=未知。",
+      "type": "string",
+      "enum": ["manufacturing", "service", "artificial_edm", "artificial_sdh", "simulated", "unknown"]
+    },
+    "LabelStatus": {
+      "description": "标签状态。positive=正样本（缺陷）；negative=负样本（背景）；ignore=该记录不参与训练/评估（如 ≥50mm 贯穿大裂纹，Protocol V2 §5.1）；unknown=无标签/未知。",
+      "type": "string",
+      "enum": ["positive", "negative", "ignore", "unknown"]
+    },
+    "TensorRef": {
+      "description": "记录 → tensor 的引用。三种形式（任选其一）：(a) tensor_key 指向顶层 tensors 段统一索引的 tensor 文件；(b) record_index = 该记录是某 tensor 文件的第几行/第几个切片；(c) slice = 在 tensor 文件中的 [start, end] 切片（按行/索引）。",
+      "type": "object",
+      "properties": {
+        "tensor_key": {"type": "string", "description": "顶层 tensors 段的 key（如 \"bscan\"）"},
+        "record_index": {"type": ["integer", "null"], "description": "该记录对应 tensor 文件中的行/切片索引（从 0 起）"},
+        "slice": {
+          "type": ["array", "null"],
+          "description": "在 tensor 文件中的索引切片 [start, end]（含 start 不含 end）",
+          "items": {"type": "integer"}, "minItems": 2, "maxItems": 2
+        }
+      },
+      "oneOf": [
+        {"required": ["tensor_key"]},
+        {"required": ["record_index"]},
+        {"required": ["slice"]}
+      ]
+    },
+    "Checksum": {
+      "type": "object",
+      "description": "原始文件的完整性校验。",
+      "properties": {
+        "algorithm": {"type": "string", "enum": ["sha256", "md5"]},
+        "digest": {"type": "string", "description": "十六进制摘要"},
+        "size_bytes": {"type": ["integer", "null"]}
+      },
+      "required": ["algorithm", "digest"]
+    },
+    "Provenance": {
+      "type": "object",
+      "description": "原始 → 处理产物的加工链（preprocessing provenance）。",
+      "properties": {
+        "steps": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "如 [\"max-pool 3500->512\", \"Group 0 71° 提取\", \"z-score norm on train\"]"
+        },
+        "software": {"type": ["string", "null"], "description": "处理脚本/工具，如 \"scripts/paut_preprocess.py@<commit>\""},
+        "timestamp": {"type": ["string", "null"]}
+      }
     },
     "Position": {
       "type": "object",
@@ -46,7 +102,8 @@
         "defect_instance_id": {"type": "string", "description": "同数据集内唯一（建议 dataset_name:specimen_id:序号）"},
         "specimen_id": {"type": "string"},
         "defect_type": {"$ref": "#/definitions/DefectType"},
-        "is_simulated": {"type": "boolean", "description": "true=仿真(CIVA 等)/人工制备(EDM notch、SDH 侧孔) ; false=真实制造缺陷"},
+        "data_origin": {"$ref": "#/definitions/DataOrigin"},
+        "defect_origin": {"$ref": "#/definitions/DefectOrigin"},
         "defect_location": {"$ref": "#/definitions/Position"},
         "defect_depth": {"type": ["number", "null"], "description": "缺陷深度 (mm)，若数据集不提供则为 null"},
         "defect_size": {
@@ -63,13 +120,14 @@
         "label_confidence": {"type": ["number", "null"], "description": "0-1，官方报告/破坏性检验=1.0；人工目视=0.5-0.8；纯推测/无标注=null"},
         "notes": {"type": ["string", "null"]}
       },
-      "required": ["defect_instance_id", "specimen_id", "is_simulated"]
+      "required": ["defect_instance_id", "specimen_id", "data_origin", "defect_origin"]
     },
     "UltrasonicAcquisition": {
       "type": "object",
       "description": "超声专属元数据。tensor 仍保留原生 A-scan/B-scan/C-scan，不插值成图片。",
       "properties": {
-        "tensor_key": {"type": "string", "description": "该记录对应的 tensor 名，如 \"bscan\" / \"ascan\" / \"cscan\"，tensor 文件见顶层 tensors 段"},
+        "tensor_ref": {"$ref": "#/definitions/TensorRef"},
+        "tensor_key": {"type": "string", "description": "该记录对应的 tensor 名，如 \"bscan\" / \"ascan\" / \"cscan\"（兼容旧写法，等价于 tensor_ref.tensor_key）"},
         "tensor_path": {"type": "string", "description": "相对 data/processed/ 的 tensor 文件路径（记录可选，见顶层 tensors 段统一索引）"},
         "scan_axis": {"type": ["string", "null"], "description": "扫描轴：\"x\"(线性扫查) / \"theta\"(扇扫) / \"s\"(编码器距离)"},
         "beam_angle": {"type": ["number", "null"], "description": "波束角/入射角 (deg)，如 71° / 0°(0° 零度纵波) / 多角值时可填代表值并在 view_group 说明"},
@@ -96,11 +154,17 @@
       "type": "object",
       "description": "涡流专属元数据。",
       "properties": {
-        "tensor_key": {"type": "string", "description": "tensor 名，如 \"iq_curve\" / \"cscan_iq\" / \"impedance\"，tensor 文件见顶层 tensors 段"},
+        "tensor_ref": {"$ref": "#/definitions/TensorRef"},
+        "tensor_key": {"type": "string", "description": "tensor 名，如 \"iq_curve\" / \"cscan_iq\" / \"impedance\"（兼容旧写法，等价于 tensor_ref.tensor_key）"},
         "tensor_path": {"type": ["string", "null"]},
         "scan_axis": {"type": ["string", "null"], "description": "\"x\"(线性) / \"theta\" / \"s\"(编码器距离)"},
-        "frequency": {"type": ["number", "null"], "description": "激励频率 (kHz 或 Hz，见 frequency_unit)"},
-        "frequency_unit": {"type": ["string", "null"], "enum": ["Hz", "kHz", "MHz"]},
+        "frequency": {"type": ["number", "null"], "description": "激励频率 (Hz / kHz / MHz，见 frequency_unit)"},
+        "frequency_unit": {
+          "description": "激励频率单位。M0-1.5 修复：不再允许 null —— 填了 frequency 就必须给单位；没有 frequency 就不该有这个键。",
+          "anyOf": [
+            {"type": "string", "enum": ["Hz", "kHz", "MHz"]}
+          ]
+        },
         "sensor_channel": {"type": ["string", "null"], "description": "传感器/通道名，如 \"coil1\" / \"abs_1\""},
         "iq": {
           "type": "string",
@@ -123,7 +187,7 @@
     },
     "FusionLink": {
       "type": "object",
-      "description": "成对多模态融合专属元数据。只有同一 specimen、同一坐标系、可配准的 UT+ECT 成对采集才允许填写；否则融合训练禁止。",
+      "description": "成对多模态融合专属元数据。只有同一 specimen、同一坐标系、可配准的 UT+ECT 成对采集才允许填写；否则融合训练禁止（PairedDataGuard）。",
       "properties": {
         "shared_specimen_id": {"type": "string", "description": "融合数据必须共享 specimen_id（同试件）"},
         "shared_coordinate_system": {"type": "string", "description": "统一坐标系名，如 \"specimen_global_mm\""},
@@ -150,7 +214,7 @@
       "properties": {
         "key": {"type": "string", "description": "tensor 名，如 \"bscan\""},
         "path": {"type": "string", "description": "相对 data/processed/ 的文件路径，如 \"paut_pp3-7/bscan.npy\""},
-        "format": {"type": "string", "enum": ["npy", "npz", "h5", "hdf5", "csv", "raw"]},
+        "format": {"type": "string", "enum": ["npy", "npz", "h5", "hdf5", "csv", "parquet", "raw"]},
         "axes": {"type": "array", "items": {"type": "string"}, "description": "轴顺序，如 [\"n_records\", \"beam\", \"time\"] 或 [\"n_records\", \"x\", \"y\", \"freq\", \"iq\"]"},
         "dtype": {"type": "string", "description": "如 \"float32\" / \"complex64\" / \"int16\""},
         "unit": {"type": ["string", "null"], "description": "信号单位，如 \"normalized\" / \"dB\" / \"V\""},
@@ -174,26 +238,31 @@
         "domain_id": {"type": ["string", "null"], "description": "域变量聚合名（如 \"material\" / \"thickness\" / \"frequency\" / \"sensor\" 组合），供 cross-domain split 使用"},
         "position": {"$ref": "#/definitions/Position"},
         "defect_present": {"type": ["boolean", "null"], "description": "本记录是否含缺陷；null=未知/无标签"},
+        "label_status": {"$ref": "#/definitions/LabelStatus"},
         "defect_type": {"$ref": "#/definitions/DefectType"},
-        "is_simulated": {"type": "boolean"},
+        "data_origin": {"$ref": "#/definitions/DataOrigin"},
+        "defect_origin": {"$ref": "#/definitions/DefectOrigin"},
         "label_source": {"type": ["string", "null"]},
         "label_confidence": {"type": ["number", "null"]},
         "split_group": {"type": ["string", "null"], "description": "推荐的物理独立划分组名（如 \"specimen:PP3\" / \"defect_instance:d03\" / \"operator:op2\"）。split 必须按此单位而非随机扫描行。"},
         "license": {"type": "string"},
         "source_file": {"type": "string", "description": "原始源文件路径"},
-        "provenance": {"type": "string", "description": "处理/派生说明（如 'max-pool 3500->512, Group 0 71°'）"},
+        "source_checksum": {"$ref": "#/definitions/Checksum"},
+        "preprocessing": {"$ref": "#/definitions/Provenance"},
+        "provenance": {"type": "string", "description": "处理/派生说明（旧写法，等价于 preprocessing.steps 的连接字符串；如 'max-pool 3500->512, Group 0 71°'）"},
         "ultrasonic": {"$ref": "#/definitions/UltrasonicAcquisition"},
         "eddy_current": {"$ref": "#/definitions/EddyCurrentAcquisition"},
         "fusion": {"$ref": "#/definitions/FusionLink"}
       },
       "required": [
         "record_id", "dataset_name", "modality", "specimen_id",
-        "defect_present", "is_simulated", "license", "source_file"
+        "defect_present", "label_status", "data_origin", "defect_origin",
+        "license", "source_file"
       ]
     }
   },
   "properties": {
-    "manifest_version": {"const": "0.1.0"},
+    "manifest_version": {"const": "0.2.0"},
     "dataset_name": {"type": "string"},
     "primary_modality": {"$ref": "#/definitions/Modality"},
     "license": {"type": "string", "description": "整个数据集的 license，如 \"CC BY 4.0\" / \"custom (repo README)\" / \"unknown\""},
@@ -206,6 +275,7 @@
         "doi": {"type": ["string", "null"]},
         "paper": {"type": ["string", "null"]},
         "size_bytes": {"type": ["integer", "null"]},
+        "checksum": {"$ref": "#/definitions/Checksum"},
         "downloadable": {"type": "boolean"},
         "audit_ref": {"type": "string", "description": "指向 docs/M0_public_ndt_dataset_audit.md 中的条目"}
       }
@@ -213,6 +283,16 @@
     "n_specimens": {"type": "integer"},
     "n_defect_instances": {"type": "integer", "description": "独立缺陷实例数（去重后的 defect_instance_id 数），注意不等于 n_records"},
     "n_records": {"type": "integer", "description": "总数据单元数（可含重复扫描），统计时勿与独立缺陷数混淆"},
+    "records_ref": {
+      "type": ["object", "null"],
+      "description": "大规模 records 的替代载体：当 n_records 很大（数万/数百万）时，records 段不内嵌进 dataset card JSON，而是放在外部 records.parquet / JSONL，由 records_ref 指向。",
+      "properties": {
+        "path": {"type": "string", "description": "相对 data/manifests/ 的 records 文件路径，如 \"penelope_saw/records.parquet\" / \".../records.jsonl\""},
+        "format": {"type": "string", "enum": ["parquet", "jsonl", "json"]},
+        "n_records": {"type": "integer", "description": "该文件内的记录数（应等于顶层 n_records）"}
+      },
+      "required": ["path", "format", "n_records"]
+    },
     "specimens": {"type": "array", "items": {"$ref": "#/definitions/Specimen"}},
     "defects": {"type": "array", "items": {"$ref": "#/definitions/DefectInstance"}},
     "tensors": {"type": "array", "items": {"$ref": "#/definitions/TensorSpec"}},
@@ -221,6 +301,26 @@
   "required": [
     "manifest_version", "dataset_name", "primary_modality", "license", "source",
     "n_specimens", "n_defect_instances", "n_records", "specimens", "defects",
-    "tensors", "records"
+    "tensors"
+  ],
+  "allOf": [
+    {
+      "if": {"properties": {"primary_modality": {"const": "ultrasonic"}}, "required": ["primary_modality"]},
+      "then": {
+        "properties": {"records": {"items": {"required": ["ultrasonic"]}}}
+      }
+    },
+    {
+      "if": {"properties": {"primary_modality": {"const": "eddy_current"}}, "required": ["primary_modality"]},
+      "then": {
+        "properties": {"records": {"items": {"required": ["eddy_current"]}}}
+      }
+    },
+    {
+      "if": {"properties": {"primary_modality": {"const": "fusion"}}, "required": ["primary_modality"]},
+      "then": {
+        "properties": {"records": {"items": {"required": ["fusion"]}}}
+      }
+    }
   ]
 }

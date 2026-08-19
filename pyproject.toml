@@ -5,8 +5,42 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "wndt"
 version = "0.1.0"
-description = "Welding NDT Time Series: ITFormer baseline on the Metal Arc Welding dataset"
+description = "Welding NDT Time Series: ITFormer baseline on the Metal Arc Welding dataset + M0 unified NDT data base (multimodal interfaces, schema, adapters)"
 requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.23",
+    "torch>=2.0",
+    "scipy>=1.9",
+    "scikit-learn>=1.1",
+    "transformers>=4.40",
+]
+
+[project.optional-dependencies]
+# 核心实验依赖（预训练/LOOCV/合成数据）
+core = [
+    "numpy>=1.23",
+    "torch>=2.0",
+    "scipy>=1.9",
+    "scikit-learn>=1.1",
+    "transformers>=4.40",
+    "matplotlib>=3.5",
+]
+# 测试依赖（CPU 可跑：接口单测 / schema 校验 / Synth-UT 单测）
+test = [
+    "pytest>=7.0",
+    "jsonschema>=4.0",
+]
+# 全部（含测试）
+all = [
+    "numpy>=1.23",
+    "torch>=2.0",
+    "scipy>=1.9",
+    "scikit-learn>=1.1",
+    "transformers>=4.40",
+    "matplotlib>=3.5",
+    "pytest>=7.0",
+    "jsonschema>=4.0",
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]

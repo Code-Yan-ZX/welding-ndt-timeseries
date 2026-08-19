@@ -1,21 +1,36 @@
 # PAUT P7 程序生成超声合成数据预训练实验报告
 
-> 报告撰写: 2026-08-18
+> 报告撰写: 2026-08-18；**M0-1.5 协议修正重标注: 2026-08-19**
 > 实验代号: **P7 (Synth-UT)**
 > 阶段定位: **新方向启动** —— 当前 PAUT 真实数据 (5 试件 / 3000 位置) 太小,
-> P0-P6 全杠杆证伪, 天花板在表征级 0.58。探索"程序生成物理保真超声 B-scan →
-> 预训练编码器 → 真实下游"翻盘路径, 是 P4 报告点名但未走通的方向。
+> P0-P6 全杠杆证伪, 天花板在表征级 0.58。探索"程序生成 (physics-inspired
+> procedural synthetic) 超声 B-scan → 预训练编码器 → 真实下游"翻盘路径,
+> 是 P4 报告点名但未走通的方向。
+>
+> **⚠ M0-1.5 重标注（Protocol V2, docs/M0_evaluation_protocol_v2.md）**：
+> 本报告 §4 的 P7a/P7b 结果均由**旧脚本**产生，存在两类协议问题，重新标注如下：
+> 1. **P7a = 探索性纯合成结果**（exploratory）。预训练只用合成数据（无真实
+>    test 信号），预训练层面严格；但 validation 为旧版**随机位置级切分**
+>    （违反 Protocol V2 §3），仅作探索性参考。
+> 2. **P7b = transductive 探索结果**。旧 `--mix-real` 把全部真实数据（含
+>    test coupon 无标签信号）一次性并入预训练，属 `transductive_unlabeled`，
+>    **不能作为严格跨试件结论**。
+> 3. **P7c 状态改为 planned/paused**：不生成 100k 数据、不跑长时训练。
+> 4. 任何"联合预训练已被正式验证有效"类表述已删除 —— 联合预训练**尚待
+>    strict_inductive 逐 coupon 预训练重跑**才能成为主指标证据。
 
 ## 1. 动机与目标
 
 ### 1.1 上阶段结论
 - PAUT 真实 5 试件数据, 主指标 (非PP4 逐折均值) 天花板 = **0.579±0.007** (P4a 规范头协议)
-- P0-P6 共 7 个阶段, 7 类不同杠杆全部证伪 (增强/域对抗/SSL 掩码目标/物理注入/监督对比/TTT/样式不变 SSL)
+- P0-P6 共 7 个阶段, 7 类不同杠杆全部未突破天花板 (增强/域对抗/SSL 掩码目标/物理注入/监督对比/TTT/样式不变 SSL；P6 为 seed42 单 seed exploratory negative evidence)
 - **关键诊断** (P4a/P6 三次验证): "缺陷强度与试件身份强耦合", 缺陷率 0.5%–76% 跨试件悬殊
 
 ### 1.2 翻盘路径 (P4 报告点名)
 - 新试件数据解耦"缺陷存在"与"试件缺陷率"
-- **CIVA 级物理保真合成数据教"缺陷回波物理"** ← 本工作
+- **物理保真合成数据教"缺陷回波物理"** ← 本工作（M0-1.5 术语修正：本工具
+  输出为 **physics-inspired procedural synthetic data**，非 CIVA 级仿真，
+  不宣称与真实超声传播定量一致）
 
 ### 1.3 用户目标 (2026-08-18)
 > "在当前的这个数据集, 只能是做小的。我们后续要做大模型的编码器训练。
@@ -43,8 +58,14 @@
 
 ### 2.2 试件间"缺陷率-身份耦合"复现
 - 真实 PAUT: PP3 0.57 / PP4 0.005 / PP5 0.44 / PP6 0.76 / PP7 0.14
-- Synth-UT (12 试件, beta(1.5,2.0) 分布): 缺陷率 **0.04-0.74**, 含 2 个近零缺陷试件
-- → 天然复现"缺陷率-试件耦合"挑战
+- **M0-1.5 修正**：`synth_ultrasound.py` 增加两种模式：
+  - `orthogonal`（默认）：style 参数与缺陷属性/缺陷率**独立采样**，缺陷率
+    0.03–0.75 均匀分布；`def_rate` **实际控制标签**（actual 与 target 容差内，
+    meta.json 同时保存 target/actual）。用于生成"风格多样但标签统计与风格
+    无关"的无偏预训练数据。
+  - `confounded`（仅诊断）：缺陷率与 style 耦合（高增益/低散斑配高缺陷率），
+    用于**复现**真实数据"缺陷率-试件耦合"挑战，不作为无偏预训练数据。
+- 真实数据"缺陷率-试件耦合"挑战的复现见 `confounded` 模式。
 
 ### 2.3 与 P5 注入的根本差异
 - **P5 (2D 高斯峰注入)**: 注入形状 = 标准 2D 高斯, 无散斑无衰减, 注入任务可学 0.998 但下游 0.545<0.579
@@ -64,6 +85,9 @@
 ### 3.3 下游评估 (真实 PAUT 5 折 LOOCV, 规范头协议)
 - 冻结编码器 + 分类头 lr=1e-3/80ep/batch=128, val AUC 早停 patience=20
 - 5 折 LOOCV by coupon, 报 **非PP4 4 折均值** (P4a 同口径)
+- **M0-1.5（新脚本）**: validation 按**完整 coupon** 分组 (每折取 1 个非 test
+  coupon 作 val, 见 Protocol V2 §3); strict_inductive 每 fold 内重训并排除
+  test coupon 真实数据; transductive_unlabeled 单独报告
 
 ### 3.4 对照基线 (P4a)
 - **P4a 真实预训练非PP4** = **0.579±0.007** (天花板)
@@ -100,12 +124,20 @@
 
 ### 4.4 结论
 
-> **P7a 证伪: 程序生成物理保真 Synth-UT 数据单独预训练, 在真实 PAUT LOOCV 上显著负向 (-0.067)**。
+> **P7a (探索性): 程序生成 Synth-UT 数据单独预训练, 在真实 PAUT LOOCV 上显著负向 (-0.067)**。
 > 但**这不是"程序生成路径失败", 而是"缺少 sim2real 弥合层"**。这与 agent 调研报告独立预言一致。
+> **M0-1.5 标注**: 探索性纯合成结果 (旧脚本, 随机位置级 validation), 不作严格跨试件结论。
 
-**下一步必跑 P7b (StorSeismic 模板: 合成+真实联合预训练)** —— 如果 P7b 仍 ≤ 0.579, 则程序生成路径基本无效; 如果 P7b > 0.579, 则是"合成数据补充真实数据"的首次正证据。
+**下一步**: P7b (StorSeismic 模板: 合成+真实联合预训练)。⚠ P7b 亦为 transductive
+探索 (见 §4.5 重标注) —— 联合预训练是否有效需 strict_inductive 逐 coupon 预训练
+重跑后才能下结论。
 
-### 4.5 P7b 结果 (合成+真实联合预训练, StorSeismic 模板, 2026-08-18 seed=42)
+### 4.5 P7b 结果 (合成+真实联合预训练, StorSeismic 模板, 2026-08-18 seed=42) —— **transductive 探索**
+
+> ⚠ **M0-1.5 重标注**：本节为 **transductive_unlabeled 探索结果**。旧
+> `--mix-real` 一次性把 12k 合成 + 3k 真实（含 test coupon 无标签信号）并入
+> 预训练，且 validation 为随机位置级切分。**不得作为严格跨试件结论**，仅提示
+> "合成+真实联合"方向值得在 strict 协议下严格复测。
 
 | 折 | n_test | def_rate | val AUC | **test AUC** | P7a 对照 |
 |---|---|---|---|---|---|
@@ -118,19 +150,24 @@
 **主指标 (非PP4 4 折均值): 0.5594 ± 0.0630** (vs P7a 0.512, **+0.047 显著改善**; vs P4a 0.579, **-0.020 仍负**)
 全 5 折均值: 0.5776 ± 0.0671 (vs P4a 0.579, **-0.001 几乎一致**)
 
-### 4.6 P7b 关键诊断
+### 4.6 P7b 关键诊断（transductive 探索层面）
 
-1. **StorSeismic 模板有效**: 联合预训练 (12k 合成 + 3k 真实) 把非PP4 从 0.512 提到 0.559 (+0.047, +9.2%) —— 真实数据修正了合成偏置
-2. **PP4 (近零缺陷) 显著恢复**: 0.32 → 0.65 (+0.33) —— 真实数据教会编码器在无 cfg 信息下也能判别
-3. **方差大幅改善** (0.063 vs P7a 0.078, -19%) 但仍 > P4a 9 倍 —— 联合预训练稳定了训练, 但合成主导 (12/15 = 80%) 仍是瓶颈
-4. **仍未翻盘 0.579**: 单靠"程序生成 + 联合预训练"路径在 12k 规模上不够, 需更大规模或外部数据
+1. **联合预训练方向值得严格复测**（transductive 探索）: 12k 合成 + 3k 真实
+   一次性预训练把非PP4 从 0.512 提到 0.559 (+0.047) —— 提示真实数据可修正合成偏置,
+   但**因含 test 无标签信号, 不能视为严格跨试件结论**
+2. **PP4 (近零缺陷) 恢复**: 0.32 → 0.65 (+0.33) —— 真实数据教会编码器在无 cfg 信息下也能判别
+3. **方差改善** (0.063 vs P7a 0.078, -19%) 但仍 > P4a 9 倍 —— 合成主导 (12/15 = 80%) 仍是瓶颈
+4. **未翻盘 0.579**: 单靠"程序生成 + 联合预训练"在 12k 规模上不够
 
-### 4.7 决策树
+### 4.7 决策树（M0-1.5 修正）
 
-- ✅ **P7a → P7b 路径有效**: 联合预训练是正确范式 (StorSeismic)
-- ❌ **未翻盘 0.579**: 12k 合成 + 3k 真实 = 80/20 合成主导, 需扩大试件多样性 / 试件比例 / 外部数据
-- 🔄 **P7c (跑中)**: mix 100k 合成 (50 试件) + 3k 真实, 验证"试件多样性"是否翻盘
-- 📋 **后续候选**: P7d 工艺噪声 (2306.01469 教训) / P7e UGW-3Mat-2SN 外部超声数据 (43.5GB) / P7f SimNDT 真仿真
+- 🔬 **P7a/P7b 均为探索性/transductive**: 需 **strict_inductive 逐 coupon 预训练**
+  重跑后才能成为主指标证据 (Protocol V2; 新脚本 `paut_p7_synth_to_real.py
+  --protocol strict_inductive --mix-real` 已实现, 尚未跑长时)
+- ❌ **未翻盘 0.579**（探索层面）: 12k 合成 + 3k 真实 = 80/20 合成主导
+- ⏸ **P7c = planned/paused**: 不生成 100k 数据、不跑长时训练 (任务明确禁止)
+- 📋 **后续候选（M0-2 外）**: P7d 工艺噪声 (2306.01469 教训) / P7e UGW-3Mat-2SN
+  外部超声数据 / P7f SimNDT 真仿真
 
 ## 5. 与新方向 (大模型 + 时序基础模型) 的连接
 
@@ -147,9 +184,10 @@
 
 | 阶段 | 名称 | 内容 | 关键依赖 | 预期 |
 |---|---|---|---|---|
-| **P7a** | 纯合成预训练基线 | Synth-UT 12k → 真实 LOOCV (本报告, 跑中) | 当前脚本 | 验证迁移基线 |
-| **P7b** | 混合预训练 | 合成 12k + 真实 3k 联合预训练 → 真实 LOOCV (StorSeismic 模板) | P7a ≥ 0.55 | 验证"合成+真实"互补 |
-| **P7c** | 工艺噪声增强 | Synth-UT + GAN 风格噪声 (2306.01469 教训) | P7b 跑通 | 弥合 sim2real gap |
+| **P7a** | 纯合成预训练基线（探索） | Synth-UT 12k → 真实 LOOCV（已完成，探索性；M0-1.5 重标注，随机位置级 val） | 当前脚本 | 验证迁移基线（负向） |
+| **P7b** | 混合预训练（transductive 探索） | 合成 12k + 真实 3k 一次性联合预训练（含 test 无标签信号；M0-1.5 重标注，非严格跨试件） | P7a ≥ 0.55 | 探索"合成+真实"互补（方向待严格复测） |
+| **P7b'** | 混合预训练（strict） | 每 fold 内重训，真实部分排除 test coupon（新脚本 `--protocol strict_inductive --mix-real`） | 未跑 | 严格跨试件主指标证据 |
+| **P7c** | 工艺噪声增强 | Synth-UT + GAN 风格噪声 (2306.01469 教训) | **planned/paused**（不生成 100k，不跑长时） | 弥合 sim2real gap |
 | **P7d** | 频域掩码目标 | USFM 式 2D FFT 频带掩码替换通用 MAE | P7b ≥ 0.56 | 目标创新 |
 | **P7e** | Moirai 编码器 | 任意变量数 (49 波束) patch 编码器替换 MAEEncoder | P7d 跑通 | 跨域大模型迁移 |
 | **P7f** | 大编码器规模 | d_model=512/1024 + 多层, 看程序生成数据能否喂出更大模型 | P7e 跑通 | 验证 "规模化"翻盘路径 |
@@ -168,12 +206,21 @@
 ## 6. 复现命令
 
 ```bash
-# Step 1: 程序生成 12 试件 × 1000 位置合成数据 (~24s)
+# Step 1: 程序生成 12 试件 × 1000 位置合成数据 (physics-inspired procedural, M0-1.5 修复 def_rate 控制标签)
 python scripts/synth_ultrasound.py --n-coupons 12 --n-pos-per-coupon 1000 --seed 42
 
-# Step 2: 纯合成预训练 → 真实 LOOCV (核心新方向探针)
-python scripts/paut_p7_synth_to_real.py --pretrain-epochs 40 --seed 42
+# Step 2: 纯合成预训练 → 真实 LOOCV (strict_inductive, val 按完整 coupon; M0-1.5 新脚本)
+python scripts/paut_p7_synth_to_real.py --protocol strict_inductive --pretrain-epochs 40 --seed 42
 
-# Step 3: 合成+真实联合预训练 → 真实 LOOCV (下一步对照)
-python scripts/paut_p7_synth_to_real.py --mix-real --pretrain-epochs 60 --seed 42
+# Step 3: 合成+真实联合预训练 → 真实 LOOCV (strict: 每 fold 内重训, 排除 test coupon 真实数据)
+python scripts/paut_p7_synth_to_real.py --protocol strict_inductive --mix-real --pretrain-epochs 60 --seed 42
+
+# Step 3': transductive 探索 (单独报告, 非严格跨试件结论)
+python scripts/paut_p7_synth_to_real.py --protocol transductive_unlabeled --mix-real --seed 42
+
+# 冒烟: 输出带 _smoke 后缀, 不覆盖 _full
+python scripts/paut_p7_synth_to_real.py --smoke
 ```
+
+> ⚠ 本报告 §4 的 P7a/P7b 数字由**旧脚本**产生 (transductive/随机位置级 val)。
+> 严格复现以上命令 (M0-1.5 新脚本) 后才可作为主指标证据。

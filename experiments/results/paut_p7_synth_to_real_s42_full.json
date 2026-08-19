@@ -55,5 +55,8 @@
       "val_auc": 0.757,
       "test_auc": 0.6162
     }
-  ]
+  ],
+  "protocol": "strict_inductive",
+  "run_type": "full",
+  "relabel_note": "M0-1.5 重新标注: 预训练只用合成数据(不含任何真实 test coupon 信号), 预训练层面满足 strict_inductive; 但该结果由旧版脚本产生, validation 为随机位置级切分(违反 Protocol V2 §3 按完整 coupon 分组)。作为 legacy 参考保留, 严格复现需重跑。"
 }

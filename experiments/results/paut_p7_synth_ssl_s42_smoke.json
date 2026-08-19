@@ -104,5 +104,10 @@
       "val_auc": 0.6693,
       "test_auc": 1.0
     }
-  ]
+  ],
+  "protocol": "smoke",
+  "run_type": "smoke",
+  "relabel_note": "M0-1.5 重新标注: 实际为 1024 样本 / 2 epoch 预训练 / 4 epoch head 的 smoke 运行, 非 full; 数字无科学意义。原文件名为 _full, 按 Protocol V2 §7 更名 _smoke。",
+  "code_commit": "37fd621554b1",
+  "code_dirty": true
 }

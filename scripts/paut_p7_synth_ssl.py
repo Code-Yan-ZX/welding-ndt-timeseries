@@ -10,7 +10,9 @@
   Step 4: 报 全5折均值 + 剔除近零缺陷折 (def_rate<0.05) 均值 (后者对应 P4a 非PP4 口径)
 
 目的: 验证 (a) 合成数据可学, (b) 评估管线跑通, (c) 纯合成预训练基线水平。
-后续实验: (i) 真实+合成混合预训练对比, (ii) 换 CIVA/真仿真数据, (iii) 更大编码器。
+⚠ M0-1.5: 本脚本只在**合成数据内部**做 LOOCV, 是探索性 (不涉及真实迁移);
+合成↔真实迁移请用 paut_p7_synth_to_real.py (含 strict_inductive/transductive
+两种协议)。smoke 输出带 _smoke 后缀, 不覆盖 _full。
 
 Usage:
   python scripts/synth_ultrasound.py --n-coupons 12 --n-pos-per-coupon 1000 --seed 42
@@ -280,8 +282,11 @@ def main():
     print(f"副指标 | 非近零缺陷折 (def_rate>=0.05, {len(aucs_nt)} 折): "
           f"mean={np.mean(aucs_nt):.4f} ± {np.std(aucs_nt):.4f} | {aucs_nt}")
 
+    run_type = "smoke" if args.smoke else "full"
     summary = {
         "exp": "synth_ssl_p7", "seed": args.seed,
+        "protocol": "smoke" if args.smoke else "strict_inductive",
+        "run_type": run_type,
         "n_samples": int(X.shape[0]), "n_coupons": int(len(np.unique(coupons))),
         "defect_rate": float(y.mean()),
         "pretrain": {"epochs": args.pretrain_epochs, "batch": args.pretrain_batch,
@@ -293,7 +298,9 @@ def main():
         "non_near_zero_folds_mean_auc": float(np.mean(aucs_nt)),
         "folds": all_folds,
     }
-    out_json = REPO / "experiments/results" / f"paut_p7_synth_ssl_s{args.seed}_full.json"
+    # M0-1.5: smoke 输出必须带 _smoke 后缀, 禁止覆盖 _full
+    out_json = REPO / "experiments/results" / (
+        f"paut_p7_synth_ssl_s{args.seed}_{run_type}.json")
     out_json.parent.mkdir(parents=True, exist_ok=True)
     with open(out_json, "w") as fh:
         json.dump(summary, fh, indent=2, ensure_ascii=False)

@@ -1,0 +1,115 @@
+{
+  "exp": "synth_to_real_p7",
+  "protocol": "strict_inductive",
+  "run_type": "smoke",
+  "seed": 42,
+  "code_commit": "37fd621554b1",
+  "code_dirty": true,
+  "normalization_scope": "train_coupons",
+  "pretrain": {
+    "n_samples": 1024,
+    "epochs": 2,
+    "batch": 256,
+    "lr": 0.001,
+    "mask_ratio": 0.3,
+    "d_model": 128,
+    "mix_real": false,
+    "per_fold_repretrain": false
+  },
+  "head": {
+    "epochs": 4,
+    "batch": 128,
+    "lr": 0.001
+  },
+  "all_folds_mean_auc": 0.51,
+  "all_folds_std_auc": 0.11451951798710994,
+  "nonPP4_mean_auc": 0.552625,
+  "nonPP4_std_auc": 0.08549237904632202,
+  "folds": [
+    {
+      "test_coupon": "PP3",
+      "n_test": 601,
+      "train_coupons": [
+        "PP4",
+        "PP5",
+        "PP6"
+      ],
+      "val_coupons": [
+        "PP7"
+      ],
+      "def_rate": 0.574,
+      "val_auc": 0.6251,
+      "test_auc": 0.4609,
+      "pretrain_coupons": [],
+      "pretrain_n_samples": 1024
+    },
+    {
+      "test_coupon": "PP4",
+      "n_test": 601,
+      "train_coupons": [
+        "PP3",
+        "PP5",
+        "PP6"
+      ],
+      "val_coupons": [
+        "PP7"
+      ],
+      "def_rate": 0.005,
+      "val_auc": 0.6083,
+      "test_auc": 0.3395,
+      "pretrain_coupons": [],
+      "pretrain_n_samples": 1024
+    },
+    {
+      "test_coupon": "PP5",
+      "n_test": 596,
+      "train_coupons": [
+        "PP3",
+        "PP4",
+        "PP6"
+      ],
+      "val_coupons": [
+        "PP7"
+      ],
+      "def_rate": 0.438,
+      "val_auc": 0.6455,
+      "test_auc": 0.4773,
+      "pretrain_coupons": [],
+      "pretrain_n_samples": 1024
+    },
+    {
+      "test_coupon": "PP6",
+      "n_test": 601,
+      "train_coupons": [
+        "PP3",
+        "PP4",
+        "PP5"
+      ],
+      "val_coupons": [
+        "PP7"
+      ],
+      "def_rate": 0.764,
+      "val_auc": 0.6611,
+      "test_auc": 0.6117,
+      "pretrain_coupons": [],
+      "pretrain_n_samples": 1024
+    },
+    {
+      "test_coupon": "PP7",
+      "n_test": 601,
+      "train_coupons": [
+        "PP3",
+        "PP4",
+        "PP5"
+      ],
+      "val_coupons": [
+        "PP6"
+      ],
+      "def_rate": 0.138,
+      "val_auc": 0.6118,
+      "test_auc": 0.6606,
+      "pretrain_coupons": [],
+      "pretrain_n_samples": 1024
+    }
+  ]
+}

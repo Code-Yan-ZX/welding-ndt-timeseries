@@ -55,5 +55,8 @@
       "val_auc": 0.7013,
       "test_auc": 0.6493
     }
-  ]
+  ],
+  "protocol": "transductive_unlabeled",
+  "run_type": "full",
+  "relabel_note": "M0-1.5 重新标注: 原脚本 --mix-real 把全部真实数据(含 test coupon 无标签信号)一次性并入预训练, 属 transductive_unlabeled; 且 validation 为旧版随机位置级切分。不得与 strict_inductive 结果混成同一主指标, 仅作探索性证据。"
 }

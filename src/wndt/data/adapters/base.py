@@ -128,16 +128,19 @@ class NDTBatch:
         tensors: dict[str, torch.Tensor] = {}
         for j, mod in enumerate(modalities):
             key = tensor_keys[mod]
-            shapes = [inst.tensors[key].shape for inst in instances
-                      if key in inst.tensors]
-            if not shapes:
+            present = [inst.tensors[key] for inst in instances if key in inst.tensors]
+            if not present:
                 raise ValueError(f"modality {mod!r} missing in every instance")
+            shapes = [t.shape for t in present]
             shape0 = shapes[0]
             if any(s != shape0 for s in shapes):
                 raise ValueError(
                     f"modality {mod!r} shapes differ across batch: {set(shapes)}; "
                     "each dataset adapter must normalize its own tensors")
-            arr = np.zeros((b, *shape0), dtype=instances[0].tensors[key].dtype)
+            # M0-1.5 修复: dtype 取第一个**存在**该模态的实例, 而不是
+            # instances[0] —— 否则第一个实例缺该模态时 KeyError / dtype 错乱。
+            dtype0 = present[0].dtype
+            arr = np.zeros((b, *shape0), dtype=dtype0)
             for i, inst in enumerate(instances):
                 if key in inst.tensors:
                     avail[i, j] = True
@@ -279,9 +282,16 @@ class ManifestSplitter:
 class PairedDataGuard:
     """成对数据守卫：禁止用 unpaired UT/ECT 样本训练监督融合头。
 
+    M0-1.5 区分两种融合层级的配对要求（Protocol V2 / 接口文档）：
+      - **early fusion**（像素/原生 tensor 层）：除成对外，还必须有**严格坐标
+        矩阵**（``registration_transform.matrix`` 4×4）。仅描述字符串
+        （``description``）不满足 early 要求 —— 没有矩阵无法做像素级配准。
+      - **intermediate / late fusion**（token / 分数层）：只要求成对（同
+        specimen、同坐标、已配准 —— 矩阵或描述二选一即可）。
+
     当且仅当样本满足"同 specimen、同坐标、已配准"（manifest 中
     ``FusionLink`` 齐备）时才允许进入融合训练。任何缺失即为 unpaired，
-    触发 ``UnpairedDataError``。
+    触发 ``UnpairedDataError``。默认拒绝（未知成对状态按 unpaired 处理）。
     """
 
     def __init__(self, paired_specimens: set[str] | None = None):
@@ -301,16 +311,25 @@ class PairedDataGuard:
         reg = fusion.get("registration_transform")
         return bool(reg and (reg.get("matrix") or reg.get("description")))
 
+    def check_registration_matrix(self, instance: NDTInstance) -> bool:
+        """是否有**严格坐标矩阵**（early fusion 的额外要求）。"""
+        fusion = instance.metadata.get("fusion") or {}
+        reg = fusion.get("registration_transform") or {}
+        return bool(reg.get("matrix"))
+
     def require_paired(
         self,
         batch: NDTBatch,
         modality_a: str,
         modality_b: str,
         instances: Sequence[NDTInstance] | None = None,
+        fusion_type: str = "intermediate",
     ) -> None:
         """训练前校验：批内每个样本必须**同时可用且真正成对**。
 
         成对 = 同 specimen、同坐标、已配准（由 ``check_paired`` 判定）。
+        ``fusion_type``: "early" 额外要求 ``registration_transform.matrix``
+        （严格坐标矩阵）；"intermediate"/"late" 只要求成对。
         ``instances`` 提供时按实例逐一校验；否则读取批内
         ``fields["paired"]``（collate 时由调用方写入）。两者都没有则
         默认拒绝（未知成对状态按 unpaired 处理，宁可错杀不可漏放）。
@@ -327,8 +346,14 @@ class PairedDataGuard:
                 "instances length must match batch size"
             pair_ok = torch.tensor(
                 [self.check_paired(inst) for inst in instances], dtype=torch.bool)
+            if fusion_type == "early":
+                pair_ok = pair_ok & torch.tensor(
+                    [self.check_registration_matrix(inst) for inst in instances],
+                    dtype=torch.bool)
         elif "paired" in batch.fields:
             pair_ok = batch.fields["paired"].bool()
+            if fusion_type == "early" and "paired_registered" in batch.fields:
+                pair_ok = pair_ok & batch.fields["paired_registered"].bool()
         else:
             raise UnpairedDataError(
                 "batch carries no pairing metadata (no instances, no "
@@ -338,8 +363,9 @@ class PairedDataGuard:
         if bad > 0:
             raise UnpairedDataError(
                 f"{bad}/{len(batch.availability)} samples are NOT paired "
-                "(missing a modality or no registered shared-specimen fusion "
-                "link); unpaired UT/ECT samples must not train a supervised "
+                f"(fusion_type={fusion_type}; missing a modality, no registered "
+                "shared-specimen fusion link, or (early) no strict registration "
+                "matrix); unpaired UT/ECT samples must not train a supervised "
                 "fusion head")
 
 

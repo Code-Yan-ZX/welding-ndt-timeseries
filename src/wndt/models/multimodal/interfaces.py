@@ -200,14 +200,19 @@ class MeanPoolEncoder(NDTEncoder):
 
 
 class ConcatFusionHead(FusionHead):
-    """intermediate 融合：encoder 输出直接拼接后过 MLP（默认融合头）。"""
+    """intermediate 融合：encoder 输出按 **modality_order** 拼接后过 MLP。
+
+    M0-1.5: 显式接收 ``modality_order``，禁止依赖 ``dict.values()`` 顺序
+    （dict 顺序与 availability 列不对齐会静默错配模态）。
+    """
 
     fusion_type: FusionType = "intermediate"
 
-    def __init__(self, d_model: int, n_modalities: int):
+    def __init__(self, d_model: int, modality_order: Sequence[str]):
         super().__init__(d_model)
+        self.modality_order = list(modality_order)
         self.mlp = nn.Sequential(
-            nn.Linear(d_model * n_modalities, d_model),
+            nn.Linear(d_model * len(modality_order), d_model),
             nn.ReLU(),
             nn.Linear(d_model, d_model),
         )
@@ -218,7 +223,12 @@ class ConcatFusionHead(FusionHead):
         availability: torch.Tensor,
     ) -> torch.Tensor:
         parts = []
-        for j, tok in enumerate(modality_tokens.values()):
+        for j, mod in enumerate(self.modality_order):
+            tok = modality_tokens.get(mod)
+            if tok is None:
+                parts.append(torch.zeros(availability.shape[0], self.d_model,
+                                         device=availability.device))
+                continue
             t = tok.mean(dim=1) if tok.dim() == 3 else tok      # (B, D)
             t = t * availability[:, j].unsqueeze(1)
             parts.append(t)
@@ -226,41 +236,64 @@ class ConcatFusionHead(FusionHead):
 
 
 class ScoreFusionHead(FusionHead):
-    """late 融合：各模态任务分数加权和（权重可学习，也支持缺模态时
-    用可用模态分数 + 校准常数）。"""
+    """late 融合：各模态任务分数加权和。
+
+    M0-1.5 修复:
+      - 显式 ``modality_order``；
+      - 权重为 **B×M** 可学习（每样本每模态一个权重）；
+      - 按 availability mask 逐样本屏蔽缺失模态权重，并在**可用模态**上
+        重新归一化 —— 缺失模态不得拉低/污染输出。
+    """
 
     fusion_type: FusionType = "late"
 
-    def __init__(self, d_model: int, n_modalities: int, n_classes: int):
+    def __init__(self, d_model: int, modality_order: Sequence[str], n_classes: int):
         super().__init__(d_model)
-        self.logits = nn.ModuleList([nn.Linear(d_model, n_classes) for _ in range(n_modalities)])
-        self.w = nn.Parameter(torch.ones(n_modalities))
+        self.modality_order = list(modality_order)
+        m = len(modality_order)
+        self.logits = nn.ModuleList([nn.Linear(d_model, n_classes) for _ in range(m)])
+        self.w = nn.Parameter(torch.ones(m))       # 全局先验, 展开为 B×M
 
     def forward(
         self,
         modality_tokens: Mapping[str, torch.Tensor],
         availability: torch.Tensor,
     ) -> torch.Tensor:
-        weights = torch.softmax(self.w, dim=0)                    # (M,)
-        weights = weights * availability.sum(dim=1, keepdim=True).clamp(min=1).float()
-        out = torch.zeros(availability.shape[0], self.logits[0].out_features,
+        b = availability.shape[0]
+        # (B, M) 权重: softmax 在全局先验上 → 按 availability 屏蔽 → 可用模态重归一化
+        w = torch.softmax(self.w, dim=0).unsqueeze(0).expand(b, -1)      # (B, M)
+        w = w * availability.float()                                     # 屏蔽缺失
+        denom = w.sum(dim=1, keepdim=True).clamp(min=1e-6)
+        w = w / denom                                                    # 重归一化
+        out = torch.zeros(b, self.logits[0].out_features,
                           device=availability.device)
-        for j, tok in enumerate(modality_tokens.values()):
+        for j, mod in enumerate(self.modality_order):
+            tok = modality_tokens.get(mod)
+            if tok is None:
+                continue
             t = tok.mean(dim=1) if tok.dim() == 3 else tok
-            out = out + weights[j] * self.logits[j](t)
+            out = out + w[:, j:j + 1] * self.logits[j](t)
         return out
 
 
 class GatedFusionHead(FusionHead):
-    """intermediate 门控融合：学习逐模态门控权重，缺失模态权重自动为 0。"""
+    """intermediate 门控融合：学习逐模态门控权重。
+
+    M0-1.5 修复:
+      - 显式 ``modality_order``；
+      - 缺失模态的 token 在进入任何 MLP（gate 或 fusion MLP）**之前必须置零**，
+        否则缺失模态的随机占位值会通过 gate/MLP 污染输出。
+    """
 
     fusion_type: FusionType = "intermediate"
 
-    def __init__(self, d_model: int, n_modalities: int):
+    def __init__(self, d_model: int, modality_order: Sequence[str]):
         super().__init__(d_model)
-        self.gate = nn.Linear(d_model * n_modalities, n_modalities)
+        self.modality_order = list(modality_order)
+        m = len(modality_order)
+        self.gate = nn.Linear(d_model * m, m)
         self.mlp = nn.Sequential(
-            nn.Linear(d_model * (n_modalities + 1), d_model),
+            nn.Linear(d_model * (m + 1), d_model),
             nn.ReLU(),
             nn.Linear(d_model, d_model),
         )
@@ -271,8 +304,16 @@ class GatedFusionHead(FusionHead):
         availability: torch.Tensor,
     ) -> torch.Tensor:
         stacked = []
-        for tok in modality_tokens.values():
-            t = tok.mean(dim=1) if tok.dim() == 3 else tok
+        for j, mod in enumerate(self.modality_order):
+            tok = modality_tokens.get(mod)
+            if tok is None:
+                # 缺失模态: 零 token, 且该列 availability=0 → 不参与任何 MLP
+                t = torch.zeros(availability.shape[0], self.d_model,
+                                device=availability.device)
+            else:
+                t = tok.mean(dim=1) if tok.dim() == 3 else tok
+                # 关键: 缺失样本的 token 进入 MLP 前置零 (占位随机值必须清掉)
+                t = t * availability[:, j:j + 1]
             stacked.append(t)
         x = torch.cat(stacked, dim=-1)
         g = torch.sigmoid(self.gate(x)) * availability.float()     # (B, M)，缺失=0
@@ -301,17 +342,20 @@ def ensure_paired_fusion(
     modality_a: str = "ultrasonic",
     modality_b: str = "eddy_current",
     instances: Sequence["object"] | None = None,
+    fusion_type: str = "intermediate",
 ) -> None:
     """训练/验证融合头前的强制校验。unpaired 样本触发 ``UnpairedDataError``。
 
     语义：同 specimen、同坐标、已配准的 UT+ECT 成对样本才允许进入监督
     融合训练；任何单模态缺失、无融合链接、或跨 specimen 拼凑的样本都会
     被拦截。``instances`` 传入构建本批的 ``NDTInstance`` 时执行逐实例校验。
+    ``fusion_type``: "early" 额外要求严格坐标矩阵（见 ``PairedDataGuard``）。
     """
     if not (batch.has(modality_a) and batch.has(modality_b)):
         raise UnpairedDataError(
             f"cannot train fusion head: batch has modalities {batch.modalities}")
-    guard.require_paired(batch, modality_a, modality_b, instances=instances)
+    guard.require_paired(batch, modality_a, modality_b, instances=instances,
+                         fusion_type=fusion_type)
 
 
 def build_ultrasonic_only_pipeline(

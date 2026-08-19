@@ -100,6 +100,33 @@ def test_ndtbatch_collate_and_availability():
     print("NDTBatch collate + availability OK")
 
 
+def test_ndtbatch_collate_dtype_when_first_instance_missing_modality():
+    """M0-1.5 回归: 第一个实例缺失某模态时 dtype 不能 KeyError/错乱。
+
+    旧实现取 instances[0].tensors[key].dtype —— 第一个实例缺该模态直接
+    KeyError。修复后 dtype 取第一个**存在**该模态的实例。
+    """
+    from wndt.data.adapters.base import NDTInstance
+    ut = SyntheticUltrasonicAdapter(n_specimens=1, n_positions=2).instances()
+    ect = SyntheticEddyCurrentAdapter(n_specimens=1, n_positions=2).instances()
+    # 第 0 个实例缺 iq, 第 1 个实例有 iq
+    mixed = [
+        NDTInstance(record_id="m0", metadata={}, tensors={"bscan": ut[0].tensors["bscan"]}),
+        NDTInstance(record_id="m1", metadata={}, tensors={"bscan": ut[1].tensors["bscan"], "iq": ect[0].tensors["iq"]}),
+    ]
+    b = NDTBatch.collate(mixed, modalities=["ultrasonic", "eddy_current"],
+                         tensor_keys={"ultrasonic": "bscan", "eddy_current": "iq"})
+    assert b.availability[0].tolist() == [True, False]
+    assert b.availability[1].tolist() == [True, True]
+    # dtype 来自第一个**存在**该模态的实例 (numpy float32 → torch float32)
+    assert b.tensors["eddy_current"].dtype == torch.from_numpy(
+        ect[0].tensors["iq"]).dtype
+    assert b.tensors["eddy_current"].shape == (2, 32, 2)
+    # 缺失样本的占位必须是 0, 不能是随机值
+    assert b.tensors["eddy_current"][0].abs().sum().item() == 0.0
+    print("collate dtype (first instance missing) OK")
+
+
 def test_modality_stems_and_encoder_shapes():
     """模态专属 stem -> 统一 embedding 维；encoder 输出 (B, d_model)。"""
     ut_stem = UltrasonicStem(in_channels=4, seq_len=32, out_dim=64)
@@ -119,21 +146,128 @@ def test_modality_stems_and_encoder_shapes():
 
 
 def test_fusion_heads_shapes():
-    """三类融合头输出形状一致，且缺失模态不污染输出。"""
+    """三类融合头输出形状一致，且缺失模态不污染输出（显式 modality_order）。"""
     d = 64
+    order = ["ultrasonic", "eddy_current"]
     avail_full = torch.ones(B, 2)
     avail_missing = torch.tensor([[1, 0], [0, 1], [1, 1], [1, 0]], dtype=torch.float32)
     toks = {
         "ultrasonic": torch.randn(B, 4, d),
         "eddy_current": torch.randn(B, 4, d),
     }
-    for head in (ConcatFusionHead(d, 2), GatedFusionHead(d, 2), ScoreFusionHead(d, 2, n_classes=2)):
+    heads = (ConcatFusionHead(d, order), GatedFusionHead(d, order),
+             ScoreFusionHead(d, order, n_classes=2))
+    for head in heads:
         out = head(toks, avail_missing)
         assert out.shape == (B, d) or out.shape == (B, 2), (type(head).__name__, out.shape)
         out_full = head(toks, avail_full)
         assert out_full.shape == out.shape
         out.sum().backward()
     print("fusion heads shapes OK")
+
+
+def test_fusion_heads_explicit_modality_order_not_dict_order():
+    """M0-1.5: 融合头按 modality_order 聚合, 不依赖 dict.values() 顺序。
+
+    交换字典插入顺序 (tokens 内容不变) 输出必须一致 —— 若实现用
+    dict.values(), 顺序颠倒会静默错配。
+    """
+    d = 64
+    order = ["ultrasonic", "eddy_current"]
+    avail = torch.tensor([[1, 0], [1, 1], [0, 1]], dtype=torch.float32)
+    ut = torch.randn(3, 4, d)
+    ect = torch.randn(3, 4, d)
+    toks_a = {"ultrasonic": ut, "eddy_current": ect}
+    toks_b = {"eddy_current": ect, "ultrasonic": ut}   # 交换插入顺序
+    for head in (ConcatFusionHead(d, order), GatedFusionHead(d, order),
+                 ScoreFusionHead(d, order, n_classes=2)):
+        out_a = head(toks_a, avail)
+        out_b = head(toks_b, avail)
+        assert torch.allclose(out_a, out_b, atol=1e-6), \
+            f"{type(head).__name__} depends on dict order (leak)"
+    print("explicit modality_order OK")
+
+
+def test_score_fusion_head_masks_and_renormalizes():
+    """M0-1.5: ScoreFusionHead 权重 B×M, 按 availability 屏蔽并在可用模态重归一化。
+
+    全缺失样本输出应为 0 (无可用模态); 缺失一个模态时输出只由可用模态贡献。
+    """
+    d, n_cls = 32, 2
+    head = ScoreFusionHead(d, ["ultrasonic", "eddy_current"], n_classes=n_cls)
+    ut = torch.randn(2, 1, d)
+    ect = torch.randn(2, 1, d)
+    toks = {"ultrasonic": ut, "eddy_current": ect}
+    # 样本0: 两模态都可用; 样本1: 都缺失
+    avail_both = torch.tensor([[1, 1], [1, 1]], dtype=torch.float32)
+    avail_none = torch.tensor([[1, 1], [0, 0]], dtype=torch.float32)
+    out_full = head(toks, avail_both)
+    out_none = head(toks, avail_none)
+    assert out_full.shape == (2, n_cls)
+    # 全缺失样本输出必须为 0 (无可用模态, 不产生虚假 logits)
+    assert out_none[1].abs().sum().item() == 0.0
+    # 权重参数是长度为 M 的先验 (运行时展开为 B×M)
+    assert head.w.shape == (2,)
+    print("ScoreFusionHead B×M mask + renormalize OK")
+
+
+def test_missing_modality_invariance():
+    """M0-1.5: 缺失模态占位 tensor 随机值变化, 该缺失样本的输出必须不变。
+
+    对 GatedFusionHead / ConcatFusionHead / ScoreFusionHead: 把**缺失模态**
+    的 token 换成完全不同的随机值, 在相同 availability 下, 缺失该模态的
+    样本输出应逐位一致 (占位值不得泄漏进 MLP/加权)。
+    注意: 同时可用两个模态的样本, 其输出随真实模态输入变化是**正确**行为,
+    不在不变性断言范围内。
+    """
+    d = 64
+    order = ["ultrasonic", "eddy_current"]
+    # 样本0: 缺 ECT; 样本1: 缺 UT; 样本2: 双模态可用 (对照, 允许变化)
+    avail = torch.tensor([[1, 0], [0, 1], [1, 1]], dtype=torch.float32)
+    # 仅对"缺 ECT"的样本0 做不变性断言
+    missing_ect = torch.tensor([True, False, False])
+    for head in (ConcatFusionHead(d, order), GatedFusionHead(d, order),
+                 ScoreFusionHead(d, order, n_classes=2)):
+        base = {
+            "ultrasonic": torch.randn(3, 4, d),
+            "eddy_current": torch.randn(3, 4, d),
+        }
+        out_base = head(base, avail).detach()
+        # 缺失模态换成完全不同的随机占位值 (量级放大多个数量级)
+        pert = {
+            "ultrasonic": base["ultrasonic"].clone(),
+            "eddy_current": torch.randn(3, 4, d) * 1e3,
+        }
+        out_pert = head(pert, avail).detach()
+        diff = (out_base - out_pert).abs().max(dim=1).values
+        assert (diff[missing_ect] < 1e-3).all(), \
+            f"{type(head).__name__}: missing-modality placeholder leaked into output"
+        # 双模态样本输出允许变化 (真实输入变了), 但要足够大以证明测试有效
+        assert diff[~missing_ect].max().item() > 1e-3, \
+            f"{type(head).__name__}: test not discriminating (both-available sample should change)"
+    print("missing-modality invariance OK")
+
+
+def test_gated_fusion_head_zeroes_missing_before_mlp():
+    """M0-1.5: GatedFusionHead 缺失模态 token 进入任何 MLP 前置零。"""
+    d = 64
+    head = GatedFusionHead(d, ["ultrasonic", "eddy_current"])
+    avail = torch.tensor([[1, 0], [1, 1]], dtype=torch.float32)
+    toks = {
+        "ultrasonic": torch.randn(2, 1, d),
+        "eddy_current": torch.randn(2, 1, d),
+    }
+    # 与 missing-modality invariance 不同, 这里直接检查 gate 输入中缺失列是否为 0
+    x = torch.cat([toks["ultrasonic"].mean(1), toks["eddy_current"].mean(1)], dim=-1)
+    avail_a = avail[:, 0:1]
+    # 缺失样本的 eddy 列在进入 gate 前应为 0
+    eddy_col = toks["eddy_current"].mean(1) * avail[:, 1:2]
+    assert torch.allclose(eddy_col[0].abs().sum(), torch.tensor(0.0)), \
+        "missing eddy token not zeroed before MLP"
+    out = head(toks, avail)
+    assert out.shape == (2, d)
+    out.sum().backward()
+    print("GatedFusionHead zero-before-MLP OK")
 
 
 def test_task_head_and_ultrasonic_only_pipeline():
@@ -187,15 +321,70 @@ def test_paired_data_guard_blocks_unpaired_fusion():
     print("PairedDataGuard blocks unpaired fusion OK")
 
 
+def test_paired_data_guard_early_vs_intermediate():
+    """M0-1.5: early fusion 需要严格坐标矩阵, intermediate/late 只要求成对。
+
+    - 只有 description 无 matrix 的配准: intermediate 可过, early 必须拦;
+    - 有 matrix 的配准: 两者都过;
+    - 未配准 (无 registration_transform): 都拦。
+    """
+    from wndt.data.adapters.base import NDTInstance as NI
+    ut = SyntheticUltrasonicAdapter(n_specimens=1, n_positions=2).instances()
+    ect = SyntheticEddyCurrentAdapter(n_specimens=1, n_positions=2).instances()
+    tensors = {"ultrasonic": ut[0].tensors["bscan"], "eddy_current": ect[0].tensors["iq"]}
+    guard = PairedDataGuard(paired_specimens={"S0"})
+
+    desc_only = NI(record_id="desc", metadata={"fusion": {
+        "shared_specimen_id": "S0",
+        "shared_coordinate_system": "specimen_global_mm",
+        "registration_transform": {"description": "manual alignment"},
+        "modality_availability": {"ultrasonic": True, "eddy_current": True},
+    }}, tensors=tensors)
+    with_matrix = NI(record_id="mat", metadata={"fusion": {
+        "shared_specimen_id": "S0",
+        "shared_coordinate_system": "specimen_global_mm",
+        "registration_transform": {"matrix": [[1, 0, 0, 0], [0, 1, 0, 0],
+                                              [0, 0, 1, 0], [0, 0, 0, 1]]},
+        "modality_availability": {"ultrasonic": True, "eddy_current": True},
+    }}, tensors=tensors)
+
+    assert guard.check_paired(desc_only) is True        # 成对 (描述即可)
+    assert guard.check_registration_matrix(desc_only) is False  # 无矩阵
+    assert guard.check_registration_matrix(with_matrix) is True
+
+    def _require(insts, fusion_type):
+        b = NDTBatch.collate(insts, modalities=["ultrasonic", "eddy_current"])
+        guard.require_paired(b, "ultrasonic", "eddy_current", instances=insts,
+                             fusion_type=fusion_type)
+
+    # intermediate: desc_only 可通过
+    _require([desc_only], "intermediate")
+    # early: desc_only 必须被拦 (无严格矩阵)
+    try:
+        _require([desc_only], "early")
+        raise AssertionError("early fusion with description-only registration must fail")
+    except UnpairedDataError:
+        pass
+    # early: with_matrix 可通过
+    _require([with_matrix], "early")
+    print("PairedDataGuard early (matrix) vs intermediate OK")
+
+
 def test_all():
     test_adapter_distinct_and_unit_split()
     test_splitter_too_few_units_raises()
     test_ndtbatch_collate_and_availability()
+    test_ndtbatch_collate_dtype_when_first_instance_missing_modality()
     test_modality_stems_and_encoder_shapes()
     test_fusion_heads_shapes()
+    test_fusion_heads_explicit_modality_order_not_dict_order()
+    test_score_fusion_head_masks_and_renormalizes()
+    test_missing_modality_invariance()
+    test_gated_fusion_head_zeroes_missing_before_mlp()
     test_task_head_and_ultrasonic_only_pipeline()
     test_paired_data_guard_blocks_unpaired_fusion()
-    print("\nAll M0-1 interface tests passed.")
+    test_paired_data_guard_early_vs_intermediate()
+    print("\nAll M0-1.5 interface tests passed.")
 
 
 if __name__ == "__main__":

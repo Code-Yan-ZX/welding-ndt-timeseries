@@ -57,6 +57,13 @@
 
 ### 通用字段（每条记录）
 
+> **M0-1.5 更新（2026-08-19）**：`is_simulated` 拆分为 `data_origin` /
+> `defect_origin`；新增 `label_status`；tensor 引用支持 `tensor_ref`
+> （`tensor_key` / `record_index` / `slice`）；`frequency_unit` 不再允许
+> null；按 modality 用 if/then 约束专属字段；原始文件带
+> `source_checksum` / `preprocessing` provenance；大规模 records 走
+> `records_ref`（parquet / JSONL）。schema 版本升至 `0.2.0`。
+
 | 字段 | 说明 | 必需 |
 |---|---|---|
 | `record_id` | 数据集内唯一 | ✓ |
@@ -71,14 +78,18 @@
 | `domain_id` | 域变量聚合（material/thickness/frequency/sensor 组合） | |
 | `position` | `{x, y, z, coordinate_system}`，单位 mm | ✓ |
 | `defect_present` | 本记录是否含缺陷；null=未知 | ✓ |
+| `label_status` | **positive / negative / ignore / unknown**（M0-1.5 新增；`ignore`=不参与训练/评估，如 ≥50mm 贯穿大裂纹，Protocol V2 §5.1） | ✓ |
 | `defect_type` | 自由字符串（气孔/未熔合/夹渣/裂纹/EDM notch...） | |
-| `is_simulated` | true=仿真/人工制备缺陷 | ✓ |
+| `data_origin` | **measured / simulated / derived**（M0-1.5 替代 `is_simulated`） | ✓ |
+| `defect_origin` | **manufacturing / service / artificial_edm / artificial_sdh / simulated / unknown**（M0-1.5） | ✓ |
 | `label_source` | official_ut_report / visual / destructive / design / simulated / unknown | |
 | `label_confidence` | 0–1 | |
 | `split_group` | 推荐物理独立划分组名（如 `specimen:PP3`） | |
 | `license` | 单记录 license | ✓ |
 | `source_file` | 原始源文件路径 | ✓ |
-| `provenance` | 处理/派生说明（如 "max-pool 3500→512, G0 71°"） | |
+| `source_checksum` | `{algorithm, digest, size_bytes}`（M0-1.5） | |
+| `preprocessing` | `{steps, software, timestamp}` provenance（M0-1.5） | |
+| `provenance` | 处理/派生说明（旧写法；如 "max-pool 3500→512, G0 71°"） | |
 
 ### 超声专属 `ultrasonic`
 

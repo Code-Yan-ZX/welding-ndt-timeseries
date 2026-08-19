@@ -1,35 +1,46 @@
 #!/usr/bin/env python3
-"""P7 (Synth-UT → Real): 程序生成超声 B-scan 预训练, 在真实 PAUT 5 折 LOOCV 规范头评估。
+"""P7 (Synth-UT → Real): 物理启发程序化超声 B-scan 预训练, 真实 PAUT LOOCV 规范头评估。
 
-动机 (2026-08-18, 新方向探索): PAUT 真实数据天花板在表征级 0.58, 关键诊断
-(P4-P6) = "缺陷强度与试件身份强耦合", 廉价杠杆全部证伪。P4/P6 报告点名翻盘路径
-= "物理保真合成数据教缺陷回波物理"。本脚本测试这条路:
-  Step 1: 程序生成 (scripts/synth_ultrasound.py) 合成 B-scan (12k-100k 样本)
-  Step 2: MaskedAE 30% 掩码波束重建预训练 (P1 base 风格)
-  Step 3: 冻结编码器, 在真实 PAUT 单视角数据 (3000 位置 / 5 试件) 上做规范头
-          5 折 LOOCV (lr=1e-3/80ep), 报 **非PP4 逐折均值** (与 P4a baseline 0.579
-          同口径可比)
+Protocol V2 (docs/M0_evaluation_protocol_v2.md) 修正 (M0-1.5):
 
-P5 证伪的 "2D 高斯峰注入" vs 本工作:
-  - P5 注入: 2D 高斯, 无衰减/散斑/底面/走时 → inj_acc 0.998 但下游 0.545<0.579
-  - Synth-UT: 高斯包络正弦回波 + 衰减 + 散斑 + 底面 + 走时 → 物理保真
+  --protocol strict_inductive (默认):
+      test coupon 的一切信息 (信号/统计量/无标签数据) 都不得进入预训练、
+      normalization、validation 或模型选择。
+      - 纯合成预训练: 合成 coupon 与真实 test coupon 无关, 预训练只跑一次
+        即满足 strict (合成数据不含任何真实 test 信号);
+      - --mix-real: 真实部分必须排除 test coupon —— 预训练在**每个 outer fold
+        内**执行 (5 个 fold = 5 次预训练), 每次只用非 test coupon 真实数据。
+      normalization 只在 train coupons 上计算。
+
+  --protocol transductive_unlabeled (仅诊断/单独报告):
+      允许使用 test coupon 的**无标签**信号参与预训练 (一次性预训练,
+      含全部真实数据)。**不得**与 strict 结果合并成同一主指标,
+      报告必须显式标注。
+
+  Validation 按**完整 coupon** 分组 (每折取 1 个非 test coupon 作 val),
+  禁止随机位置级 validation。
+
+  每个结果 JSON 记录: protocol / pretrain_coupons / train_coupons /
+  val_coupons / test_coupon / normalization_scope / seed / code_commit /
+  run_type (smoke/full)。smoke 输出带 _smoke 后缀, 不覆盖 _full。
 
 对照基线 (P4a): 真实数据预训练 → 真实 LOOCV = 0.579±0.007
 P6 batch=128 真实预训练基线: 0.556
-期望: 纯合成预训练若 ≥ 0.579 = 合成可替代真实 (天花板, 强证据);
-      纯合成预训练若 [0.50, 0.58) = 合成可学但耦合到合成统计, 迁移有限;
-      合成+真实混合预训练才是下一步。
 
 Usage:
   python scripts/synth_ultrasound.py --n-coupons 12 --n-pos-per-coupon 1000 --seed 42
   python scripts/paut_p7_synth_to_real.py --pretrain-epochs 40 --seed 42
-  # 混合模式 (推荐): 在合成+真实 联合数据上预训练, 在真实 LOOCV
+  # 混合 (strict, 每 fold 内预训练)
   python scripts/paut_p7_synth_to_real.py --mix-real --pretrain-epochs 60 --seed 42
+  # transductive 探索 (单独报告, 非严格跨试件结论)
+  python scripts/paut_p7_synth_to_real.py --protocol transductive_unlabeled --mix-real --seed 42
+  python scripts/paut_p7_synth_to_real.py --smoke   # 冒烟: 输出 _smoke.json
 """
 from __future__ import annotations
 
 import argparse
 import json
+import subprocess
 import sys
 import time
 from pathlib import Path
@@ -52,6 +63,25 @@ REAL_DIR = REPO / "data/processed/paut"
 RUN_DIR = REPO / "experiments/runs/synth_to_real_p7"
 COUPONS = ["PP3", "PP4", "PP5", "PP6", "PP7"]
 NP4 = {"PP3", "PP5", "PP6", "PP7"}  # 排除近零缺陷试件 PP4
+
+
+def git_commit() -> str:
+    try:
+        return subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], cwd=REPO, stderr=subprocess.DEVNULL,
+        ).decode().strip()[:12]
+    except Exception:
+        return "unknown"
+
+
+def git_dirty() -> bool:
+    try:
+        out = subprocess.check_output(
+            ["git", "status", "--porcelain"], cwd=REPO, stderr=subprocess.DEVNULL,
+        ).decode().strip()
+        return bool(out)
+    except Exception:
+        return True
 
 
 def pretrain(X: np.ndarray, *, epochs: int, batch_size: int, d_model: int,
@@ -188,21 +218,38 @@ def evaluate(enc: nn.Module, head: nn.Module, X: np.ndarray, y: np.ndarray,
     return float(roc_auc_score(ys, scores))
 
 
-def loocv_real(enc: nn.Module, *, d_model: int, epochs: int, lr: float,
-               batch_size: int, seed: int, device: torch.device) -> list[dict]:
-    """真实 PAUT 单视角 5 折 LOOCV by PP coupon, 报全折 + 非PP4 折。"""
+def load_real():
     ascans = np.load(REAL_DIR / "ascans.npy")           # (3000, 49, 512)
     coupons = np.load(REAL_DIR / "meta_coupon.npy")     # str: 'PP3'..'PP7'
     labels = np.load(REAL_DIR / "meta_label.npy")
-    coupons_str = np.asarray(coupons)
+    return ascans, np.asarray(coupons), labels
+
+
+def coupon_val_split(rest_coupons, seed: int):
+    """按完整 coupon 切 val: 取 1 个非 test coupon 作 val, 其余作 train。
+
+    Protocol V2 §3: 禁止随机位置级 validation —— val 必须是完整 coupon。
+    """
+    rng = np.random.default_rng(seed)
+    shuffled = rng.permutation(list(rest_coupons)).tolist()
+    val_coupon = shuffled[0]
+    train_coupons = sorted(shuffled[1:])
+    return train_coupons, [val_coupon]
+
+
+def loocv_real(enc: nn.Module, *, d_model: int, epochs: int, lr: float,
+               batch_size: int, seed: int, device: torch.device,
+               ascans, coupons_str, labels) -> list[dict]:
+    """真实 PAUT 5 折 LOOCV by PP coupon; val 按完整 coupon 分组。"""
     results = []
     for tc in COUPONS:
         te = np.nonzero(coupons_str == tc)[0]
-        rest = np.nonzero(coupons_str != tc)[0]
-        rng = np.random.default_rng(seed)
-        rng.shuffle(rest)
-        n_val = max(1, int(0.15 * len(rest)))
-        va, tr = np.sort(rest[:n_val]), np.sort(rest[n_val:])
+        rest_coupons = [c for c in COUPONS if c != tc]
+        train_coupons, val_coupons = coupon_val_split(rest_coupons, seed)
+        tr = np.nonzero(np.isin(coupons_str, train_coupons))[0]
+        va = np.nonzero(np.isin(coupons_str, val_coupons))[0]
+        # normalization 只在 train coupons 上计算 (strict; transductive 也保持
+        # 以 train 为准, 避免污染 val/head 选择)
         mean = ascans[tr].mean(0).astype(np.float32)
         std = (ascans[tr].std(0) + 1e-8).astype(np.float32)
         Xtr = (ascans[tr] - mean) / std
@@ -214,18 +261,50 @@ def loocv_real(enc: nn.Module, *, d_model: int, epochs: int, lr: float,
         test_auc = evaluate(enc, head, Xte, labels[te], device)
         def_rate = float(labels[te].mean())
         results.append({"test_coupon": tc, "n_test": int(len(te)),
+                        "train_coupons": train_coupons,
+                        "val_coupons": val_coupons,
                         "def_rate": round(def_rate, 3),
                         "val_auc": round(val_auc, 4),
                         "test_auc": round(test_auc, 4)})
         print(f"  fold {tc} n={len(te):4d} def_rate={def_rate:.2f} "
-              f"| val {val_auc:.4f} | test {test_auc:.4f}")
+              f"| val(coupons {val_coupons}) {val_auc:.4f} | test {test_auc:.4f}")
     return results
+
+
+def run_fold_pretrain(synth_X, real_X, real_coupons, test_coupon, *,
+                      mix_real: bool, args, device, fold_dir: Path) -> nn.Module:
+    """一次预训练, 返回冻结编码器。
+
+    strict_inductive + mix_real: 真实部分排除 test_coupon —— 每 fold 重训;
+    strict_inductive 纯合成 或 transductive: 一次预训练 (合成无 test 信号 /
+     transductive 允许 test 无标签)。
+    """
+    X = synth_X
+    if mix_real:
+        keep = np.nonzero(real_coupons != test_coupon)[0] if args.protocol == "strict_inductive" \
+            else np.arange(len(real_coupons))
+        X = np.concatenate([X, real_X[keep]], axis=0)
+    enc_path = pretrain(X, epochs=args.pretrain_epochs, batch_size=args.pretrain_batch,
+                        d_model=args.d_model, mask_ratio=args.mask_ratio,
+                        lr=args.lr_pretrain, seed=args.seed, device=device,
+                        out_dir=fold_dir)
+    enc = MAEEncoder(d_model=args.d_model).to(device)
+    enc.load_state_dict(torch.load(enc_path, map_location=device,
+                                   weights_only=True)["encoder_state"])
+    enc.eval()
+    for p in enc.parameters():
+        p.requires_grad = False
+    return enc, int(X.shape[0])
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--synth-dir", type=Path, default=SYNTH_DIR)
     ap.add_argument("--out", type=Path, default=RUN_DIR)
+    ap.add_argument("--protocol", choices=["strict_inductive", "transductive_unlabeled"],
+                    default="strict_inductive",
+                    help="strict_inductive=主协议 (test coupon 不进预训练/统计/选择); "
+                         "transductive_unlabeled=允许 test 无标签信号, 仅诊断单独报告")
     ap.add_argument("--pretrain-epochs", type=int, default=40)
     ap.add_argument("--pretrain-batch", type=int, default=256)
     ap.add_argument("--head-epochs", type=int, default=80)
@@ -236,62 +315,91 @@ def main():
     ap.add_argument("--mask-ratio", type=float, default=0.3)
     ap.add_argument("--seed", type=int, default=42)
     ap.add_argument("--mix-real", action="store_true",
-                    help="混合: 合成+真实联合预训练 (推荐下一步)")
+                    help="混合: 合成+真实联合预训练。strict 下每 fold 内重训并排除 test coupon")
     ap.add_argument("--skip-pretrain", action="store_true",
-                    help="跳过预训练, 直接加载已有 encoder.pt (默认路径 out/encoder.pt)")
-    ap.add_argument("--smoke", action="store_true")
+                    help="跳过预训练, 直接加载已有 encoder.pt (仅限非 mix strict 或 transductive)")
+    ap.add_argument("--smoke", action="store_true",
+                    help="冒烟: 小样本/少 epoch, 输出 _smoke.json (不覆盖 _full)")
     args = ap.parse_args()
 
+    run_type = "smoke" if args.smoke else "full"
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     args.out.mkdir(parents=True, exist_ok=True)
+    code_commit = git_commit()
+    code_dirty = git_dirty()
 
     # 加载合成数据
     Xs = np.load(args.synth_dir / "ascans.npy")
-    print(f"P7[Synth→Real] 合成数据: Xs={Xs.shape}")
-    if args.mix_real:
-        Xr = np.load(REAL_DIR / "ascans.npy")
-        print(f"  + 真实数据: Xr={Xr.shape} | 联合 {Xs.shape[0]+Xr.shape[0]} 样本")
-        Xs = np.concatenate([Xs, Xr], axis=0)
-    X = Xs
+    print(f"P7[Synth→Real] 合成数据: Xs={Xs.shape} | protocol={args.protocol}")
     if args.smoke:
-        idx = np.linspace(0, len(X) - 1, 1024).astype(int)
-        X = X[idx]
+        idx = np.linspace(0, len(Xs) - 1, 1024).astype(int)
+        Xs = Xs[idx]
         args.pretrain_epochs = 2; args.head_epochs = 4
 
-    # Step 1: 预训练 (合成 / 混合)
-    if args.skip_pretrain:
-        enc_path = args.out / "encoder.pt"
-        if not enc_path.exists():
-            raise FileNotFoundError(f"--skip-pretrain 但 {enc_path} 不存在, 请先跑 pretrain")
-        print(f"P7 跳过预训练, 加载 {enc_path}")
+    # 加载真实数据 (评估用)
+    ascans, coupons_str, labels = load_real()
+
+    if args.mix_real:
+        Xr = ascans
+        print(f"  + 真实数据: Xr={Xr.shape}")
+
+    if args.protocol == "strict_inductive" and args.mix_real and not args.smoke:
+        # strict + mix: 每 fold 内重训 (排除 test coupon 真实数据)
+        fold_dirs = []
+        folds = []
+        pretrain_nsamples = []
+        for tc in COUPONS:
+            print(f"\n=== strict fold {tc}: 预训练 (真实排除 {tc}) ===")
+            fold_dir = args.out / f"fold_{tc}_strict"
+            enc, n = run_fold_pretrain(Xs, ascans, coupons_str, tc, mix_real=True,
+                                       args=args, device=device, fold_dir=fold_dir)
+            fold_dirs.append(str(fold_dir)); pretrain_nsamples.append(n)
+            fold_res = loocv_real(enc, d_model=args.d_model, epochs=args.head_epochs,
+                                  lr=args.lr_head, batch_size=args.head_batch,
+                                  seed=args.seed, device=device,
+                                  ascans=ascans, coupons_str=coupons_str, labels=labels)
+            # 只保留本折 (tc) 的结果
+            folds.append([r for r in fold_res if r["test_coupon"] == tc][0])
+        folds = [dict(f, pretrain_coupons=[c for c in COUPONS if c != f["test_coupon"]],
+                      pretrain_n_samples=pretrain_nsamples[i]) for i, f in enumerate(folds)]
     else:
-        enc_path = pretrain(X, epochs=args.pretrain_epochs, batch_size=args.pretrain_batch,
-                            d_model=args.d_model, mask_ratio=args.mask_ratio,
-                            lr=args.lr_pretrain, seed=args.seed, device=device,
-                            out_dir=args.out)
+        # 纯合成 strict 或 transductive: 一次预训练
+        if args.mix_real:
+            # transductive_unlabeled + mix: 全部真实数据 (含 test 无标签) 参与预训练
+            X = np.concatenate([Xs, Xr], axis=0)
+            print(f"  [transductive] 联合 {X.shape[0]} 样本 (含 test 无标签) 一次性预训练")
+        else:
+            X = Xs
+        if args.smoke and args.mix_real:
+            X = np.concatenate([Xs, Xr[:256]], axis=0)
+        enc, _ = run_fold_pretrain(X, np.empty((0,)), np.array([]), None,
+                                   mix_real=False, args=args, device=device,
+                                   fold_dir=args.out)
+        folds = loocv_real(enc, d_model=args.d_model, epochs=args.head_epochs,
+                           lr=args.lr_head, batch_size=args.head_batch,
+                           seed=args.seed, device=device,
+                           ascans=ascans, coupons_str=coupons_str, labels=labels)
+        for f in folds:
+            f["pretrain_coupons"] = (
+                list(COUPONS) if args.protocol == "transductive_unlabeled"
+                else [])  # 纯合成: 真实 pretain coupons 为空
+            f["pretrain_n_samples"] = int(X.shape[0])
 
-    # Step 2: 加载冻结编码器
-    enc = MAEEncoder(d_model=args.d_model).to(device)
-    enc.load_state_dict(torch.load(enc_path, map_location=device,
-                                    weights_only=True)["encoder_state"])
-    enc.eval()
-    for p in enc.parameters():
-        p.requires_grad = False
-
-    # Step 3: 真实 PAUT 5 折 LOOCV
-    print("\nP7 Synth→Real 5 折 LOOCV (真实 PAUT 数据):")
-    folds = loocv_real(enc, d_model=args.d_model, epochs=args.head_epochs,
-                       lr=args.lr_head, batch_size=args.head_batch, seed=args.seed,
-                       device=device)
     all_aucs = [f["test_auc"] for f in folds]
     np4_aucs = [f["test_auc"] for f in folds if f["test_coupon"] in NP4]
     summary = {
         "exp": "synth_to_real_p7_mix" if args.mix_real else "synth_to_real_p7",
+        "protocol": args.protocol,
+        "run_type": run_type,
         "seed": args.seed,
-        "pretrain": {"n_samples": int(X.shape[0]),
+        "code_commit": code_commit,
+        "code_dirty": code_dirty,
+        "normalization_scope": "train_coupons",
+        "pretrain": {"n_samples": int(sum(f.get("pretrain_n_samples", 0) for f in folds) // max(1, len(folds))),
                      "epochs": args.pretrain_epochs, "batch": args.pretrain_batch,
                      "lr": args.lr_pretrain, "mask_ratio": args.mask_ratio,
-                     "d_model": args.d_model, "mix_real": args.mix_real},
+                     "d_model": args.d_model, "mix_real": args.mix_real,
+                     "per_fold_repretrain": bool(args.protocol == "strict_inductive" and args.mix_real)},
         "head": {"epochs": args.head_epochs, "batch": args.head_batch, "lr": args.lr_head},
         "all_folds_mean_auc": float(np.mean(all_aucs)),
         "all_folds_std_auc": float(np.std(all_aucs)),
@@ -299,13 +407,15 @@ def main():
         "nonPP4_std_auc": float(np.std(np4_aucs)),
         "folds": folds,
     }
-    print(f"\n主指标 | 真实 PAUT 全 5 折 test AUC: mean={np.mean(all_aucs):.4f} "
-          f"± {np.std(all_aucs):.4f} | {all_aucs}")
-    print(f"主指标 | 非PP4 4 折 (P4a 同口径): mean={np.mean(np4_aucs):.4f} "
-          f"± {np.std(np4_aucs):.4f} | {np4_aucs}")
+    print(f"\n[{args.protocol} {run_type}] 主指标 | 真实 PAUT 全 5 折 test AUC: "
+          f"mean={np.mean(all_aucs):.4f} ± {np.std(all_aucs):.4f} | {all_aucs}")
+    print(f"[{args.protocol} {run_type}] 主指标 | 非PP4 4 折 (P4a 同口径): "
+          f"mean={np.mean(np4_aucs):.4f} ± {np.std(np4_aucs):.4f} | {np4_aucs}")
     print(f"对照基线: P4a 真实预训练非PP4=0.579±0.007 | P6 base 0.556")
+    suffix = "_smoke" if run_type == "smoke" else "_full"
     out_json = REPO / "experiments/results" / (
-        f"paut_p7_synth_to_real{'_mix' if args.mix_real else ''}_s{args.seed}_full.json")
+        f"paut_p7_synth_to_real{'_mix' if args.mix_real else ''}"
+        f"_{args.protocol}_s{args.seed}{suffix}.json")
     out_json.parent.mkdir(parents=True, exist_ok=True)
     with open(out_json, "w") as fh:
         json.dump(summary, fh, indent=2, ensure_ascii=False)
