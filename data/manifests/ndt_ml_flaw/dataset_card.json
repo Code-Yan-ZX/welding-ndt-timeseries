@@ -1,0 +1,291 @@
+{
+  "manifest_version": "0.2.0",
+  "dataset_name": "ndt_ml_flaw",
+  "primary_modality": "ultrasonic",
+  "license": "LGPL-3.0",
+  "source": {
+    "official_name": "NDT_ML_Flaw (VTT)",
+    "url": "https://github.com/koomas/NDT_ML_Flaw",
+    "commit": "94bab25972744bde2320b4972c45d7a9a0bdcc89",
+    "license": "LGPL-3.0",
+    "license_warning": "LGPL-3.0 针对代码；对'数据'的授权语义模糊。本仓库不重新分发原始数据，不阻塞研究使用。",
+    "size_bytes": 80367728,
+    "notes": "7 real .xz + 10 simulated .lzma; raw ~28 GB compressed 80 MB"
+  },
+  "n_specimens": 1,
+  "n_defect_instances": 16,
+  "n_records": 17000,
+  "records_ref": {
+    "path": "records.parquet",
+    "format": "parquet",
+    "n_records": 17000
+  },
+  "specimens": [
+    {
+      "specimen_id": "P41",
+      "dataset_name": "ndt_ml_flaw",
+      "material": "dissimilar metal weld",
+      "manufacturing": "weld (VTT test block P41)",
+      "geometry": "single weld block; ~17000 B-scan strips",
+      "source_file": "data/raw/NDT_ML_Flaw/datasets"
+    }
+  ],
+  "defects": [
+    {
+      "defect_instance_id": "ndtmf:P41:P41_01",
+      "specimen_id": "P41",
+      "defect_type": "crack",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "coordinate_system": "strip_pixels",
+        "x": 210.526275
+      },
+      "defect_size": {
+        "length": 2.0
+      }
+    },
+    {
+      "defect_instance_id": "ndtmf:P41:P41_06_notch",
+      "specimen_id": "P41",
+      "defect_type": "edm_notch",
+      "data_origin": "measured",
+      "defect_origin": "artificial_edm",
+      "defect_location": {
+        "coordinate_system": "strip_pixels",
+        "x": 226.585174
+      },
+      "defect_size": {
+        "length": 6.0
+      }
+    },
+    {
+      "defect_instance_id": "ndtmf:P41:P41_04",
+      "specimen_id": "P41",
+      "defect_type": "crack",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "coordinate_system": "strip_pixels",
+        "x": 339.543174
+      },
+      "defect_size": {
+        "length": 6.0
+      }
+    },
+    {
+      "defect_instance_id": "ndtmf:P41:P41_03",
+      "specimen_id": "P41",
+      "defect_type": "crack",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "coordinate_system": "strip_pixels",
+        "x": 40.337964
+      },
+      "defect_size": {
+        "length": 26.0
+      }
+    },
+    {
+      "defect_instance_id": "ndtmf:P41:P41_02",
+      "specimen_id": "P41",
+      "defect_type": "crack",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "coordinate_system": "strip_pixels",
+        "x": 263.8407
+      },
+      "defect_size": {
+        "length": 3.0
+      }
+    },
+    {
+      "defect_instance_id": "ndtmf:P41:P41_05",
+      "specimen_id": "P41",
+      "defect_type": "crack",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "coordinate_system": "strip_pixels",
+        "x": 322.452661
+      },
+      "defect_size": {
+        "length": 17.0
+      }
+    },
+    {
+      "defect_instance_id": "ndtmf:P41:civa:batch_201",
+      "specimen_id": "P41",
+      "defect_type": "civa_simulated_crack",
+      "data_origin": "simulated",
+      "defect_origin": "simulated",
+      "defect_location": {
+        "coordinate_system": "strip_pixels",
+        "x": 0.0
+      },
+      "defect_size": {
+        "length": 0.0
+      }
+    },
+    {
+      "defect_instance_id": "ndtmf:P41:civa:batch_202",
+      "specimen_id": "P41",
+      "defect_type": "civa_simulated_crack",
+      "data_origin": "simulated",
+      "defect_origin": "simulated",
+      "defect_location": {
+        "coordinate_system": "strip_pixels",
+        "x": 0.0
+      },
+      "defect_size": {
+        "length": 0.0
+      }
+    },
+    {
+      "defect_instance_id": "ndtmf:P41:civa:batch_203",
+      "specimen_id": "P41",
+      "defect_type": "civa_simulated_crack",
+      "data_origin": "simulated",
+      "defect_origin": "simulated",
+      "defect_location": {
+        "coordinate_system": "strip_pixels",
+        "x": 647.0
+      },
+      "defect_size": {
+        "length": 2.001
+      }
+    },
+    {
+      "defect_instance_id": "ndtmf:P41:civa:batch_204",
+      "specimen_id": "P41",
+      "defect_type": "civa_simulated_crack",
+      "data_origin": "simulated",
+      "defect_origin": "simulated",
+      "defect_location": {
+        "coordinate_system": "strip_pixels",
+        "x": 0.0
+      },
+      "defect_size": {
+        "length": 0.0
+      }
+    },
+    {
+      "defect_instance_id": "ndtmf:P41:civa:batch_205",
+      "specimen_id": "P41",
+      "defect_type": "civa_simulated_crack",
+      "data_origin": "simulated",
+      "defect_origin": "simulated",
+      "defect_location": {
+        "coordinate_system": "strip_pixels",
+        "x": 0.0
+      },
+      "defect_size": {
+        "length": 0.0
+      }
+    },
+    {
+      "defect_instance_id": "ndtmf:P41:civa:batch_206",
+      "specimen_id": "P41",
+      "defect_type": "civa_simulated_crack",
+      "data_origin": "simulated",
+      "defect_origin": "simulated",
+      "defect_location": {
+        "coordinate_system": "strip_pixels",
+        "x": 729.0
+      },
+      "defect_size": {
+        "length": 4.001
+      }
+    },
+    {
+      "defect_instance_id": "ndtmf:P41:civa:batch_207",
+      "specimen_id": "P41",
+      "defect_type": "civa_simulated_crack",
+      "data_origin": "simulated",
+      "defect_origin": "simulated",
+      "defect_location": {
+        "coordinate_system": "strip_pixels",
+        "x": 0.0
+      },
+      "defect_size": {
+        "length": 0.0
+      }
+    },
+    {
+      "defect_instance_id": "ndtmf:P41:civa:batch_208",
+      "specimen_id": "P41",
+      "defect_type": "civa_simulated_crack",
+      "data_origin": "simulated",
+      "defect_origin": "simulated",
+      "defect_location": {
+        "coordinate_system": "strip_pixels",
+        "x": 0.0
+      },
+      "defect_size": {
+        "length": 0.0
+      }
+    },
+    {
+      "defect_instance_id": "ndtmf:P41:civa:batch_209",
+      "specimen_id": "P41",
+      "defect_type": "civa_simulated_crack",
+      "data_origin": "simulated",
+      "defect_origin": "simulated",
+      "defect_location": {
+        "coordinate_system": "strip_pixels",
+        "x": 535.0
+      },
+      "defect_size": {
+        "length": 0.001
+      }
+    },
+    {
+      "defect_instance_id": "ndtmf:P41:civa:batch_210",
+      "specimen_id": "P41",
+      "defect_type": "civa_simulated_crack",
+      "data_origin": "simulated",
+      "defect_origin": "simulated",
+      "defect_location": {
+        "coordinate_system": "strip_pixels",
+        "x": 0.0
+      },
+      "defect_size": {
+        "length": 0.0
+      }
+    }
+  ],
+  "tensors": [
+    {
+      "key": "strip",
+      "path": "raw/NDT_ML_Flaw/datasets/<batch>.(xz|lzma)",
+      "format": "raw",
+      "axes": [
+        "depth",
+        "scan"
+      ],
+      "dtype": "uint16",
+      "unit": "raw_amplitude",
+      "n_records": 17000
+    }
+  ],
+  "data_policy": {
+    "specimen_count": 1,
+    "strip_is_record": true,
+    "strip_is_not_defect": true,
+    "n_batches": 17,
+    "n_real_batches": 7,
+    "n_simulated_batches": 10,
+    "split_by": "defect_instance_id",
+    "streaming_only": true,
+    "no_full_extraction": true
+  },
+  "provenance": {
+    "steps": [
+      "parse 17 .txt metadata (no decompression)",
+      "stream-decompress per strip on demand"
+    ],
+    "software": "src/wndt/data/adapters/ndt_ml_flaw.py"
+  }
+}

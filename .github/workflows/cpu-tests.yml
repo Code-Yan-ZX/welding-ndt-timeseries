@@ -18,10 +18,10 @@ jobs:
       - name: Install test deps (CPU only)
         run: |
           python -m pip install --upgrade pip
-          pip install "numpy" "scipy" "torch" "scikit-learn" "jsonschema" "pytest"
+          pip install "numpy" "scipy" "torch" "scikit-learn" "jsonschema" "pytest" "pandas" "pyarrow"
 
       - name: JSON Schema validation (well-formed)
-        run: python -c "import json; s=json.load(open('data/manifests/templates/ndt_manifest_schema.json')); print('schema JSON OK, version', s['manifest_version'])"
+        run: python -c "import json; s=json.load(open('data/manifests/templates/ndt_manifest_schema.json')); print('schema JSON OK, version', s['properties']['manifest_version']['const'])"
 
       - name: python compileall (syntax check all sources/scripts/tests)
         run: python -m compileall -q src scripts tests
@@ -37,3 +37,6 @@ jobs:
 
       - name: Run eval protocol (anti-leak) tests
         run: python tests/test_eval_protocol.py
+
+      - name: Run M0-2A adapter manifest tests (test_adapters.py)
+        run: python tests/test_adapters.py

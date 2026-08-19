@@ -1,0 +1,3805 @@
+{
+  "manifest_version": "0.2.0",
+  "dataset_name": "penelope_paut",
+  "primary_modality": "ultrasonic",
+  "license": "CC-BY-4.0",
+  "source": {
+    "official_name": "PENELOPE / Submerged Arc Welding Open Repository",
+    "url": "https://doi.org/10.5281/zenodo.15083865",
+    "size_bytes": 12679424288,
+    "commit": "n/a (Zenodo zip)",
+    "notes": "ZENODO_Penelope_vs2.zip, 12.7 GB, MD5 verified at download",
+    "raw_root": "data/raw/saw/ZENODO_Penelope"
+  },
+  "n_specimens": 5,
+  "n_defect_instances": 243,
+  "n_records": 3000,
+  "records_ref": {
+    "path": "records.parquet",
+    "format": "parquet",
+    "n_records": 3000
+  },
+  "specimens": [
+    {
+      "specimen_id": "PP3",
+      "dataset_name": "penelope_paut",
+      "material": "SAW X-joint steel weld (AIMEN)",
+      "manufacturing": "submerged arc welding (SAW)",
+      "geometry": "weld coupon ~600mm scan line",
+      "source_file": "PP3/2. ndt_data/PAUT_90.nde"
+    },
+    {
+      "specimen_id": "PP4",
+      "dataset_name": "penelope_paut",
+      "material": "SAW X-joint steel weld (AIMEN)",
+      "manufacturing": "submerged arc welding (SAW)",
+      "geometry": "weld coupon ~600mm scan line",
+      "source_file": "PP4/2. ndt_data/PAUT_90+.nde"
+    },
+    {
+      "specimen_id": "PP5",
+      "dataset_name": "penelope_paut",
+      "material": "SAW X-joint steel weld (AIMEN)",
+      "manufacturing": "submerged arc welding (SAW)",
+      "geometry": "weld coupon ~600mm scan line",
+      "source_file": "PP5/2. ndt_data/PAUT_90+.nde"
+    },
+    {
+      "specimen_id": "PP6",
+      "dataset_name": "penelope_paut",
+      "material": "SAW X-joint steel weld (AIMEN)",
+      "manufacturing": "submerged arc welding (SAW)",
+      "geometry": "weld coupon ~600mm scan line",
+      "source_file": "PP6/2. ndt_data/PAUT_90+.nde"
+    },
+    {
+      "specimen_id": "PP7",
+      "dataset_name": "penelope_paut",
+      "material": "SAW X-joint steel weld (AIMEN)",
+      "manufacturing": "submerged arc welding (SAW)",
+      "geometry": "weld coupon ~600mm scan line",
+      "source_file": "PP7/2. ndt_data/1163421_PP7_030325_90.nde"
+    }
+  ],
+  "defects": [
+    {
+      "defect_instance_id": "penelope:PP3:row0",
+      "specimen_id": "PP3",
+      "defect_type": "Lack of fusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 80.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 234.41000000000003
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row1",
+      "specimen_id": "PP3",
+      "defect_type": "Lack of fusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 336.2,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 84.40000000000003
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row2",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 90.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 96.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row3",
+      "specimen_id": "PP3",
+      "defect_type": "Metallic inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 389.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 4.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row4",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 384.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 2.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row5",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 85.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row6",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 105.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 5.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row7",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 115.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 15.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row8",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 157.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 9.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row9",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 185.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 20.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row10",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 210.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 5.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row11",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 224.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row12",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 249.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 11.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row13",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 269.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 13.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row14",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 290.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 13.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row15",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 310.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 18.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row16",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 335.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 26.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row17",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 391.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 19.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row18",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 424.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 23.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row19",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 462.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 0.5
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row20",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 487.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 4.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row21",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 532.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 4.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row22",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 546.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row23",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 553.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row24",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 557.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 38.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row25",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 615.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 30.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row26",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 657.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 37.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row27",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 123.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row28",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 125.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row29",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 131.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row30",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 146.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row31",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 170.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.5
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row32",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 194.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 2.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row33",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 209.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 4.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row34",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 224.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 2.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row35",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 227.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 2.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row36",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 246.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row37",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 300.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row38",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 303.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row39",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 388.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row40",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 423.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row41",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 451.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row42",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 472.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 0.5
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row43",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 515.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.5
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row44",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 522.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 5.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row45",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 543.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row46",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 565.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 0.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row47",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 581.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 0.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row48",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 584.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 0.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row49",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 591.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 0.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row50",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 594.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 0.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row51",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 619.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 0.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row52",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 626.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 3.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row53",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 653.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row54",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 657.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.5
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row55",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 665.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 26.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row56",
+      "specimen_id": "PP3",
+      "defect_type": "Metallic inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 158.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 4.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row57",
+      "specimen_id": "PP3",
+      "defect_type": "Metallic inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 552.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 4.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row58",
+      "specimen_id": "PP3",
+      "defect_type": "Lack of fusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 80.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 234.41000000000003
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row59",
+      "specimen_id": "PP3",
+      "defect_type": "Lack of fusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 336.2,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 84.40000000000003
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row60",
+      "specimen_id": "PP3",
+      "defect_type": "Cracks",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 80.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 600.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row61",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 90.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 94.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row62",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 245.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row63",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 345.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 2.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row64",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 358.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 2.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row65",
+      "specimen_id": "PP3",
+      "defect_type": "Cracks",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 80.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 186.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row66",
+      "specimen_id": "PP3",
+      "defect_type": "Cracks",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 347.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 9.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP3:row67",
+      "specimen_id": "PP3",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 529.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP4:row0",
+      "specimen_id": "PP4",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 223.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 2.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row0",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 80.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 600.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row1",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 136.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 0.6999999999999886
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row2",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 155.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row3",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 244.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 0.7700000000000102
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row4",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 471.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.3700000000000045
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row5",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 484.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 0.7699999999999818
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row6",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 490.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 0.910000000000025
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row7",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 514.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.3899999999999864
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row8",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 533.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 0.5899999999999181
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row9",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 540.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.4200000000000728
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row10",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 563.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.8700000000000045
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row11",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 570.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.9400000000000546
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row12",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 595.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 45.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row13",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 650.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row14",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 670.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 0.9500000000000455
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row15",
+      "specimen_id": "PP5",
+      "defect_type": "Slag inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 84.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 3.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row16",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 87.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 3.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row17",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 122.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row18",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 126.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row19",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 130.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 0.5
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row20",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 133.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 3.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row21",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 137.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 3.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row22",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 174.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row23",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 160.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 17.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row24",
+      "specimen_id": "PP5",
+      "defect_type": "Metallic inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 207.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 11.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row25",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 335.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row26",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 346.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.5
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row27",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 381.5,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.5
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row28",
+      "specimen_id": "PP5",
+      "defect_type": "Metallic inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 383.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 12.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row29",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 395.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 2.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row30",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 445.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 2.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row31",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 480.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 2.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row32",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 501.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row33",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 546.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 7.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row34",
+      "specimen_id": "PP5",
+      "defect_type": "Metallic inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 568.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row35",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 581.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 2.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row36",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 593.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row37",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 613.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 42.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row38",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 663.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 17.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row39",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 80.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 600.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row40",
+      "specimen_id": "PP5",
+      "defect_type": "Metallic inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 166.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 9.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row41",
+      "specimen_id": "PP5",
+      "defect_type": "Metallic inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 311.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 8.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row42",
+      "specimen_id": "PP5",
+      "defect_type": "Metallic inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 496.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row43",
+      "specimen_id": "PP5",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 80.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 600.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row44",
+      "specimen_id": "PP5",
+      "defect_type": "Metallic inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 163.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 11.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row45",
+      "specimen_id": "PP5",
+      "defect_type": "Metallic inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 345.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 8.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row46",
+      "specimen_id": "PP5",
+      "defect_type": "Metallic inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 554.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 14.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row47",
+      "specimen_id": "PP5",
+      "defect_type": "Metallic inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 150.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row48",
+      "specimen_id": "PP5",
+      "defect_type": "Metallic inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 350.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP5:row49",
+      "specimen_id": "PP5",
+      "defect_type": "Metallic inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 580.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row0",
+      "specimen_id": "PP6",
+      "defect_type": "Metallic inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 106.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row1",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 376.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 15.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row2",
+      "specimen_id": "PP6",
+      "defect_type": "Metallic inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 391.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row3",
+      "specimen_id": "PP6",
+      "defect_type": "Metallic inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 667.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 11.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row4",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 86.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 4.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row5",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 101.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 3.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row6",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 118.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 0.5
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row7",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 140.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 9.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row8",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 155.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 64.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row9",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 226.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row10",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 239.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 2.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row11",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 256.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 4.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row12",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 276.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 2.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row13",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 290.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row14",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 300.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row15",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 305.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 20.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row16",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 329.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 0.5
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row17",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 341.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 3.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row18",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 347.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 63.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row19",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 417.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 6.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row20",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 426.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row21",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 431.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 4.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row22",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 440.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 24.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row23",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 472.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row24",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 482.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row25",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 507.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row26",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 515.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row27",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 530.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 11.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row28",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 581.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 4.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row29",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 621.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 3.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row30",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 637.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 3.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row31",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 643.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row32",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 653.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 4.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row33",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 663.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 3.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row34",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 670.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row35",
+      "specimen_id": "PP6",
+      "defect_type": "Metallic inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 210.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row36",
+      "specimen_id": "PP6",
+      "defect_type": "Metallic inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 380.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row37",
+      "specimen_id": "PP6",
+      "defect_type": "Metallic inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 545.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row38",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 94.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row39",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 100.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 2.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row40",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 110.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 2.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row41",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 127.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.5
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row42",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 167.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 8.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row43",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 245.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 2.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row44",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 252.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 3.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row45",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 315.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 6.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row46",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 331.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row47",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 339.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 2.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row48",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 409.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 78.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row49",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 498.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 3.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row50",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 505.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 2.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row51",
+      "specimen_id": "PP6",
+      "defect_type": "Slag inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 417.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 4.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row52",
+      "specimen_id": "PP6",
+      "defect_type": "Slag inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 425.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 5.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row53",
+      "specimen_id": "PP6",
+      "defect_type": "Slag inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 432.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 5.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row54",
+      "specimen_id": "PP6",
+      "defect_type": "Slag inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 494.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 4.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row55",
+      "specimen_id": "PP6",
+      "defect_type": "Slag inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 501.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 4.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row56",
+      "specimen_id": "PP6",
+      "defect_type": "Slag inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 509.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 4.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row57",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 531.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row58",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 538.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 2.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row59",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 553.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 3.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row60",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 591.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 2.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row61",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 652.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 2.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row62",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 668.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 3.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row63",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 675.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row64",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 113.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.4099999999999966
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row65",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 205.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 0.5300000000000011
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row66",
+      "specimen_id": "PP6",
+      "defect_type": "Metallic inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 173.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 13.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row67",
+      "specimen_id": "PP6",
+      "defect_type": "Metallic inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 320.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row68",
+      "specimen_id": "PP6",
+      "defect_type": "Metallic inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 510.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 5.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row69",
+      "specimen_id": "PP6",
+      "defect_type": "Metallic inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 520.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 5.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row70",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 80.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 600.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row71",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 95.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row72",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 108.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row73",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 129.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 2.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row74",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 140.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 2.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row75",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 171.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row76",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 180.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row77",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 185.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.5
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row78",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 195.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 5.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row79",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 212.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 2.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row80",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 220.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 21.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row81",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 254.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 2.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row82",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 289.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 11.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row83",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 303.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 2.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row84",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 343.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row85",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 378.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 2.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row86",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 392.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row87",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 424.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 7.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row88",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 449.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 9.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row89",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 480.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 8.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row90",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 504.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row91",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 530.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 19.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row92",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 578.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 26.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row93",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 617.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 20.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row94",
+      "specimen_id": "PP6",
+      "defect_type": "Metallic inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 157.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row95",
+      "specimen_id": "PP6",
+      "defect_type": "Metallic inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 355.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row96",
+      "specimen_id": "PP6",
+      "defect_type": "Metallic inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 610.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row97",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 115.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 565.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row98",
+      "specimen_id": "PP6",
+      "defect_type": "Metallic inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 130.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row99",
+      "specimen_id": "PP6",
+      "defect_type": "Metallic inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 240.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row100",
+      "specimen_id": "PP6",
+      "defect_type": "Metallic inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 450.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row101",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 115.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 3.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row102",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 134.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 2.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row103",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 176.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row104",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 220.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 3.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row105",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 240.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 35.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row106",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 450.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 2.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row107",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 478.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 2.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row108",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 487.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row109",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 543.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 2.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row110",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 590.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 30.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP6:row111",
+      "specimen_id": "PP6",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 635.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 25.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP7:row0",
+      "specimen_id": "PP7",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 230.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 5.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP7:row1",
+      "specimen_id": "PP7",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 395.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 12.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP7:row2",
+      "specimen_id": "PP7",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 451.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 12.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP7:row3",
+      "specimen_id": "PP7",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 486.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP7:row4",
+      "specimen_id": "PP7",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 484.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP7:row5",
+      "specimen_id": "PP7",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 511.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 2.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP7:row6",
+      "specimen_id": "PP7",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 521.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP7:row7",
+      "specimen_id": "PP7",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 554.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP7:row8",
+      "specimen_id": "PP7",
+      "defect_type": "Porosity",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 365.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP7:row9",
+      "specimen_id": "PP7",
+      "defect_type": "Cracks",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 80.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 600.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP7:row10",
+      "specimen_id": "PP7",
+      "defect_type": "Slag inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 280.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 20.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    },
+    {
+      "defect_instance_id": "penelope:PP7:row11",
+      "specimen_id": "PP7",
+      "defect_type": "Slag inclusion",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_location": {
+        "x": 480.0,
+        "coordinate_system": "coupon_local"
+      },
+      "defect_size": {
+        "length": 20.0
+      },
+      "label_source": "defects_xlocation.xlsx"
+    }
+  ],
+  "tensors": [
+    {
+      "key": "ascans",
+      "path": "paut/ascans.npy",
+      "format": "npy",
+      "axes": [
+        "n_records",
+        "beam",
+        "time"
+      ],
+      "dtype": "float32",
+      "unit": "rectified_amplitude",
+      "n_records": 3000
+    },
+    {
+      "key": "env",
+      "path": "paut/env.npy",
+      "format": "npy",
+      "axes": [
+        "n_records",
+        "time"
+      ],
+      "dtype": "float32",
+      "unit": "rectified_amplitude_max_over_beams",
+      "n_records": 3000
+    }
+  ],
+  "data_policy": {
+    "label_policy": "localized defects (< 50mm) only; blanket defects treated as background",
+    "view": "90/G0(71deg,49beam)",
+    "group": 0,
+    "beam_angle_deg": 71.0,
+    "n_beams": 49,
+    "depth_samples": 512,
+    "raw_samples": 3500,
+    "per_coupon_counts": {
+      "PP3": {
+        "n_pos": 601,
+        "n_defect_pos": 345,
+        "n_clean_pos": 256,
+        "defect_rate": 0.574
+      },
+      "PP4": {
+        "n_pos": 601,
+        "n_defect_pos": 3,
+        "n_clean_pos": 598,
+        "defect_rate": 0.005
+      },
+      "PP5": {
+        "n_pos": 596,
+        "n_defect_pos": 261,
+        "n_clean_pos": 335,
+        "defect_rate": 0.4379
+      },
+      "PP6": {
+        "n_pos": 601,
+        "n_defect_pos": 459,
+        "n_clean_pos": 142,
+        "defect_rate": 0.7637
+      },
+      "PP7": {
+        "n_pos": 601,
+        "n_defect_pos": 83,
+        "n_clean_pos": 518,
+        "defect_rate": 0.1381
+      }
+    },
+    "canonical_split": {
+      "train": [
+        "PP3",
+        "PP4",
+        "PP5"
+      ],
+      "val": [
+        "PP6"
+      ],
+      "test": [
+        "PP7"
+      ]
+    },
+    "raw_nde_checksum": {
+      "algorithm": "sha256",
+      "digest": "bd9735654a458aec353734ce3e13ef6553ed0dbb324517e8b9e0955efdde2dc3",
+      "size_bytes": 331680283
+    }
+  },
+  "provenance": {
+    "steps": [
+      "read .nde DataGroup 0 amplitude (n_pos, 49, 3500) int16",
+      "max-pool depth 3500 -> 512 (rectified envelope keeps echo peaks)",
+      "defects_xlocation.xlsx -> per-position localized-defect label (<50mm)"
+    ],
+    "software": "scripts/paut_preprocess.py"
+  }
+}

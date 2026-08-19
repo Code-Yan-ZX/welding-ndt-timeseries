@@ -25,10 +25,12 @@ core = [
     "transformers>=4.40",
     "matplotlib>=3.5",
 ]
-# 测试依赖（CPU 可跑：接口单测 / schema 校验 / Synth-UT 单测）
+# 测试依赖（CPU 可跑：接口单测 / schema 校验 / Synth-UT 单测 / manifest 校验）
 test = [
     "pytest>=7.0",
     "jsonschema>=4.0",
+    "pandas>=2.0",
+    "pyarrow>=14.0",
 ]
 # 全部（含测试）
 all = [
@@ -40,6 +42,8 @@ all = [
     "matplotlib>=3.5",
     "pytest>=7.0",
     "jsonschema>=4.0",
+    "pandas>=2.0",
+    "pyarrow>=14.0",
 ]
 
 [tool.setuptools.packages.find]

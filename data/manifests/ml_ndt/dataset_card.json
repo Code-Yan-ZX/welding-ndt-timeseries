@@ -1,0 +1,111 @@
+{
+  "manifest_version": "0.2.0",
+  "dataset_name": "ml_ndt",
+  "primary_modality": "ultrasonic",
+  "license": "LGPL-3.0",
+  "source": {
+    "official_name": "ML-NDT (VTT)",
+    "url": "https://github.com/iikka-v/ML-NDT",
+    "commit": "94bab25972744bde2320b4972c45d7a9a0bdcc89",
+    "license": "LGPL-3.0",
+    "size_bytes": 91750400,
+    "notes": "201 volumes x (100,256,256) uint16; 1 specimen; 3 real thermal fatigue cracks + virtual flaws"
+  },
+  "n_specimens": 1,
+  "n_defect_instances": 3,
+  "n_records": 7,
+  "records_ref": {
+    "path": "records.parquet",
+    "format": "parquet",
+    "n_records": 7
+  },
+  "specimens": [
+    {
+      "specimen_id": "mlndt_pipe_weld",
+      "dataset_name": "ml_ndt",
+      "material": "316L austenitic stainless steel",
+      "manufacturing": "single butt pipe weld",
+      "geometry": "austenitic stainless steel pipe weld (single butt joint)",
+      "source_file": "data/raw/ML-NDT"
+    }
+  ],
+  "defects": [
+    {
+      "defect_instance_id": "mlndt:mlndt_pipe_weld:crack1.6",
+      "specimen_id": "mlndt_pipe_weld",
+      "defect_type": "thermal_fatigue_crack",
+      "data_origin": "measured",
+      "defect_origin": "service",
+      "defect_size": {
+        "length": 1.6
+      },
+      "equivalent_flawsize": 1.2918925590975823,
+      "is_virtual": false,
+      "factor": 1.0,
+      "notes": "real crack ~1.6mm; many eFlaw virtual re-insertions derive from it"
+    },
+    {
+      "defect_instance_id": "mlndt:mlndt_pipe_weld:crack4.0",
+      "specimen_id": "mlndt_pipe_weld",
+      "defect_type": "thermal_fatigue_crack",
+      "data_origin": "measured",
+      "defect_origin": "service",
+      "defect_size": {
+        "length": 4.0
+      },
+      "equivalent_flawsize": 2.585299110654818,
+      "is_virtual": false,
+      "factor": 1.0,
+      "notes": "real crack ~4.0mm; many eFlaw virtual re-insertions derive from it"
+    },
+    {
+      "defect_instance_id": "mlndt:mlndt_pipe_weld:crack8.6",
+      "specimen_id": "mlndt_pipe_weld",
+      "defect_type": "thermal_fatigue_crack",
+      "data_origin": "measured",
+      "defect_origin": "service",
+      "defect_size": {
+        "length": 8.6
+      },
+      "equivalent_flawsize": 6.874862814591331,
+      "is_virtual": false,
+      "factor": 1.0,
+      "notes": "real crack ~8.6mm; many eFlaw virtual re-insertions derive from it"
+    }
+  ],
+  "tensors": [
+    {
+      "key": "volume",
+      "path": "raw/ML-NDT/<volume_id>/*.bins",
+      "format": "raw",
+      "axes": [
+        "frame",
+        "y",
+        "x"
+      ],
+      "dtype": "uint16",
+      "unit": "raw_amplitude",
+      "n_records": 7
+    }
+  ],
+  "data_policy": {
+    "specimen_count": 1,
+    "volume_is_acquisition": true,
+    "real_defect_count": 3,
+    "virtual_event_total": 700,
+    "split_by": "defect_instance_id",
+    "train_val": "train 199 / val 2 (original repo split)",
+    "raw_volume_checksum": {
+      "algorithm": "sha256",
+      "digest": "bf2da11d7618e7dcc159556e14ee58a0d97f5225477a949514a5ef98b0a107da",
+      "size_bytes": 13107200
+    }
+  },
+  "provenance": {
+    "steps": [
+      "read .bins as uint16 (100,256,256)",
+      "parse .labels/.jsons/.meta"
+    ],
+    "software": "src/wndt/data/adapters/ml_ndt.py"
+  }
+}

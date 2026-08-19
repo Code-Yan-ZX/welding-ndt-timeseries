@@ -36,9 +36,22 @@
     `data/manifests/templates/ndt_manifest_schema.json`（manifest 模板）、
     `src/wndt/data/adapters/base.py` 与 `src/wndt/models/multimodal/interfaces.py`
     （接口草案）、`tests/test_nd_interfaces.py`（接口单测，已通过）。
-- **M0-2（待用户审核后启动）**：按审计优先级接入数据集 + 单模态基线。**在获得
-  可验证的同试件、同坐标、成对 UT+ECT 公共数据之前，不做真正的融合训练**，严禁
-  把不同试件/材料/任务的 UT 与 ECT 强行拼接后称为"多模态融合"。
+- **M0-2A（当前，进行中）**：接入三个外部超声数据集（PENELOPE PAUT / ML-NDT /
+  NDT_ML_Flaw）到统一数据底座，做数据管线 smoke，**不训练**。
+  - 交付物：三个 adapter（`src/wndt/data/adapters/{penelope,ml_ndt,ndt_ml_flaw}.py`）、
+    三个 dataset card + records manifest（`data/manifests/{penelope,ml_ndt,ndt_ml_flaw}/`）、
+    统一读取层（`adapters/unified.py`）、数据集专属 stem
+    （`models/multimodal/dataset_stems.py`）、审计报告
+    （`docs/M0_2A_ultrasound_data_integration_report.md`）、冒烟脚本
+    （`scripts/m0_inspect_dataset.py`）、QA 图（`scripts/m0_2a_qa_figures.py`）。
+  - 核心结论（详见报告）：三数据集独立信息量远小于记录数（PENELOPE 5 试件 /
+    ML-NDT 1 试件 3 裂纹 / NDT_ML_Flaw 1 试件 6 缺陷）；两 VTT 数据集是极佳 PAUT
+    预训练素材但**不能当独立多试件基准**；同一原始 flaw 跨 train/test 泄漏风险高，
+    必须按 specimen / defect_instance_id 划分。
+- **M0-2B（规划，待 M0-2A 审核后）**：按审计优先级接入数据集 + 单模态基线 +
+  外部超声预训练迁移实验。**在获得可验证的同试件、同坐标、成对 UT+ECT 公共数据
+  之前，不做真正的融合训练**，严禁把不同试件/材料/任务的 UT 与 ECT 强行拼接后
+  称为"多模态融合"。
 
 > ⚠ 限制：本阶段不进行超 10 GB 的新下载、不自动下载全部 LOTSA/UTSD、不做正式
 > 训练、不跑长时 GPU 任务。公开小数据实验不代表最终课题结论。

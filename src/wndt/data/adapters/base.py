@@ -253,8 +253,11 @@ class ManifestSplitter:
         groups: dict[str, list[int]] = {}
         for i, inst in enumerate(self.instances):
             v = inst.metadata.get(self.unit_field.value)
-            if v is not None:
-                groups.setdefault(str(v), []).append(i)
+            if v is None:
+                # 无该字段（如背景/clean 记录）归入一个"clean"单元，确保
+                # 负样本也参与 split（否则干净记录被整体丢弃，训练无负例）。
+                v = f"clean:{inst.metadata.get('dataset_name', '')}"
+            groups.setdefault(str(v), []).append(i)
         return groups
 
     def split(
