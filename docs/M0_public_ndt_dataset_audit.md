@@ -16,7 +16,7 @@
 |---|---|---|---|---|---|---|---|---|---|
 | PENELOPE / SAW Open Repository | 超声 PAUT | SAW 埋弧焊 | 7（5 含完整 PAUT） | 243 标注（PP3=68/PP4=1/PP5=50/PP6=112/PP7=12） | 3000 位置级 | CC-BY-4.0 | 12.7 GB | ✅ 免登录 | **P0** |
 | NDT_ML_Flaw | 超声 B-scan | 异种金属焊缝 | 1（P41） | 6（5 裂纹+1 EDM notch） | ~17,000 条带 | LGPL-3.0 | 236 MB | ✅ 免登录 | **P1**（预训练素材） |
-| ML-NDT | 超声 PAUT 体积 | 316L 奥氏体管道焊缝 | 1 | 3（真实热疲劳裂纹） | 201 体积 / 20,100 帧 | LGPL-3.0 | 174 MB | ✅ 免登录 | **P1**（预训练素材） |
+| ML-NDT | 超声 PAUT B-scan（minibatch 容器） | 316L 奥氏体管道焊缝 | 1 | 3（真实热疲劳裂纹） | 201 容器 / 20,100 张 eFlaw 增强 B-scan | LGPL-3.0 | 174 MB | ✅ 免登录 | **P1**（预训练素材） |
 | Evident NDE examples | 超声 .nde | 多类（PAUT/TFM/TOFD/FMC） | 多（示例） | 无可靠标签 | 13 个示例文件（0.4–274 MB） | 格式 MIT / 示例数据无声明 | ~1 GB | ✅ 免登录直链 | **P2**（格式兼容/无标签测试） |
 | UGW-3Mat-2SN | 超声导波 | 3 种复合板（Lamb 波） | 待核实 | 待核实（pseudo-damage） | 43.5 GB 压缩 | CC-BY-4.0 | 43.5 GB | ✅ 免登录 | **P2**（低层表征/域适配对照） |
 | Open Guided Waves | 超声导波 | CFRP 板/omega 长桁 | 多 | 人工缺陷/脱粘 | 多组 h5 波场 | #4 CC-BY-4.0 / #1–3 待核实 | ~6 GB/波场 | ✅ 免登录 | **P2**（对照） |
@@ -81,10 +81,10 @@
 | 来源 | https://github.com/iikka-v/ML-NDT；论文 arXiv:1903.11399（Virkkunen et al., 2019） | 已确认 |
 | 内容 | 每批 UUID：`.bins`(原始体积) + `.meta` + `.jsons` + `.labels` | 已确认（实测） |
 | 格式 | **原始 3D 超声体积** `UInt16 256×256×100`（100 帧 × 256×256 B-scan）= 每体积 13.1 MB | 已确认（实测逐字节吻合） |
-| 数据量 | 201 体积 ≈ 2.6 GB 原始；git 压缩约 **174 MB** | 已确认 |
+| 数据量 | 201 个 minibatch 容器 ≈ 2.6 GB 原始；git 压缩约 **174 MB** | 已确认 |
 | 独立 specimen | **1**（316L 奥氏体管道单对焊接头） | 已确认 |
 | 独立 defect | **3 条真实热疲劳裂纹**（深度 1.6/4.0/8.6 mm，Trueflaw 制造）+ eFlaw 幅度缩放 virtual flaws | 已确认 |
-| nominal sample | **201 体积 = 20,100 帧**（train 199 体积 + val 2 体积） | 已确认 |
+| nominal sample | **201 个 minibatch 容器 = 20,100 张 B-scan**（train 199 容器 + val 2 容器；每容器 100 张 eFlaw 增强图，非三维体积采集） | 已确认 |
 | 标签 | `.labels` 每体积 100 行 `[flaw 0/1, equivalent flaw size]`；`.jsons` 含 `size`/`equivalent_flawsize`/`original_location`(帧范围)/`location`/`max_amplitude`/`factor` | 已确认（实测） |
 | 位置/深度/尺寸 | **有**（帧范围坐标 + 源/等效尺寸）；无三维物理坐标 | 已确认 |
 | 真实/人工/仿真 | 3 条**真实**热疲劳裂纹 + 基于真实裂纹重植入的 virtual flaws（仿真增强） | 已确认 |

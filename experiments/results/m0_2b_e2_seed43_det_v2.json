@@ -1,0 +1,119 @@
+{
+  "exp": "e2",
+  "model_seed": 43,
+  "split_seed": 42,
+  "data_seed": 42,
+  "det_version": "det_v2",
+  "run_type": "full",
+  "code_commit": "acf6bbbe78b0",
+  "head": {
+    "lr": 0.001,
+    "epochs": 80,
+    "batch_size": 128,
+    "class_balance": true
+  },
+  "optimizer_steps_total": 10000,
+  "folds": [
+    {
+      "test_coupon": "PP3",
+      "train_coupons": [
+        "PP4",
+        "PP5",
+        "PP6"
+      ],
+      "val_coupon": "PP7",
+      "n_test": 601,
+      "n_pos": 345,
+      "defect_rate": 0.574,
+      "val_auc": 0.7027,
+      "test_auc": 0.478,
+      "pr_auc": 0.5475,
+      "checkpoint": null,
+      "optimizer_steps": 10000,
+      "epochs_run": 69,
+      "wall_s": 14.6
+    },
+    {
+      "test_coupon": "PP4",
+      "train_coupons": [
+        "PP3",
+        "PP5",
+        "PP6"
+      ],
+      "val_coupon": "PP7",
+      "n_test": 601,
+      "n_pos": 3,
+      "defect_rate": 0.005,
+      "val_auc": 0.7333,
+      "test_auc": 0.5396,
+      "pr_auc": 0.0071,
+      "checkpoint": null,
+      "optimizer_steps": 10000,
+      "epochs_run": 52,
+      "wall_s": 11.5
+    },
+    {
+      "test_coupon": "PP5",
+      "train_coupons": [
+        "PP3",
+        "PP4",
+        "PP6"
+      ],
+      "val_coupon": "PP7",
+      "n_test": 596,
+      "n_pos": 261,
+      "defect_rate": 0.4379,
+      "val_auc": 0.6838,
+      "test_auc": 0.5275,
+      "pr_auc": 0.4848,
+      "checkpoint": null,
+      "optimizer_steps": 10000,
+      "epochs_run": 24,
+      "wall_s": 4.8
+    },
+    {
+      "test_coupon": "PP6",
+      "train_coupons": [
+        "PP3",
+        "PP4",
+        "PP5"
+      ],
+      "val_coupon": "PP7",
+      "n_test": 601,
+      "n_pos": 459,
+      "defect_rate": 0.7637,
+      "val_auc": 0.678,
+      "test_auc": 0.4847,
+      "pr_auc": 0.7405,
+      "checkpoint": null,
+      "optimizer_steps": 10000,
+      "epochs_run": 23,
+      "wall_s": 5.2
+    },
+    {
+      "test_coupon": "PP7",
+      "train_coupons": [
+        "PP3",
+        "PP4",
+        "PP5"
+      ],
+      "val_coupon": "PP6",
+      "n_test": 601,
+      "n_pos": 83,
+      "defect_rate": 0.1381,
+      "val_auc": 0.6234,
+      "test_auc": 0.6284,
+      "pr_auc": 0.2724,
+      "checkpoint": null,
+      "optimizer_steps": 10000,
+      "epochs_run": 67,
+      "wall_s": 14.3
+    }
+  ],
+  "all_folds_mean_auc": 0.5316,
+  "all_folds_std_auc": 0.0539,
+  "nonPP4_mean_auc": 0.5297,
+  "nonPP4_std_auc": 0.0601,
+  "pooled_auc": 0.572,
+  "pp4_auc": 0.5396
+}

@@ -1,33 +1,52 @@
-# M0-2B 外部超声自监督预训练迁移实验报告
+# M0-2B 外部超声自监督预训练迁移实验报告（deterministic v2）
 
 > 阶段：M0-2B —— 统一超声 MAE（共享 encoder）+ 三数据集外部混合 SSL →
 > 严格跨试件 LOOCV 迁移判断。
-> 日期：2026-08-19
 > 核心研究问题：**ML-NDT 与 NDT_ML_Flaw 的外部超声自监督预训练，能否提升
 > PENELOPE 焊缝 PAUT 的严格跨试件泛化？**
-> 第一轮仅 seed 42；主指标 = **非PP4 逐折均值**（PP3 / PP5 / PP6 / PP7）；
-> pooled AUC 仅参考；PP4 单独报告，不纳入主均值。
+> 本文档为 **deterministic v2（det_v2）** 版本：修复初始版本的
+> 模型/分类头初始化 seed 设置顺序问题，并扩展为三个 model seed
+> （42 / 43 / 44）多种子复现。主指标 = **非PP4 逐折均值**
+> （PP3 / PP5 / PP6 / PP7）；pooled AUC 仅参考；PP4 单独报告。
+
+---
+
+## 0. 版本与旧结果处理
+
+- **初始版本**（`acf6bbb` 时代，seed 42 第一轮）：**因模型/分类头初始化 seed
+  设置顺序问题被本 deterministic v2 取代**。初始版本结果与 checkpoint 全部
+  保留（见 §9），其结论**不再作为正式迁移判断依据**。
+- **deterministic v2**（本报告）：随机性拆分为三个 seed ——
+  `split_seed=42`（coupon 划分）、`data_seed=42`（数据采样）、
+  `model_seed ∈ {42,43,44}`（模型初始化 / MAE mask / dropout / 分类头
+  初始化 / 训练随机性）。新结果写入 `_det_v2` 后缀文件与
+  `experiments/runs/m0_2b/pretrain/det_v2/`，**不覆盖初始版本任何结果**。
+
+---
 
 ## 1. 动机与目标
 
 - **上阶段结论**（M0-2A 审计）：PAUT 真实 5 试件数据太小（3000 位置 = 5 独立
   试件），P0–P7 全杠杆证伪，天花板在表征级 ~0.58（P4a 规范头协议 0.579±0.007）。
-  ML-NDT（201 volume / 100 帧 / 单试件）与 NDT_ML_Flaw（17,000 条带 / 单试件
+  ML-NDT（201 个 minibatch 容器 / 20,100 张 eFlaw 增强 B-scan / 单试件）与
+  NDT_ML_Flaw（17,000 条带 / 单试件
   P41）是模态最匹配的**外部超声预训练素材**，但两者都是**单试件**，预训练学到
   的是该试件的采集/噪声特性，能否跨试件迁移到 PAUT **待 M0-2B 验证**。
 - **本阶段目标**：用外部超声数据做 MAE 自监督预训练，判断能否改善 PAUT 的
-  **严格跨试件泛化**（test coupon 在训练 / SSL / 统计 / 模型选择全程不可见）。
+  **严格跨试件泛化**（test coupon 在训练 / SSL / 统计 / 模型选择全程不可见），
+  并在**三种子（42/43/44）**下确认结果的可复现性。
 - **明确不做**：不跑 VLM / LLM / Moirai / MOMENT / 时序基础模型；不下载新数据；
-  不修改历史 P0–P7 结果；不做 encoder fine-tuning；第一轮只跑 seed 42。
+  不修改历史 P0–P7 结果；不做 encoder fine-tuning；不尝试通过调整学习率/步数/
+  模型结构挽救任何条件。
+
+---
 
 ## 2. 方法
 
 ### 2.1 统一超声 MAE（共享输入 + 共享 encoder）
 
 三个数据集的**原生超声张量不同**（PENELOPE B-scan / ML-NDT 帧 / NDT_ML_Flaw
-条带），第一轮**不直接使用三个彼此独立的 dataset stem 作为迁移骨干**（外部
-预训练不会训练 PenelopeStem，source-only checkpoint 的低层特征无法迁移）。
-因此实现**一个共享输入、共享编码器**的 MAE：
+条带），实现**一个共享输入、共享编码器**的 MAE：
 
 | 组件 | 设计 |
 |---|---|
@@ -40,41 +59,46 @@
 | 损失 | masked-patch SmoothL1（只在被掩码 patch 上） |
 | 下游 | encoder 输出 **mean pooling** → 冻结 encoder + 二分类头 |
 
-模型**支持不同数据集在不同 batch 中具有不同空间尺寸**，不要求在同一 batch
-混合不同形状（各 batch 单一数据集单形状）。
+模型参数量：**859,264**（encoder + 线性重建头；不含下游分类头）。模型支持
+不同数据集在不同 batch 中具有不同空间尺寸，不要求在同一 batch 混合不同形状。
 
 ### 2.2 三数据集正式训练输入
 
 | 数据集 | 原生形状 | 统一输入 | 归一化 | SSL 标签 |
 |---|---|---|---|---|
 | PENELOPE PAUT | (49, 512) | 转置 (512,49) → **零填充到 64 → (512,64)** | **按 LOOCV fold 只由 train coupons** 计算（per-depth-row z-score） | 无标签（只用 train coupons） |
-| ML-NDT | volume (100,256,256) | **单帧 (256,256)**（不用一次性输入 100 帧的 volume stem） | 全局标量 z-score（单试件，与 PAUT test 无关） | 不用缺陷标签 |
-| NDT_ML_Flaw | 条带 (480,7168) | **沿扫描轴裁 (480,256) 局部窗口**（不用 AdaptivePool 成小图） | 全局标量 z-score | 不用 flaw 标签 |
+| ML-NDT | volume (100,256,256) | **单帧 (256,256)** | 全局标量 z-score | 不用缺陷标签 |
+| NDT_ML_Flaw | 条带 (480,7168) | **沿扫描轴裁 (480,256) 局部窗口** | 全局标量 z-score | 不用 flaw 标签 |
 
 - **ML-NDT 抽帧**：每个 volume 视为 100 个候选帧，每 epoch/采样周期按
-  `(seed, volume_id, epoch)` 确定性随机抽帧。
-- **NDT_ML_Flaw 裁窗**：crop start 由 `(seed, record_id, epoch)` 可复现。
+  `(data_seed, volume_id, epoch)` 确定性随机抽帧。
+- **NDT_ML_Flaw 裁窗**：crop start 由 `(data_seed, record_id, epoch)` 可复现。
 - **外部混合预训练按数据集 50/50 均衡采样**（batch 级交替：偶数 batch = ML-NDT，
   奇数 batch = NDT_ML_Flaw），**不按原始记录数混合**（避免 NDT_ML_Flaw 的
   17,000 条带支配优化）。
 - **NDT_ML_Flaw 读取**：先流式读取；profile 证实单条带流式读取会反复整批解压
-  （~11 s/次），必然卡 GPU → 建立**可重建的 float16 局部窗口缓存**（每批只解压
-  一次；先 float32 z-score 再存 float16，避免 uint16 最大值 65535 溢出 float16
-  产生 inf/NaN）。缓存与原始数据均不提交 git。
+  （~11 s/次）→ 建立**可重建的 float16 局部窗口缓存**（每批只解压一次；先
+  float32 z-score 再存 float16，避免 uint16 最大值 65535 溢出 float16）。缓存
+  与原始数据均不提交 git。
+- **缓存复用（deterministic v2 关键约束）**：NDT_ML_Flaw 窗口缓存键**只由
+  `data_seed` + 采样配置决定，不含 model_seed**；三个 model seed（42/43/44）
+  复用同一份 data_seed=42 缓存，**不重复建立几十 GB 缓存**。`data_version`
+  指纹（批次文件+压缩大小）只作有效性校验（数据变化 -> 判定过期重建），并入
+  meta 不并入目录键，从而复用初始版本已有的 data_seed=42 缓存。
 
 ### 2.3 四个实验条件（相同结构 / mask / 优化器 / 总 steps / 头协议）
 
-| # | 条件 | 预训练 | SSL optimizer steps（seed 42） |
+| # | 条件 | 预训练 | SSL optimizer steps（正式） |
 |---|---|---|---|
 | E0 | scratch | 无（随机初始化共享 encoder） | 0（冻结，只训头） |
 | E1 | target_ssl | 每折仅在本折 PENELOPE train coupons 上 SSL | 10,000 / 折 |
 | E2 | external_ssl | ML-NDT + NDT_ML_Flaw 混合 SSL（一次，复用于 5 折） | 10,000 |
 | E3 | external_then_target | 加载 E2 外部 ckpt → 每折在 train coupons 继续 SSL | 8,000 外部 + 2,000 目标 |
 
-- 第一轮只 seed 42；E1 / E2 / E3 总 optimizer steps **均为 10,000**。
+- **model seed 42** 运行 E0 / E1 / E2 / E3 全部四条件；**model seeds 43 / 44**
+  只运行 E0 / E1 / E2（**不为 43/44 运行 E3**，不通过调 lr/步数/结构挽救 E3）。
 - 下游头沿用规范协议：**lr 1e-3、最多 80 epochs、batch 128、class-balanced
-  加权采样**，val coupon AUC 驱动早停（模型选择）。第一轮**不做 encoder
-  fine-tuning**。
+  加权采样**，val coupon AUC 驱动早停（模型选择）。**不做 encoder fine-tuning**。
 
 ### 2.4 严格 LOOCV（Protocol V2，coupon-level）
 
@@ -90,169 +114,332 @@
   `test_target_ssl_excludes_val_test` / `test_normalization_not_read_val_test`
   用 NaN 污染 val/test 行验证不读取）。
 
-### 2.5 自动审计
+### 2.5 deterministic v2 随机性职责分离
 
-`tests/test_m0_2b.py` 覆盖 10 项审计（全部通过）：crop/frame 采样在相同 seed
-下可复现；NDT crop 不越界；ML-NDT 默认**不会**产生 25,600-token volume；
-PENELOPE target SSL 样本不包含 val/test coupon；归一化不读取 val/test；
-E1/E2/E3 使用相同 encoder 结构（arch_signature 一致）；E1/E2/E3 总 steps 可比
-（10,000 = 10,000 = 10,000）；输出结果含五折与 non-PP4 聚合；smoke 结果不覆盖
-正式结果（独立 `_smoke` 后缀）。另含 ML-NDT 变帧数 volume（201 个中 1 个只有
-10 帧）的健壮读取审计。
+原代码缺陷：`m0_2b_pretrain.py` 在 `set_seed()` 前调用 `build_model()`（MAE
+encoder 初始化不受 seed 控制）；`m0_2b_loocv.py` 在 `set_seed()` 前调用
+`make_head()`（分类头初始化不受 seed 控制）；E0 随机 encoder 构建前未显式
+`set_seed`；且一个 seed 同时控制数据划分、数据采样与模型初始化，无法单独
+判断模型初始化方差。
 
-## 3. 实验结果（seed 42，严格 LOOCV）
+修复（det_v2）：拆成三个参数，并在每次 `build_model()` / `make_head()` /
+`WeightedRandomSampler` / `DataLoader` 构建前设置对应 seed：
 
-### 3.1 汇总表
+| seed | 控制内容 |
+|---|---|
+| `split_seed=42` | 只控制 coupon train/val/test 划分（`paut_fold_split`） |
+| `data_seed=42` | 只控制 ML-NDT 抽帧 / NDT_ML_Flaw 裁窗 / PENELOPE SSL 样本顺序 |
+| `model_seed=42/43/44` | 模型初始化 / MAE mask / dropout / 分类头初始化 / 训练随机性 |
+
+同一 model_seed 下：E0 五折使用**同一个随机 encoder**；同一 fold 的
+E0/E1/E2/E3 使用**相同的分类头初始化**；split 与数据采样在 model seeds
+42/43/44 之间**完全一致**。
+
+启用 CUDA deterministic 设置：`torch.backends.cudnn.deterministic=True`、
+`benchmark=False`、`torch.backends.cuda.{enable_flash_sdp,enable_mem_efficient_sdp}
+=False`（强制数学注意力，避免 backward 非确定性内存高效内核）、
+`CUBLAS_WORKSPACE_CONFIG=":4096:8"`、`use_deterministic_algorithms(True,
+warn_only=True)`。相同命令重复执行时初始化权重**逐位一致**，smoke 分数在
+浮点容差内一致。
+
+### 2.6 自动审计
+
+`tests/test_m0_2b.py` 覆盖 **10 项原有审计 + 11 项 deterministic v2 确定性
+测试**（详见 §8），含：初始 state_dict 可复现 / 不同 model seed 不同 /
+E0 五折 encoder 一致 / 四条件头初始化一致 / 抽帧裁窗计划与 split 划分对
+model_seed 不变 / smoke 重复运行一致 / 单独 E2 == all 中 E2 / checkpoint
+存在与否不影响头初始化 / det_v2 不覆盖旧结果 / 原有无泄漏测试继续通过。
+
+---
+
+## 3. 完整结果表
+
+> 结果文件：`experiments/results/m0_2b_{e0,e1,e2,e3}_seed{42,43,44}_det_v2.json`
+> （各条件 per-exp）、`experiments/results/m0_2b_seed{42,43,44}_det_v2.{json,md}`
+> （单 seed 合并）、`experiments/results/m0_2b_det_v2_aggregate.{json,md}`
+> （三种子聚合）。
+
+### 3.1 model seed 42（E0–E3）
 
 | 条件 | PP3 | PP4 | PP5 | PP6 | PP7 | 全5折 mean±std | **非PP4 mean±std** | pooled（仅参考） |
 |---|---|---|---|---|---|---|---|---|
-| E0 scratch | 0.479 | 0.515 | 0.531 | 0.535 | 0.690 | 0.550±0.073 | **0.559±0.079** | 0.618 |
-| E1 target_ssl | 0.518 | 0.355 | 0.497 | 0.510 | 0.629 | 0.502±0.087 | **0.538±0.053** | 0.517 |
-| E2 external_ssl | 0.488 | 0.346 | 0.543 | 0.554 | 0.712 | 0.529±0.118 | **0.574±0.084** | 0.561 |
-| E3 external→target | 0.469 | 0.248 | 0.478 | 0.509 | 0.542 | 0.449±0.104 | **0.500±0.029** | 0.613 |
+| E0 scratch | 0.4781 | 0.5574 | 0.5590 | 0.5386 | 0.6385 | 0.5543±0.0513 | **0.5535±0.0574** | 0.6248 |
+| E1 target_ssl | 0.4488 | 0.5128 | 0.5094 | 0.4832 | 0.5935 | 0.5095±0.0478 | **0.5087±0.0535** | 0.5575 |
+| E2 external_ssl | 0.4696 | 0.3623 | 0.5012 | 0.4999 | 0.6776 | 0.5021±0.1014 | **0.5371±0.0821** | 0.6313 |
+| E3 external→target | 0.4468 | 0.4610 | 0.5236 | 0.5774 | 0.7151 | 0.5448±0.0971 | **0.5657±0.0979** | 0.6251 |
 
-- 每折明细（test coupon / train coupons / val coupon / n / 正样本 / 缺陷率 /
-  val_auc / test_auc / PR-AUC / SSL steps / head epochs / 耗时）见
-  `experiments/results/m0_2b_seed42.md`。
-- PP4（近零缺陷，3 正样本）结果单独报告、不纳入主均值（E0 0.515 / E1 0.355 /
-  E2 0.346 / E3 0.248）。
+### 3.2 model seed 43（E0–E2）
 
-### 3.2 迁移判断（E3 vs E1，任务规定口径）
+| 条件 | PP3 | PP4 | PP5 | PP6 | PP7 | 全5折 mean±std | **非PP4 mean±std** | pooled（仅参考） |
+|---|---|---|---|---|---|---|---|---|
+| E0 scratch | 0.4629 | 0.6087 | 0.5198 | 0.5078 | 0.6983 | 0.5595±0.0840 | **0.5472±0.0898** | 0.6173 |
+| E1 target_ssl | 0.4644 | 0.5022 | 0.5165 | 0.5144 | 0.6777 | 0.5350±0.0737 | **0.5433±0.0804** | 0.6456 |
+| E2 external_ssl | 0.4780 | 0.5396 | 0.5275 | 0.4847 | 0.6284 | 0.5316±0.0539 | **0.5297±0.0601** | 0.5720 |
 
-| 对比 | Δ non-PP4 mean AUC |
-|---|---|
-| **E2 − E1**（外部直接迁移 vs 严格 target-only） | **+0.0361** |
-| **E3 − E1**（外部+目标继续 SSL vs target-only） | **−0.0387** |
-| E2 − E0（外部 SSL vs 随机 encoder，sanity） | +0.0156 |
-| E3 − E2（目标继续 SSL vs 纯外部） | −0.0748 |
+### 3.3 model seed 44（E0–E2）
 
-## 4. 六问回答
+| 条件 | PP3 | PP4 | PP5 | PP6 | PP7 | 全5折 mean±std | **非PP4 mean±std** | pooled（仅参考） |
+|---|---|---|---|---|---|---|---|---|
+| E0 scratch | 0.4680 | 0.4905 | 0.5208 | 0.5135 | 0.6761 | 0.5338±0.0735 | **0.5446±0.0786** | 0.5990 |
+| E1 target_ssl | 0.4452 | 0.3545 | 0.4940 | 0.5005 | 0.6797 | 0.4948±0.1062 | **0.5298±0.0891** | 0.4831 |
+| E2 external_ssl | 0.4620 | 0.3038 | 0.5272 | 0.5258 | 0.7095 | 0.5057±0.1304 | **0.5561±0.0924** | 0.5744 |
 
-### Q1. 外部 SSL 是否优于严格 target-only SSL？
+> 每折明细（test coupon / train coupons / val coupon / n / 正样本 / 缺陷率 /
+> val_auc / test_auc / PR-AUC / SSL steps / head epochs / 耗时）见各
+> `experiments/results/m0_2b_{e0,e1,e2,e3}_seed{ms}_det_v2.json` 与单 seed 合并
+> `m0_2b_seed{ms}_det_v2.md`。PP4 单独报告，不纳入主均值。
 
-**分两种情况，结论相反且关键：**
-- **纯外部直接迁移（E2）优于 target-only SSL（E1）：+0.036（0.574 vs 0.538）。**
-  且 E2 也优于随机 encoder（E0）+0.016，证明外部 MAE 确实学到了可迁移特征
-  （sanity 通过）。
-- **外部 + 目标域继续 SSL（E3，任务规定的正式迁移口径）劣于 E1：−0.039**
-  （0.500 vs 0.538），甚至低于随机 encoder E0（0.559）。
+---
 
-### Q2. 外部直接迁移 E2 是否有效？
+## 4. 三种子聚合（model seeds 42 / 43 / 44）
 
-**部分有效**：E2 是四条件中最好的（非PP4 0.574），比 E1 高 +0.036、比随机 E0
-高 +0.016，且 3/4 非PP4 折改善。但**未达"翻盘"**：未超过历史 P4a 0.579（仅
-作参考，新协议下不可直接对比），且 PP3 折退化。E2 的绝对水平（0.574）离表征
-级天花板 ~0.58 仍有距离。
+### 4.1 汇总
 
-### Q3. 经过目标域继续 SSL 的 E3 是否有效？
+| 条件 | 三种子 non-PP4 mean±std | 各 seed |
+|---|---|---|
+| E0 scratch | **0.5484±0.0037** | 0.5535, 0.5472, 0.5446 |
+| E1 target_ssl | **0.5273±0.0142** | 0.5087, 0.5433, 0.5298 |
+| E2 external_ssl | **0.5410±0.0111** | 0.5371, 0.5297, 0.5561 |
 
-**无效，且明显有害**：E3（0.500）比 E1（0.538）低 −0.039、比 E2（0.574）低
-−0.075，甚至低于随机 encoder（0.559）。**2,000 步目标域继续 SSL 主动摧毁了
-外部预训练带来的迁移收益。**
+| 对比 | 平均 Δ | 各 seed Δ |
+|---|---|---|
+| **E2 − E0** | **−0.0075** | −0.0164, −0.0175, +0.0115 |
+| E2 − E1 | +0.0137 | +0.0284, −0.0136, +0.0263 |
 
-**解释（与 E1<E0 一致的内在规律）**：在本 PAUT 5 试件上，**目标域 SSL 无论
-从零（E1）还是从外部初始化（E3）都系统性降低冻结线性探针的表征质量**。外部
-encoder 的低层特征在 PAUT 上恰好线性可分，但继续用重建损失在目标域精修后，
-特征被拉向目标域重建专用方向，线性可分性反而下降。这与仓库 P5/P6 的结论一致：
-**盲目 SSL 预训练不一定能翻盘天花板**。
+- E2−E0 为正的 seed 数：**1 / 3**
+- 平均 E2−E0（剔除 PP7 折）：**−0.0103**
+- E2 收益是否被 PP7 单折主导：**否**（剔除 PP7 后仍为负）
+- 是否满足 **平均 E2−E0 ≥ +0.01 且 ≥2/3 seed 为正** 判据：**否**
 
-### Q4. 哪些 coupon 改善、哪些 coupon 退化？
+### 4.2 四种非PP4 coupon 多种子 mean±std
 
-以 E1 为基准，非PP4 逐折 Δ：
-
-| coupon | 缺陷率 | E2−E1 | E3−E1 |
+| coupon | E0 | E1 | E2 |
 |---|---|---|---|
-| PP3 | 0.574 | **−0.030**（退化） | −0.048（退化） |
-| PP5 | 0.438 | +0.047（改善） | −0.019（退化） |
-| PP6 | 0.764 | +0.044（改善） | −0.001（持平） |
-| PP7 | 0.138 | **+0.084（强改善）** | −0.086（强退化） |
+| PP3 | 0.4697±0.0063 | 0.4528±0.0083 | 0.4699±0.0065 |
+| PP5 | 0.5332±0.0182 | 0.5066±0.0094 | 0.5186±0.0123 |
+| PP6 | 0.5200±0.0134 | 0.4994±0.0128 | 0.5035±0.0170 |
+| PP7 | 0.6710±0.0247 | 0.6503±0.0402 | 0.6718±0.0334 |
 
-- **E2 改善**：PP5 / PP6 / PP7；**退化**：PP3。
-- **E3 全面退化**（PP7 退化最严重 −0.086）。
+### 4.3 E3（deterministic seed 42 复跑）
 
-### Q5. 改善是否来自普遍提升，还是某一个高缺陷率 coupon？
+- E3 = **0.5657**（seed42；43/44 按任务规定未运行 E3）
+- **E3 − E2 = +0.0286**
+- **E3 − E1 = +0.0570**
+- 每折变化（vs E2）：PP3 −0.0228 / PP4 +0.0987 / PP5 +0.0224 / PP6 +0.0775 / PP7 +0.0375
+- 是否仍支持“目标域继续 MAE 有害”：**否** —— det_v2 下 E3（seed42）**不低于**
+  E2，初始版本“E3 明显低于 E2 → 目标域继续 MAE 有害”的结论**未复现**，同样是
+  初始 seed 设置顺序问题的伪影。注意 E3 仅 seed42（单 seed，非主判据）；且结合
+  §7 数据审计，外部数据本身为虚拟缺陷语料，因此该单 seed 结果不构成扩大公开
+  超声模型的依据。
 
-**不是单一高缺陷率 coupon 的功劳，提升相对普遍但非普遍**：
-- E2 的 +0.036 增益分布在 3 个 coupon：低缺陷率 PP7（0.138，+0.084，最强）、
-  高缺陷率 PP6（0.764，+0.044）、中缺陷率 PP5（0.438，+0.047）——既有低缺陷
-  率又有高缺陷率折改善，说明外部预训练学到的是**通用的超声回波物理表征**
-  而非仅适配某一缺陷率。
-- 但 PP3（高缺陷率 0.574）退化 −0.030，故改善**非全折普遍**，幅度也有限。
+---
 
-### Q6. 是否值得扩大到三 seed？
+## 5. 迁移判断（deterministic v2 最终口径）
 
-**不值得（按停止判据，明确停止）**：
+**正确判断规则**（与初始版本的 E3−E1 唯一口径不同）：
 
-> **E3 − E1 = −0.039 ≤ 0.01 → 第一轮没有足够迁移信号；停止扩大模型 / 预训练
-> 数据，转入涡流公开数据基线。**
+- E3 只用于判断“外部预训练后继续目标域 MAE”是否有效（E3 vs E2，seed42）；
+- E2 用于判断“外部预训练 encoder 直接迁移”是否有效（**E2 vs E0 主对照**，
+  E2 vs E1 次对照——E1 本身可能受目标域重建式 SSL 损害）；
+- 最终判据：**平均 E2−E0 ≥ +0.01 且至少 2/3 个 model seed 的 E2−E0 为正** →
+  保留 external encoder；否则结束公开超声迁移实验。
 
-- 任务规定的正式迁移判断口径是 **E3 vs E1**（不是 E2 vs E1）。E3 相对 E1 为负
-  （−0.039），远低于 +0.01 门槛，**不满足任何扩大判据**。
-- 即使看"建议类"信号 E2（+0.036 > 0.02 且 3/4 非PP4 折改善），其绝对水平
-  （0.574）仍未突破表征级天花板 0.58，且单 seed 下 std 大（±0.084），不足以
-  支撑"翻盘"结论。按任务纪律，**第一轮 seed 42 结果出来后停止**，不自动运行
-  更多 seed 或更多模型。
+**判据判定结果：**
 
-## 5. 结论与下一步
+- 平均 E2−E0 = **−0.0075**
+- 正 seed 数 = **1 / 3**
+- 结论 = **外部直接迁移正信号不能跨初始化稳定复现（平均 E2−E0=−0.0075，正
+  seed 数 1/3）：结束公开超声迁移实验，不再扩大公开超声模型和数据。**
 
-**核心结论：外部超声数据（ML-NDT + NDT_ML_Flaw）的 MAE 预训练，直接迁移（E2）
-给出了正信号（+0.036 vs target-only、优于随机），但任务规定的"外部+目标继续
-SSL"迁移口径（E3）为明显负信号（−0.039），目标域 SSL 在 PAUT 上系统性损害
-冻结线性探针表征。整体判定：第一轮没有足够的可采纳迁移信号。**
+**E3 判断**：只要 deterministic seed42 中 E3 仍明显低于 E2，就停止
+“外部预训练后继续目标域 MAE”的路线。det_v2 seed42 中 **E3（0.5657）不低于
+E2（0.5371），E3−E2 = +0.0286**，因此**该停止规则未触发**——初始版本“目标域
+继续 MAE 有害”的结论在 det_v2 下不成立（是初始化 seed 顺序问题的伪影）。
+但 E3 仅为单 seed 证据，且外部数据为虚拟缺陷语料（§7），不构成扩大公开超声
+模型/数据的依据。
 
-**停止判据执行**：不扩大 seed、不扩大模型、不扩大预训练数据；**转入涡流公开
-数据基线**（在获得同试件同坐标成对 UT+ECT 之前，不做真正的融合训练）。
+---
 
-**保留的科学发现**（如实记录，不粉饰）：
-1. 目标域 SSL（E1/E3）在 PAUT 5 试件上系统性**降低**冻结探针 AUC（E1<E0，
-  E3<E0），这是 P5/P6 之外又一次独立证据：小试件 PAUT 的目标域重建预训练对
-  线性探针无益。
-2. 外部单试件数据预训练的 encoder，其 PAUT 特征线性可分性**高于**随机 encoder
-  （E2>E0）与目标域 SSL（E2>E1），说明"单试件外部超声"仍能学到比目标域随机
-  初始化更有用的通用回波特征——但幅度不足以翻盘天花板。
-3. pooled 与逐折均值的巨大分离（E3 pooled 0.613 vs 逐折 0.449；E0 pooled 0.618
-  vs 逐折 0.550）再次验证仓库纪律：**pooled 仅参考，主指标 = 非PP4 逐折均值**。
+## 6. 与初始版本（seed42）的对比与解释
 
-## 6. 产物与复现
+| 条件（seed42 非PP4） | 初始版本 | det_v2 复跑 | Δ |
+|---|---|---|---|
+| E0 scratch | 0.559 | 0.5535 | −0.0055 |
+| E1 target_ssl | 0.538 | 0.5087 | **−0.0293** |
+| E2 external_ssl | 0.574 | 0.5371 | **−0.0369** |
+| E3 external→target | 0.500 | 0.5657 | **+0.0657** |
 
-### 新增文件
+**变化明显，因此初始版本结论不能继续使用。** 差异来源（deterministic v2 修复）：
+
+1. **模型初始化 seed 设置顺序**：初始版本在 `set_seed()` 前调用 `build_model()`，
+   MAE encoder 初始化不受 seed 控制；det_v2 在每次 `build_model()` 前
+   `set_seed(model_seed)`。E1/E2/E3 预训练从不同的（正确 seed 化的）初始化出发，
+   下游特征因此变化。
+2. **分类头初始化 seed**：初始版本在 `set_seed()` 前调用 `make_head()`；det_v2
+   在 `make_head()` / `WeightedRandomSampler` / `DataLoader` 前 `set_seed`。
+3. **目标域 SSL 样本顺序**：初始版本用全局 torch RNG 采样（受训练 RNG 污染）；
+   det_v2 用 `data_seed` 预计算的确定性计划，三种子一致。
+4. **训练/数据 RNG 分离 + CUDA deterministic**：MAE mask/dropout 与数据采样互不
+   干扰。
+
+**关键反转**：初始版本认为“E2 外部直接迁移有正信号（E2−E0=+0.016）、E3 目标域
+继续 MAE 明显有害（E3=0.500 为最差）”。det_v2 三种子显示 **E2−E0 平均为负
+（−0.0075，仅 1/3 seed 为正）**，外部直接迁移正信号**不能跨初始化稳定复现**；
+同时 **E3（seed42）不再低于 E2**（0.5657 vs 0.5371），“目标域继续 MAE 有害”也
+未复现。**初始版本的两个核心结论都是初始化 seed 设置顺序问题的伪影，均已由
+det_v2 取代。**
+
+---
+
+## 7. 结论与下一步
+
+**核心结论（deterministic v2，三种子 42/43/44）：**
+
+1. **外部直接迁移（E2）没有可复现的正信号**：三种子 E0=0.5484±0.0037 /
+   E1=0.5273±0.0142 / E2=0.5410±0.0111；**平均 E2−E0 = −0.0075，仅 1/3 seed
+   为正**，未达到预定的 **+0.01 且 2/3 seed 为正** 判据 → **结束公开超声迁移
+   实验**，不再扩大公开超声模型与数据。初始版本的 E2 正信号（+0.016）是初始化
+   seed 设置顺序问题的伪影。
+2. **目标域 SSL（E1）系统性低于随机（E0）**：三种子 E1<E0 稳定成立（0.5273 <
+   0.5484），与 P5/P6 及初始版本一致：小试件 PAUT 的目标域重建预训练对冻结线性
+   探针无益。
+3. **“目标域继续 MAE 有害”（E3<E2）未复现**：det_v2 seed42 中 E3=0.5657 >
+   E2=0.5371（E3−E2=+0.0286）。初始版本 E3=0.500 为最差的结论不成立。但 E3
+   仅单 seed 运行（43/44 按任务规定不跑），且结合数据审计（外部数据为 VTT
+   虚拟缺陷语料），**不能据此扩大公开超声模型/数据**。
+4. **数据真实性/独立性审计（新增，见 docs/M0_2B_VTT_virtual_flaw_data_audit.md）**：
+   ML-NDT（1 试件 3 真实裂纹，20,010 张 eFlaw 生成图）与 NDT_ML_Flaw（1 试件
+   6 真实缺陷 + 10 CIVA 模板，17,000 条带）的**有效独立单元远小于 nominal
+   数量**；随机样本级性能含模板/背景复用与植入伪影。因此即使 E2/E3 出现正信号，
+   也只能解释为“VTT 虚拟缺陷增强超声语料的迁移”，**不能**解释为“学到通用真实
+   缺陷物理表征”或“大规模独立真实缺陷数据”。
+
+**下一步建议**：
+- **不再扩大公开超声模型/数据**（E2−E0 判据未过）。
+- 保留 det_v2 管线与确定性审计作为后续评估基础设施。
+- 转入 M0-2C 涡流公开数据基线（在获得同试件同坐标成对 UT+ECT 之前不做融合）；
+  若未来获得合作单位真实 UT 数据，可复用本阶段 det_v2 评估框架做初始化迁移
+  判断，但须按 §7 数据审计口径分级用途。
+
+---
+
+## 8. 自动审计结果
+
+### 8.1 测试数量与命令
+
+- 测试文件：`tests/test_m0_2b.py`
+- 命令：`CUDA_VISIBLE_DEVICES=0 python tests/test_m0_2b.py`
+- 测试项：**10 项原有审计 + 11 项 deterministic v2 确定性测试（D1–D10/D5b）**
+  = **21 项**；D7/D8 需 GPU + PAUT 数据（本机具备，已实际运行）。
+- 结果：**21 / 21 全部通过**（见下文逐项输出）。
+- 另：数据真实性/独立性/捷径审计见
+  `docs/M0_2B_VTT_virtual_flaw_data_audit.md` 与
+  `experiments/results/m0_2b_vtt_data_audit.{json,md}`。
+
+测试逐项输出（完整）：
+```
+test_sampling_reproducible OK            test_ndt_crop_in_bounds OK
+test_mlndt_no_volume_tokens OK           test_mlndt_variable_frame_volume OK
+test_target_ssl_excludes_val_test OK     test_normalization_not_read_val_test OK
+test_encoder_structure_identical OK      test_optimizer_steps_comparable OK
+test_result_shape OK                     test_smoke_does_not_overwrite OK
+D1 test_det_model_init_reproducible OK   D2 test_det_model_init_differs OK
+D3 test_det_e0_folds_share_encoder OK    D4 test_det_head_init_shared_across_conditions OK
+D5 test_det_sampling_plan_model_seed_invariant OK
+D5b test_det_ndt_cache_shared_and_reused OK
+D6 test_det_split_model_seed_invariant OK
+D9 test_det_head_init_independent_of_checkpoint OK
+D10 test_det_v2_does_not_overwrite_old OK
+D7 test_det_smoke_reproducible OK (nonPP4=0.5444 both runs)
+D8 test_det_e2_alone_equals_e2_in_all OK (nonPP4=0.5444)
+All M0-2B audit tests passed (original 10 + deterministic v2).
+```
+
+### 8.2 确定性审计结论
+
+- 原代码 seed 设置问题：`m0_2b_pretrain.py` 在 `set_seed()` 前调用
+  `build_model()`（MAE encoder 初始化不受 seed 控制）；`m0_2b_loocv.py` 在
+  `set_seed()` 前调用 `make_head()`（分类头初始化不受 seed 控制）；E0 随机
+  encoder 构建前未显式 `set_seed`；一个 seed 同时控制数据划分/采样/模型初始化。
+- 修改位置：`src/wndt/data/ultrasound_pretrain.py`（采样函数改 data_seed、
+  新增 `target_ssl_sample_plan` / `ndt_data_version`、`NDTWindowCache` 键只含
+  data_seed+采样配置）、`src/wndt/utils/seed.py`（`configure_determinism`：
+  cudnn deterministic / 关闭 flash & mem-efficient SDP / CUBLAS workspace /
+  use_deterministic_algorithms）、`scripts/m0_2b_pretrain.py`（build_model 前
+  set_seed(model_seed)、det_v2 checkpoint 目录）、`scripts/m0_2b_loocv.py`
+  （make_head 前 set_seed、DataLoader generator+worker_init_fn、split/data/
+  model seed 拆分、det_v2 结果路径）。
+- 相同 smoke 重复运行差值：**0.0000**（两次运行 E2 smoke 逐折 AUC 完全一致，
+  nonPP4=0.5444；预训练 ckpt 强制重建后 state_dict **逐位一致**）。
+- 单独 E2 与 all 中 E2 是否一致：**一致**（nonPP4=0.5444，逐折 AUC 完全相同）。
+- 相同 model seed 的初始化权重是否一致：**是（逐位一致）**；不同 model seed 不同。
+- E0 五折 encoder：同一 model_seed 下**完全一致**；四条件分类头初始化：同一
+  model_seed 下**完全一致**；checkpoint 存在与否不影响头初始化。
+- 旧 seed42 与 det_v2 seed42 是否发生明显变化：**是**（见 §6：E1 −0.029、
+  E2 −0.037、E3 +0.066），故初始版本结论不能继续使用。
+
+---
+
+## 9. 产物、复现信息与旧结果保留
+
+### 9.1 复现信息
+
+| 项 | 值 |
+|---|---|
+| 最终代码 commit | `e5220ce`（det_v2 代码提交，含确定性修复 + 测试 + 审计脚本；运行时的 HEAD 为 acf6bbb，结果 JSON 内 code_commit=acf6bbb, code_dirty=true，表示 det_v2 修改在运行未提交的工作树上，后以 `e5220ce` 固化） |
+| git dirty 状态 | 运行期间 dirty（det_v2 修改未提交）；提交后 clean |
+| GPU 型号 | NVIDIA GeForce RTX 4090 D ×3（24 GB 显存） |
+| Python | 3.10.12 |
+| PyTorch | 2.5.1+cu121 |
+| CUDA | 12.1（torch 编译）；驱动 535.309.01 / CUDA 12.2 |
+| split_seed / data_seed / model_seeds | 42 / 42 / 42,43,44 |
+| 模型参数量 | 859,264（MAE encoder + 线性重建头；不含下游头） |
+| 各条件 optimizer steps | E0=0 / E1=10,000 / E2=10,000 / E3=8,000+2,000 |
+| 每实验耗时 | E2 external 10k ≈ 23.5 min（1413–1434s）；E1 target 10k/折 ≈ 5.5 min（328–335s）；E3 external 8k ≈ 18.6 min（1117s）；E3 target 2k/折 ≈ 1.1 min（61–71s）；头训练 ≈ 4–17s/折。三 GPU 并行墙钟 21:45→23:04 ≈ 79 min，总 GPU 时间（预训练）≈ 178.5 min + 头训练/编码 |
+| NDT 缓存实际大小 | 67 GB（37G E2 全量 + 30G E3 外部 + 61M/76M smoke 缓存），**det_v2 未新增任何缓存** |
+| 三个 model seed 是否复用同一份缓存 | **是**（data_seed=42，缓存键只含 data_seed+采样配置，不含 model_seed） |
+
+### 9.2 新增文件（det_v2）
 
 | 文件 | 说明 |
 |---|---|
-| `src/wndt/models/ultrasound_mae.py` | 统一超声 MAE（共享 patch embed + PE + Transformer + 线性重建头） |
-| `src/wndt/data/ultrasound_pretrain.py` | 三数据集输入编码 / 确定性采样 / 外部均衡 / NDT float16 窗口缓存 / 严格 fold |
-| `scripts/m0_2b_pretrain.py` | external / target SSL 预训练子命令，存 ckpt + 元数据 |
-| `scripts/m0_2b_loocv.py` | 严格 coupon-level LOOCV（E0–E3），聚合 + 停止判据 |
-| `configs/m0_2b_ultrasound_mae.yaml` | 统一模型 / 预训练 / 头协议配置 |
-| `tests/test_m0_2b.py` | 10 项自动审计（全过） |
-| `docs/M0_2B_external_ultrasound_transfer_report.md` | 本报告 |
-| `experiments/results/m0_2b_seed42.json` / `.md` | 正式结果 + 汇总表 |
+| `experiments/results/m0_2b_{e0,e1,e2,e3}_seed{42,43,44}_det_v2.json` | 各条件 per-exp 结果 |
+| `experiments/results/m0_2b_seed{42,43,44}_det_v2.{json,md}` | 单 seed 合并 + 汇总表 |
+| `experiments/results/m0_2b_det_v2_aggregate.{json,md}` | 三种子聚合 + 最终迁移判据 |
+| `experiments/results/m0_2b_vtt_data_audit.{json,md}` | VTT 虚拟缺陷数据审计结果（小 CNN 捷径对照 + 近重复） |
+| `scripts/m0_2b_vtt_data_audit.py` | 数据审计脚本 |
+| `docs/M0_2B_VTT_virtual_flaw_data_audit.md` | VTT 数据审计报告（独立性分级 + 允许/禁止用途） |
+| `experiments/runs/m0_2b/pretrain/det_v2/*.pt` | det_v2 预训练 checkpoint（独立目录） |
 
-### 运行命令
+### 9.3 运行命令
 
 ```bash
-# 审计
+# 审计（含 11 项确定性测试）
 python tests/test_m0_2b.py
 # 冒烟（20 SSL steps / 1 head ep，输出 _smoke 不覆盖正式）
-python scripts/m0_2b_loocv.py --exp all --seed 42 --smoke
-# 正式（seed 42，E0–E3，~1.5h）
-python scripts/m0_2b_loocv.py --exp all --seed 42
+python scripts/m0_2b_loocv.py --exp all --model-seed 42 --smoke
+# 正式（seed42：E0–E3；seed43/44：E0–E2）
+python scripts/m0_2b_loocv.py --exp all --model-seed 42
+python scripts/m0_2b_loocv.py --exp all --model-seed 43
+python scripts/m0_2b_loocv.py --exp all --model-seed 44
+# 三种子聚合 + 迁移判据
+python scripts/m0_2b_loocv.py --aggregate
 # 仅重合并/重生成汇总表
-python scripts/m0_2b_loocv.py --exp combine --seed 42
-# 单独跑某个条件
-python scripts/m0_2b_loocv.py --exp e2 --seed 42
+python scripts/m0_2b_loocv.py --exp combine --model-seed 42
 ```
 
-### 数据访问与缓存
+### 9.4 数据访问与缓存
 
 - NDT_ML_Flaw float16 局部窗口缓存位于 `experiments/runs/m0_2b/cache/`
-  （gitignore；可由原始 `.xz/.lzma` 重建，`--force-cache`）。
+  （gitignore；键只含 data_seed + 采样配置；`--force-cache` 重建）。
 - 外部全局统计缓存于 `experiments/runs/m0_2b/stats/`（gitignore；`--force-stats`
-  重算）。
-- 预训练 checkpoint 位于 `experiments/runs/m0_2b/pretrain/`（gitignore）。
+  重算；det_v2 安全复用，统计量只依赖原始数据）。
+- 预训练 checkpoint：初始版本在 `experiments/runs/m0_2b/pretrain/`，det_v2
+  在 `experiments/runs/m0_2b/pretrain/det_v2/`（**不加载/不覆盖旧 checkpoint**）。
 
-### 与 M0-2A 边界
+### 9.5 与 M0-2A / 历史边界
 
-- **不重构**已通过 smoke 的 adapter / manifest / unified reader（本阶段直接复用
-  现有 adapter 的流式读取）。
+- **不重构**已通过 smoke 的 adapter / manifest / unified reader。
 - **不覆盖**历史 P0–P7 结果；P4a 0.579±0.007 仅作参考，不作为 E1 匹配对照。
+- 初始版本 seed42 结果与 checkpoint **全部保留**，报告中标记为“初始版本，
+  因模型/分类头初始化 seed 设置顺序问题，被 deterministic v2 取代”。

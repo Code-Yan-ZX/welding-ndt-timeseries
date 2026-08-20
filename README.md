@@ -48,24 +48,36 @@
     ML-NDT 1 试件 3 裂纹 / NDT_ML_Flaw 1 试件 6 缺陷）；两 VTT 数据集是极佳 PAUT
     预训练素材但**不能当独立多试件基准**；同一原始 flaw 跨 train/test 泄漏风险高，
     必须按 specimen / defect_instance_id 划分。
-- **M0-2B（当前，已完成 seed 42 第一轮）**：外部超声自监督预训练迁移实验。
-  统一超声 MAE（共享 encoder，patch 16×16 / d128 / depth4）+ ML-NDT &
-  NDT_ML_Flaw **50/50 均衡**混合 SSL → 严格 coupon-level LOOCV。
-  - 四条件：E0 scratch（0.559）/ E1 target_ssl（0.538）/ **E2 external_ssl
-    （0.574，最佳）** / E3 external→target（0.500），主指标 = 非PP4 逐折均值
-    （seed 42）。
-  - 结论：外部 SSL **直接迁移正信号**（E2−E1 +0.036，优于随机 E0），但任务规定
-    的"外部+目标继续 SSL"口径 **E3−E1 = −0.039 ≤ 0.01** → **停止判据触发**，
-    不扩 seed/模型/数据，转入涡流公开数据基线。目标域 SSL 在 PAUT 上系统性损害
-    冻结线性探针（E1<E0、E3<E0），与 P5/P6 一致。
+- **M0-2B（当前，已完成 deterministic v2 多种子）**：外部超声自监督预训练迁移
+  实验。统一超声 MAE（共享 encoder，patch 16×16 / d128 / depth4，859,264 参数）
+  + ML-NDT & NDT_ML_Flaw **50/50 均衡**混合 SSL → 严格 coupon-level LOOCV，
+  seed 职责分离（split_seed=42 / data_seed=42 / model_seed∈{42,43,44}）。
+  - **det_v2 三种子结果**（非PP4 逐折均值）：E0 **0.5484±0.0037** / E1
+    **0.5273±0.0142** / E2 **0.5410±0.0111**；**平均 E2−E0 = −0.0075**
+    （仅 1/3 seed 为正），**平均 E2−E1 = +0.0137**。E3（seed42）见报告。
+  - **结论（最终判据：平均 E2−E0 ≥ +0.01 且 ≥2/3 seed 为正）不满足** →
+    外部直接迁移正信号**不能跨初始化稳定复现**，**结束公开超声迁移实验**，
+    不再扩大公开超声模型与数据。初始版本（seed42）的 E2>E0 正信号（+0.016）
+    是模型/分类头初始化 seed 设置顺序问题的伪影（det_v2 已修正）。
+  - **数据审计（新增）**：ML-NDT / NDT_ML_Flaw 均为 VTT 虚拟缺陷（eFlaw）生成
+    —— ML-NDT 仅 1 试件 3 条真实裂纹（20,010 张 B-scan 由 eFlaw 植入生成，
+    `.bins` 是 100 张图的 minibatch 容器**不是**三维体积采集）；
+    NDT_ML_Flaw 仅 1 试件（P41）6 个真实缺陷 + 10 个 CIVA 仿真模板（17,000
+    条带）。**有效独立单元远小于 nominal 数量**；随机样本级性能含模板/背景
+    复用与植入伪影，不能代表对新真实缺陷的泛化。详见
+    `docs/M0_2B_VTT_virtual_flaw_data_audit.md`。
   - 交付物：`src/wndt/models/ultrasound_mae.py`、
     `src/wndt/data/ultrasound_pretrain.py`、`scripts/m0_2b_pretrain.py`、
-    `scripts/m0_2b_loocv.py`、`configs/m0_2b_ultrasound_mae.yaml`、
-    `tests/test_m0_2b.py`（10 项审计）、
+    `scripts/m0_2b_loocv.py`、`scripts/m0_2b_vtt_data_audit.py`、
+    `configs/m0_2b_ultrasound_mae.yaml`、`tests/test_m0_2b.py`
+    （10 项原有 + 11 项确定性审计）、
     `docs/M0_2B_external_ultrasound_transfer_report.md`、
-    `experiments/results/m0_2b_seed42.{json,md}`。
+    `docs/M0_2B_VTT_virtual_flaw_data_audit.md`、
+    `experiments/results/m0_2b_*_det_v2*.{json,md}`（det_v2 多种子结果，
+    初始 seed42 结果保留在 `m0_2b_seed42.{json,md}` 并标记为被 det_v2 取代）。
   - **在获得可验证的同试件、同坐标、成对 UT+ECT 公共数据之前，不做真正的融合
-    训练**，严禁把不同试件/材料/任务的 UT 与 ECT 强行拼接后称为"多模态融合"。
+    训练**，严禁把不同试件/材料/任务的 UT 与 ECT 强行拼接后称为"多模态融合"；
+    严禁把 VTT 虚拟缺陷数据当作"数万条独立真实缺陷"或跨试件泛化证据。
 
 > ⚠ 限制：本阶段不进行超 10 GB 的新下载、不自动下载全部 LOTSA/UTSD、不做正式
 > 训练、不跑长时 GPU 任务。公开小数据实验不代表最终课题结论。

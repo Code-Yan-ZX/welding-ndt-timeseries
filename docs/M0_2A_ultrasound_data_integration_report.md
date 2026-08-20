@@ -11,10 +11,11 @@
 | 数据集 | 记录数 | 独立试件 | 独立缺陷 | 实测/仿真 | 原始形状 | 实际可用于预训练的单位 |
 |---|---:|---:|---:|---|---|---|
 | PENELOPE PAUT（本仓库目标域） | 3000（位置级） | 5（PP3–PP7） | 243 标注行 / 174 局部缺陷 | 实测 | (49 波束, 512 深度) B-scan | 3000 位置 B-scan（5 试件级，跨试件泛化可验证） |
-| ML-NDT | **201**（volume，全部 201 个已落地） | 1（316L 管道焊缝） | 3 真实裂纹（1.6/4.0/8.6 mm）+ eFlaw 虚拟事件 | 实测 + 仿真增强 | (100 帧, 256, 256) 体积 uint16 | 20100 帧 B-scan（单试件，模态完全匹配 PAUT） |
+| ML-NDT | **201**（minibatch 容器，全部 201 个已落地；每容器 100 张 B-scan = 20,100 张） | 1（316L 管道焊缝） | 3 真实裂纹（1.6/4.0/8.6 mm）+ eFlaw 虚拟事件 | 实测 + 仿真增强 | (100, 256, 256) uint16 = **100 张增强 B-scan 的 minibatch 容器**（非三维体积采集） | 20100 张 B-scan（单试件，模态完全匹配 PAUT；有效独立单元 ≈ 3 真实裂纹） |
 | NDT_ML_Flaw | 17000（条带） | 1（P41 异种金属焊缝） | 6 真实（5 裂纹 + 1 EDM notch）+ 10 CIVA 仿真实例 = **16** | 实测 + 仿真（CIVA） | (480 深度, 7168 扫描) 条带 uint16 | 17000 条带 B-scan（缺陷形态最接近目标） |
 
-> 三个数据集已**全部完整落地**（ML-NDT 201 volume、NDT_ML_Flaw 17 批全部 1000 条），
+> 三个数据集已**全部完整落地**（ML-NDT 201 个 minibatch 容器 = 20,100 张 B-scan、
+> NDT_ML_Flaw 17 批全部 1000 条），
 > 具体列数值见 `data/manifests/*/dataset_card.json` 与 `records.parquet`。
 > Live 数据读实测：PENELOPE `(49, 512)` float32、ML-NDT `(100, 256, 256)` uint16、
 > NDT_ML_Flaw `(480, 7168)` uint16，单次加载峰值内存各为 ~300 MB / 13 MB / 6.9 MB。
@@ -58,16 +59,19 @@
 ## 三、ML-NDT（超声源域：PAUT 体积）
 
 来源：https://github.com/iikka-v/ML-NDT （Virkkunen et al., 2019）。
-- commit：`<git_head>`；license：LGPL-3.0；文件：201 volume × .bins(13.1 MB)
+- commit：`<git_head>`；license：LGPL-3.0；文件：201 minibatch 容器 × .bins(13.1 MB)
   ≈ 2.6 GB 原始，git 压缩 ~174 MB。
-- 每 volume：`.bins`(uint16 100×256×256) + `.meta` + `.jsons` + `.labels`(100 行)。
-- **201 volume ≠ 201 试件**：独立试件仅 1（316L 奥氏体管道单对焊接头）；
+- 每容器：`.bins`(uint16 100×256×256 = **100 张 B-scan 图**) + `.meta` + `.jsons`
+  + `.labels`(100 行)。论文："The data was stored in minibatches of 100 UT-images
+  per file" —— **`.bins` 是 100 张 eFlaw 增强图的 minibatch 容器，不是三维体积
+  采集**（deterministic v2 数据审计修正，见 docs/M0_2B_VTT_virtual_flaw_data_audit.md）。
+- **201 容器 ≠ 201 次独立采集**：独立试件仅 1（316L 奥氏体管道单对焊接头）；
   独立缺陷 3 条真实热疲劳裂纹（深度 1.6/4.0/8.6 mm，Trueflaw）+ eFlaw
   幅度缩放 virtual flaws（对真实裂纹响应重植入的仿真增强）。
 - 标签：逐帧 `[flaw 0/1, equivalent_flaw_size]`；`.jsons` 含
   `equivalent_flawsize` / `original_location`(帧范围) / `factor`(virtual 缩放)。
-- adapter：按 volume / flaw 流式读取；split 按 **defect_instance_id**（同一缺陷
-  的全部 volume 不跨 split）。
+- adapter：按容器（minibatch）/ flaw 流式读取；split 按 **defect_instance_id**（同一缺陷
+  的全部容器不跨 split）。
 - QA：见 `experiments/results/m0_2a/` 下 8–16 个样本的 shape / 频谱 / 标签检查图。
 
 ## 四、NDT_ML_Flaw（超声源域：异种金属焊缝）
@@ -96,8 +100,8 @@
 - **PENELOPE**：3000 位置样本 = 5 独立试件 × ~600 位置。位置间存在强空间自相关
   （相邻位置是同一扫描线相邻 mm），但 5 试件是真正独立的物理单元 —— 是三个数据
   集中唯一能验证**跨试件泛化**的（本课题核心目标）。
-- **ML-NDT**：201 volume 全部来自**同一根管道接头**，独立信息量 ≈ 3 条真实裂纹 +
-  其虚拟重植入增强。volume 之间大量重叠（同一缺陷的多帧/多位置/多幅度）。
+- **ML-NDT**：201 个 minibatch 容器全部来自**同一根管道接头**，独立信息量 ≈ 3 条真实裂纹 +
+  其虚拟重植入增强。容器之间大量重叠（同一缺陷的多帧/多位置/多幅度；每容器 ~60% 缺陷帧）。
 - **NDT_ML_Flaw**：~17,000 条带全部来自**同一试件 P41**，独立信息量 ≈ 6 个缺陷
   （5 裂纹 + 1 notch）+ CIVA 仿真批。条带是同一缺陷的密集扫描重复。
 - **结论**：三者的"独立信息量"都远小于"记录数"。真正的独立单元：
@@ -106,9 +110,8 @@
 
 ### Q2. 哪些记录只是同一缺陷的重复/增强？
 
-- **ML-NDT**：同一 `defect_instance_id`（真实裂纹或 virtual）下的全部 volume
-  都是该缺陷的重复采集 / eFlaw 幅度缩放增强。201 volume 中只有 ~3+ 个独立缺陷
-  核。
+- **ML-NDT**：同一 `defect_instance_id`（真实裂纹或 virtual）下的全部容器
+  都是该缺陷的 eFlaw 虚拟重植入增强。201 个容器中只有 ~3 个独立缺陷核。
 - **NDT_ML_Flaw**：同一批内的 1000 条带是同一缺陷沿扫描轴的密集扫描 +
   augmentation 幅度增强；同一缺陷（P41_0X）跨批仍有重复。~17,000 条带对应
   6 个真实缺陷核 + 10 个 CIVA 仿真批。
@@ -154,7 +157,7 @@ defect_instance_id / label_status / data_origin / defect_origin），tensor 由
 ### Q6. 是否存在同一原始 flaw 跨 train/test 的泄漏风险？
 
 - **是，风险很高**，尤其两个 VTT 数据集：
-  - ML-NDT 201 volume 共享 3 个缺陷核：若按 volume 随机切 train/test，
+  - ML-NDT 201 个 minibatch 容器共享 3 个缺陷核：若按容器随机切 train/test，
     同一裂纹的多次采集会跨 split → 严重高估。**必须按 defect_instance_id 划分**
     （adapter `split_indices("defect")` 已实现）。
   - NDT_ML_Flaw ~17,000 条带共享 6 个缺陷核：按条带随机切必然泄漏。

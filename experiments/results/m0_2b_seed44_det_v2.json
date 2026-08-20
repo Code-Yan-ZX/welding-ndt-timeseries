@@ -1,0 +1,374 @@
+{
+  "exp": "m0_2b",
+  "model_seed": 44,
+  "det_version": "det_v2",
+  "run_type": "full",
+  "code_commit": "acf6bbbe78b0",
+  "conditions": {
+    "e0": {
+      "exp": "e0",
+      "model_seed": 44,
+      "split_seed": 42,
+      "data_seed": 42,
+      "det_version": "det_v2",
+      "run_type": "full",
+      "code_commit": "acf6bbbe78b0",
+      "head": {
+        "lr": 0.001,
+        "epochs": 80,
+        "batch_size": 128,
+        "class_balance": true
+      },
+      "optimizer_steps_total": 0,
+      "folds": [
+        {
+          "test_coupon": "PP3",
+          "train_coupons": [
+            "PP4",
+            "PP5",
+            "PP6"
+          ],
+          "val_coupon": "PP7",
+          "n_test": 601,
+          "n_pos": 345,
+          "defect_rate": 0.574,
+          "val_auc": 0.7023,
+          "test_auc": 0.468,
+          "pr_auc": 0.5659,
+          "checkpoint": null,
+          "optimizer_steps": 0,
+          "epochs_run": 35,
+          "wall_s": 8.0
+        },
+        {
+          "test_coupon": "PP4",
+          "train_coupons": [
+            "PP3",
+            "PP5",
+            "PP6"
+          ],
+          "val_coupon": "PP7",
+          "n_test": 601,
+          "n_pos": 3,
+          "defect_rate": 0.005,
+          "val_auc": 0.7094,
+          "test_auc": 0.4905,
+          "pr_auc": 0.0063,
+          "checkpoint": null,
+          "optimizer_steps": 0,
+          "epochs_run": 46,
+          "wall_s": 8.5
+        },
+        {
+          "test_coupon": "PP5",
+          "train_coupons": [
+            "PP3",
+            "PP4",
+            "PP6"
+          ],
+          "val_coupon": "PP7",
+          "n_test": 596,
+          "n_pos": 261,
+          "defect_rate": 0.4379,
+          "val_auc": 0.6958,
+          "test_auc": 0.5208,
+          "pr_auc": 0.4524,
+          "checkpoint": null,
+          "optimizer_steps": 0,
+          "epochs_run": 27,
+          "wall_s": 4.7
+        },
+        {
+          "test_coupon": "PP6",
+          "train_coupons": [
+            "PP3",
+            "PP4",
+            "PP5"
+          ],
+          "val_coupon": "PP7",
+          "n_test": 601,
+          "n_pos": 459,
+          "defect_rate": 0.7637,
+          "val_auc": 0.6804,
+          "test_auc": 0.5135,
+          "pr_auc": 0.7623,
+          "checkpoint": null,
+          "optimizer_steps": 0,
+          "epochs_run": 21,
+          "wall_s": 3.9
+        },
+        {
+          "test_coupon": "PP7",
+          "train_coupons": [
+            "PP3",
+            "PP4",
+            "PP5"
+          ],
+          "val_coupon": "PP6",
+          "n_test": 601,
+          "n_pos": 83,
+          "defect_rate": 0.1381,
+          "val_auc": 0.52,
+          "test_auc": 0.6761,
+          "pr_auc": 0.346,
+          "checkpoint": null,
+          "optimizer_steps": 0,
+          "epochs_run": 23,
+          "wall_s": 4.4
+        }
+      ],
+      "all_folds_mean_auc": 0.5338,
+      "all_folds_std_auc": 0.0735,
+      "nonPP4_mean_auc": 0.5446,
+      "nonPP4_std_auc": 0.0786,
+      "pooled_auc": 0.599,
+      "pp4_auc": 0.4905
+    },
+    "e1": {
+      "exp": "e1",
+      "model_seed": 44,
+      "split_seed": 42,
+      "data_seed": 42,
+      "det_version": "det_v2",
+      "run_type": "full",
+      "code_commit": "acf6bbbe78b0",
+      "head": {
+        "lr": 0.001,
+        "epochs": 80,
+        "batch_size": 128,
+        "class_balance": true
+      },
+      "optimizer_steps_total": 10000,
+      "folds": [
+        {
+          "test_coupon": "PP3",
+          "train_coupons": [
+            "PP4",
+            "PP5",
+            "PP6"
+          ],
+          "val_coupon": "PP7",
+          "n_test": 601,
+          "n_pos": 345,
+          "defect_rate": 0.574,
+          "val_auc": 0.7033,
+          "test_auc": 0.4452,
+          "pr_auc": 0.5363,
+          "checkpoint": null,
+          "optimizer_steps": 10000,
+          "epochs_run": 22,
+          "wall_s": 4.2
+        },
+        {
+          "test_coupon": "PP4",
+          "train_coupons": [
+            "PP3",
+            "PP5",
+            "PP6"
+          ],
+          "val_coupon": "PP7",
+          "n_test": 601,
+          "n_pos": 3,
+          "defect_rate": 0.005,
+          "val_auc": 0.5968,
+          "test_auc": 0.3545,
+          "pr_auc": 0.005,
+          "checkpoint": null,
+          "optimizer_steps": 10000,
+          "epochs_run": 21,
+          "wall_s": 4.3
+        },
+        {
+          "test_coupon": "PP5",
+          "train_coupons": [
+            "PP3",
+            "PP4",
+            "PP6"
+          ],
+          "val_coupon": "PP7",
+          "n_test": 596,
+          "n_pos": 261,
+          "defect_rate": 0.4379,
+          "val_auc": 0.664,
+          "test_auc": 0.494,
+          "pr_auc": 0.4233,
+          "checkpoint": null,
+          "optimizer_steps": 10000,
+          "epochs_run": 21,
+          "wall_s": 4.1
+        },
+        {
+          "test_coupon": "PP6",
+          "train_coupons": [
+            "PP3",
+            "PP4",
+            "PP5"
+          ],
+          "val_coupon": "PP7",
+          "n_test": 601,
+          "n_pos": 459,
+          "defect_rate": 0.7637,
+          "val_auc": 0.6797,
+          "test_auc": 0.5005,
+          "pr_auc": 0.7631,
+          "checkpoint": null,
+          "optimizer_steps": 10000,
+          "epochs_run": 22,
+          "wall_s": 4.7
+        },
+        {
+          "test_coupon": "PP7",
+          "train_coupons": [
+            "PP3",
+            "PP4",
+            "PP5"
+          ],
+          "val_coupon": "PP6",
+          "n_test": 601,
+          "n_pos": 83,
+          "defect_rate": 0.1381,
+          "val_auc": 0.5005,
+          "test_auc": 0.6797,
+          "pr_auc": 0.4354,
+          "checkpoint": null,
+          "optimizer_steps": 10000,
+          "epochs_run": 22,
+          "wall_s": 4.5
+        }
+      ],
+      "all_folds_mean_auc": 0.4948,
+      "all_folds_std_auc": 0.1062,
+      "nonPP4_mean_auc": 0.5298,
+      "nonPP4_std_auc": 0.0891,
+      "pooled_auc": 0.4831,
+      "pp4_auc": 0.3545
+    },
+    "e2": {
+      "exp": "e2",
+      "model_seed": 44,
+      "split_seed": 42,
+      "data_seed": 42,
+      "det_version": "det_v2",
+      "run_type": "full",
+      "code_commit": "acf6bbbe78b0",
+      "head": {
+        "lr": 0.001,
+        "epochs": 80,
+        "batch_size": 128,
+        "class_balance": true
+      },
+      "optimizer_steps_total": 10000,
+      "folds": [
+        {
+          "test_coupon": "PP3",
+          "train_coupons": [
+            "PP4",
+            "PP5",
+            "PP6"
+          ],
+          "val_coupon": "PP7",
+          "n_test": 601,
+          "n_pos": 345,
+          "defect_rate": 0.574,
+          "val_auc": 0.7152,
+          "test_auc": 0.462,
+          "pr_auc": 0.5479,
+          "checkpoint": null,
+          "optimizer_steps": 10000,
+          "epochs_run": 21,
+          "wall_s": 4.5
+        },
+        {
+          "test_coupon": "PP4",
+          "train_coupons": [
+            "PP3",
+            "PP5",
+            "PP6"
+          ],
+          "val_coupon": "PP7",
+          "n_test": 601,
+          "n_pos": 3,
+          "defect_rate": 0.005,
+          "val_auc": 0.7395,
+          "test_auc": 0.3038,
+          "pr_auc": 0.0046,
+          "checkpoint": null,
+          "optimizer_steps": 10000,
+          "epochs_run": 41,
+          "wall_s": 9.3
+        },
+        {
+          "test_coupon": "PP5",
+          "train_coupons": [
+            "PP3",
+            "PP4",
+            "PP6"
+          ],
+          "val_coupon": "PP7",
+          "n_test": 596,
+          "n_pos": 261,
+          "defect_rate": 0.4379,
+          "val_auc": 0.7124,
+          "test_auc": 0.5272,
+          "pr_auc": 0.463,
+          "checkpoint": null,
+          "optimizer_steps": 10000,
+          "epochs_run": 22,
+          "wall_s": 4.9
+        },
+        {
+          "test_coupon": "PP6",
+          "train_coupons": [
+            "PP3",
+            "PP4",
+            "PP5"
+          ],
+          "val_coupon": "PP7",
+          "n_test": 601,
+          "n_pos": 459,
+          "defect_rate": 0.7637,
+          "val_auc": 0.7217,
+          "test_auc": 0.5258,
+          "pr_auc": 0.7788,
+          "checkpoint": null,
+          "optimizer_steps": 10000,
+          "epochs_run": 21,
+          "wall_s": 4.9
+        },
+        {
+          "test_coupon": "PP7",
+          "train_coupons": [
+            "PP3",
+            "PP4",
+            "PP5"
+          ],
+          "val_coupon": "PP6",
+          "n_test": 601,
+          "n_pos": 83,
+          "defect_rate": 0.1381,
+          "val_auc": 0.5453,
+          "test_auc": 0.7095,
+          "pr_auc": 0.4319,
+          "checkpoint": null,
+          "optimizer_steps": 10000,
+          "epochs_run": 23,
+          "wall_s": 4.9
+        }
+      ],
+      "all_folds_mean_auc": 0.5057,
+      "all_folds_std_auc": 0.1304,
+      "nonPP4_mean_auc": 0.5561,
+      "nonPP4_std_auc": 0.0924,
+      "pooled_auc": 0.5744,
+      "pp4_auc": 0.3038
+    },
+    "e3": null
+  },
+  "transfer": {
+    "e3_minus_e1": null,
+    "e2_minus_e1": 0.02629999999999999,
+    "e2_minus_e0": 0.011500000000000066,
+    "e3_minus_e2": null,
+    "decision": "单 seed 仅供参考：最终迁移判据看三种子聚合 （平均 E2−E0 ≥ +0.01 且 ≥2/3 seed 为正）与 E3−E2（seed42）。"
+  }
+}

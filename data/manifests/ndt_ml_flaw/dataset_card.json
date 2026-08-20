@@ -279,7 +279,8 @@
     "n_simulated_batches": 10,
     "split_by": "defect_instance_id",
     "streaming_only": true,
-    "no_full_extraction": true
+    "no_full_extraction": true,
+    "audit_note": "M0-2B deterministic v2 data audit: 1 physical specimen (P41), 6 real defect types (P41_01..05 cracks + P41_06 EDM notch) + 10 CIVA simulated templates; each real batch (1000 strips, ~50% flaw) MIXES multiple defect types and clean strips (augmentation factor 0.4-1.0 scales flaw amplitude); effective independent units << 17,000 nominal strips; random sample-level splits do NOT measure generalization to new real defects"
   },
   "provenance": {
     "steps": [

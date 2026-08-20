@@ -1,23 +1,30 @@
-"""ML-NDT（VTT）PAUT 体积适配器（M0-2A）。
+"""ML-NDT（VTT）PAUT 数据适配器（M0-2A）。
 
 来源：https://github.com/iikka-v/ML-NDT （Virkkunen et al., 2019, arXiv:1903.11399）
-结构：每个 UUID 批次目录含 ``.bins``（原始 3D 超声体积 UInt16 256×256×100 =
-100 帧 × 256×256 B-scan，13.1 MB）+ ``.meta`` + ``.jsons``（缺陷元数据）+
+结构：每个 UUID 目录含 ``.bins``（UInt16 256×256×100 = **100 张 B-scan 图的
+minibatch 容器**，13.1 MB）+ ``.meta`` + ``.jsons``（缺陷元数据）+
 ``.labels``（100 行 [flaw 0/1, equivalent flaw size]）。
 
-关键口径（与审计 docs/M0_public_ndt_dataset_audit.md 一致）：
+**数据生成口径（deterministic v2 数据审计确认，见
+docs/M0_2B_VTT_virtual_flaw_data_audit.md）**：
 - **1 个独立试件**：316L 奥氏体管道单对焊接头；
-- **3 条真实热疲劳裂纹**（深度 1.6/4.0/8.6 mm，Trueflaw 制造）+ eFlaw
-  幅度缩放/重植入的 virtual flaws（仿真增强）；
-- **201 个 volume ≠ 201 个试件**：volume 是同一试件上的一次采集，
-  ``defect_instance_id`` 标识真正的独立缺陷，volume/frame 是重复/增强；
-- split 必须按 defect_instance_id 划分（跨 volume 同一个缺陷属于同一单元）。
+- **3 条真实热疲劳裂纹**（深度 1.6/4.0/8.6 mm，Trueflaw 制造），论文明确
+  "The raw data contained only three real cracks, that were then modified to
+  give the total data set"；
+- 全部 20,100 张图由这 3 条裂纹经 **eFlaw 虚拟缺陷流程**（提取缺陷信号 → 植入
+  不同位置 / 移动 / 幅度缩放 factor 0.x）生成；论文："The data was stored in
+  minibatches of 100 UT-images per file"。**因此 ``.bins`` 不是一次真实三维体积
+  采集，而是 100 张增强图的容器**；`volume_is_acquisition=false`；
+- **201 个容器 ≠ 201 次独立采集**：`defect_instance_id` 标识真正的独立缺陷
+  （3 条），容器/帧是重复/增强（每容器缺陷率 ~60%，含 ~40% 背景/噪声帧）；
+- split 必须按 defect_instance_id 划分（跨容器同一个缺陷属于同一单元）；随机
+  样本级划分不能代表对新真实缺陷的泛化。
 
 本适配器：
-- 解析 .labels/.jsons/.meta 构建 manifest（volume 级记录，frame ID 保留）；
-- 支持按 volume / flaw 流式读取（mmap 或逐 volume 载入，绝不整仓 2.6 GB
+- 解析 .labels/.jsons/.meta 构建 manifest（容器级记录，frame ID 保留）；
+- 支持按容器 / flaw 流式读取（mmap 或逐容器载入，绝不整仓 2.6 GB
   一次进内存）；
-- 不把 201 volume 当作 201 独立试件；独立 specimen=1。
+- 不把 201 个容器当作 201 个独立试件；独立 specimen=1。
 """
 from __future__ import annotations
 
