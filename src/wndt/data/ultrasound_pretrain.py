@@ -6,13 +6,19 @@
   per-depth-row z-score（**按 LOOCV fold 只由 train coupons 计算**）->
   第二维零填充到 64 -> ``(512, 64)``。目标域 SSL **只能读取本折 train
   coupons**，val/test coupon 完全不进入 SSL batch 与归一化统计。
-- **ML-NDT**：每个 volume 视为 **100 个候选帧**，按 ``(seed, volume_id,
+- **ML-NDT**：每个 volume 视为 **100 个候选帧**，按 ``(data_seed, volume_id,
   epoch)`` 确定性随机抽 1 帧 -> ``(256, 256)`` -> 全局 z-score。SSL 不使用
   缺陷标签。
 - **NDT_ML_Flaw**：条带 ``(480, 7168)`` 沿扫描轴裁 ``(480, 256)`` 局部窗口，
-  crop start 由 ``(seed, record_id, epoch)`` 可复现 -> 全局 z-score。SSL 不
-  使用 flaw 标签。**先流式读取**；profile 确认 I/O 卡 GPU 时建立**可重建的
+  crop start 由 ``(data_seed, record_id, epoch)`` 可复现 -> 全局 z-score。SSL
+  不使用 flaw 标签。**先流式读取**；profile 确认 I/O 卡 GPU 时建立**可重建的
   float16 局部窗口缓存**（缓存与原始数据均不提交 git）。
+
+采样与划分的 seed 职责分离（deterministic v2）：``split_seed`` 只控制
+coupon train/val/test 划分；``data_seed`` 只控制数据采样（ML-NDT 抽帧 /
+NDT_ML_Flaw 裁窗 / PENELOPE SSL 样本顺序）；``model_seed`` 只控制模型
+初始化 / MAE mask / dropout / 分类头初始化与训练随机性。三个 model seed
+（42/43/44）在相同 split_seed 与 data_seed 下数据与划分完全一致。
 
 外部混合预训练按**数据集 50/50 均衡采样**（ML-NDT / NDT_ML_Flaw，batch 级
 交替，同一 batch 内单一数据集单形状），不按原始记录数混合，避免任一数据集
@@ -77,31 +83,48 @@ def stable_hash(*parts: Any) -> int:
     return int(h.hexdigest(), 16)
 
 
-def mlndt_frame_index(seed: int, volume_id: str, epoch: int, step: int,
+def mlndt_frame_index(data_seed: int, volume_id: str, epoch: int, step: int,
                       n_frames: int = NDT_N_FRAMES) -> int:
-    """确定性抽帧：``(seed, volume_id, epoch, step) -> [0, n_frames)``。
+    """确定性抽帧：``(data_seed, volume_id, epoch, step) -> [0, n_frames)``。
 
-    ``n_frames`` 为该 volume 的实际帧数（ML-NDT 大部分 100 帧，个别 volume
-    只有 10 帧；按文件大小解析，见 ``volume_n_frames``）。
+    只由 ``data_seed``（数据采样 seed）决定，**与 model_seed 无关**——三个
+    model seed 抽帧计划完全一致。``n_frames`` 为该 volume 的实际帧数
+    （ML-NDT 大部分 100 帧，个别 volume 只有 10 帧；按文件大小解析，
+    见 ``volume_n_frames``）。
     """
-    return stable_hash(seed, "frame", volume_id, epoch, step) % max(1, int(n_frames))
+    return stable_hash(data_seed, "frame", volume_id, epoch, step) % max(1, int(n_frames))
 
 
-def ndtmf_crop_start(seed: int, record_id: str, epoch: int, step: int,
+def ndtmf_crop_start(data_seed: int, record_id: str, epoch: int, step: int,
                      window_width: int = NDTMLFLAW_WINDOW[1]) -> int:
-    """确定性 crop start：``(seed, record_id, epoch, step)``。
+    """确定性 crop start：``(data_seed, record_id, epoch, step)``。
 
-    返回 ``[0, 7168 - window_width]`` 内的整数（不越界）。
+    只由 ``data_seed`` 决定（与 model_seed 无关）。返回
+    ``[0, 7168 - window_width]`` 内的整数（不越界）。
     """
     max_start = NDT_STRIP[1] - window_width
     assert max_start >= 0
-    return stable_hash(seed, "crop", record_id, epoch, step) % (max_start + 1)
+    return stable_hash(data_seed, "crop", record_id, epoch, step) % (max_start + 1)
 
 
 def external_dataset_for_batch(batch_idx: int) -> str:
     """外部混合采样：batch 级交替 —— 偶数 batch 为 ML-NDT，奇数 batch 为
     NDT_ML_Flaw（50/50 均衡，同一 batch 单一数据集单形状）。"""
     return EXTERNAL_DS[batch_idx % 2]
+
+
+def target_ssl_sample_plan(data_seed: int, n: int, steps: int, batch_size: int
+                           ) -> np.ndarray:
+    """PENELOPE 目标域 SSL 采样计划：``(steps, batch_size)`` 样本索引。
+
+    只由 ``(data_seed, n, steps, batch_size)`` 决定，**与 model_seed 无关**
+    （三个 model seed 得到同一份目标域 SSL 样本顺序）。用独立 RNG（而非全局
+    torch/numpy RNG）生成，训练时的 MAE mask / dropout 等 model_seed 随机性
+    不会污染数据采样。
+    """
+    key = stable_hash(data_seed, "target_ssl_plan", int(n), int(steps), int(batch_size))
+    rng = np.random.default_rng(key % (2 ** 32))
+    return rng.integers(0, int(n), size=(int(steps), int(batch_size)))
 
 
 # ---------------------------------------------------------------------------
@@ -115,29 +138,31 @@ def load_paut() -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     return ascans, coupons, labels
 
 
-def coupon_val_split(rest_coupons: Sequence[str], seed: int) -> tuple[list[str], str]:
+def coupon_val_split(rest_coupons: Sequence[str], split_seed: int) -> tuple[list[str], str]:
     """按完整 coupon 切 inner val：取 1 个非 test coupon 作 val，其余作 train。
 
     Protocol V2：禁止随机位置级 validation —— val 必须是完整 coupon。
+    ``split_seed`` 只控制 coupon 划分，与 model_seed / data_seed 无关。
     """
-    rng = np.random.default_rng(seed)
+    rng = np.random.default_rng(split_seed)
     shuffled = rng.permutation(list(rest_coupons)).tolist()
     val = shuffled[0]
     train = sorted(shuffled[1:])
     return train, val
 
 
-def paut_fold_split(coupons: np.ndarray, test_coupon: str, seed: int
+def paut_fold_split(coupons: np.ndarray, test_coupon: str, split_seed: int
                     ) -> tuple[np.ndarray, np.ndarray, np.ndarray, list[str], str]:
     """严格 LOOCV 折划分：test=1 完整 coupon；inner val=剩余中 1 完整 coupon；
     train=其余 3 个完整 coupons。
 
     返回 ``(train_idx, val_idx, test_idx, train_coupons, val_coupon)``。
+    ``split_seed`` 只控制 coupon 划分（三个 model_seed 下完全一致）；
     test coupon 在 SSL / 归一化 / 头训练 / 模型选择全程不可见。
     """
     te_idx = np.nonzero(coupons == test_coupon)[0]
     rest = [c for c in COUPONS if c != test_coupon]
-    train_coupons, val_coupon = coupon_val_split(rest, seed)
+    train_coupons, val_coupon = coupon_val_split(rest, split_seed)
     tr_idx = np.nonzero(np.isin(coupons, train_coupons))[0]
     va_idx = np.nonzero(coupons == val_coupon)[0]
     return tr_idx, va_idx, te_idx, train_coupons, val_coupon
@@ -291,31 +316,52 @@ class MLNDTFrameSource:
         self._cache[vi] = vol
         return vol
 
-    def sample(self, seed: int, step: int, epoch: int) -> np.ndarray:
-        """返回第 ``step`` 个样本的归一化单帧 ``(256, 256)`` float32。"""
-        vi = stable_hash(seed, "vol", step) % len(self.records)
+    def sample(self, data_seed: int, step: int, epoch: int) -> np.ndarray:
+        """返回第 ``step`` 个样本的归一化单帧 ``(256, 256)`` float32。
+
+        ``data_seed`` 只控制数据采样（volume / frame 选择），与 model_seed 无关。
+        """
+        vi = stable_hash(data_seed, "vol", step) % len(self.records)
         rec = self.records[vi]
         n_frames = volume_n_frames(self.adapter, vi)
-        frame = mlndt_frame_index(seed, rec.record_id, epoch, step, n_frames=n_frames)
+        frame = mlndt_frame_index(data_seed, rec.record_id, epoch, step, n_frames=n_frames)
         f = self._load_volume(vi)[frame].astype(np.float32)
         return (f - self.mean) / self.std
 
-    def sample_many(self, seed: int, steps: Sequence[int], steps_per_epoch: int,
+    def sample_many(self, data_seed: int, steps: Sequence[int], steps_per_epoch: int,
                     out_dtype: np.dtype = np.float32) -> np.ndarray:
         """批量采样一批 ``(B, 1, 256, 256)``（确定性：按 steps 逐个 sample）。"""
-        xs = [self.sample(seed, s, s // steps_per_epoch) for s in steps]
+        xs = [self.sample(data_seed, s, s // steps_per_epoch) for s in steps]
         return np.ascontiguousarray(np.stack(xs)[:, None]).astype(out_dtype)
 
 
 # ---------------------------------------------------------------------------
 # NDT_ML_Flaw 窗口：确定性计划 + 可重建 float16 局部窗口缓存
 # ---------------------------------------------------------------------------
-def ndt_window_schedule(seed: int, n_steps: int, batch_size: int,
+def ndt_data_version() -> str:
+    """NDT_ML_Flaw 数据内容指纹（批次文件名 + 压缩大小）。
+
+    用于缓存有效性校验（数据版本）：缓存只由 ``data_seed`` + 数据版本 +
+    采样配置决定；原始数据变化时指纹变化 -> 缓存判定过期重建。只读文件
+    元数据（``_list_batches`` 为 glob，不解压），开销可忽略。
+    """
+    comps = NDTMLFlawAdapter()._list_batches()
+    h = hashlib.sha256()
+    for c in comps:
+        try:
+            h.update(f"{c.name}:{c.stat().st_size}".encode("utf-8"))
+        except OSError:
+            h.update(f"{c.name}:?".encode("utf-8"))
+    return h.hexdigest()[:16]
+
+
+def ndt_window_schedule(data_seed: int, n_steps: int, batch_size: int,
                         steps_per_epoch: int, records: Sequence[Any],
                         window_width: int = NDTMLFLAW_WINDOW[1]) -> list[dict[str, Any]]:
     """外部预训练的 NDT_ML_Flaw 窗口采样计划（batch 级交替，奇数 batch 为 NDT）。
 
-    返回按 step 升序的窗口描述列表：
+    只由 ``data_seed``（数据采样 seed）决定，与 model_seed 无关。返回按
+    step 升序的窗口描述列表：
     ``{step, epoch, record_id, batch_id, strip_index, crop_start}``。
     """
     schedule: list[dict[str, Any]] = []
@@ -326,13 +372,13 @@ def ndt_window_schedule(seed: int, n_steps: int, batch_size: int,
             end = min(n_steps, start + batch_size)
             for s in range(start, end):
                 epoch = s // steps_per_epoch
-                rec = records[stable_hash(seed, "strip", s) % len(records)]
+                rec = records[stable_hash(data_seed, "strip", s) % len(records)]
                 schedule.append({
                     "step": s, "epoch": epoch,
                     "record_id": rec.record_id,
                     "batch_id": rec.acquisition_id,
                     "strip_index": int(rec.tensor_index),
-                    "crop_start": ndtmf_crop_start(seed, rec.record_id, epoch, s,
+                    "crop_start": ndtmf_crop_start(data_seed, rec.record_id, epoch, s,
                                                    window_width),
                 })
     return schedule
@@ -345,16 +391,23 @@ class NDTWindowCache:
     本缓存按确定性计划**每批只解压一次**，提取所需窗口存 float16 重建缓存。
     缓存位于 ``experiments/runs/m0_2b/cache/``（gitignore），可随时从原始
     ``.xz/.lzma`` 重建。
+
+    **缓存键只由 ``data_seed`` + 采样配置决定（不含 model_seed）**：三个
+    model seed（42/43/44）复用同一份 data_seed=42 缓存，不重复建几十 GB。
+    ``data_version`` 只作有效性校验（数据变化 -> 判定过期重建），不并入目录键
+    —— 保证与旧 seed42 缓存同键复用，不无意义地新增重复缓存。
     """
 
-    def __init__(self, seed: int, n_steps: int, batch_size: int,
-                 steps_per_epoch: int, window: tuple[int, int] = NDTMLFLAW_WINDOW):
-        self.seed = seed
+    def __init__(self, data_seed: int, n_steps: int, batch_size: int,
+                 steps_per_epoch: int, window: tuple[int, int] = NDTMLFLAW_WINDOW,
+                 data_version: str | None = None):
+        self.data_seed = data_seed
         self.n_steps = n_steps
         self.batch_size = batch_size
         self.steps_per_epoch = steps_per_epoch
         self.window = tuple(window)
-        key = stable_hash(seed, n_steps, batch_size, steps_per_epoch,
+        self.data_version = data_version or ndt_data_version()
+        key = stable_hash(data_seed, n_steps, batch_size, steps_per_epoch,
                           window[0], window[1])
         self.dir = CACHE_ROOT / f"ndt_windows_{key:016x}"
         self.meta_path = self.dir / "meta.json"
@@ -368,16 +421,42 @@ class NDTWindowCache:
         return self.windows_path.exists() and self.index_path.exists()
 
     def key_desc(self) -> str:
-        return f"ndt_windows_s{self.seed}_n{self.n_steps}_b{self.batch_size}_e{self.steps_per_epoch}"
+        return (f"ndt_windows_ds{self.data_seed}_n{self.n_steps}"
+                f"_b{self.batch_size}_e{self.steps_per_epoch}")
 
     # -- 构建 -------------------------------------------------------------
+    def _cache_current(self) -> bool:
+        """缓存存在且数据版本匹配 -> 可直接复用；否则返回 False 触发重建。
+
+        旧版缓存（M0-2B seed42 时代）meta 无 ``data_version`` 字段，但其构建
+        时原始数据与当前完全一致（M0-2A 之后未变过），故在此回填版本号并按
+        当前版本复用，避免无意义地重建几十 GB。
+        """
+        if not self.exists:
+            return False
+        try:
+            meta = json.loads(self.meta_path.read_text())
+        except (OSError, ValueError):
+            return False
+        dv = meta.get("data_version")
+        if dv is None:
+            # 旧版缓存（M0-2B seed42 时代，meta 用 "seed" 字段）：构建时原始数据
+            # 与当前一致，回填 data_seed/data_version 后按当前版本复用
+            legacy_seed = meta.get("seed", meta.get("data_seed"))
+            if legacy_seed is not None:
+                meta["data_seed"] = int(legacy_seed)
+            meta["data_version"] = self.data_version
+            self.meta_path.write_text(json.dumps(meta, indent=2))
+            return True
+        return dv == self.data_version
+
     def build(self, adapter: NDTMLFlawAdapter, mean: float, std: float,
               force: bool = False) -> Path:
-        if self.exists and not force:
+        if self._cache_current() and not force:
             return self.dir
         records = adapter.records()
         schedule = ndt_window_schedule(
-            self.seed, self.n_steps, self.batch_size, self.steps_per_epoch,
+            self.data_seed, self.n_steps, self.batch_size, self.steps_per_epoch,
             records, window_width=self.window[1])
         if not schedule:
             raise ValueError("empty NDT window schedule — check steps/batch_size")
@@ -408,7 +487,8 @@ class NDTWindowCache:
         self.dir.mkdir(parents=True, exist_ok=True)
         np.save(self.windows_path, out)
         self.meta_path.write_text(json.dumps({
-            "seed": self.seed, "n_steps": self.n_steps,
+            "data_seed": self.data_seed, "data_version": self.data_version,
+            "n_steps": self.n_steps,
             "batch_size": self.batch_size, "steps_per_epoch": self.steps_per_epoch,
             "window": list(self.window), "n_windows": len(schedule),
             "mean": float(mean), "std": float(std),
@@ -446,13 +526,16 @@ class NDTWindowCache:
 # ---------------------------------------------------------------------------
 # 批量构建（供 pretrain 脚本用）
 # ---------------------------------------------------------------------------
-def build_external_batch(source: str, steps: Sequence[int], seed: int,
+def build_external_batch(source: str, steps: Sequence[int], data_seed: int,
                          steps_per_epoch: int,
                          ml_ndt_src: MLNDTFrameSource | None,
                          ndt_cache: NDTWindowCache | None) -> np.ndarray:
-    """构建单个外部 batch（单一数据集单形状）。返回归一化 ``(B, 1, H, W)``。"""
+    """构建单个外部 batch（单一数据集单形状）。返回归一化 ``(B, 1, H, W)``。
+
+    ``data_seed`` 只控制数据采样（三个 model_seed 下 batch 内容一致）。
+    """
     if source == "ml_ndt":
         assert ml_ndt_src is not None
-        return ml_ndt_src.sample_many(seed, steps, steps_per_epoch)
+        return ml_ndt_src.sample_many(data_seed, steps, steps_per_epoch)
     assert ndt_cache is not None, "NDT cache must be built before NDT batches"
     return ndt_cache.get_windows(steps)

@@ -16,7 +16,6 @@ model:
   dropout: 0.0
 
 pretrain:
-  seed: 42
   lr: 1.0e-3
   weight_decay: 1.0e-4
   batch_size: 32
@@ -29,6 +28,16 @@ pretrain:
   e3_external_steps: 8000     # E3 外部部分
   e3_target_steps: 2000       # E3 目标域继续 SSL（每折）
   external_balance: {ml_ndt: 0.5, ndt_ml_flaw: 0.5}   # batch 级交替
+
+# deterministic v2：seed 职责分离
+#   split_seed —— 只控制 coupon train/val/test 划分；
+#   data_seed  —— 只控制数据采样（ML-NDT 抽帧 / NDT_ML_Flaw 裁窗 / PENELOPE SSL 样本顺序）；
+#   model_seed —— 只控制模型初始化 / MAE mask / dropout / 分类头初始化 / 训练随机性。
+det:
+  version: "det_v2"
+  split_seed: 42
+  data_seed: 42
+  model_seeds: [42, 43, 44]
 
 inputs:
   penelope: {height: 512, width: 64, pad_beams: 49}
