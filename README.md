@@ -48,10 +48,24 @@
     ML-NDT 1 试件 3 裂纹 / NDT_ML_Flaw 1 试件 6 缺陷）；两 VTT 数据集是极佳 PAUT
     预训练素材但**不能当独立多试件基准**；同一原始 flaw 跨 train/test 泄漏风险高，
     必须按 specimen / defect_instance_id 划分。
-- **M0-2B（规划，待 M0-2A 审核后）**：按审计优先级接入数据集 + 单模态基线 +
-  外部超声预训练迁移实验。**在获得可验证的同试件、同坐标、成对 UT+ECT 公共数据
-  之前，不做真正的融合训练**，严禁把不同试件/材料/任务的 UT 与 ECT 强行拼接后
-  称为"多模态融合"。
+- **M0-2B（当前，已完成 seed 42 第一轮）**：外部超声自监督预训练迁移实验。
+  统一超声 MAE（共享 encoder，patch 16×16 / d128 / depth4）+ ML-NDT &
+  NDT_ML_Flaw **50/50 均衡**混合 SSL → 严格 coupon-level LOOCV。
+  - 四条件：E0 scratch（0.559）/ E1 target_ssl（0.538）/ **E2 external_ssl
+    （0.574，最佳）** / E3 external→target（0.500），主指标 = 非PP4 逐折均值
+    （seed 42）。
+  - 结论：外部 SSL **直接迁移正信号**（E2−E1 +0.036，优于随机 E0），但任务规定
+    的"外部+目标继续 SSL"口径 **E3−E1 = −0.039 ≤ 0.01** → **停止判据触发**，
+    不扩 seed/模型/数据，转入涡流公开数据基线。目标域 SSL 在 PAUT 上系统性损害
+    冻结线性探针（E1<E0、E3<E0），与 P5/P6 一致。
+  - 交付物：`src/wndt/models/ultrasound_mae.py`、
+    `src/wndt/data/ultrasound_pretrain.py`、`scripts/m0_2b_pretrain.py`、
+    `scripts/m0_2b_loocv.py`、`configs/m0_2b_ultrasound_mae.yaml`、
+    `tests/test_m0_2b.py`（10 项审计）、
+    `docs/M0_2B_external_ultrasound_transfer_report.md`、
+    `experiments/results/m0_2b_seed42.{json,md}`。
+  - **在获得可验证的同试件、同坐标、成对 UT+ECT 公共数据之前，不做真正的融合
+    训练**，严禁把不同试件/材料/任务的 UT 与 ECT 强行拼接后称为"多模态融合"。
 
 > ⚠ 限制：本阶段不进行超 10 GB 的新下载、不自动下载全部 LOTSA/UTSD、不做正式
 > 训练、不跑长时 GPU 任务。公开小数据实验不代表最终课题结论。

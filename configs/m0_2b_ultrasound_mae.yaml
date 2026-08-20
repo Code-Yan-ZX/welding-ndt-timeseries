@@ -1,0 +1,50 @@
+# M0-2B 统一超声 MAE（共享输入 patch embedding + 共享 Transformer encoder）。
+# 四个条件 E0 (scratch) / E1 (target_ssl) / E2 (external_ssl) / E3
+# (external_then_target) 保持相同模型结构 / mask ratio / 优化器 /
+# 总 optimizer steps / 下游头协议。
+#
+# 严格 LOOCV：outer test = 1 完整 coupon；inner val = 剩余 1 完整 coupon；
+# train = 其余 3 coupons。归一化与目标域 SSL 只读 train coupons。
+model:
+  d_model: 128
+  depth: 4
+  n_heads: 4
+  mlp_ratio: 4.0
+  patch_size: [16, 16]
+  mask_ratio: 0.5
+  in_channels: 1
+  dropout: 0.0
+
+pretrain:
+  seed: 42
+  lr: 1.0e-3
+  weight_decay: 1.0e-4
+  batch_size: 32
+  grad_clip: 1.0
+  steps_per_epoch: 500        # epoch = global_step // steps_per_epoch（采样键的一部分）
+  warmup_steps: 200
+  # 各条件总 optimizer steps（smoke 统一 20）
+  e1_target_steps: 10000      # 每折目标域 SSL
+  e2_external_steps: 10000    # 外部混合 SSL（一次）
+  e3_external_steps: 8000     # E3 外部部分
+  e3_target_steps: 2000       # E3 目标域继续 SSL（每折）
+  external_balance: {ml_ndt: 0.5, ndt_ml_flaw: 0.5}   # batch 级交替
+
+inputs:
+  penelope: {height: 512, width: 64, pad_beams: 49}
+  ml_ndt: {height: 256, width: 256}      # 单帧
+  ndt_ml_flaw: {height: 480, width: 256} # 局部窗口
+
+head:
+  lr: 1.0e-3
+  weight_decay: 1.0e-4
+  batch_size: 128
+  epochs: 80
+  patience: 20
+  class_balance: true        # 规范协议：加权采样平衡类别
+  dropout: 0.3
+
+eval:
+  main_metric: nonPP4_mean_auc   # mean(PP3, PP5, PP6, PP7)
+  pooled_reference_only: true
+  pp4_excluded_from_main: true

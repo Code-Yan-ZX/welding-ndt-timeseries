@@ -1,0 +1,116 @@
+{
+  "exp": "e0",
+  "seed": 42,
+  "run_type": "full",
+  "code_commit": "b6a1992ec3c5",
+  "head": {
+    "lr": 0.001,
+    "epochs": 80,
+    "batch_size": 128,
+    "class_balance": true
+  },
+  "optimizer_steps_total": 0,
+  "folds": [
+    {
+      "test_coupon": "PP3",
+      "train_coupons": [
+        "PP4",
+        "PP5",
+        "PP6"
+      ],
+      "val_coupon": "PP7",
+      "n_test": 601,
+      "n_pos": 345,
+      "defect_rate": 0.574,
+      "val_auc": 0.6873,
+      "test_auc": 0.4791,
+      "pr_auc": 0.5712,
+      "checkpoint": null,
+      "optimizer_steps": 0,
+      "epochs_run": 21,
+      "wall_s": 4.8
+    },
+    {
+      "test_coupon": "PP4",
+      "train_coupons": [
+        "PP3",
+        "PP5",
+        "PP6"
+      ],
+      "val_coupon": "PP7",
+      "n_test": 601,
+      "n_pos": 3,
+      "defect_rate": 0.005,
+      "val_auc": 0.677,
+      "test_auc": 0.5151,
+      "pr_auc": 0.0069,
+      "checkpoint": null,
+      "optimizer_steps": 0,
+      "epochs_run": 22,
+      "wall_s": 4.8
+    },
+    {
+      "test_coupon": "PP5",
+      "train_coupons": [
+        "PP3",
+        "PP4",
+        "PP6"
+      ],
+      "val_coupon": "PP7",
+      "n_test": 596,
+      "n_pos": 261,
+      "defect_rate": 0.4379,
+      "val_auc": 0.6895,
+      "test_auc": 0.5313,
+      "pr_auc": 0.4692,
+      "checkpoint": null,
+      "optimizer_steps": 0,
+      "epochs_run": 26,
+      "wall_s": 5.1
+    },
+    {
+      "test_coupon": "PP6",
+      "train_coupons": [
+        "PP3",
+        "PP4",
+        "PP5"
+      ],
+      "val_coupon": "PP7",
+      "n_test": 601,
+      "n_pos": 459,
+      "defect_rate": 0.7637,
+      "val_auc": 0.6952,
+      "test_auc": 0.5351,
+      "pr_auc": 0.77,
+      "checkpoint": null,
+      "optimizer_steps": 0,
+      "epochs_run": 21,
+      "wall_s": 4.0
+    },
+    {
+      "test_coupon": "PP7",
+      "train_coupons": [
+        "PP3",
+        "PP4",
+        "PP5"
+      ],
+      "val_coupon": "PP6",
+      "n_test": 601,
+      "n_pos": 83,
+      "defect_rate": 0.1381,
+      "val_auc": 0.5223,
+      "test_auc": 0.6897,
+      "pr_auc": 0.3497,
+      "checkpoint": null,
+      "optimizer_steps": 0,
+      "epochs_run": 21,
+      "wall_s": 3.0
+    }
+  ],
+  "all_folds_mean_auc": 0.5501,
+  "all_folds_std_auc": 0.0726,
+  "nonPP4_mean_auc": 0.5588,
+  "nonPP4_std_auc": 0.0787,
+  "pooled_auc": 0.618,
+  "pp4_auc": 0.5151
+}
