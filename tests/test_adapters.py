@@ -119,7 +119,10 @@ def test_expected_counts():
         # 严格期望值（PENELOPE/ML-NDT）；ML-NDT 允许 < 201（数据下载中）
         if ds == "ml_ndt":
             assert len(df) > 0, f"{ds}: empty"
-            print(f"{ds} count (partial ok): {len(df)} / expected 201 (download in progress)")
+            if len(df) == 201:
+                print(f"{ds} count OK: 201 (full)")
+            else:
+                print(f"{ds} count (partial): {len(df)} / expected 201")
         else:
             assert len(df) == n, f"{ds}: count mismatch"
 
@@ -140,12 +143,14 @@ def test_field_completeness():
         assert set(df["defect_origin"].unique()) <= {
             "manufacturing", "service", "artificial_edm", "artificial_sdh",
             "simulated", "unknown"}
-        # 至少一条 positive（训练需要）；negative 在数据量小时可缺
+        # 至少一条 positive（训练需要）；negative 在数据量小时可缺。
+        # ML-NDT 201 volume 全部为缺陷场景（positive），无负样本，这是该数据集
+        # 的设计（不视为缺陷）。
         assert "positive" in set(df["label_status"]), f"{ds}: no positives"
-        if len(df) >= 100:
+        if len(df) >= 100 and ds != "ml_ndt":
             assert "negative" in set(df["label_status"]), f"{ds}: no negatives"
         else:
-            print(f"fields note: {ds} small ({len(df)}) — negative check skipped")
+            print(f"fields note: {ds} — negative check skipped")
         print(f"fields OK: {ds} specimens={df['specimen_id'].nunique()} "
               f"defects={df['defect_instance_id'].dropna().nunique()}")
 

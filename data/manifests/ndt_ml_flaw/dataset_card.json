@@ -6,11 +6,11 @@
   "source": {
     "official_name": "NDT_ML_Flaw (VTT)",
     "url": "https://github.com/koomas/NDT_ML_Flaw",
-    "commit": "94bab25972744bde2320b4972c45d7a9a0bdcc89",
+    "commit": "c9a21f3c8c835e9d2397859e8f02a38cec7b66ab",
     "license": "LGPL-3.0",
     "license_warning": "LGPL-3.0 针对代码；对'数据'的授权语义模糊。本仓库不重新分发原始数据，不阻塞研究使用。",
-    "size_bytes": 80367728,
-    "notes": "7 real .xz + 10 simulated .lzma; raw ~28 GB compressed 80 MB"
+    "size_bytes": 235931224,
+    "notes": "7 real .xz + 10 simulated .lzma; raw ~1626497420 GB compressed 236 MB"
   },
   "n_specimens": 1,
   "n_defect_instances": 16,

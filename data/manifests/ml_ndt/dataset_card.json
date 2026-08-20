@@ -6,18 +6,18 @@
   "source": {
     "official_name": "ML-NDT (VTT)",
     "url": "https://github.com/iikka-v/ML-NDT",
-    "commit": "94bab25972744bde2320b4972c45d7a9a0bdcc89",
+    "commit": "c9a21f3c8c835e9d2397859e8f02a38cec7b66ab",
     "license": "LGPL-3.0",
-    "size_bytes": 91750400,
+    "size_bytes": 2622750720,
     "notes": "201 volumes x (100,256,256) uint16; 1 specimen; 3 real thermal fatigue cracks + virtual flaws"
   },
   "n_specimens": 1,
   "n_defect_instances": 3,
-  "n_records": 7,
+  "n_records": 201,
   "records_ref": {
     "path": "records.parquet",
     "format": "parquet",
-    "n_records": 7
+    "n_records": 201
   },
   "specimens": [
     {
@@ -85,14 +85,14 @@
       ],
       "dtype": "uint16",
       "unit": "raw_amplitude",
-      "n_records": 7
+      "n_records": 201
     }
   ],
   "data_policy": {
     "specimen_count": 1,
     "volume_is_acquisition": true,
     "real_defect_count": 3,
-    "virtual_event_total": 700,
+    "virtual_event_total": 20010,
     "split_by": "defect_instance_id",
     "train_val": "train 199 / val 2 (original repo split)",
     "raw_volume_checksum": {

@@ -11,16 +11,13 @@
 | 数据集 | 记录数 | 独立试件 | 独立缺陷 | 实测/仿真 | 原始形状 | 实际可用于预训练的单位 |
 |---|---:|---:|---:|---|---|---|
 | PENELOPE PAUT（本仓库目标域） | 3000（位置级） | 5（PP3–PP7） | 243 标注行 / 174 局部缺陷 | 实测 | (49 波束, 512 深度) B-scan | 3000 位置 B-scan（5 试件级，跨试件泛化可验证） |
-| ML-NDT | 7（部分下载中，目标 201） | 1（316L 管道焊缝） | 3 真实裂纹（1.6/4.0/8.6 mm）+ eFlaw 虚拟事件 | 实测 + 仿真增强 | (100 帧, 256, 256) 体积 uint16 | 目标 20100 帧 B-scan（单试件，模态完全匹配 PAUT） |
+| ML-NDT | **201**（volume，全部 201 个已落地） | 1（316L 管道焊缝） | 3 真实裂纹（1.6/4.0/8.6 mm）+ eFlaw 虚拟事件 | 实测 + 仿真增强 | (100 帧, 256, 256) 体积 uint16 | 20100 帧 B-scan（单试件，模态完全匹配 PAUT） |
 | NDT_ML_Flaw | 17000（条带） | 1（P41 异种金属焊缝） | 6 真实（5 裂纹 + 1 EDM notch）+ 10 CIVA 仿真实例 = **16** | 实测 + 仿真（CIVA） | (480 深度, 7168 扫描) 条带 uint16 | 17000 条带 B-scan（缺陷形态最接近目标） |
 
-> 表格数字为 manifest 生成时的权威值；具体列数值见 `data/manifests/*/dataset_card.json`
-> 与 `records.parquet`。ML-NDT 仍在大文件下载中（git clone 反复断连，已通过部分
-> tarball + raw fallback 拉取前 7 个 volume 的元数据与 .bins，**metadata + 字段解析
-> 全部经实测验证**；完整 201-volume 清单与实测待下载完成后由 adapter
-> `build_ml_ndt_manifest()` 自动重生成）。NDT_ML_Flaw 的 17 个 .txt 全部通过
-> raw.githubusercontent 抓取并实测解析，13 个 .xz/.lzma 压缩包以 placeholder 补全
-> （adapter `_list_batches` 仍可枚举全部 17 批，live read 仅前 4 个批可用）。
+> 三个数据集已**全部完整落地**（ML-NDT 201 volume、NDT_ML_Flaw 17 批全部 1000 条），
+> 具体列数值见 `data/manifests/*/dataset_card.json` 与 `records.parquet`。
+> Live 数据读实测：PENELOPE `(49, 512)` float32、ML-NDT `(100, 256, 256)` uint16、
+> NDT_ML_Flaw `(480, 7168)` uint16，单次加载峰值内存各为 ~300 MB / 13 MB / 6.9 MB。
 
 ### 各数据集 manifest / adapter
 
