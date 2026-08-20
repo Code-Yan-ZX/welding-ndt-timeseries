@@ -1,190 +1,177 @@
 {
   "ml_ndt": {
-    "n_containers": 80,
-    "n_images": 8000,
-    "n_flaw": 4805,
-    "n_clean": 3195,
+    "n_containers": 120,
+    "n_images": 12000,
+    "n_flaw": 7268,
+    "n_clean": 4732,
     "template_distribution": {
-      "clean": 3195,
-      "t6028_s1.6": 1625,
-      "t7414_s4.0": 1620,
-      "t23474_s8.6": 1560
+      "clean": 4732,
+      "t7414_s4.0": 2470,
+      "t6028_s1.6": 2461,
+      "t23474_s8.6": 2337
     },
     "n_templates": 3,
     "random_image_level": {
-      "acc": 0.8996,
+      "acc": 0.9908,
       "auc": 1.0,
-      "n_train": 5600,
-      "n_test": 2400
+      "n_train": 8400,
+      "n_test": 3600
     },
     "leave_container_out": {
-      "acc": 0.8675,
+      "acc": 0.595,
       "auc": 1.0,
-      "n_train": 7200,
-      "n_test": 800
+      "n_train": 10800,
+      "n_test": 1200
     },
     "leave_template_out": {
       "t23474_s8.6": {
-        "acc": 0.9912,
+        "acc": 1.0,
         "auc": 1.0,
-        "n_train": 6440,
-        "n_test": 4000
+        "n_train": 8705,
+        "n_test": 3295
       },
       "t6028_s1.6": {
-        "acc": 0.88,
-        "auc": 0.9371,
-        "n_train": 6375,
-        "n_test": 4000
+        "acc": 0.2802,
+        "auc": 0.4102,
+        "n_train": 8581,
+        "n_test": 3419
       },
       "t7414_s4.0": {
-        "acc": 0.6613,
-        "auc": 0.7376,
-        "n_train": 6380,
-        "n_test": 4000
+        "acc": 0.2795,
+        "auc": 0.7634,
+        "n_train": 8572,
+        "n_test": 3428
       }
     },
     "split_containers_half": {
-      "acc": 0.9985,
+      "acc": 0.6132,
       "auc": 1.0,
-      "n_train": 4000,
+      "n_train": 6000,
       "n_test": 4000
     },
     "metadata_only": {
-      "acc": 0.5929,
-      "n": 8000,
-      "n_containers": 80,
-      "container_defect_rate_mean": 0.6006,
-      "container_defect_rate_std": 0.0426,
+      "acc": 0.5847,
+      "n": 12000,
+      "n_containers": 120,
+      "container_defect_rate_mean": 0.6057,
+      "container_defect_rate_std": 0.0443,
       "container_defect_rate_min": 0.48,
-      "container_defect_rate_max": 0.72,
+      "container_defect_rate_max": 0.74,
       "note": "features: container one-hot only (批次指纹)"
     },
     "shortcut": {
       "flaw_only": {
-        "acc": 0.9733,
-        "auc": 0.9982,
-        "n_train": 1750,
-        "n_test": 750
+        "acc": 0.9444,
+        "auc": 0.992,
+        "n_train": 1050,
+        "n_test": 450
       },
       "background_only": {
-        "acc": 0.9453,
-        "auc": 0.9912,
-        "n_train": 1750,
-        "n_test": 750
+        "acc": 0.9178,
+        "auc": 0.9887,
+        "n_train": 1050,
+        "n_test": 450
       },
       "boundary_only": {
-        "acc": 0.744,
-        "auc": 0.9681,
-        "n_train": 1750,
-        "n_test": 750
+        "acc": 0.9156,
+        "auc": 0.9652,
+        "n_train": 1050,
+        "n_test": 450
       }
     },
     "near_duplicate": {
-      "mean_nn_cosine": 0.9992,
+      "mean_nn_cosine": 0.9994,
       "frac_nn_same_template": 1.0,
-      "frac_nn_same_container": 0.0067,
+      "frac_nn_same_container": 0.01,
       "frac_nn_cos_gt_0.9": 1.0,
-      "frac_nn_cos_gt_0.99": 0.9933,
+      "frac_nn_cos_gt_0.99": 0.9967,
       "n_query": 300,
-      "n_train_pool": 6400
+      "n_train_pool": 9600
     }
   },
   "ndt_ml_flaw": {
-    "n_strips": 4000,
+    "n_strips": 5000,
     "n_real_defects": 6,
     "n_civa_templates": 2,
-    "n_flaw": 1946,
-    "n_clean": 2054,
+    "n_flaw": 2457,
+    "n_clean": 2543,
     "defect_distribution": {
-      "clean": 1277,
+      "clean": 1521,
       "ndtmf:P41:civa:batch_201": 1000,
-      "ndtmf:P41:civa:batch_202": 500,
-      "ndtmf:P41:P41_03": 224,
-      "ndtmf:P41:P41_06_notch": 216,
-      "ndtmf:P41:P41_05": 213,
-      "ndtmf:P41:P41_04": 203,
-      "ndtmf:P41:P41_01": 195,
-      "ndtmf:P41:P41_02": 172
+      "ndtmf:P41:civa:batch_202": 1000,
+      "ndtmf:P41:P41_03": 267,
+      "ndtmf:P41:P41_05": 264,
+      "ndtmf:P41:P41_06_notch": 260,
+      "ndtmf:P41:P41_04": 240,
+      "ndtmf:P41:P41_01": 235,
+      "ndtmf:P41:P41_02": 213
     },
     "batch_distribution": {
       "batch_013": 1000,
       "batch_014": 1000,
+      "batch_015": 1000,
       "batch_201": 1000,
-      "batch_015": 500,
-      "batch_202": 500
+      "batch_202": 1000
     },
     "random_image_level": {
       "acc": 0.5,
       "auc": 1.0,
-      "n_train": 2800,
-      "n_test": 1200
+      "n_train": 3500,
+      "n_test": 1500
     },
     "leave_batch_out": {
-      "acc": 0.4845,
+      "acc": 0.5155,
       "auc": 1.0,
-      "n_train": 2000,
+      "n_train": 3000,
       "n_test": 2000
     },
     "leave_one_real_defect_out": {
       "ndtmf:P41:P41_01": {
-        "acc": 0.8675,
+        "acc": 0.1856,
         "auc": 1.0,
-        "n_train": 2305,
-        "n_test": 1472
+        "n_train": 1734,
+        "n_test": 1266
       },
       "ndtmf:P41:P41_02": {
-        "acc": 0.8813,
+        "acc": 0.1712,
         "auc": 1.0,
-        "n_train": 2328,
-        "n_test": 1449
+        "n_train": 1756,
+        "n_test": 1244
       },
       "ndtmf:P41:P41_03": {
-        "acc": 0.8508,
+        "acc": 0.2057,
         "auc": 1.0,
-        "n_train": 2276,
-        "n_test": 1501
+        "n_train": 1702,
+        "n_test": 1298
       }
     },
     "sim_to_real": {
-      "acc": 0.5108,
-      "auc": 0.9975,
-      "n_train": 1500,
-      "n_test": 2500
+      "acc": 0.493,
+      "auc": 1.0,
+      "n_train": 2000,
+      "n_test": 3000
     },
     "real_to_sim": {
-      "acc": 0.518,
-      "auc": 1.0,
-      "n_train": 2500,
-      "n_test": 1500
+      "acc": 0.489,
+      "auc": 0.999,
+      "n_train": 3000,
+      "n_test": 2000
     },
     "metadata_only": {
-      "acc": 0.505,
-      "n": 4000,
+      "acc": 0.4947,
+      "n": 5000,
       "n_batches": 5,
       "note": "features: batch one-hot only (批次指纹)"
     },
-    "shortcut": {
-      "flaw_only": {
-        "acc": 1.0,
-        "auc": 1.0,
-        "n_train": 1750,
-        "n_test": 750
-      },
-      "background_only": {
-        "acc": 1.0,
-        "auc": 1.0,
-        "n_train": 1750,
-        "n_test": 750
-      }
-    }
+    "shortcut": null
   },
   "config": {
-    "mlndt_max_containers": 80,
-    "ndtmf_real_strips": 2500,
-    "ndtmf_sim_strips": 1500,
+    "mlndt_max_containers": 120,
+    "ndtmf_real_strips": 3000,
+    "ndtmf_sim_strips": 2000,
     "epochs": 10,
     "device": "cuda"
   },
-  "wall_s": 556.6,
+  "wall_s": 674.5,
   "note": "audit of VTT virtual-flaw datasets; small CNN, not a foundation model"
 }

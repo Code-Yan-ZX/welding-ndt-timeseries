@@ -159,16 +159,23 @@ class NDTMLFlawAdapter(BaseNDTAdapter):
 
     @staticmethod
     def _raw_batch_bytes(comp: Path) -> int | None:
-        """压缩包内原始字节数（只读 xz index / lzma header，不解压数据）。"""
+        """压缩包内原始字节数（只读 xz index / lzma header，不解压数据）。
+
+        注意：本仓库的 ``.lzma`` 文件实际是 **XZ 格式**（magic ``fd377a585a00``，
+        CIVA 仿真批由 XZ 压缩但扩展名为 .lzma），按扩展名走 LZMA-alone header
+        会解析出垃圾字节数。一律先按 magic 判 XZ，再用 LZMA-alone 兜底。
+        """
         try:
-            if comp.suffix == ".lzma":
-                hdr = comp.open("rb").read(13)
-                if len(hdr) < 13:
-                    return None
+            with comp.open("rb") as f:
+                magic = f.read(6)
+            if magic == b"\xfd7zXZ\x00":
+                return _xz_uncompressed_size(comp)
+            hdr = comp.open("rb").read(13)
+            if len(hdr) >= 13:
                 import struct
                 size = struct.unpack("<Q", hdr[5:13])[0]
                 return None if size == 0xFFFFFFFFFFFFFFFF else int(size)
-            return _xz_uncompressed_size(comp)
+            return None
         except Exception:
             return None
 

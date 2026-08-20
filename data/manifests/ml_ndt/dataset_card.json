@@ -6,10 +6,10 @@
   "source": {
     "official_name": "ML-NDT (VTT)",
     "url": "https://github.com/iikka-v/ML-NDT",
-    "commit": "c9a21f3c8c835e9d2397859e8f02a38cec7b66ab",
+    "commit": "978ee7ec65028fa0a9876e783884cf6cbfa2c2f2",
     "license": "LGPL-3.0",
     "size_bytes": 2622750720,
-    "notes": "201 minibatch containers x 100 augmented B-scan images = 20,100 uint16 (100,256,256); 1 specimen; 3 real thermal fatigue cracks + eFlaw virtual flaws (arXiv:1903.11399); NOT a 3D volume acquisition"
+    "notes": "201 minibatch containers x 100 augmented B-scan images = 20,010 uint16 (100,256,256); 1 specimen; 3 real thermal fatigue cracks + eFlaw virtual flaws (arXiv:1903.11399); NOT a 3D volume acquisition"
   },
   "n_specimens": 1,
   "n_defect_instances": 3,
@@ -92,7 +92,11 @@
   "data_policy": {
     "specimen_count": 1,
     "volume_is_acquisition": false,
+    "container_is_acquisition": false,
     "real_defect_count": 3,
+    "n_images_total": 20010,
+    "n_flaw_positive": 12128,
+    "n_clean_control": 7882,
     "virtual_event_total": 20010,
     "split_by": "defect_instance_id",
     "train_val": "train 199 / val 2 (original repo split)",
@@ -100,8 +104,7 @@
       "algorithm": "sha256",
       "digest": "bf2da11d7618e7dcc159556e14ee58a0d97f5225477a949514a5ef98b0a107da",
       "size_bytes": 13107200
-    },
-    "audit_note": "corrected in M0-2B deterministic v2 data audit: .bins(100,256,256) is a minibatch container of 100 eFlaw-augmented B-scan images, not a volume acquisition; ~3 real crack templates drive 20,010 virtual flaw implantations; random sample-level splits do NOT measure generalization to new real defects"
+    }
   },
   "provenance": {
     "steps": [

@@ -7,7 +7,8 @@
 
 关键事实（由官方仓库/论文/元数据确认，见 docs/M0_2B_VTT_virtual_flaw_data_audit.md）：
 - ML-NDT：1 个物理试件，**3 条真实热疲劳裂纹**（1.6/4.0/8.6mm，arXiv:1903.11399）；
-  201 个 `.bins` 容器 ×100 帧 = 20,010 张 B-scan 图，由这 3 条裂纹经 eFlaw
+  **20,010 张增强 B-scan**（200 个容器×100 张 + 1 个容器×10 张），其中
+  **12,128 张 flaw-positive、7,882 张 clean/control**，由这 3 条裂纹经 eFlaw
   **植入/移动/幅度缩放**生成（`original_location` = 源裂纹区段，
   `factor` = 幅度缩放，`location` = 植入位置）。
 - NDT_ML_Flaw：1 个物理试件（P41），**6 个真实缺陷**（P41_01..05 裂纹 +
@@ -114,6 +115,10 @@ def train_cnn(Xtr: np.ndarray, ytr: np.ndarray, Xte: np.ndarray, yte: np.ndarray
         probs = torch.softmax(model(Xte_t), -1)[:, 1].cpu().numpy()
     acc = float(accuracy_score(yte, (probs >= 0.5).astype(int)))
     auc = float(roc_auc_score(yte, probs)) if len(np.unique(yte)) >= 2 else None
+    # 释放 GPU 缓存，避免多个协议训练在缓存分配器里累积导致 OOM
+    del model, Xtr_t, ytr_t, Xte_t, yte_t, probs
+    if device != "cpu":
+        torch.cuda.empty_cache()
     return {"acc": round(acc, 4), "auc": round(auc, 4) if auc is not None else None,
             "n_train": int(len(Xtr)), "n_test": int(len(Xte))}
 
@@ -149,8 +154,12 @@ def _patch_resize(patch: np.ndarray, size: int = 64) -> np.ndarray:
 
 
 def shortcut_mlndt(x: np.ndarray, y: np.ndarray, epochs: int, device: str,
-                   seed: int = 0, cap: int = 2500) -> dict:
+                   seed: int = 0, cap: int = 1500) -> dict:
     """对 ML-NDT 子集做 flaw-only / background-only / boundary-only 对照。
+
+    **探索性结果（audit_v2）**：缺陷回波区域由启发式最亮像素边界框
+    ``_flaw_bbox`` 定位，**不是真实植入 mask**；因此在未获得真实植入 mask 前，
+    本组结果只能作为探索性参考，不能作为正式捷径结论。
 
     - flaw-only：只保留缺陷回波区域（最亮像素附近 64×64）。
     - background-only：遮挡缺陷回波区域（置为该图局部中值），只留背景。
@@ -181,50 +190,6 @@ def shortcut_mlndt(x: np.ndarray, y: np.ndarray, epochs: int, device: str,
     tr, te = ridx[: int(0.7 * len(y))], ridx[int(0.7 * len(y)):]
     for name, xx in (("flaw_only", xf), ("background_only", xb),
                      ("boundary_only", xgr)):
-        out[name] = train_cnn(_normalize(xx[tr]), y[tr], _normalize(xx[te]), y[te],
-                              epochs, seed=seed, device=device)
-    return out
-
-
-def shortcut_ndtmf(x: np.ndarray, y: np.ndarray, defect_id: np.ndarray,
-                   positions: np.ndarray, epochs: int, device: str,
-                   seed: int = 0, cap: int = 2500) -> dict:
-    """NDT_ML_Flaw 捷径对照。positions: 每张图缺陷的 (depth, scan)（降采样坐标）。
-
-    NDT 条带 (60,896)：缺陷位置来自 metadata（原图 480×7168 中 (depth, position)，
-    降采样 8× 后 ≈ (depth/8, position/8)）。flaw-only 裁剪缺陷附近 32×64；
-    background-only 遮挡缺陷区域。
-    """
-    rng = np.random.default_rng(seed)
-    n = len(y)
-    if n > cap:
-        idx = rng.choice(n, cap, replace=False)
-        x = x[idx]
-        y = y[idx]
-        defect_id = defect_id[idx]
-        positions = [positions[int(i)] for i in idx]
-    xf = np.zeros((len(x), 64, 64), dtype=np.float32)
-    xb = np.zeros_like(x, dtype=np.float32)
-    for i in range(len(x)):
-        xi = x[i]
-        # 缺陷位置（降采样坐标）
-        d, s = positions[i] if positions[i] is not None else (xi.shape[0] // 2, xi.shape[1] // 2)
-        d = int(min(max(d, 0), xi.shape[0] - 1))
-        s = int(min(max(s, 0), xi.shape[1] - 1))
-        r0, r1 = max(0, d - 16), min(xi.shape[0], d + 16)
-        c0, c1 = max(0, s - 32), min(xi.shape[1], s + 32)
-        # 防止越界导致空 patch（元数据坐标异常/条带太短）
-        if r1 - r0 < 2:
-            r0, r1 = 0, min(xi.shape[0], 32)
-        if c1 - c0 < 2:
-            c0, c1 = 0, min(xi.shape[1], 64)
-        xf[i] = _patch_resize(xi[r0:r1, c0:c1], 64)
-        xb[i] = xi.copy()
-        xb[i][r0:r1, c0:c1] = float(np.median(xi))
-    out = {}
-    for name, xx in (("flaw_only", xf), ("background_only", xb)):
-        ridx = rng.permutation(len(y))
-        tr, te = ridx[: int(0.7 * len(y))], ridx[int(0.7 * len(y)):]
         out[name] = train_cnn(_normalize(xx[tr]), y[tr], _normalize(xx[te]), y[te],
                               epochs, seed=seed, device=device)
     return out
@@ -463,14 +428,19 @@ def run_mlndt_audit(d: dict, epochs: int, device: str) -> dict:
         x[tr_mask], y[tr_mask], x[te_mask], y[te_mask], epochs, device=device)
 
     # 3. 按模板分组（leave-template-out：留一个真实裂纹模板做 test）
-    #    train = 其它模板的缺陷图 + clean；test = 该模板缺陷图 + clean
-    #    （clean 为共享背景，保证二分类可测）
+    #    **clean 样本按容器划分（不共享）**：test clean 取前 20% 容器的 clean 图，
+    #    train clean 取其余容器的 clean 图 —— 同一张 clean 图不会同时进 train/test，
+    #    消除 clean 复用泄漏（audit_v2 修正）。
     tmpls = [t for t in tmpl_count if t != "clean"]
     clean_mask = d["template"] == "clean"
+    n_te_clean_cont = max(1, d["n_containers"] // 5)
+    te_clean_cont = set(range(n_te_clean_cont))       # 前 20% 容器
+    clean_test_mask = clean_mask & np.isin(d["container"], list(te_clean_cont))
+    clean_train_mask = clean_mask & ~np.isin(d["container"], list(te_clean_cont))
     tmpl_out = {}
     for t in sorted(tmpls)[:3]:                 # 只测前 3 个模板（省时）
-        tr_mask = ((d["template"] != t) & ~clean_mask) | clean_mask
-        te_mask = (d["template"] == t) | clean_mask
+        tr_mask = ((d["template"] != t) & ~clean_mask) | clean_train_mask
+        te_mask = (d["template"] == t) | clean_test_mask
         tmpl_out[t] = train_cnn(x[tr_mask], y[tr_mask], x[te_mask], y[te_mask],
                                 epochs, device=device,
                                 max_test=min(4000, int(te_mask.sum())))
@@ -521,14 +491,21 @@ def run_ndtmf_audit(d: dict, epochs: int, device: str) -> dict:
     out["leave_batch_out"] = train_cnn(
         x[tr_mask], y[tr_mask], x[te_mask], y[te_mask], epochs, device=device)
 
-    # 3. leave-one-real-defect-out（真实缺陷间；test = 该缺陷 + clean 共享背景）
+    # 3. leave-one-real-defect-out（真实缺陷间）
+    #    **clean 样本按批划分（不共享）**：test clean 取前 2 个真实批的 clean 条带，
+    #    train clean 取其余真实批 —— 消除 clean 复用泄漏（audit_v2 修正）。
     real_def = [i for i in set(d["defect_id"]) if "civa" not in i and i != "clean"]
     clean_mask = d["defect_id"] == "clean"
+    bids = sorted(set(d["batch_id"]))
+    real_bids = [b for b in bids if not b.startswith("batch_2")]   # batch_2xx = CIVA
+    te_clean_bids = set(real_bids[:2])
+    clean_test_mask = clean_mask & np.isin(d["batch_id"], list(te_clean_bids))
+    clean_train_mask = clean_mask & ~np.isin(d["batch_id"], list(te_clean_bids))
     lod_out = {}
     for rd in sorted(real_def)[:3]:
-        tr_mask = ((d["defect_id"] != rd) & ~clean_mask & ~d["is_sim"].astype(bool)) | \
-                  (clean_mask & ~d["is_sim"].astype(bool))
-        te_mask = (d["defect_id"] == rd) | (clean_mask & ~d["is_sim"].astype(bool))
+        tr_mask = ((d["defect_id"] != rd) & ~clean_mask &
+                   ~d["is_sim"].astype(bool)) | clean_train_mask
+        te_mask = (d["defect_id"] == rd) | clean_test_mask
         lod_out[rd] = train_cnn(x[tr_mask], y[tr_mask], x[te_mask], y[te_mask],
                                 epochs, device=device,
                                 max_test=min(4000, int(te_mask.sum())))
@@ -544,9 +521,9 @@ def run_ndtmf_audit(d: dict, epochs: int, device: str) -> dict:
     # 5. metadata-only
     out["metadata_only"] = metadata_only_ndtmf(d)
 
-    # 5b. 捷径对照（flaw-only / background-only）
-    out["shortcut"] = shortcut_ndtmf(x, y, d["defect_id"], d["positions"],
-                                     epochs, device)
+    # 5b. （audit_v2 移除）NDT shortcut 曾用缺陷 metadata 位置裁剪 flaw/background
+    #     —— 位置是标签相关特征，会引入标签泄漏，且无真实植入 mask；已删除。
+    out["shortcut"] = None
     return out
 
 
@@ -555,9 +532,9 @@ def run_ndtmf_audit(d: dict, epochs: int, device: str) -> dict:
 # ---------------------------------------------------------------------------
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--mlndt-max", type=int, default=80, help="ML-NDT 容器数上限(≤201)")
-    ap.add_argument("--ndtmf-real", type=int, default=2500, help="NDT_ML_Flaw 真实条带数")
-    ap.add_argument("--ndtmf-sim", type=int, default=1500, help="NDT_ML_Flaw 仿真条带数")
+    ap.add_argument("--mlndt-max", type=int, default=120, help="ML-NDT 容器数上限(≤201)")
+    ap.add_argument("--ndtmf-real", type=int, default=3000, help="NDT_ML_Flaw 真实条带数")
+    ap.add_argument("--ndtmf-sim", type=int, default=2000, help="NDT_ML_Flaw 仿真条带数")
     ap.add_argument("--epochs", type=int, default=10)
     ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     args = ap.parse_args()
@@ -572,6 +549,8 @@ def main():
     print("[ML-NDT] random:", r1["random_image_level"],
           "| leave_container:", r1["leave_container_out"],
           "| metadata_only:", r1["metadata_only"])
+    print("[ML-NDT] shortcut 为探索性（启发式 bbox，无真实植入 mask）",
+          json.dumps(r1["shortcut"], ensure_ascii=False))
 
     print("[2/2] loading NDT_ML_Flaw ...")
     d2 = load_ndtmf(max_real=args.ndtmf_real, max_sim=args.ndtmf_sim)
@@ -627,7 +606,8 @@ def write_markdown(out: dict) -> None:
           f"| real→sim | {n['real_to_sim'].get('acc')} | {n['real_to_sim'].get('auc')} |",
           f"| metadata-only | {n['metadata_only'].get('acc')} | - |",
           "", "leave-one-real-defect-out:", json.dumps(n["leave_one_real_defect_out"], ensure_ascii=False),
-          "", "捷径对照（flaw/background）:", json.dumps(n["shortcut"], ensure_ascii=False)]
+          "", "捷径对照（NDT，audit_v2 已移除——原用标签相关位置裁剪，存在泄漏）:",
+          "removed (no real insertion mask; label-dependent crop removed)"]
     OUT_MD.write_text("\n".join(L), encoding="utf-8")
 
 

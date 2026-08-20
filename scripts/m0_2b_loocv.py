@@ -573,7 +573,7 @@ def aggregate(model_seeds: list[int], smoke: bool) -> dict:
                    f"（平均 E2−E0={avg_d20:+.4f}，正 seed 数 {n_pos}/{len(e2s)}）："
                    "**结束公开超声迁移实验**，不再扩大公开超声模型和数据。")
 
-    # E3 判断（seed42）：E3−E2 明显为负 -> 目标域继续 MAE 有害
+    # E3 观察（audit_v2）：E3 仅 seed42 单种子，不下"有害/有效"结论
     e3_judgment = "n/a (E3 未运行)"
     if e3_42 and e2_42 and e3_42["nonPP4_mean_auc"] is not None and \
             e2_42["nonPP4_mean_auc"] is not None:
@@ -586,15 +586,14 @@ def aggregate(model_seeds: list[int], smoke: bool) -> dict:
         per_fold_e2 = {f["test_coupon"]: f["test_auc"] for f in e2_42["folds"]}
         fold_changes = {c: round(per_fold[c] - per_fold_e2[c], 4)
                         for c in COUPONS}
-        harmful = d32 < -0.01
         e3_judgment = {
             "e3_minus_e2": round(d32, 4),
             "e3_minus_e1": round(d31, 4) if d31 is not None else None,
             "per_fold_changes_vs_e2": fold_changes,
-            "target_continue_mae_harmful": harmful,
-            "note": "E3−E2 明显为负 -> 停止“外部预训练后继续目标域 MAE”路线，"
-                    "不继续调参（此结论独立于 E2 是否成立）。" if harmful else
-                    "E3−E2 未明显为负，目标域继续 MAE 路线需结合三种子评估。",
+            "n_seeds": 1,
+            "conclusion": "E3 仅一个确定性种子（seed42），不下'有害'或'有效'结论；"
+                          "初始版本'E3 有害'是初始化 seed 顺序伪影，但单种子不足以"
+                          "说 E3 有效。",
         }
 
     out = {
@@ -676,13 +675,13 @@ def write_aggregate_markdown(agg: dict, path: Path) -> None:
     if isinstance(agg["e3_seed42"], dict):
         ej = agg["e3_seed42"]
         L += ["",
-              "## E3（seed42 确定性复跑）",
+              "## E3（seed42 单种子观察）",
               "",
               f"- E3 − E2 = {ej['e3_minus_e2']:+.4f}",
               f"- E3 − E1 = {(ej['e3_minus_e1'] if ej['e3_minus_e1'] is not None else float('nan')):+.4f}",
               f"- 每折变化（vs E2）：{ej['per_fold_changes_vs_e2']}",
-              f"- 目标域继续 MAE 是否仍有害：{'是' if ej['target_continue_mae_harmful'] else '否'}",
-              f"- {ej['note']}"]
+              f"- 种子数：{ej['n_seeds']}（仅 seed42）",
+              f"- 结论：{ej['conclusion']}"]
     L.append("")
     L.append("> 措辞纪律：单 seed 不能写“证明”；多种子成立只能写“提供可复现的"
              "小幅迁移证据”；不得写成“突破 PAUT 天花板”除非确实显著超过匹配协议"

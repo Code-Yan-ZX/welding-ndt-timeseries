@@ -1,5 +1,11 @@
 # M0-2B 数据真实性、独立性与捷径学习审计（ML-NDT / NDT_ML_Flaw，VTT 虚拟缺陷数据）
 
+> ⚠ **audit_v2 取代**：本报告为 v1。审计结论以
+> [`docs/M0_2B_VTT_virtual_flaw_data_audit_v2.md`](M0_2B_VTT_virtual_flaw_data_audit_v2.md)
+> 为准（audit_v2 修复了 leave-out 的 clean 复用泄漏、删除了标签相关位置的 NDT
+> shortcut、将 ML-NDT shortcut 降级为探索性、并明确区分上游事实/实验结论/不
+> 支持推断）。v1 保留作为历史记录。
+>
 > 日期：2026-08-19（deterministic v2 阶段）
 > 对象：ML-NDT（Virkkunen et al., 2019, arXiv:1903.11399）与 NDT_ML_Flaw
 > （VTT / koomas），两者被 M0-2B 用作外部超声 MAE 预训练素材。
@@ -15,14 +21,15 @@
 - ML-NDT 与 NDT_ML_Flaw 均为 **VTT 虚拟缺陷（eFlaw）数据增强流程**生成，
   生成机制**作者已公开声明**（论文与官方 README）。
 - **有效独立单元远小于 nominal 数量**：
-  - ML-NDT：1 试件、**3 条真实裂纹**，20,010 张含缺陷图全部由这 3 条裂纹
-    经 eFlaw 植入/移动/幅度缩放生成（另有 ~7,900 张背景/噪声帧）。
+  - ML-NDT：1 试件、**3 条真实裂纹**，**20,010 张增强图**中 **12,128 张
+    flaw-positive** 由这 3 条裂纹经 eFlaw 植入/移动/幅度缩放生成，另有
+    **7,882 张 clean/control**（背景/噪声，含 size=0 噪声模板）。
   - NDT_ML_Flaw：1 试件（P41）、**6 个真实缺陷 + 10 个 CIVA 仿真模板**，
     17,000 条带是这 6 个真实缺陷的密集扫描/增强 + 仿真。
 - **随机样本级性能不代表对新真实缺陷的泛化**（捷径审计证据见 §6）：
   小 CNN 在 ML-NDT 随机图像级划分上 acc≈0.99 / AUC≈0.999，但该性能主要由
   模板复用 + 植入伪影 + 背景/批次结构驱动；metadata/背景/边界对照揭示了
-  捷径成分。**不能**把 ~20,100 / 17,000 当作"数万条独立真实缺陷"。
+  捷径成分。**不能**把 ~20,010 / 17,000 当作"数万条独立真实缺陷"。
 - 对 M0-2B 结论的影响：外部预训练数据（E2/E3 的输入）本质是"单试件虚拟缺陷
   增强语料"，不是"大规模独立真实缺陷"。因此 E2/E3 的任何信号最多只能解释为
   "VTT 虚拟缺陷增强超声语料的迁移"，**不能**解释为"学到通用真实缺陷物理表征"，
@@ -54,7 +61,8 @@
   `flaw=0: 7,882`；
 - 5 个 `(noise_threshold, max_amplitude, size)` 源模板，其中 **3 个为真实裂纹
   （size 1.6/4.0/8.6，label=1）**，2 个 size=0.0 的为噪声/背景变体（label=0）；
-  20,010 次植入全部来自这 3 条裂纹模板；
+  12,128 张 flaw-positive 图全部由这 3 条裂纹模板经 eFlaw 植入生成
+  （~4,000 次/模板）；7,882 张 clean/control 为背景/噪声（含 size=0 噪声模板）。
 - `original_location`（源裂纹区段）/ `location`（植入位置）/ `factor`
   （幅度缩放 0.4–1.0）字段直接记录了"模板重复植入"过程；
 - `.labels` 逐帧 `[flaw 0/1, equivalent_flaw_size]`，`equivalent_flawsize`
@@ -93,14 +101,14 @@
 
 | 数据集 | nominal 图像数 | 物理试件数 | 真实独立缺陷数 | 原始缺陷模板数 | 仿真模板/批次数 | 背景来源数 | 推荐最小分组单位 |
 |---|---:|---:|---:|---:|---:|---:|---|
-| ML-NDT | 20,100 张（201 容器×100，1 容器 10 帧） | **1**（316L 管道单对焊接头） | **3**（热疲劳裂纹 1.6/4.0/8.6mm） | 3（另 2 个 size=0 噪声模板，label=0） | 0（eFlaw 增强非独立仿真） | 1（同一 45° 扫描线背景区段复制，见论文） | `defect_instance_id`（3 单元） |
+| ML-NDT | 20,010 张（200 容器×100 + 1 容器×10） | **1**（316L 管道单对焊接头） | **3**（热疲劳裂纹 1.6/4.0/8.6mm） | 3（另 2 个 size=0 噪声模板，label=0） | 0（eFlaw 增强非独立仿真） | 1（同一 45° 扫描线背景区段复制，见论文） | `defect_instance_id`（3 单元） |
 | NDT_ML_Flaw | 17,000 条带（17 批×1000） | **1**（P41 异种金属焊缝） | **6**（P41_01..05 裂纹 + P41_06_notch EDM） | 6（真实）+ 10（CIVA） | **10**（CIVA，batch_201–210） | 1（P41 扫描，每批 ~50% clean） | `defect_instance_id` / batch（16 单元） |
 
 关键回答：
-- **20,100 与 17,000 是"图像数/条带数"，不是独立采集数**：ML-NDT 的有效独立
+- **20,010 与 17,000 是"图像数/条带数"，不是独立采集数**：ML-NDT 的有效独立
   单元 ≈ 3 条真实裂纹；NDT_ML_Flaw ≈ 6 个真实缺陷（+10 个仿真模板）。
 - **同一缺陷模板被重复使用的次数**：ML-NDT 每条真实裂纹被植入 ~6,500 次
-  （20,010 植入 / 3 模板）；NDT_ML_Flaw 每个真实缺陷在 ~10 批中反复出现
+  （12,128 张缺陷图 / 3 模板 ≈ 4,000 次/模板）；NDT_ML_Flaw 每个真实缺陷在 ~10 批中反复出现
   （P41_01..05 每批 65–106 条 × 7 批 ≈ 500–700 条/缺陷）。
 - **正负样本是否共享背景**：是。ML-NDT 干净帧与缺陷帧来自同一背景扫描区段
   （论文明确"copy unflawed section to another location"）；NDT_ML_Flaw 每批
@@ -129,9 +137,9 @@
 |---|---|---|---|
 | `data/manifests/ml_ndt/dataset_card.json` | `volume_is_acquisition: true`；"201 volumes × (100,256,256)" | `volume_is_acquisition: false`；"201 minibatch containers × 100 augmented B-scan images"；tensor key 改 `minibatch`；加 audit_note | 论文 "minibatches of 100 UT-images per file" |
 | `src/wndt/data/adapters/ml_ndt.py` | "201 volume" 术语 | "201 个 minibatch 容器" + 数据生成口径注释 | 同上 |
-| `docs/M0_2A_ultrasound_data_integration_report.md` | "201 volume / 20,100 帧" | "201 个 minibatch 容器 / 20,100 张 B-scan（非三维体积采集）" | 同上 |
-| `docs/M0_public_ndt_dataset_audit.md` | "201 体积 / 20,100 帧" | "201 容器 / 20,100 张 eFlaw 增强 B-scan" | 同上 |
-| `docs/M0_2B_external_ultrasound_transfer_report.md` | "201 volume / 100 帧" | "201 个 minibatch 容器 / 20,100 张 eFlaw 增强 B-scan" | 同上 |
+| `docs/M0_2A_ultrasound_data_integration_report.md` | "201 volume / 20,100 帧" | "201 个 minibatch 容器 / 20,010 张 B-scan（12,128 缺陷 / 7,882 干净；非三维体积采集）" | 同上 |
+| `docs/M0_public_ndt_dataset_audit.md` | "201 体积 / 20,100 帧" | "201 容器 / 20,010 张 eFlaw 增强 B-scan（12,128 缺陷 / 7,882 干净）" | 同上 |
+| `docs/M0_2B_external_ultrasound_transfer_report.md` | "201 volume / 100 帧" | "201 个 minibatch 容器 / 20,010 张 eFlaw 增强 B-scan" | 同上 |
 
 > 修改前的版本由 git 历史保留（供审计回查），此处不另设备份。
 
@@ -142,49 +150,57 @@
 脚本：`scripts/m0_2b_vtt_data_audit.py`；输出：
 `experiments/results/m0_2b_vtt_data_audit.{json,md}`。
 
+> **audit_v2 修正**：leave-template-out / leave-one-defect-out 的 **clean 样本
+> 按容器/批划分**（不再同时进 train/test，消除 clean 复用泄漏）；NDT shortcut
+> 已删除（原用标签相关位置裁剪）；ML-NDT shortcut 标记为**探索性**（启发式
+> bbox，无真实植入 mask）。下表为 audit_v2 结果（120 ML-NDT 容器 / 5,000 NDT
+> 条带，epochs=10，lr=5e-4，耗时 674s）。
+
 | 数据集 | 协议 | acc | auc |
 |---|---|---|---|
-| ML-NDT | 随机图像级划分 | 0.8996 | **1.0000** |
-| ML-NDT | leave-container-out（留 10% 容器） | 0.8675 | **1.0000** |
-| ML-NDT | leave-template-out：8.6mm 裂纹 | 0.9912 | 1.0000 |
-| ML-NDT | leave-template-out：1.6mm 裂纹 | 0.8800 | 0.9371 |
-| ML-NDT | leave-template-out：4.0mm 裂纹 | 0.6613 | **0.7376** |
-| ML-NDT | 容器前/后半分 | 0.9985 | 1.0000 |
-| ML-NDT | metadata-only（仅容器 one-hot） | 0.5929 | — |
-| ML-NDT | 捷径 flaw-only / background-only / boundary-only | 0.9733 / **0.9453** / 0.7440 | 0.9982 / **0.9912** / 0.9681 |
+| ML-NDT | 随机图像级划分 | 0.9908 | **1.0000** |
+| ML-NDT | leave-container-out（留 10% 容器） | 0.5950 | **1.0000** |
+| ML-NDT | leave-template-out：8.6mm 裂纹 | 1.0000 | 1.0000 |
+| ML-NDT | leave-template-out：1.6mm 裂纹 | 0.2802 | **0.4102** |
+| ML-NDT | leave-template-out：4.0mm 裂纹 | 0.2795 | **0.7634** |
+| ML-NDT | 容器前/后半分 | 0.6132 | 1.0000 |
+| ML-NDT | metadata-only（仅容器 one-hot） | 0.5847 | — |
+| ML-NDT | 捷径 flaw-only / background-only / boundary-only（探索性） | 0.9444 / 0.9178 / 0.9156 | 0.9920 / 0.9887 / 0.9652 |
 | NDT_ML_Flaw | 随机图像级 | 0.5000 | **1.0000** |
-| NDT_ML_Flaw | leave-batch-out | 0.4845 | **1.0000** |
-| NDT_ML_Flaw | sim→real（CIVA 训练 → 真实测试） | 0.5108 | **0.9975** |
-| NDT_ML_Flaw | real→sim | 0.5180 | 1.0000 |
-| NDT_ML_Flaw | leave-one-real-defect-out（P41_01/02/03） | 0.868/0.881/0.851 | 均 1.0000 |
-| NDT_ML_Flaw | metadata-only（仅 batch one-hot） | 0.5050 | — |
-| NDT_ML_Flaw | 捷径 flaw-only / background-only | 1.0000 / **1.0000** | 1.0000 / **1.0000** |
+| NDT_ML_Flaw | leave-batch-out | 0.5155 | **1.0000** |
+| NDT_ML_Flaw | sim→real（CIVA 训练 → 真实测试） | 0.4930 | **1.0000** |
+| NDT_ML_Flaw | real→sim | 0.4890 | 0.9990 |
+| NDT_ML_Flaw | leave-one-real-defect-out（P41_01/02/03） | 0.186/0.171/0.206 | 均 1.0000 |
+| NDT_ML_Flaw | metadata-only（仅 batch one-hot） | 0.4947 | — |
+| NDT_ML_Flaw | 捷径（NDT） | —（已删除，见上） | — |
 
-结果解读（完整审计结果，epochs=10，lr=5e-4，小 CNN；脚本
-`scripts/m0_2b_vtt_data_audit.py`，耗时 556s）：
-- **随机图像级接近完美（AUC≈1.0），且 leave-container / leave-batch 仍 AUC≈1.0**
-  —— 模型在随机/容器级划分下几乎完美检测"缺陷"。但**按真实缺陷模板分组后并非
-  普遍崩塌**：ML-NDT leave-template-out 8.6mm 裂纹 AUC=1.0（大缺陷好学）、
-  1.6mm 0.94、**4.0mm 0.74（明显下降）**；NDT leave-one-real-defect-out 全部
-  AUC=1.0（靠共享 clean 背景 + 缺陷回波）。
-- **近重复（template 泄漏）是随机高分的核心机制**：ML-NDT 32×32 池化特征下，
-  test 样本 99.3% 能在 train 池中找到 **cos>0.99 的近重复**，且最近邻 100% 是
-  同模板 —— 随机划分让同一模板的近重复副本跨 train/test。
-- **存在背景/上下文捷径**：ML-NDT **background-only AUC=0.9912**、NDT_ML_Flaw
-  **background-only AUC=1.0** —— 即使遮挡缺陷回波区域，模型仍能近乎完美分类，
-  说明缺陷检测显著依赖**缺陷回波周围的背景/上下文（植入残留或背景结构）**。
-  同时 flaw-only 也接近完美（缺陷回波本身可判），二者叠加 → **既学缺陷信号，
-  也学背景/植入捷径**。
-- **metadata-only（批次/容器指纹）弱**（ML-NDT 0.59 / NDT 0.51）→ 批次指纹
-  **不是**主导捷径；主导捷径是**模板近重复 + 缺陷上下文**。
-- **sim→real AUC 0.9975**：CIVA 仿真训练能很好排名真实缺陷（但 acc≈0.51 说明
-  阈值不校准），说明仿真与真实在该任务上高度同构 —— 但这仍是同一试件的缺陷
-  形态，不构成跨试件泛化证据。
+结果解读（audit_v2）：
+- **随机图像级 AUC≈1.0**，leave-container / leave-batch 后 **AUC 仍≈1.0**（acc
+  在阈值不校准时可跌到 ~0.5–0.6，AUC 是稳健指标）。
+- **clean 泄漏修复后，ML-NDT leave-template-out 明显崩塌**：8.6mm 大裂纹
+  AUC=1.0（大缺陷模板信号强）、**1.6mm AUC=0.41（低于机会）、4.0mm AUC=0.76**。
+  —— v1 报告的 leave-template AUC（0.94/0.74）被 clean 复用泄漏**高估**；
+  修复后证明**模型对新尺寸模板（尤其小裂纹）不能泛化**。
+- **NDT leave-one-real-defect-out 修复后 AUC 仍=1.0**（但 acc 跌到 ~0.17–0.21，
+  阈值不校准）：同一试件 P41 的 6 个真实缺陷回波形态相似，模型能对留出缺陷
+  排序 —— 这是**同试件内**缺陷间泛化，**不是跨试件/新焊缝泛化**。
+- **近重复（template 泄漏）是随机高分的核心机制**：ML-NDT test 样本 **99.7%**
+  能在 train 池中找到 **cos>0.99 的同模板近重复**，最近邻 100% 同模板。
+- **背景/上下文捷径（探索性）**：ML-NDT background-only **AUC=0.9887** ——
+  即使遮挡（启发式定位的）缺陷回波区域，模型仍能近乎完美分类。**因缺陷回波
+  区域由启发式最亮像素 bbox 定位（非真实植入 mask），此结论为探索性**（audit_v2
+  降级）。NDT shortcut 因标签相关位置裁剪已删除。
+- **metadata-only（批次/容器指纹）弱**（ML-NDT 0.58 / NDT 0.49）→ 批次指纹
+  **不是**主导捷径；主导捷径是**模板近重复 + 缺陷上下文（植入残留）**。
+- **sim→real AUC≈1.0**：CIVA 仿真训练能很好排名真实缺陷（acc≈0.49 说明阈值
+  不校准）；仿真与真实在**同试件同任务**上高度同构，但**不构成跨试件泛化证据**。
 
 **结论（按任务规定措辞）**：
 > **"随机样本级性能主要受到模板复用、背景/批次指纹或植入伪影影响，不能代表
 > 对新真实缺陷的泛化。"**
-> background-only 仍保持高 AUC → **明确报告存在 background/context shortcut**。
+> ML-NDT background-only 仍保持高 AUC（探索性）→ **存在 background/context
+> shortcut 的探索性证据**；leave-template-out 修复 clean 泄漏后小模板崩塌 →
+> 随机高分的泛化解释不成立。
 
 ---
 
@@ -272,7 +288,7 @@
    按 defect_instance_id 划分，禁止把源数据随机划分当泛化证据）。
 
 **禁止：**
-1. 作为"数万条独立真实缺陷"使用/宣传（20,100 / 17,000 是图像/条带数，
+1. 作为"数万条独立真实缺陷"使用/宣传（20,010 / 17,000 是图像/条带数，
    有效独立单元 ≈ 3 / 6 真实缺陷 + 仿真模板）。
 2. 随机样本划分后宣称"接近 100% 真实缺陷识别"（捷径审计显示该性能含
    模板/背景/批次指纹与植入伪影）。
@@ -284,7 +300,13 @@
 ## 10. 附：运行方式
 
 ```bash
-CUDA_VISIBLE_DEVICES=0 python scripts/m0_2b_vtt_data_audit.py \
-    --mlndt-max 80 --ndtmf-real 2500 --ndtmf-sim 1500 --epochs 5
+CUDA_VISIBLE_DEVICES=0 PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True \
+    python scripts/m0_2b_vtt_data_audit.py \
+    --mlndt-max 120 --ndtmf-real 3000 --ndtmf-sim 2000 --epochs 10
 ```
 输出 `experiments/results/m0_2b_vtt_data_audit.{json,md}`。
+> audit_v2 修正：leave-template-out / leave-one-defect-out 的 clean 样本按
+> 容器/批划分（不再同时进 train/test，消除 clean 复用泄漏）；NDT shortcut
+> 已删除（原用标签相关位置裁剪，存在泄漏）；ML-NDT shortcut 标记为探索性
+> （启发式 bbox，无真实植入 mask）。最终结论以
+> `docs/M0_2B_VTT_virtual_flaw_data_audit_v2.md` 为准。

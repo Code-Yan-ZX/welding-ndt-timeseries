@@ -272,6 +272,37 @@ def test_live_read_ndt_ml_flaw():
         print(f"ndt_ml_flaw live smoke skipped: {e}")
 
 
+def test_mlndt_card_volume_is_acquisition_false():
+    """audit_v2 回归：ML-NDT 的 .bins 是 minibatch 容器而非三维体积采集。
+
+    dataset card 的 volume_is_acquisition 必须为 false；重新生成 manifest 时
+    也必须保持 false（build_ml_ndt_manifest 不写回 True）。
+    """
+    card = json.loads((manifest_dir_for("ml_ndt") / "dataset_card.json").read_text())
+    assert card["data_policy"]["volume_is_acquisition"] is False, \
+        "ML-NDT .bins 是 minibatch 容器, volume_is_acquisition 必须为 false"
+    assert card["data_policy"].get("container_is_acquisition") is False
+    # 数量口径统一：20,010 = 12,128 flaw + 7,882 clean
+    assert card["data_policy"]["n_images_total"] == 20010, card["data_policy"]
+    assert card["data_policy"]["n_flaw_positive"] == 12128, card["data_policy"]
+    assert card["data_policy"]["n_clean_control"] == 7882, card["data_policy"]
+    # tensor key / 术语
+    assert card["tensors"][0]["key"] == "minibatch", card["tensors"]
+    # 重新生成 manifest（写临时目录）也保持 volume_is_acquisition=false
+    try:
+        import tempfile
+        from wndt.data.adapters.ml_ndt import build_ml_ndt_manifest
+        tmp = Path(tempfile.mkdtemp())
+        build_ml_ndt_manifest(out_dir=tmp, write_parquet=False)
+        gen = json.loads((tmp / "dataset_card.json").read_text())
+        assert gen["data_policy"]["volume_is_acquisition"] is False
+        assert gen["data_policy"]["n_flaw_positive"] == 12128
+        print("ml_ndt card volume_is_acquisition=false OK (regen preserved)")
+    except (FileNotFoundError, IndexError) as e:
+        print(f"ml_ndt regen skipped (no raw data): {e}")
+    print("test_mlndt_card_volume_is_acquisition_false OK")
+
+
 def test_all():
     test_cards_valid_against_schema()
     test_records_parquet_consistency()
@@ -286,6 +317,7 @@ def test_all():
     test_live_read_penelope()
     test_live_read_ml_ndt()
     test_live_read_ndt_ml_flaw()
+    test_mlndt_card_volume_is_acquisition_false()
     print("\nAll adapter tests passed.")
 
 

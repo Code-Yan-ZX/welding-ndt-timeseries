@@ -5,7 +5,7 @@
   "data_seed": 42,
   "det_version": "det_v2",
   "run_type": "smoke",
-  "code_commit": "acf6bbbe78b0",
+  "code_commit": "978ee7ec6502",
   "head": {
     "lr": 0.001,
     "epochs": 1,
@@ -31,7 +31,7 @@
       "checkpoint": null,
       "optimizer_steps": 20,
       "epochs_run": 1,
-      "wall_s": 1.4
+      "wall_s": 1.2
     },
     {
       "test_coupon": "PP4",

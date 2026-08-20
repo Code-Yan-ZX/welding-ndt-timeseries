@@ -60,19 +60,20 @@
     不再扩大公开超声模型与数据。初始版本（seed42）的 E2>E0 正信号（+0.016）
     是模型/分类头初始化 seed 设置顺序问题的伪影（det_v2 已修正）。
   - **数据审计（新增）**：ML-NDT / NDT_ML_Flaw 均为 VTT 虚拟缺陷（eFlaw）生成
-    —— ML-NDT 仅 1 试件 3 条真实裂纹（20,010 张 B-scan 由 eFlaw 植入生成，
+    —— ML-NDT 仅 1 试件 3 条真实裂纹（20,010 张增强 B-scan：12,128 张缺陷 / 7,882 张干净控制，由 eFlaw 植入生成，
     `.bins` 是 100 张图的 minibatch 容器**不是**三维体积采集）；
     NDT_ML_Flaw 仅 1 试件（P41）6 个真实缺陷 + 10 个 CIVA 仿真模板（17,000
     条带）。**有效独立单元远小于 nominal 数量**；随机样本级性能含模板/背景
     复用与植入伪影，不能代表对新真实缺陷的泛化。详见
-    `docs/M0_2B_VTT_virtual_flaw_data_audit.md`。
+    `docs/M0_2B_VTT_virtual_flaw_data_audit_v2.md`（audit_v2）。
   - 交付物：`src/wndt/models/ultrasound_mae.py`、
     `src/wndt/data/ultrasound_pretrain.py`、`scripts/m0_2b_pretrain.py`、
     `scripts/m0_2b_loocv.py`、`scripts/m0_2b_vtt_data_audit.py`、
     `configs/m0_2b_ultrasound_mae.yaml`、`tests/test_m0_2b.py`
     （10 项原有 + 11 项确定性审计）、
     `docs/M0_2B_external_ultrasound_transfer_report.md`、
-    `docs/M0_2B_VTT_virtual_flaw_data_audit.md`、
+    `docs/M0_2B_VTT_virtual_flaw_data_audit_v2.md`、
+    `docs/M0_2B_VTT_virtual_flaw_data_audit.md`（v1 历史）、
     `experiments/results/m0_2b_*_det_v2*.{json,md}`（det_v2 多种子结果，
     初始 seed42 结果保留在 `m0_2b_seed42.{json,md}` 并标记为被 det_v2 取代）。
   - **在获得可验证的同试件、同坐标、成对 UT+ECT 公共数据之前，不做真正的融合

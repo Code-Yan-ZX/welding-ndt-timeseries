@@ -424,12 +424,17 @@ def build_ml_ndt_manifest(out_dir: Path = MANIFEST_DIR, write_parquet: bool = Tr
         })
     n_virtual_total = sum(r.extra.get("n_virtual_events", 0) for r in records)
 
-    # volume 级 checksum（首个 .bins 示例）
+    # minibatch 容器级 checksum（首个 .bins 示例）
     bins = []
     for r in records:
         p = ad._volume_path(r.acquisition_id)
         bins.append(p)
     chk = checksum_file(bins[0]) if bins else None
+
+    # 数量口径（audit_v2）：20,010 张增强 B-scan = 12,128 flaw-positive + 7,882 clean
+    n_flaw = sum(r.extra.get("n_flaw_frames", 0) for r in records)
+    n_images_total = sum(r.extra.get("ultrasonic", {}).get("n_frames", 0) for r in records)
+    n_clean = n_images_total - n_flaw
 
     card_path = write_dataset_card(
         dataset_name=DATASET_NAME,
@@ -441,7 +446,9 @@ def build_ml_ndt_manifest(out_dir: Path = MANIFEST_DIR, write_parquet: bool = Tr
             "commit": _git_head(),
             "license": LICENSE,
             "size_bytes": sum(p.stat().st_size for p in bins),
-            "notes": "201 volumes x (100,256,256) uint16; 1 specimen; 3 real thermal fatigue cracks + virtual flaws",
+            "notes": ("201 minibatch containers x 100 augmented B-scan images = 20,010 "
+                      "uint16 (100,256,256); 1 specimen; 3 real thermal fatigue cracks "
+                      "+ eFlaw virtual flaws (arXiv:1903.11399); NOT a 3D volume acquisition"),
         },
         n_specimens=1,
         n_defect_instances=len(defects),
@@ -456,18 +463,24 @@ def build_ml_ndt_manifest(out_dir: Path = MANIFEST_DIR, write_parquet: bool = Tr
         }],
         defects=defects,
         tensors=[{
-            "key": "volume", "path": "raw/ML-NDT/<volume_id>/*.bins",
-            "format": "raw", "axes": ["frame", "y", "x"],
+            "key": "minibatch", "path": "raw/ML-NDT/<container_id>/*.bins",
+            "format": "raw", "axes": ["image", "y", "x"],
             "dtype": "uint16", "unit": "raw_amplitude",
             "n_records": len(records),
+            "note": ("100 B-scan images per .bins container (minibatch), NOT a 3D "
+                     "volume acquisition (arXiv:1903.11399)"),
         }],
         out_dir=out_dir,
         extra={
             "data_policy": {
-                "specimen_count": 1,       # 201 volume ≠ 201 specimen
-                "volume_is_acquisition": True,
+                "specimen_count": 1,       # 201 容器 ≠ 201 试件
+                "volume_is_acquisition": False,   # audit_v2 修正：.bins 是 minibatch 容器
+                "container_is_acquisition": False,
                 "real_defect_count": 3,    # 热疲劳裂纹 1.6/4.0/8.6 mm
-                "virtual_event_total": n_virtual_total,   # eFlaw 重植入事件总数
+                "n_images_total": n_images_total,     # 20,010 张增强 B-scan
+                "n_flaw_positive": n_flaw,            # 12,128
+                "n_clean_control": n_clean,           # 7,882
+                "virtual_event_total": n_virtual_total,  # jsons 缺陷事件数（含 size=0 噪声模板，非独立缺陷数）
                 "split_by": "defect_instance_id",
                 "train_val": "train 199 / val 2 (original repo split)",
                 "raw_volume_checksum": chk,
@@ -484,7 +497,8 @@ def build_ml_ndt_manifest(out_dir: Path = MANIFEST_DIR, write_parquet: bool = Tr
         rec_path = out_dir / "records.parquet"
     print(f"[ml_ndt] card: {card_path}")
     print(f"[ml_ndt] recs: {rec_path}  ({len(records)} records)")
-    print(f"[ml_ndt] specimens=1 defect_instances={len(defects)} volumes={len(records)}")
+    print(f"[ml_ndt] specimens=1 defect_instances={len(defects)} containers={len(records)} "
+          f"images={n_images_total} (flaw {n_flaw} / clean {n_clean})")
     return card_path, rec_path
 
 

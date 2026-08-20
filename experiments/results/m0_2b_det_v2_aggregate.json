@@ -2,7 +2,7 @@
   "exp": "m0_2b_det_v2_aggregate",
   "det_version": "det_v2",
   "run_type": "full",
-  "code_commit": "acf6bbbe78b0",
+  "code_commit": "978ee7ec6502",
   "model_seeds": [
     42,
     43,
@@ -184,7 +184,7 @@
       "PP6": 0.0775,
       "PP7": 0.0375
     },
-    "target_continue_mae_harmful": false,
-    "note": "E3−E2 未明显为负，目标域继续 MAE 路线需结合三种子评估。"
+    "n_seeds": 1,
+    "conclusion": "E3 仅一个确定性种子（seed42），不下'有害'或'有效'结论；初始版本'E3 有害'是初始化 seed 顺序伪影，但单种子不足以说 E3 有效。"
   }
 }
