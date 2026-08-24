@@ -1,0 +1,103 @@
+{
+  "exp": "m0_2c_aggregate",
+  "run_type": "full",
+  "steps": 10000,
+  "model_seeds": [
+    42,
+    43,
+    44
+  ],
+  "ect_probe": {
+    "run_type_note": "transductive_unlabeled representation probe；SSL 使用全部 ECT 无标注视图后冻结；group 5 折按 config/specimen proxy，同一配置组绝不跨 fold；不得写成严格 cross-group 泛化。",
+    "per_seed": {
+      "42": {
+        "seed": 42,
+        "E": {
+          "roc_auc": 0.8486,
+          "pr_auc": 0.9838,
+          "balanced_acc": 0.5903
+        },
+        "PE": {
+          "roc_auc": 0.8667,
+          "pr_auc": 0.9824,
+          "balanced_acc": 0.5865
+        },
+        "d_roc_auc": 0.0181,
+        "d_pr_auc": -0.0014,
+        "d_balanced_acc": -0.0038
+      },
+      "43": {
+        "seed": 43,
+        "E": {
+          "roc_auc": 0.777,
+          "pr_auc": 0.985,
+          "balanced_acc": 0.5411
+        },
+        "PE": {
+          "roc_auc": 0.7949,
+          "pr_auc": 0.9883,
+          "balanced_acc": 0.5165
+        },
+        "d_roc_auc": 0.0179,
+        "d_pr_auc": 0.0033,
+        "d_balanced_acc": -0.0246
+      },
+      "44": {
+        "seed": 44,
+        "E": {
+          "roc_auc": 0.8432,
+          "pr_auc": 0.9809,
+          "balanced_acc": 0.5687
+        },
+        "PE": {
+          "roc_auc": 0.8558,
+          "pr_auc": 0.9804,
+          "balanced_acc": 0.5938
+        },
+        "d_roc_auc": 0.0126,
+        "d_pr_auc": -0.0005,
+        "d_balanced_acc": 0.0251
+      }
+    },
+    "avg_d_roc_auc": 0.0162,
+    "avg_d_pr_auc": 0.0005,
+    "avg_d_balanced_acc": -0.0011,
+    "n_seeds_pe_gt_e": 3,
+    "criterion": {
+      "min_delta": 0.01,
+      "min_positive_seeds": 2
+    },
+    "met": true
+  },
+  "paut_retention": {
+    "metric": "nonPP4_fold_mean (PP3/PP5/PP6/PP7)",
+    "per_seed": {
+      "42": {
+        "seed": 42,
+        "P": 0.571,
+        "PE": 0.5311,
+        "d_nonPP4": -0.0399
+      },
+      "43": {
+        "seed": 43,
+        "P": 0.5726,
+        "PE": 0.5047,
+        "d_nonPP4": -0.0679
+      },
+      "44": {
+        "seed": 44,
+        "P": 0.5768,
+        "PE": 0.5027,
+        "d_nonPP4": -0.0741
+      }
+    },
+    "avg_d_nonPP4": -0.0606,
+    "criterion": {
+      "min_delta": -0.01
+    },
+    "met": false,
+    "catastrophic_forgetting": true
+  },
+  "verdict": "PAUT 保持判据不通过（平均 P→E−P=-0.0606 < −0.01）：结论 = 灾难性遗忘，直接停止，不调参、不做 replay/freeze 补救实验。",
+  "code_commit": "0089735f00b5"
+}

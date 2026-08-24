@@ -79,7 +79,7 @@
   - **在获得可验证的同试件、同坐标、成对 UT+ECT 公共数据之前，不做真正的融合
     训练**，严禁把不同试件/材料/任务的 UT 与 ECT 强行拼接后称为"多模态融合"；
     严禁把 VTT 虚拟缺陷数据当作"数万条独立真实缺陷"或跨试件泛化证据。
-- **M0-2C（当前，下载 + 真实审计 + 接入设计已完成，未训练）**：为 **PAUT SSL
+- **M0-2C（当前，E/P→E 顺序 SSL 已训练，判据未过 → 结束）**：为 **PAUT SSL
   encoder → ECT continued SSL pretraining** 落地涡流数据。
   - **盘点结论**：本轮前本机 ECT=0（全盘搜索含 gitignore 区/共享盘/归档/HF
     cache 均无涡流文件；项目内三外部数据集均为超声）。
@@ -91,22 +91,37 @@
     I/Q（real/imaginary float64）+ magnitude/phase。**独立性**：`id` 是扫描序号
     非试件号，物理配置组 148 / 缺陷组 133；43 文件（5.8%）仅元数据无信号、
     36 文件缺 x/y/z mm。**禁止 sensor×frequency 或扫描级随机划分**。
-  - **迁移源修正**：主源 = **`experiments/runs/ssl_ae/encoder.pt`（P1 beam-mask，
-    非PP4 0.579±0.007）**；`ssl_ae_both`（P4b beam+depth ~0.566）仅可选消融。
-  - **推荐输入方案 B**：每（扫描, 频率）→ **I/Q 双通道 `(2,H,W)`，保留原生栅格**
-    （H=track、W=每 track 采样，~101×451；**不强制 49×512**；尺寸不一致 batch
-    内 padding，仅超大网格才等比例下采样）；第一层 `Conv2d(1,32,3×7)→
-    Conv2d(2,32,3×7)` 用 `old.repeat(1,2,1,1)/2` 初始化（已数值验证），其余
-    22/23 权重加载；**必须新建 ECT decoder + 2D 空间块掩码**。
-  - **实验设计（下一轮训练）**：E（scratch）vs **P→E**（加载 `ssl_ae/encoder.pt`
-    续训），同数据/steps/decoder/head/seed；评估含 **ECT 下游**（cross-material /
-    cross-sensor，判据 P→E−E ≥ +0.01 且 ≥2/3 seed 正）与 **PP3–PP7 回测**
-    （灾难性遗忘 vs 0.579±0.007）。
-  - 交付物：`docs/M0_2C_local_ect_inventory.md`（盘点）、
-    `docs/M0_2C_eddycus_data_audit.md`（真实审计 + 接入设计）、
-    `data/manifests/eddycus/`（manifest + records）、
-    `src/wndt/data/adapters/eddycus.py` + `EddyCusStem`、
-    `scripts/m0_2c_eddycus_audit.py`、`tests/test_m0_2c.py`（8 项全过）。
+  - **数据/划分修复**：正式训练只用 **695 个有信号扫描**（43 个 metadata-only
+    排除，×4 频率 = **2780 views**）；`split_indices` 的 sensor/material 真正按
+    sensor_type/material_type 分组（不退化 defect）；clean 记录按 specimen/config
+    proxy 分组（不归入单一 clean 单元）；每折训练前输出审计（记录数/组数/
+    clean-flaw/8 类分布/material-sensor），**train/val/test 缺正负样本即停止**。
+  - **输入方案 B**：每（扫描, 频率）→ **I/Q 双通道 `(2,H,W)`，保留原生栅格**
+    （不强制 49×512；同 batch 按尺寸 bucket；超大网格按**预先声明的等比例规则**
+    下采样：`S=max(ceil(H/256),ceil(W/768))`，如 202×1067→101×534）；每个
+    scan-frequency 每通道 median/MAD robust 归一化（valid 像素）；第一层
+    `Conv2d(1,32,3×7)→Conv2d(2,32,3×7)` 用 `old.repeat(1,2,1,1)/2`（22/23 权重
+    原样，missing/unexpected 断言为空）；**新建 ECTDecoder（输出当前 batch
+    H×W）+ 2D block=16×16 mask，mask_ratio=0.3，recon loss 只算 masked∩valid**。
+  - **正式结果（3 seeds 42/43/44 × 10000 steps，batch 16，固定预算）**：
+    - **ECT 迁移判据通过**：transductive group probe（clean vs flaw 二分类，
+      5 折 SGKFold 按 config/specimen proxy）平均 P→E−E = **+0.0162** ROC-AUC
+      （≥+0.01），**3/3 seed 为正**（+0.0181/+0.0179/+0.0126）。
+    - **PAUT 保持判据失败 → 灾难性遗忘**：PP3–PP7 规范 LOOCV（非PP4 逐折均值）
+      平均 P→E−P = **−0.0606**（< −0.01；逐 seed −0.0399/−0.0679/−0.0741）。
+      P 重跑 = 0.5710/0.5726/0.5768，与历史 0.579±0.007 一致。
+    - **总结论：顺序训练未得到更通用的 NDT 编码器**（ECT 增益但 PAUT 大幅遗忘），
+      按判据**结束 M0-2C，不做 replay/freeze 补救**。
+  - 交付物：`docs/M0_2C_local_ect_inventory.md`、`docs/M0_2C_eddycus_data_audit.md`、
+    `data/manifests/eddycus/`、`src/wndt/data/adapters/eddycus.py`、
+    `src/wndt/data/eddycus_pretrain.py`、`src/wndt/models/ssl_ae.py`（ECTDecoder/
+    ECTMaskedAE）、`scripts/m0_2c_eddycus_audit.py`、`scripts/m0_2c_ect_pretrain.py`、
+    `scripts/m0_2c_ect_probe.py`、`scripts/m0_2c_paut_retention.py`、
+    `scripts/m0_2c_aggregate.py`、`configs/m0_2c_ect.yaml`、
+    `tests/test_m0_2c.py` + `tests/test_m0_2c_training.py`（19 项审计全过）、
+    `reports/M0_2C_ECT顺序SSL实验报告.md`、
+    `experiments/results/m0_2c_*_seed{42,43,44}.json` + `m0_2c_aggregate.{json,md}`；
+    checkpoint 在 `experiments/runs/m0_2c/ect/`（不覆盖 `ssl_ae/encoder.pt`）。
 
 > ⚠ 限制：本阶段不进行超 10 GB 的新下载、不自动下载全部 LOTSA/UTSD、不做正式
 > 训练、不跑长时 GPU 任务。公开小数据实验不代表最终课题结论。

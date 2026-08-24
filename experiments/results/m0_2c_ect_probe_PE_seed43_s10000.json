@@ -1,0 +1,564 @@
+{
+  "exp": "m0_2c_ect_probe",
+  "cond": "PE",
+  "model_seed": 43,
+  "data_seed": 42,
+  "run_type": "transductive_unlabeled",
+  "smoke": false,
+  "ckpt": "/home/yzx/doct/welding-ndt-timeseries/experiments/runs/m0_2c/ect/PE_s43_s10000.pt",
+  "n_scans": 695,
+  "n_groups": 146,
+  "n_flaw": 632,
+  "n_clean": 63,
+  "8class_dist_scans": {
+    "clean": 63,
+    "gap": 492,
+    "mis_orientation": 75,
+    "copper_foil": 19,
+    "copper_roving": 18,
+    "ptfe_insert": 18,
+    "ondulation": 6,
+    "fuzz_ball": 4
+  },
+  "head": {
+    "lr": 0.001,
+    "epochs": 80,
+    "batch_size": 128,
+    "class_balance": true
+  },
+  "folds": [
+    {
+      "fold": 0,
+      "n_test": 122,
+      "n_test_flaw": 118,
+      "n_test_clean": 4,
+      "n_test_groups": 28,
+      "val_auc": 0.9864,
+      "thr": 0.1965,
+      "roc_auc": 0.7818,
+      "pr_auc": 0.9909,
+      "balanced_acc": 0.5953,
+      "epochs_run": 56,
+      "wall_s": 10.9,
+      "audit": {
+        "train": {
+          "n_records": 466,
+          "n_config_groups": 95,
+          "flaw": 416,
+          "clean": 50,
+          "defect_type_dist": {
+            "clean": 50,
+            "gap": 316,
+            "mis_orientation": 53,
+            "copper_foil": 16,
+            "copper_roving": 15,
+            "ptfe_insert": 9,
+            "ondulation": 6,
+            "fuzz_ball": 1
+          },
+          "material_dist": {
+            "HP-U300/122C": 393,
+            "Kohlegelege ST 50g": 55,
+            "0/90° Fabric 524 g/m²": 8,
+            "0/90° Fabric 565 g/m²": 1,
+            "0/90/45/-45° Fabric 1013 g/m²": 1,
+            "0/90 Fabric 565 g/m²": 8
+          },
+          "sensor_dist": {
+            "S13131 P3,3A 7,3 MHz": 450,
+            "S15172 P2,4H 8,5 MHz": 2,
+            "S13132 P5,8A 6,1 MHz": 1,
+            "S14150 P5,8H 9,2 MHz": 1,
+            "S14152 P3,3H 24,3 MHz": 1,
+            "S17257 P7H 17,0 MHz": 1,
+            "S13132 P5,8A 6,1MHz": 6,
+            "S15152 P3,3H 24,3MHz": 4
+          }
+        },
+        "val": {
+          "n_records": 107,
+          "n_config_groups": 23,
+          "flaw": 98,
+          "clean": 9,
+          "defect_type_dist": {
+            "gap": 88,
+            "clean": 9,
+            "mis_orientation": 3,
+            "ptfe_insert": 3,
+            "copper_foil": 3,
+            "fuzz_ball": 1
+          },
+          "material_dist": {
+            "HP-U300/122C": 81,
+            "Kohlegelege ST 50g": 9,
+            "0/90° Fabric 524 g/m²": 14,
+            "0/90 Fabric 565 g/m²": 3
+          },
+          "sensor_dist": {
+            "S13131 P3,3A 7,3 MHz": 91,
+            "S15172 P2,4H 8,5 MHz": 3,
+            "S14150 P5,8H 9,2 MHz": 3,
+            "S14152 P3,3H 24,3 MHz": 3,
+            "S17257 P7H 17,0 MHz": 3,
+            "S13132 P5,8A 6,1 MHz": 1,
+            "S15152 P3,3H 24,3MHz": 3
+          }
+        },
+        "test": {
+          "n_records": 122,
+          "n_config_groups": 28,
+          "flaw": 118,
+          "clean": 4,
+          "defect_type_dist": {
+            "clean": 4,
+            "gap": 88,
+            "mis_orientation": 19,
+            "copper_roving": 3,
+            "ptfe_insert": 6,
+            "fuzz_ball": 2
+          },
+          "material_dist": {
+            "HP-U300/122C": 98,
+            "Kohlegelege ST 50g": 7,
+            "0/90° Fabric 524 g/m²": 14,
+            "0/90 Fabric 565 g/m²": 3
+          },
+          "sensor_dist": {
+            "S13131 P3,3A 7,3 MHz": 108,
+            "S15172 P2,4H 8,5 MHz": 4,
+            "S14150 P5,8H 9,2 MHz": 2,
+            "S14152 P3,3H 24,3 MHz": 2,
+            "S17257 P7H 17,0 MHz": 2,
+            "S13132 P5,8A 6,1 MHz": 1,
+            "S15152 P3,3H 24,3MHz": 3
+          }
+        }
+      }
+    },
+    {
+      "fold": 1,
+      "n_test": 140,
+      "n_test_flaw": 131,
+      "n_test_clean": 9,
+      "n_test_groups": 31,
+      "val_auc": 0.8093,
+      "thr": 0.2877,
+      "roc_auc": 0.8075,
+      "pr_auc": 0.9847,
+      "balanced_acc": 0.4962,
+      "epochs_run": 21,
+      "wall_s": 3.6,
+      "audit": {
+        "train": {
+          "n_records": 459,
+          "n_config_groups": 92,
+          "flaw": 415,
+          "clean": 44,
+          "defect_type_dist": {
+            "clean": 44,
+            "gap": 320,
+            "mis_orientation": 53,
+            "copper_roving": 12,
+            "ptfe_insert": 15,
+            "copper_foil": 12,
+            "fuzz_ball": 1,
+            "ondulation": 2
+          },
+          "material_dist": {
+            "HP-U300/122C": 372,
+            "Kohlegelege ST 50g": 60,
+            "0/90° Fabric 524 g/m²": 21,
+            "0/90 Fabric 565 g/m²": 6
+          },
+          "sensor_dist": {
+            "S13131 P3,3A 7,3 MHz": 436,
+            "S15172 P2,4H 8,5 MHz": 6,
+            "S14150 P5,8H 9,2 MHz": 3,
+            "S14152 P3,3H 24,3 MHz": 3,
+            "S17257 P7H 17,0 MHz": 3,
+            "S13132 P5,8A 6,1 MHz": 2,
+            "S15152 P3,3H 24,3MHz": 4,
+            "S13132 P5,8A 6,1MHz": 2
+          }
+        },
+        "val": {
+          "n_records": 96,
+          "n_config_groups": 23,
+          "flaw": 86,
+          "clean": 10,
+          "defect_type_dist": {
+            "clean": 10,
+            "gap": 61,
+            "mis_orientation": 14,
+            "ptfe_insert": 3,
+            "copper_roving": 6,
+            "fuzz_ball": 2
+          },
+          "material_dist": {
+            "HP-U300/122C": 78,
+            "Kohlegelege ST 50g": 7,
+            "0/90° Fabric 524 g/m²": 8,
+            "0/90 Fabric 565 g/m²": 3
+          },
+          "sensor_dist": {
+            "S13131 P3,3A 7,3 MHz": 85,
+            "S15172 P2,4H 8,5 MHz": 2,
+            "S14150 P5,8H 9,2 MHz": 2,
+            "S14152 P3,3H 24,3 MHz": 2,
+            "S17257 P7H 17,0 MHz": 2,
+            "S15152 P3,3H 24,3MHz": 3
+          }
+        },
+        "test": {
+          "n_records": 140,
+          "n_config_groups": 31,
+          "flaw": 131,
+          "clean": 9,
+          "defect_type_dist": {
+            "clean": 9,
+            "gap": 111,
+            "mis_orientation": 8,
+            "copper_foil": 7,
+            "ondulation": 4,
+            "fuzz_ball": 1
+          },
+          "material_dist": {
+            "HP-U300/122C": 122,
+            "Kohlegelege ST 50g": 4,
+            "0/90° Fabric 524 g/m²": 7,
+            "0/90° Fabric 565 g/m²": 1,
+            "0/90/45/-45° Fabric 1013 g/m²": 1,
+            "0/90 Fabric 565 g/m²": 5
+          },
+          "sensor_dist": {
+            "S13131 P3,3A 7,3 MHz": 128,
+            "S15172 P2,4H 8,5 MHz": 1,
+            "S13132 P5,8A 6,1 MHz": 1,
+            "S14150 P5,8H 9,2 MHz": 1,
+            "S14152 P3,3H 24,3 MHz": 1,
+            "S17257 P7H 17,0 MHz": 1,
+            "S13132 P5,8A 6,1MHz": 4,
+            "S15152 P3,3H 24,3MHz": 3
+          }
+        }
+      }
+    },
+    {
+      "fold": 2,
+      "n_test": 157,
+      "n_test_flaw": 130,
+      "n_test_clean": 27,
+      "n_test_groups": 30,
+      "val_auc": 0.7919,
+      "thr": 0.1229,
+      "roc_auc": 0.9607,
+      "pr_auc": 0.9924,
+      "balanced_acc": 0.5185,
+      "epochs_run": 31,
+      "wall_s": 5.9,
+      "audit": {
+        "train": {
+          "n_records": 430,
+          "n_config_groups": 93,
+          "flaw": 405,
+          "clean": 25,
+          "defect_type_dist": {
+            "clean": 25,
+            "gap": 315,
+            "mis_orientation": 48,
+            "copper_foil": 13,
+            "copper_roving": 9,
+            "ptfe_insert": 12,
+            "ondulation": 5,
+            "fuzz_ball": 3
+          },
+          "material_dist": {
+            "HP-U300/122C": 365,
+            "Kohlegelege ST 50g": 27,
+            "0/90° Fabric 524 g/m²": 25,
+            "0/90° Fabric 565 g/m²": 1,
+            "0/90/45/-45° Fabric 1013 g/m²": 1,
+            "0/90 Fabric 565 g/m²": 11
+          },
+          "sensor_dist": {
+            "S13131 P3,3A 7,3 MHz": 396,
+            "S15172 P2,4H 8,5 MHz": 7,
+            "S14150 P5,8H 9,2 MHz": 4,
+            "S14152 P3,3H 24,3 MHz": 4,
+            "S17257 P7H 17,0 MHz": 4,
+            "S13132 P5,8A 6,1 MHz": 2,
+            "S13132 P5,8A 6,1MHz": 5,
+            "S15152 P3,3H 24,3MHz": 8
+          }
+        },
+        "val": {
+          "n_records": 108,
+          "n_config_groups": 23,
+          "flaw": 97,
+          "clean": 11,
+          "defect_type_dist": {
+            "clean": 11,
+            "gap": 67,
+            "mis_orientation": 23,
+            "ptfe_insert": 6,
+            "fuzz_ball": 1
+          },
+          "material_dist": {
+            "HP-U300/122C": 73,
+            "Kohlegelege ST 50g": 23,
+            "0/90° Fabric 524 g/m²": 11,
+            "0/90 Fabric 565 g/m²": 1
+          },
+          "sensor_dist": {
+            "S13131 P3,3A 7,3 MHz": 98,
+            "S15172 P2,4H 8,5 MHz": 2,
+            "S13132 P5,8A 6,1 MHz": 1,
+            "S14150 P5,8H 9,2 MHz": 2,
+            "S14152 P3,3H 24,3 MHz": 2,
+            "S17257 P7H 17,0 MHz": 2,
+            "S15152 P3,3H 24,3MHz": 1
+          }
+        },
+        "test": {
+          "n_records": 157,
+          "n_config_groups": 30,
+          "flaw": 130,
+          "clean": 27,
+          "defect_type_dist": {
+            "gap": 110,
+            "clean": 27,
+            "mis_orientation": 4,
+            "copper_roving": 9,
+            "copper_foil": 6,
+            "ondulation": 1
+          },
+          "material_dist": {
+            "HP-U300/122C": 134,
+            "Kohlegelege ST 50g": 21,
+            "0/90 Fabric 565 g/m²": 2
+          },
+          "sensor_dist": {
+            "S13131 P3,3A 7,3 MHz": 155,
+            "S15152 P3,3H 24,3MHz": 1,
+            "S13132 P5,8A 6,1MHz": 1
+          }
+        }
+      }
+    },
+    {
+      "fold": 3,
+      "n_test": 147,
+      "n_test_flaw": 126,
+      "n_test_clean": 21,
+      "n_test_groups": 30,
+      "val_auc": 0.8408,
+      "thr": 0.1111,
+      "roc_auc": 0.9048,
+      "pr_auc": 0.984,
+      "balanced_acc": 0.496,
+      "epochs_run": 29,
+      "wall_s": 5.9,
+      "audit": {
+        "train": {
+          "n_records": 435,
+          "n_config_groups": 92,
+          "flaw": 402,
+          "clean": 33,
+          "defect_type_dist": {
+            "clean": 33,
+            "gap": 320,
+            "mis_orientation": 45,
+            "copper_foil": 7,
+            "copper_roving": 12,
+            "ptfe_insert": 12,
+            "ondulation": 4,
+            "fuzz_ball": 2
+          },
+          "material_dist": {
+            "HP-U300/122C": 358,
+            "Kohlegelege ST 50g": 46,
+            "0/90° Fabric 524 g/m²": 21,
+            "0/90° Fabric 565 g/m²": 1,
+            "0/90/45/-45° Fabric 1013 g/m²": 1,
+            "0/90 Fabric 565 g/m²": 8
+          },
+          "sensor_dist": {
+            "S13131 P3,3A 7,3 MHz": 409,
+            "S15172 P2,4H 8,5 MHz": 5,
+            "S13132 P5,8A 6,1 MHz": 2,
+            "S14150 P5,8H 9,2 MHz": 3,
+            "S14152 P3,3H 24,3 MHz": 3,
+            "S17257 P7H 17,0 MHz": 3,
+            "S13132 P5,8A 6,1MHz": 4,
+            "S15152 P3,3H 24,3MHz": 6
+          }
+        },
+        "val": {
+          "n_records": 113,
+          "n_config_groups": 24,
+          "flaw": 104,
+          "clean": 9,
+          "defect_type_dist": {
+            "clean": 9,
+            "gap": 83,
+            "mis_orientation": 7,
+            "copper_roving": 6,
+            "copper_foil": 6,
+            "fuzz_ball": 1,
+            "ondulation": 1
+          },
+          "material_dist": {
+            "HP-U300/122C": 106,
+            "Kohlegelege ST 50g": 3,
+            "0/90 Fabric 565 g/m²": 4
+          },
+          "sensor_dist": {
+            "S13131 P3,3A 7,3 MHz": 109,
+            "S15152 P3,3H 24,3MHz": 3,
+            "S13132 P5,8A 6,1MHz": 1
+          }
+        },
+        "test": {
+          "n_records": 147,
+          "n_config_groups": 30,
+          "flaw": 126,
+          "clean": 21,
+          "defect_type_dist": {
+            "gap": 89,
+            "mis_orientation": 23,
+            "clean": 21,
+            "ptfe_insert": 6,
+            "copper_foil": 6,
+            "fuzz_ball": 1,
+            "ondulation": 1
+          },
+          "material_dist": {
+            "HP-U300/122C": 108,
+            "Kohlegelege ST 50g": 22,
+            "0/90° Fabric 524 g/m²": 15,
+            "0/90 Fabric 565 g/m²": 2
+          },
+          "sensor_dist": {
+            "S13131 P3,3A 7,3 MHz": 131,
+            "S15172 P2,4H 8,5 MHz": 4,
+            "S14150 P5,8H 9,2 MHz": 3,
+            "S14152 P3,3H 24,3 MHz": 3,
+            "S17257 P7H 17,0 MHz": 3,
+            "S13132 P5,8A 6,1 MHz": 1,
+            "S15152 P3,3H 24,3MHz": 1,
+            "S13132 P5,8A 6,1MHz": 1
+          }
+        }
+      }
+    },
+    {
+      "fold": 4,
+      "n_test": 129,
+      "n_test_flaw": 127,
+      "n_test_clean": 2,
+      "n_test_groups": 27,
+      "val_auc": 0.9701,
+      "thr": 0.1762,
+      "roc_auc": 0.5197,
+      "pr_auc": 0.9895,
+      "balanced_acc": 0.4764,
+      "epochs_run": 26,
+      "wall_s": 5.0,
+      "audit": {
+        "train": {
+          "n_records": 445,
+          "n_config_groups": 96,
+          "flaw": 392,
+          "clean": 53,
+          "defect_type_dist": {
+            "clean": 53,
+            "gap": 305,
+            "mis_orientation": 51,
+            "copper_foil": 13,
+            "copper_roving": 6,
+            "ptfe_insert": 9,
+            "ondulation": 4,
+            "fuzz_ball": 4
+          },
+          "material_dist": {
+            "HP-U300/122C": 368,
+            "Kohlegelege ST 50g": 46,
+            "0/90° Fabric 524 g/m²": 19,
+            "0/90° Fabric 565 g/m²": 1,
+            "0/90/45/-45° Fabric 1013 g/m²": 1,
+            "0/90 Fabric 565 g/m²": 10
+          },
+          "sensor_dist": {
+            "S13131 P3,3A 7,3 MHz": 417,
+            "S15172 P2,4H 8,5 MHz": 6,
+            "S14150 P5,8H 9,2 MHz": 3,
+            "S14152 P3,3H 24,3 MHz": 3,
+            "S17257 P7H 17,0 MHz": 3,
+            "S13132 P5,8A 6,1 MHz": 1,
+            "S13132 P5,8A 6,1MHz": 4,
+            "S15152 P3,3H 24,3MHz": 8
+          }
+        },
+        "val": {
+          "n_records": 121,
+          "n_config_groups": 23,
+          "flaw": 113,
+          "clean": 8,
+          "defect_type_dist": {
+            "gap": 93,
+            "copper_roving": 6,
+            "clean": 8,
+            "mis_orientation": 3,
+            "ptfe_insert": 3,
+            "copper_foil": 6,
+            "ondulation": 2
+          },
+          "material_dist": {
+            "HP-U300/122C": 94,
+            "Kohlegelege ST 50g": 8,
+            "0/90° Fabric 524 g/m²": 17,
+            "0/90 Fabric 565 g/m²": 2
+          },
+          "sensor_dist": {
+            "S13131 P3,3A 7,3 MHz": 105,
+            "S15172 P2,4H 8,5 MHz": 3,
+            "S13132 P5,8A 6,1 MHz": 2,
+            "S14150 P5,8H 9,2 MHz": 3,
+            "S14152 P3,3H 24,3 MHz": 3,
+            "S17257 P7H 17,0 MHz": 3,
+            "S13132 P5,8A 6,1MHz": 2
+          }
+        },
+        "test": {
+          "n_records": 129,
+          "n_config_groups": 27,
+          "flaw": 127,
+          "clean": 2,
+          "defect_type_dist": {
+            "clean": 2,
+            "gap": 94,
+            "mis_orientation": 21,
+            "ptfe_insert": 6,
+            "copper_roving": 6
+          },
+          "material_dist": {
+            "HP-U300/122C": 110,
+            "Kohlegelege ST 50g": 17,
+            "0/90 Fabric 565 g/m²": 2
+          },
+          "sensor_dist": {
+            "S13131 P3,3A 7,3 MHz": 127,
+            "S15152 P3,3H 24,3MHz": 2
+          }
+        }
+      }
+    }
+  ],
+  "fold_mean_roc_auc": 0.7949,
+  "fold_mean_pr_auc": 0.9883,
+  "fold_mean_balanced_acc": 0.5165,
+  "pooled_roc_auc": null,
+  "note": "transductive_unlabeled representation probe：SSL 使用全部 ECT 无标注视图后冻结；group 5 折按 config/specimen proxy，同一配置组绝不跨 fold；不得写成严格 cross-group 泛化。",
+  "code_commit": "0089735f00b5",
+  "code_dirty": true
+}

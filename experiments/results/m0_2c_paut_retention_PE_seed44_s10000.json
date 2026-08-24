@@ -1,0 +1,80 @@
+{
+  "exp": "m0_2c_paut_retention",
+  "cond": "PE",
+  "model_seed": 44,
+  "split_seed": 42,
+  "smoke": false,
+  "protocol": "P4a 规范 LOOCV：test=1 coupon；其余 4 coupons 85/15 分层位置级 val；per-timestep 归一化（train 位置）；冻结 encoder + SSLClassifier 规范头（lr 1e-3/80ep/batch128/加权/val-AUC 早停）",
+  "ckpt": "/home/yzx/doct/welding-ndt-timeseries/experiments/runs/m0_2c/ect/PE_s44_s10000.pt",
+  "folds": [
+    {
+      "test_coupon": "PP3",
+      "n_test": 601,
+      "n_pos": 345,
+      "defect_rate": 0.574,
+      "val_auc": 0.8406,
+      "test_auc": 0.4608,
+      "pr_auc": 0.5703,
+      "epochs_run": 57,
+      "wall_s": 53.4
+    },
+    {
+      "test_coupon": "PP4",
+      "n_test": 601,
+      "n_pos": 3,
+      "defect_rate": 0.005,
+      "val_auc": 0.7801,
+      "test_auc": 0.4454,
+      "pr_auc": 0.0058,
+      "epochs_run": 64,
+      "wall_s": 62.7
+    },
+    {
+      "test_coupon": "PP5",
+      "n_test": 596,
+      "n_pos": 261,
+      "defect_rate": 0.4379,
+      "val_auc": 0.8268,
+      "test_auc": 0.4917,
+      "pr_auc": 0.4723,
+      "epochs_run": 77,
+      "wall_s": 75.9
+    },
+    {
+      "test_coupon": "PP6",
+      "n_test": 601,
+      "n_pos": 459,
+      "defect_rate": 0.7637,
+      "val_auc": 0.8177,
+      "test_auc": 0.4485,
+      "pr_auc": 0.7283,
+      "epochs_run": 74,
+      "wall_s": 72.7
+    },
+    {
+      "test_coupon": "PP7",
+      "n_test": 601,
+      "n_pos": 83,
+      "defect_rate": 0.1381,
+      "val_auc": 0.813,
+      "test_auc": 0.6096,
+      "pr_auc": 0.2539,
+      "epochs_run": 80,
+      "wall_s": 77.8
+    }
+  ],
+  "all_folds_mean_auc": 0.4912,
+  "all_folds_std_auc": 0.0614,
+  "nonPP4_mean_auc": 0.5027,
+  "nonPP4_std_auc": 0.0637,
+  "pooled_auc": 0.452,
+  "pp4_auc": 0.4454,
+  "head": {
+    "lr": 0.001,
+    "epochs": 80,
+    "batch_size": 128,
+    "class_balance": true
+  },
+  "code_commit": "0089735f00b5",
+  "code_dirty": true
+}

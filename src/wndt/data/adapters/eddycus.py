@@ -91,6 +91,37 @@ def _short_hash(s: str, n: int = 8) -> str:
     return hashlib.sha1(s.encode("utf-8")).hexdigest()[:n]
 
 
+def split_by_unit_keys(keys: Sequence[str], val_ratio: float = 0.2,
+                       test_ratio: float = 0.2, seed: int = 42
+                       ) -> dict[str, list[int]]:
+    """按每记录的物理单元键做单元级 train/val/test 划分（同单元绝不跨 split）。
+
+    单元数 < 3 时报错而不是静默产生泄漏 split；与 ``ManifestSplitter.split``
+    语义一致（val_ratio / test_ratio 各取对应比例单元）。
+    """
+    groups: dict[str, list[int]] = {}
+    for i, k in enumerate(keys):
+        groups.setdefault(k, []).append(i)
+    units = list(groups.keys())
+    if len(units) < 3:
+        raise ValueError(
+            f"only {len(units)} physical units; cannot do unit-level split "
+            "(need >=3). Use LOOCV or a coarser unit.")
+    rng = np.random.default_rng(seed)
+    perm = rng.permutation(units).tolist()
+    n_val = max(1, round(len(perm) * val_ratio))
+    n_test = max(1, round(len(perm) * test_ratio))
+    train_units = perm[:-(n_val + n_test)] or []
+    val_units = perm[len(perm) - n_val - n_test:len(perm) - n_test]
+    test_units = perm[-n_test:]
+    out: dict[str, list[int]] = {"train": [], "val": [], "test": []}
+    for unit_list, part in ((train_units, "train"), (val_units, "val"),
+                            (test_units, "test")):
+        for u in unit_list:
+            out[part].extend(groups[u])
+    return out
+
+
 class EddyCusAdapter(BaseNDTAdapter):
     """EddyCus 适配器：738 扫描记录，1 次扫描 = 1 条记录。"""
 
@@ -100,6 +131,7 @@ class EddyCusAdapter(BaseNDTAdapter):
         super().__init__(manifest_path=manifest_path or MANIFEST_DIR / "dataset_card.json",
                          data_root=root)
         self._records: Optional[list[UnifiedRecord]] = None
+        self._signal_records: Optional[list[UnifiedRecord]] = None
         self._files: Optional[list[Path]] = None
         self.dataset_name = DATASET_NAME
 
@@ -266,38 +298,80 @@ class EddyCusAdapter(BaseNDTAdapter):
     # ------------------------------------------------------------------
     # 划分
     # ------------------------------------------------------------------
+    # ------------------------------------------------------------------
+    # 有信号记录（正式训练只使用这些；43 个 metadata-only 必须排除）
+    # ------------------------------------------------------------------
+    def signal_records(self) -> list[UnifiedRecord]:
+        """有 ``signal_data/f1`` 的记录（695/738；43 个 2022-11 批次仅元数据）。"""
+        if self._signal_records is None:
+            self._signal_records = [r for r in self.records() if _has_signal(r)]
+        return self._signal_records
+
+    def signal_indices(self) -> list[int]:
+        """695 个有信号记录在 ``records()`` 中的索引（保持 record_id 排序）。"""
+        return [i for i, r in enumerate(self.records()) if _has_signal(r)]
+
+    def read_spatial(self, i: int) -> tuple[np.ndarray, np.ndarray]:
+        """第 i 条记录的 (track_number, sample_number) int64（2D 栅格重建）。"""
+        import h5py
+        rec = self.records()[i]
+        with h5py.File(rec.tensor_path, "r") as f:
+            trk = np.asarray(f["spatial_data"]["track_number"][...], dtype=np.int64)
+            smp = np.asarray(f["spatial_data"]["sample_number"][...], dtype=np.int64)
+        return trk, smp
+
+    # ------------------------------------------------------------------
+    # 划分（每记录显式物理单元键，禁止退化为单一 clean 单元 / 扫描随机）
+    # ------------------------------------------------------------------
+    def unit_keys(self, unit: str) -> list[str]:
+        """每条记录所属物理单元键。
+
+        - ``defect``  : defect_instance_id；**clean 记录按 specimen_id（物理配置
+          代理）分组**——同一配置的重复 clean 扫描同组，不同 clean 配置可进不同
+          fold，绝不归入单一 "clean" 单元；
+        - ``specimen``: specimen_id（= (material,fiber,layup,desc,defect,thickness)
+          配置组哈希，所有记录都有）；
+        - ``sensor``  : geometry.sensor_type（真正读 sensor 分组）；
+        - ``material``: domain.material_type（真正读 material 分组）。
+        """
+        recs = self.records()
+        keys: list[str] = []
+        for r in recs:
+            if unit == "defect":
+                keys.append(r.defect_instance_id or f"clean:{r.specimen_id}")
+            elif unit == "specimen":
+                keys.append(r.specimen_id)
+            elif unit == "sensor":
+                keys.append(str(r.geometry.get("sensor_type", "")) or "unknown_sensor")
+            elif unit == "material":
+                keys.append(str(r.domain.get("material_type", "")) or "unknown_material")
+            else:
+                raise ValueError(f"unknown unit {unit!r}")
+        return keys
+
     def split_indices(self, protocol: str, val_ratio: float = 0.2, seed: int = 42,
                       unit: str = "defect") -> dict[str, list[int]]:
         """按物理单元划分：unit='defect'（默认）| 'specimen' | 'sensor' | 'material'。
 
-        禁止按扫描随机划分。EddyCus 最小独立单元 = 缺陷组（133）或物理配置组
-        （148）；cross-sensor / cross-material 由 unit='sensor'/'material' 给出
-        （test 为未见过的传感器/材料）。
+        禁止按扫描随机划分。EddyCus 最小独立单元 = 缺陷组或物理配置组（148）；
+        cross-sensor / cross-material 由 unit='sensor'/'material' 给出（test 为
+        未见过的传感器/材料）。**同一物理单元绝不跨 split**（sensor/material/
+        specimen/clean 配置组均保证）。sensor/material 真正按 sensor_type /
+        material_type 分组，不允许退化为 defect_instance_id 划分。
         """
-        field = {"defect": ManifestField.DEFECT_INSTANCE_ID,
-                 "specimen": ManifestField.SPECIMEN_ID,
-                 "sensor": ManifestField.SENSOR_ID,
-                 "material": ManifestField.DOMAIN_ID}[unit]
-        instances = self.load_manifest()
-        if unit in ("sensor", "material"):
-            # 需要从 metadata 构建 sensor/material 组
-            # sensor: 每记录有 geometry.sensor_type；material: domain.material_type
-            from wndt.data.adapters.base import ManifestField as MF
-            splitter = ManifestSplitter(instances, MF.DEFECT_INSTANCE_ID)
-            return splitter.split(val_ratio, seed)
-        splitter = ManifestSplitter(instances, field)
-        return splitter.split(val_ratio, seed)
+        keys = self.unit_keys(unit)
+        return split_by_unit_keys(keys, val_ratio=val_ratio, seed=seed)
 
     def validate_defect_split(self, split: dict[str, list[int]]) -> bool:
-        """同一 defect_instance 不跨 split。"""
-        groups = {}
-        for idx, rec in enumerate(self.records()):
-            did = rec.defect_instance_id or f"clean:{rec.specimen_id}"
-            groups.setdefault(did, set()).add(idx)
-        where = {}
+        """同一 defect 单元（clean 按配置代理）不跨 split。"""
+        keys = self.unit_keys("defect")
+        where: dict[int, str] = {}
         for part, idxs in split.items():
             for i in idxs:
                 where[i] = part
+        groups: dict[str, set[int]] = {}
+        for i, k in enumerate(keys):
+            groups.setdefault(k, set()).add(i)
         for g, members in groups.items():
             parts = {where[m] for m in members if m in where}
             if len(parts) > 1:

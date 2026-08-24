@@ -1,0 +1,53 @@
+# M0-2C ECT 顺序 SSL 预训练配置（E / P→E 完全一致，只差 encoder 初始化）。
+#
+# 输入：695 有信号扫描 × 4 频率 = 2780 个 (2,H,W) I/Q 双通道视图（原生栅格 +
+# 预先声明的等比例下采样，见 src/wndt/data/eddycus_pretrain.py）。
+# 结构：P1 MAEEncoder 卷积结构（Conv2d->BN->GELU->Pool×3，AdaptiveAvgPool，
+# d_model=128），in_channels=2；新建 ECTDecoder 输出当前 batch H×W；
+# block=16×16 掩码，mask_ratio=0.3；recon loss 只算 masked∩valid。
+#
+# seed 职责分离（沿用 M0-2B det_v2）：
+#   data_seed  —— 只控制数据顺序（bucket + batch 内 view 采样计划）；
+#   model_seed —— 只控制模型初始化 / mask 计划 / 训练随机性。
+# 正式预算固定 10000 steps，不根据 pilot 结果调参。
+
+model:
+  d_model: 128
+  in_channels: 2
+  mask_ratio: 0.3
+  block: 16
+  dropout: 0.2
+
+pretrain:
+  lr: 1.0e-3
+  weight_decay: 1.0e-4
+  # batch 16：最大原生桶 (251,560) 在 batch 32 时峰值 ~48GB 逼近 49GB 显存，
+  # 为防 OOM 定为 16（steps 预算仍固定 10000；E/P→E 的 batch 完全一致）。
+  batch_size: 16
+  grad_clip: 1.0
+  warmup_steps: 200
+  steps: 10000
+  data_seed: 42
+  model_seeds: [42, 43, 44]
+  # 超大网格等比例下采样阈值（预先声明，E/P→E 一致）
+  max_grid_h: 256
+  max_grid_w: 768
+
+# 规范头协议（冻结 encoder 下游二分类；与 M0-2B / PAUT 规范一致）
+head:
+  lr: 1.0e-3
+  weight_decay: 1.0e-4
+  batch_size: 128
+  epochs: 80
+  patience: 20
+  class_balance: true
+  dropout: 0.3
+
+# 迁移源：P1 PAUT SSL encoder（非PP4 0.579±0.007，beam-mask）
+transfer_source: experiments/runs/ssl_ae/encoder.pt
+
+eval:
+  main_metric: fold_mean_roc_auc      # ECT probe：5 折 SGKFold fold mean
+  paut_retention_metric: nonPP4_fold_mean
+  ect_criterion: {min_delta: 0.01, min_positive_seeds: 2}
+  retention_criterion: {min_delta: -0.01}

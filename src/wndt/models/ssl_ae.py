@@ -18,12 +18,19 @@ import torch.nn.functional as F
 
 
 class MAEEncoder(nn.Module):
-    """Conv 编码器: (B,1,49,512) -> z (d_model)。"""
+    """Conv 编码器: (B,C,H,W) -> z (d_model)。
 
-    def __init__(self, d_model: int = 128, dropout: float = 0.2):
+    ``in_channels`` 允许 1（PAUT B-scan）或 2（EddyCus I/Q 双通道）；其余
+    结构与 P1 ``ssl_ae/encoder.pt`` 完全一致（三层 Conv2d->BN->GELU->MaxPool，
+    AdaptiveAvgPool + Linear proj），保证 P→E 权重迁移按名字对齐。
+    """
+
+    def __init__(self, d_model: int = 128, dropout: float = 0.2,
+                 in_channels: int = 1):
         super().__init__()
+        self.in_channels = in_channels
         self.conv = nn.Sequential(
-            nn.Conv2d(1, 32, (3, 7), padding=(1, 3)), nn.BatchNorm2d(32), nn.GELU(), nn.MaxPool2d((2, 2)),
+            nn.Conv2d(in_channels, 32, (3, 7), padding=(1, 3)), nn.BatchNorm2d(32), nn.GELU(), nn.MaxPool2d((2, 2)),
             nn.Conv2d(32, 64, (3, 7), padding=(1, 3)), nn.BatchNorm2d(64), nn.GELU(), nn.MaxPool2d((2, 2)),
             nn.Conv2d(64, 128, (3, 7), padding=(1, 3)), nn.BatchNorm2d(128), nn.GELU(), nn.MaxPool2d((2, 2)),
         )
@@ -118,3 +125,69 @@ class SSLClassifier(nn.Module):
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         z = self.encoder(x)
         return self.head(z)
+
+
+# ---------------------------------------------------------------------------
+# M0-2C ECT：双通道 (2,H,W) I/Q 掩码自编码器（P1 MAEEncoder 结构 + 新建 ECT decoder）
+# ---------------------------------------------------------------------------
+class ECTDecoder(nn.Module):
+    """z (d_model) -> 重建 (B,2,H,W)，H/W 由当前 batch 决定。
+
+    与 PAUT ``MAEDecoder`` 同构：fc -> (B,128,mid_h,mid_w) -> 插值到 (H,W) ->
+    3 层 refine conv（末层输出 2 通道 = I/Q）。``mid_h*mid_w`` 固定，decoder
+    权重与 batch 尺寸无关，E 与 P→E 的 decoder 初始化完全一致（仅 encoder
+    初始化不同）。
+    """
+
+    def __init__(self, d_model: int = 128, mid_h: int = 8, mid_w: int = 32):
+        super().__init__()
+        self.mid_h, self.mid_w = mid_h, mid_w
+        self.fc = nn.Linear(d_model, 128 * mid_h * mid_w)
+        self.refine = nn.Sequential(
+            nn.Conv2d(128, 64, 3, padding=1), nn.GELU(),
+            nn.Conv2d(64, 32, 3, padding=1), nn.GELU(),
+            nn.Conv2d(32, 2, 3, padding=1),
+        )
+
+    def forward(self, z: torch.Tensor, H: int, W: int) -> torch.Tensor:
+        h = self.fc(z).reshape(z.size(0), 128, self.mid_h, self.mid_w)
+        h = F.interpolate(h, size=(H, W), mode="bilinear", align_corners=False)
+        return self.refine(h)
+
+
+class ECTMaskedAE(nn.Module):
+    """双通道 2D block-mask 掩码自编码器（M0-2C）。
+
+    - 输入 ``(B,2,H,W)``（I/Q 双通道，原生栅格，同 batch 同尺寸）；
+    - ``block=16×16`` 空间块掩码，``mask_ratio`` 比例块被置零；
+    - encoder = ``MAEEncoder(in_channels=2)``（P1 卷积结构，P→E 迁移源）；
+    - decoder = ``ECTDecoder``，输出当前 batch 的 H×W（2 通道 I/Q 重建）；
+    - ``recon_loss`` 只计算 **masked ∩ valid** 像素（padding / 栅格缺失点
+      由 valid mask 排除，绝不进入 loss）。
+    """
+
+    def __init__(self, d_model: int = 128, mask_ratio: float = 0.3,
+                 block: int = 16, dropout: float = 0.2, in_channels: int = 2):
+        super().__init__()
+        self.encoder = MAEEncoder(d_model, dropout, in_channels=in_channels)
+        self.decoder = ECTDecoder(d_model)
+        self.mask_ratio = mask_ratio
+        self.block = block
+
+    def forward(self, x: torch.Tensor, valid: torch.Tensor,
+                mask: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor,
+                                             torch.Tensor, torch.Tensor]:
+        """x (B,2,H,W)；valid (B,H,W) bool；mask (B,1,H,W)，0=masked。
+        返回 (recon, target, mask, valid)。"""
+        xm = x * mask
+        z = self.encoder(xm)
+        recon = self.decoder(z, x.shape[-2], x.shape[-1])
+        return recon, x, mask, valid
+
+    def recon_loss(self, recon: torch.Tensor, target: torch.Tensor,
+                   mask: torch.Tensor, valid: torch.Tensor) -> torch.Tensor:
+        """masked∩valid 上的 Huber 重建损失；padding/缺失点绝不进入。"""
+        masked = (1.0 - mask) * valid.unsqueeze(1).float()   # (B,1,H,W)
+        diff = (recon - target) * masked
+        denom = masked.sum().clamp(min=1)
+        return F.smooth_l1_loss(diff, torch.zeros_like(diff), reduction="sum") / denom
