@@ -114,11 +114,44 @@ class NDTMLFlawStripStem(nn.Module):
         return self.stem(self.pool(x.unsqueeze(1)))
 
 
+class EddyCusStem(nn.Module):
+    """EddyCus I/Q stem：原生 (N, 2) 1D I/Q -> 2D 栅格 (2, H, W) -> token。
+
+    H/W 从 spatial_data（track_number / sample_number）重建，按真实网格保留；
+    I/Q 双通道（real/imaginary），不强制 49×512。栅格尺寸随扫描变化
+    （101×451 / 51×451 / 202×1067 ...），stem 用 AdaptiveAvgPool 出固定 token 数，
+    对任意 H×W 稳健。
+    """
+
+    def __init__(self, out_dim: int = 128, grid: tuple[int, int] = (101, 451),
+                 tokens: tuple[int, int] = (4, 8)):
+        super().__init__()
+        self.grid = grid
+        self.tokens = tokens
+        self.proj = nn.Conv2d(2, out_dim, kernel_size=7, padding=3)
+        self.norm = nn.LayerNorm(out_dim)
+
+    def forward(self, x: torch.Tensor, grid: tuple[int, int] | None = None) -> torch.Tensor:
+        # x: (B, N, 2) 或 (B, 2, H, W)
+        if x.dim() == 3 and x.shape[-1] == 2:
+            h, w = grid or self.grid
+            n = x.shape[1]
+            # 1D -> 栅格：填满 h*w，尾部不足补零（栅格近似规则，±1 点/track）
+            if n < h * w:
+                x = torch.nn.functional.pad(x, (0, 0, 0, h * w - n))
+            x = x[:, : h * w].reshape(x.shape[0], h, w, 2).permute(0, 3, 1, 2).contiguous()
+        h = self.proj(x)                                  # (B, D, H, W)
+        h = torch.nn.functional.adaptive_avg_pool2d(h, self.tokens)  # (B, D, 4, 8)
+        h = h.flatten(2).transpose(1, 2)                  # (B, 32, D)
+        return self.norm(h)
+
+
 DATASET_STEMS = {
     "penelope_paut": PenelopeStem,
     "ml_ndt": MLNDTFrameStem,      # 默认按帧；体积用 MLNDTVolumeStem
     "ml_ndt_volume": MLNDTVolumeStem,
     "ndt_ml_flaw": NDTMLFlawStripStem,
+    "eddycus": EddyCusStem,
 }
 
 

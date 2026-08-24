@@ -29,3 +29,6 @@ CLAUDE.md
 
 # P2 multimodal LLM venv (vLLM/torch, 不提交)
 .venv_p2/
+
+# M0-2C EddyCus 全量审计转储（大文件，不入库）
+experiments/results/m0_2c_eddycus_audit_full.json

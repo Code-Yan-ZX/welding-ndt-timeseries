@@ -1,0 +1,3147 @@
+{
+  "manifest_version": "0.2.0",
+  "dataset_name": "eddycus",
+  "primary_modality": "eddy_current",
+  "license": "CC BY 4.0",
+  "source": {
+    "official_name": "EddyCus-HDF5 / Open-Source Multi-Sensor Eddy Current Database",
+    "url": "https://zenodo.org/records/19251759",
+    "doi": "10.5281/zenodo.19251759",
+    "size_bytes": 3657641862,
+    "checksum": {
+      "algorithm": "md5",
+      "digest": "814f496342d77eb2eeabb1e0d34645c3",
+      "size_bytes": 3657641862
+    },
+    "downloadable": true,
+    "audit_ref": "docs/M0_public_ndt_dataset_audit.md §8"
+  },
+  "n_specimens": 148,
+  "n_defect_instances": 127,
+  "n_records": 738,
+  "specimens": [
+    {
+      "specimen_id": "eddycus:cfg5d0efb89",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00001.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg24f8f5b5",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0] thickness 0.3mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00003.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgfc6ce4df",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90] thickness 0.3mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00005.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg28063837",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [45] thickness 0.3mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00006.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg45d11546",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90] thickness 0.3mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00009.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg1f9cee9d",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90] thickness 0.3mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00011.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg9618f0c7",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90] thickness 0.3mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00013.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgc6467d10",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90] thickness 0.3mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00015.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg0f8eb692",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/0] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00017.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgaa92b593",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/0] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00020.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg049953ee",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/0] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00023.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg25152931",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/0] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00026.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg5b05b1b9",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/0] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00029.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg5b75b921",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/0] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00032.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgc9a9fc5c",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/0] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00035.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg40e1a732",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/0] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00038.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgfb7bf17a",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/0] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00041.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg19645a43",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/0] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00044.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg078834ad",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00048.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg33c634aa",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00051.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg3faa66bf",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00054.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg1388d3a9",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00057.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg3d453410",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00060.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgdc555cc9",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00063.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg414f073a",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [45/90] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00066.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgc4f04542",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [45/90] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00069.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgd5048805",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [45/90] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00072.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgca2e8647",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [45/90] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00075.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg9caadd29",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [45/90] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00078.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg05f0be6c",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [45/90] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00081.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg54dfe800",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [45/90] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00084.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgdce0a6d6",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [45/90] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00087.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgb6ab6f10",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [45/90] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00090.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg0f37abb7",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [45/90] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00093.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg18100ce1",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [45/90] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00096.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg0ac9691e",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90/0] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00099.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg9579df00",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90/0] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00102.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg8790dddb",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90/0] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00105.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg6c9f5186",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90/0] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00108.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg814b83f9",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90/0] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00111.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg8e148bda",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90/0] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00114.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg4f94a084",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90/45] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00117.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg5b5bb499",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90/45] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00120.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgf21c18b7",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90/45] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00123.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg3d93d100",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90/45] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00126.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg91248ae2",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90/45] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00129.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfge8ab1723",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90/45] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00132.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg37727a98",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90/45] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00135.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg0e144177",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90/45] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00138.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg9d464917",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90/45] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00141.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg1ed9a666",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90/45] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00144.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg99d4eeac",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90/45] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00147.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgcccf8017",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90/90] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00150.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg819e555a",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90] thickness 0.3mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00153.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg8454139f",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90] thickness 0.3mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00156.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg1ab1b31b",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90] thickness 0.3mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00159.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg3e03f0c0",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90] thickness 0.3mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00162.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg0db095fb",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90] thickness 0.3mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00165.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgcd2d6ab2",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90] thickness 0.3mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00168.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg185141d3",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90/90] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00273.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg199fdf66",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90/90] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00276.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg7c2bb659",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90/90] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00279.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgf73ea869",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90/90] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00282.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg6443c800",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90/90] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00285.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgb65980c7",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90/90] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00288.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg7beba947",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90/90] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00291.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgfd0889ce",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90/90] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00294.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgbdfdccdf",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90/90] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00297.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg21fd0235",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [90/90] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00300.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg3b4c79cd",
+      "dataset_name": "eddycus",
+      "material": "Kohlegelege ST 50g",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric ZOLTEK PX35 50K layup [0/90/45/45/45/45/90/0] thickness 1.36mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00459.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg5a41700e",
+      "dataset_name": "eddycus",
+      "material": "Kohlegelege ST 50g",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric ZOLTEK PX35 50K layup [0/90/45/45/45/45/90/0] thickness 1.36mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00460.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgf76c9f98",
+      "dataset_name": "eddycus",
+      "material": "Kohlegelege ST 50g",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric ZOLTEK PX35 50K layup [0/90/45/45/45/45/90/0] thickness 1.36mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00461.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg95f32e58",
+      "dataset_name": "eddycus",
+      "material": "Kohlegelege ST 50g",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric ZOLTEK PX35 50K layup [0/90/45/45/45/45/90/0] thickness 1.36mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00462.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgc62df292",
+      "dataset_name": "eddycus",
+      "material": "Kohlegelege ST 50g",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric ZOLTEK PX35 50K layup [0/90/45/45/45/45/90/0] thickness 1.36mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00463.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgf5267ca8",
+      "dataset_name": "eddycus",
+      "material": "Kohlegelege ST 50g",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric ZOLTEK PX35 50K layup [0/90/45/45/45/45/90/0] thickness 1.36mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00464.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg567d99ee",
+      "dataset_name": "eddycus",
+      "material": "Kohlegelege ST 50g",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric ZOLTEK PX35 50K layup [0/90/45/45] thickness 1.36mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00465.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgc80c06ab",
+      "dataset_name": "eddycus",
+      "material": "Kohlegelege ST 50g",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric ZOLTEK PX35 50K layup [0/90/45/45] thickness 1.36mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00466.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgff0297e1",
+      "dataset_name": "eddycus",
+      "material": "Kohlegelege ST 50g",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric ZOLTEK PX35 50K layup [0/90/45/45] thickness 1.36mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00467.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg8ee9a7a3",
+      "dataset_name": "eddycus",
+      "material": "Kohlegelege ST 50g",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric ZOLTEK PX35 50K layup [0/90/45/45] thickness 1.36mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00468.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg9c795eb7",
+      "dataset_name": "eddycus",
+      "material": "Kohlegelege ST 50g",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric ZOLTEK PX35 50K layup [0/90/45/45] thickness 1.36mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00469.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgc7747000",
+      "dataset_name": "eddycus",
+      "material": "Kohlegelege ST 50g",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric ZOLTEK PX35 50K layup [0/90/45/45] thickness 1.36mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00470.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg4a5598f1",
+      "dataset_name": "eddycus",
+      "material": "Kohlegelege ST 50g",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric ZOLTEK PX35 50K layup [0/90/90/0] thickness 1.36mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00471.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg9e4f3730",
+      "dataset_name": "eddycus",
+      "material": "Kohlegelege ST 50g",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric ZOLTEK PX35 50K layup [0/90] thickness 1.36mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00472.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg7f70c3ff",
+      "dataset_name": "eddycus",
+      "material": "Kohlegelege ST 50g",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric ZOLTEK PX35 50K layup [0] thickness 1.36mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00473.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg7b97ec19",
+      "dataset_name": "eddycus",
+      "material": "Kohlegelege ST 50g",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric ZOLTEK PX35 50K layup [0] thickness 0.136mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00476.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg04b63531",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90/45/45] thickness 1.2mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00479.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgbab4762e",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90/45/45] thickness 1.2mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00480.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg8afc4729",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90/45/45] thickness 1.2mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00481.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg422a04dc",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90/45/45] thickness 1.2mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00482.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg5f88c42a",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90/45/45] thickness 1.2mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00483.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg6b1e7dc2",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90/45/45] thickness 1.2mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00484.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgd1666c60",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90/45/45] thickness 1.2mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00485.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgf7a82c25",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90/45/45] thickness 1.2mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00486.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg7f5b74f3",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90/45/45] thickness 1.2mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00487.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgcf402cb9",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90/45/45] thickness 1.2mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00488.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg16d24afc",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90/45/45] thickness 1.2mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00489.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgb154612a",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90/45/45] thickness 1.2mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00490.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfge32f6f96",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90/90/0] thickness 1.2mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00491.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg722b06d4",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90/90/0] thickness 1.2mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00492.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg59b4982e",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90/90/0] thickness 1.2mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00493.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg285c0e02",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90/90/0] thickness 1.2mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00494.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg73dc6730",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90/90/0] thickness 1.2mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00495.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg15504b6a",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90/90/0] thickness 1.2mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00496.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg8350a65e",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90/90/0] thickness 1.2mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00497.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgbb498b81",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90/90/0] thickness 1.2mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00498.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgee779bc2",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90/90/0] thickness 1.2mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00499.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg78024103",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90/90/0] thickness 1.2mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00500.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfge85a4eee",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90/90/0] thickness 1.2mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00501.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgc6bac598",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90/90/0] thickness 1.2mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00502.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg4f36bd22",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90/90/0] thickness 1.2mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00503.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg526be0ed",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90/90/0] thickness 1.2mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00504.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg46f177c8",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90/90/0] thickness 1.2mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00505.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg7a0449d9",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90/90/0] thickness 1.2mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00506.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg11af3464",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90/90/0] thickness 1.2mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00507.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfge85cbb31",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90/90/0] thickness 1.2mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00508.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg09eaa364",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90] thickness 1.2mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00509.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg223285a4",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0] thickness 1.2mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00510.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg168cd0e5",
+      "dataset_name": "eddycus",
+      "material": "Kohlegelege ST 50g",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric ZOLTEK PX35 50K layup [0] thickness 0.272mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00511.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg3ef54812",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0] thickness 0.3mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00514.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg0db9e58e",
+      "dataset_name": "eddycus",
+      "material": "Kohlegelege ST 50g",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric ZOLTEK PX35 50K layup [0] thickness 0.68mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00515.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg5f7bbfd3",
+      "dataset_name": "eddycus",
+      "material": "Kohlegelege ST 50g",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric ZOLTEK PX35 50K layup [0] thickness 0.068mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00518.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgaf598de1",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0] thickness 0.6mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00521.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg3fe6a401",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0] thickness 0.9mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00522.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgfbf48db8",
+      "dataset_name": "eddycus",
+      "material": "HP-U300/122C",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric HT 50K layup [0/90/90/90] thickness 1.2mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00678.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg1a561983",
+      "dataset_name": "eddycus",
+      "material": "0/90° Fabric 524 g/m²",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric Toho Tenax HTS40 12K layup [0/90] thickness 0.5mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00687.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg3b4e0707",
+      "dataset_name": "eddycus",
+      "material": "0/90° Fabric 524 g/m²",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric Toho Tenax HTS40 12K layup [0/90] thickness 0.5mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00688.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg423fe5c2",
+      "dataset_name": "eddycus",
+      "material": "0/90° Fabric 524 g/m²",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric Toho Tenax HTS40 12K layup [0/90] thickness 0.5mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00689.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg933d0c6e",
+      "dataset_name": "eddycus",
+      "material": "0/90° Fabric 524 g/m²",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric Toho Tenax HTS40 12K layup [0/90/[0/90]] thickness 1.0mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00702.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg49a36ca4",
+      "dataset_name": "eddycus",
+      "material": "0/90° Fabric 524 g/m²",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric Toho Tenax HTS40 12K layup [0/90/[0/90]] thickness 1.0mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00705.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg7812b915",
+      "dataset_name": "eddycus",
+      "material": "0/90° Fabric 524 g/m²",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric Toho Tenax HTS40 12K layup [0/90/[0/90]] thickness 1.0mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00706.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg85868e76",
+      "dataset_name": "eddycus",
+      "material": "0/90° Fabric 524 g/m²",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric Toho Tenax HTS40 12K layup [0/90/[0/90/[0/90]]] thickness 1.5mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00716.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg7fe9c201",
+      "dataset_name": "eddycus",
+      "material": "0/90° Fabric 524 g/m²",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric Toho Tenax HTS40 12K layup [0/90/[0/90/[0/90]]] thickness 1.5mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00722.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgc57a30e1",
+      "dataset_name": "eddycus",
+      "material": "0/90° Fabric 565 g/m²",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric Toho Tenax HTS45-E23 12K layup [0/90] thickness 0.5mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00723.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg5b071907",
+      "dataset_name": "eddycus",
+      "material": "0/90/45/-45° Fabric 1013 g/m²",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric Toho Tenax HTS45-E23 12K layup [0/90/45/-45] thickness 1.0mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00724.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgf86b8767",
+      "dataset_name": "eddycus",
+      "material": "0/90 Fabric 565 g/m²",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric Toho Tenax HTS45-E23 12K layup [0/90] thickness 0.5mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00725.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg4c32320b",
+      "dataset_name": "eddycus",
+      "material": "0/90 Fabric 565 g/m²",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric Toho Tenax HTS45-E23 12K layup [0/90] thickness 0.5mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00726.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfge8db928c",
+      "dataset_name": "eddycus",
+      "material": "0/90 Fabric 565 g/m²",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric Toho Tenax HTS45-E23 12K layup [0/90] thickness 0.5mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00727.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg8197692a",
+      "dataset_name": "eddycus",
+      "material": "0/90 Fabric 565 g/m²",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric Toho Tenax HTS45-E23 12K layup [0/90] thickness 0.5mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00728.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg728b6167",
+      "dataset_name": "eddycus",
+      "material": "0/90 Fabric 565 g/m²",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric Toho Tenax HTS45-E23 12K layup [0/90] thickness 0.5mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00729.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg2c387731",
+      "dataset_name": "eddycus",
+      "material": "0/90 Fabric 565 g/m²",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric Toho Tenax HTS45-E23 12K layup [0/90] thickness 0.5mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00730.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfgf1cda1f3",
+      "dataset_name": "eddycus",
+      "material": "0/90 Fabric 565 g/m²",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric Toho Tenax HTS45-E23 12K layup [0/90/0/90] thickness 1.0mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00731.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg203ce08f",
+      "dataset_name": "eddycus",
+      "material": "0/90 Fabric 565 g/m²",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric Toho Tenax HTS45-E23 12K layup [0/90/0/90] thickness 1.0mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00732.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg9e0e0b13",
+      "dataset_name": "eddycus",
+      "material": "0/90 Fabric 565 g/m²",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric Toho Tenax HTS45-E23 12K layup [0/90] thickness 0.5mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00733.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg6de438e4",
+      "dataset_name": "eddycus",
+      "material": "0/90 Fabric 565 g/m²",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric Toho Tenax HTS45-E23 12K layup [0/90] thickness 0.5mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00734.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg57cdadcb",
+      "dataset_name": "eddycus",
+      "material": "0/90 Fabric 565 g/m²",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric Toho Tenax HTS45-E23 12K layup [0/90/0/90] thickness 1.0mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00735.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg230dd9e1",
+      "dataset_name": "eddycus",
+      "material": "0/90 Fabric 565 g/m²",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric Toho Tenax HTS45-E23 12K layup [0/90/0/90/0/90] thickness 1.5mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00736.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg3c11bc6e",
+      "dataset_name": "eddycus",
+      "material": "0/90 Fabric 565 g/m²",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric Toho Tenax HTS45-E23 12K layup [0/90/0/90/0/90] thickness 1.5mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00737.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    },
+    {
+      "specimen_id": "eddycus:cfg0ede77a4",
+      "dataset_name": "eddycus",
+      "material": "0/90 Fabric 565 g/m²",
+      "manufacturing": "CFRP laminate (reference samples)",
+      "geometry": "fabric Toho Tenax HTS45-E23 12K layup [0/90/0/90/0/90] thickness 1.5mm",
+      "source_file": "/home/yzx/doct/welding-ndt-timeseries/data/raw/EddyCus-HDF5/output/scan_00738.h5",
+      "notes": "specimen_id = (material,fiber,layup,description,defect,thickness) 配置组哈希；数据集无显式试件 ID，此为最细物理配置代理"
+    }
+  ],
+  "defects": [
+    {
+      "defect_instance_id": "eddycus:def6cd91026",
+      "specimen_id": "eddycus:cfg45d11546",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 30.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=90 Degree fiber orientation with 30 mm gap"
+    },
+    {
+      "defect_instance_id": "eddycus:def2b76e54c",
+      "specimen_id": "eddycus:cfg1f9cee9d",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=90 Degree fiber orientation with 10 mm gap"
+    },
+    {
+      "defect_instance_id": "eddycus:def21076130",
+      "specimen_id": "eddycus:cfg9618f0c7",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 15.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=90 Degree fiber orientation with 15 mm gap"
+    },
+    {
+      "defect_instance_id": "eddycus:defb60cd3a4",
+      "specimen_id": "eddycus:cfgc6467d10",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 20.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=90 Degree fiber orientation with 20 mm gap"
+    },
+    {
+      "defect_instance_id": "eddycus:def4ed81810",
+      "specimen_id": "eddycus:cfg0f8eb692",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/0] Degree fiber orientation with 10 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def6b98f5dd",
+      "specimen_id": "eddycus:cfgaa92b593",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 15.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/0] Degree fiber orientation with 15 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:defd6bdabc3",
+      "specimen_id": "eddycus:cfg049953ee",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 20.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/0] Degree fiber orientation with 20 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:defd650205d",
+      "specimen_id": "eddycus:cfg25152931",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 25.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/0] Degree fiber orientation with 25 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:defc1eee313",
+      "specimen_id": "eddycus:cfg5b05b1b9",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 30.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/0] Degree fiber orientation with 30 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def7951d5e7",
+      "specimen_id": "eddycus:cfg5b75b921",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/0] Degree fiber orientation with 10 mm gap in second layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def92d892e5",
+      "specimen_id": "eddycus:cfgc9a9fc5c",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 15.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/0] Degree fiber orientation with 15 mm gap in second layer"
+    },
+    {
+      "defect_instance_id": "eddycus:defa27ceef1",
+      "specimen_id": "eddycus:cfg40e1a732",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 20.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/0] Degree fiber orientation with 20 mm gap in second layer"
+    },
+    {
+      "defect_instance_id": "eddycus:defbd3a9015",
+      "specimen_id": "eddycus:cfgfb7bf17a",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 25.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/0] Degree fiber orientation with 25 mm gap in second layer"
+    },
+    {
+      "defect_instance_id": "eddycus:defefbd9242",
+      "specimen_id": "eddycus:cfg19645a43",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 30.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/0] Degree fiber orientation with 30 mm gap in second layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def8e7d523c",
+      "specimen_id": "eddycus:cfg078834ad",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90] Degree fiber orientation with 10 mm gap in second layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def742db647",
+      "specimen_id": "eddycus:cfg33c634aa",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 15.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90] Degree fiber orientation with 15 mm gap in second layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def6331eb35",
+      "specimen_id": "eddycus:cfg3faa66bf",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 20.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90] Degree fiber orientation with 20 mm gap in second layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def08d97f1f",
+      "specimen_id": "eddycus:cfg1388d3a9",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 25.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90] Degree fiber orientation with 25 mm gap in second layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def767f5307",
+      "specimen_id": "eddycus:cfg3d453410",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 30.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90] Degree fiber orientation with 30 mm gap in second layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def25e6cbd9",
+      "specimen_id": "eddycus:cfgdc555cc9",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": null,
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90] Degree fiber orientation with 0 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:defa1a267c9",
+      "specimen_id": "eddycus:cfg414f073a",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[45/90] Degree fiber orientation with 10 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:defea81d923",
+      "specimen_id": "eddycus:cfgc4f04542",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 15.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[45/90] Degree fiber orientation with 15 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:defed560952",
+      "specimen_id": "eddycus:cfgd5048805",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 20.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[45/90] Degree fiber orientation with 20 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def9e458ba2",
+      "specimen_id": "eddycus:cfgca2e8647",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 25.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[45/90] Degree fiber orientation with 25 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def8149febc",
+      "specimen_id": "eddycus:cfg9caadd29",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 30.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[45/90] Degree fiber orientation with 30 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def9d317128",
+      "specimen_id": "eddycus:cfg05f0be6c",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[45/90] Degree fiber orientation with 10 mm gap in second layer"
+    },
+    {
+      "defect_instance_id": "eddycus:defb1bb3889",
+      "specimen_id": "eddycus:cfg54dfe800",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 15.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[45/90] Degree fiber orientation with 15 mm gap in second layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def886c6770",
+      "specimen_id": "eddycus:cfgdce0a6d6",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 20.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[45/90] Degree fiber orientation with 20 mm gap in second layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def4d3fad6c",
+      "specimen_id": "eddycus:cfgb6ab6f10",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 25.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[45/90] Degree fiber orientation with 25 mm gap in second layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def73a7dacb",
+      "specimen_id": "eddycus:cfg0f37abb7",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 30.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[45/90] Degree fiber orientation with 30 mm gap in second layer"
+    },
+    {
+      "defect_instance_id": "eddycus:defefc10f68",
+      "specimen_id": "eddycus:cfg18100ce1",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": null,
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[45/90] Degree fiber orientation with 0 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:defac66f738",
+      "specimen_id": "eddycus:cfg0ac9691e",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90/0] Degree fiber orientation with 10 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def758a5500",
+      "specimen_id": "eddycus:cfg9579df00",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 15.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90/0] Degree fiber orientation with 15 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def93895dc3",
+      "specimen_id": "eddycus:cfg8790dddb",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 20.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90/0] Degree fiber orientation with 20 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def2c545343",
+      "specimen_id": "eddycus:cfg6c9f5186",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 25.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90/0] Degree fiber orientation with 25 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def3c566448",
+      "specimen_id": "eddycus:cfg814b83f9",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 30.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90/0] Degree fiber orientation with 30 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:defc000a57d",
+      "specimen_id": "eddycus:cfg8e148bda",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": null,
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90/0] Degree fiber orientation with 0 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def1aa74720",
+      "specimen_id": "eddycus:cfg4f94a084",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90/45] Degree fiber orientation with 10 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def299504c3",
+      "specimen_id": "eddycus:cfg5b5bb499",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 15.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90/45] Degree fiber orientation with 15 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def930ad50f",
+      "specimen_id": "eddycus:cfgf21c18b7",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 20.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90/45] Degree fiber orientation with 20 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def158bf391",
+      "specimen_id": "eddycus:cfg3d93d100",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 25.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90/45] Degree fiber orientation with 25 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def378251f8",
+      "specimen_id": "eddycus:cfg91248ae2",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 30.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90/45] Degree fiber orientation with 30 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def150fe2ce",
+      "specimen_id": "eddycus:cfge8ab1723",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90/45] Degree fiber orientation with 10 mm gap in second layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def0a6d342d",
+      "specimen_id": "eddycus:cfg37727a98",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 15.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90/45] Degree fiber orientation with 15 mm gap in second layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def277665a3",
+      "specimen_id": "eddycus:cfg0e144177",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 20.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90/45] Degree fiber orientation with 20 mm gap in second layer"
+    },
+    {
+      "defect_instance_id": "eddycus:defbd57e629",
+      "specimen_id": "eddycus:cfg9d464917",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 25.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90/45] Degree fiber orientation with 25 mm gap in second layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def1b5f4353",
+      "specimen_id": "eddycus:cfg1ed9a666",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 30.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90/45] Degree fiber orientation with 30 mm gap in second layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def2201dace",
+      "specimen_id": "eddycus:cfg99d4eeac",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": null,
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90/45] Degree fiber orientation with 0 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def05c67e7e",
+      "specimen_id": "eddycus:cfgcccf8017",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": null,
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90/90] Degree fiber orientation with 0 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def04fcf642",
+      "specimen_id": "eddycus:cfg819e555a",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": null,
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90] Degree fiber orientation with 0 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:defa7e48ef9",
+      "specimen_id": "eddycus:cfg8454139f",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90] Degree fiber orientation with 10 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:defd4ff3d0b",
+      "specimen_id": "eddycus:cfg1ab1b31b",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 15.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90] Degree fiber orientation with 15 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def628b4d11",
+      "specimen_id": "eddycus:cfg3e03f0c0",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 20.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90] Degree fiber orientation with 20 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def7a3ebdb3",
+      "specimen_id": "eddycus:cfg0db095fb",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 25.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90] Degree fiber orientation with 25 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:deffe29af95",
+      "specimen_id": "eddycus:cfgcd2d6ab2",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 30.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90] Degree fiber orientation with 30 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def6cd4e746",
+      "specimen_id": "eddycus:cfg185141d3",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90/90] Degree fiber orientation with 10 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def080fd20b",
+      "specimen_id": "eddycus:cfg199fdf66",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 15.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90/90] Degree fiber orientation with 15 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def8f45fc8e",
+      "specimen_id": "eddycus:cfg7c2bb659",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 20.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90/90] Degree fiber orientation with 20 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def8e474bcb",
+      "specimen_id": "eddycus:cfgf73ea869",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 25.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90/90] Degree fiber orientation with 25 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def354ce7da",
+      "specimen_id": "eddycus:cfg6443c800",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 30.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90/90] Degree fiber orientation with 30 mm gap in first layer"
+    },
+    {
+      "defect_instance_id": "eddycus:defbfb3e943",
+      "specimen_id": "eddycus:cfgb65980c7",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90/90] Degree fiber orientation with 10 mm gap in second layer"
+    },
+    {
+      "defect_instance_id": "eddycus:defaf00586f",
+      "specimen_id": "eddycus:cfg7beba947",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 15.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90/90] Degree fiber orientation with 15 mm gap in second layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def3659287f",
+      "specimen_id": "eddycus:cfgfd0889ce",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 20.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90/90] Degree fiber orientation with 20 mm gap in second layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def0672ca40",
+      "specimen_id": "eddycus:cfgbdfdccdf",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 25.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90/90] Degree fiber orientation with 25 mm gap in second layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def4fec16dc",
+      "specimen_id": "eddycus:cfg21fd0235",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 30.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[90/90] Degree fiber orientation with 30 mm gap in second layer"
+    },
+    {
+      "defect_instance_id": "eddycus:defd8c43638",
+      "specimen_id": "eddycus:cfg5a41700e",
+      "defect_type": "mis_orientation",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.34,
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/45/45/45/45/90/0] orientation with a mis-orientation in the upper 90 ° stack"
+    },
+    {
+      "defect_instance_id": "eddycus:defb2d525ce",
+      "specimen_id": "eddycus:cfgf76c9f98",
+      "defect_type": "mis_orientation",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.34,
+      "defect_size": {
+        "length": 15.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/45/45/45/45/90/0] orientation with a mis-orientation in the upper 90 ° stack"
+    },
+    {
+      "defect_instance_id": "eddycus:def7bfb3f38",
+      "specimen_id": "eddycus:cfg95f32e58",
+      "defect_type": "mis_orientation",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.34,
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/45/45/45/45/90/0] orientation with a mis-orientation in the upper 90 ° stack"
+    },
+    {
+      "defect_instance_id": "eddycus:def389638a0",
+      "specimen_id": "eddycus:cfgc62df292",
+      "defect_type": "mis_orientation",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.34,
+      "defect_size": {
+        "length": 3.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/45/45/45/45/90/0] orientation with a mis-orientation in the upper 90 ° stack"
+    },
+    {
+      "defect_instance_id": "eddycus:deff1a66fde",
+      "specimen_id": "eddycus:cfgf5267ca8",
+      "defect_type": "mis_orientation",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.34,
+      "defect_size": {
+        "length": 5.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/45/45/45/45/90/0] orientation with a mis-orientation in the upper 90 ° stack"
+    },
+    {
+      "defect_instance_id": "eddycus:def254df1d2",
+      "specimen_id": "eddycus:cfgc80c06ab",
+      "defect_type": "mis_orientation",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.34,
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/45/45] orientation with a mis-orientation in the upper 90 ° stack"
+    },
+    {
+      "defect_instance_id": "eddycus:defbf0a1d72",
+      "specimen_id": "eddycus:cfgff0297e1",
+      "defect_type": "mis_orientation",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.34,
+      "defect_size": {
+        "length": 15.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/45/45] orientation with a mis-orientation in the upper 90 ° stack"
+    },
+    {
+      "defect_instance_id": "eddycus:defcfc0dc8c",
+      "specimen_id": "eddycus:cfg8ee9a7a3",
+      "defect_type": "mis_orientation",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.34,
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/45/45] orientation with a mis-orientation in the upper 90 ° stack"
+    },
+    {
+      "defect_instance_id": "eddycus:defe592829b",
+      "specimen_id": "eddycus:cfg9c795eb7",
+      "defect_type": "mis_orientation",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.34,
+      "defect_size": {
+        "length": 3.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/45/45] orientation with a mis-orientation in the upper 90 ° stack"
+    },
+    {
+      "defect_instance_id": "eddycus:defea192216",
+      "specimen_id": "eddycus:cfgc7747000",
+      "defect_type": "mis_orientation",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.34,
+      "defect_size": {
+        "length": 5.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/45/45] orientation with a mis-orientation in the upper 90 ° stack"
+    },
+    {
+      "defect_instance_id": "eddycus:def0573fdd9",
+      "specimen_id": "eddycus:cfgbab4762e",
+      "defect_type": "mis_orientation",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/45/45] orientation with a mis-orientation in the upper 90 ° stack"
+    },
+    {
+      "defect_instance_id": "eddycus:def39fafb30",
+      "specimen_id": "eddycus:cfg8afc4729",
+      "defect_type": "mis_orientation",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 15.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/45/45] orientation with a mis-orientation in the upper 90 ° stack"
+    },
+    {
+      "defect_instance_id": "eddycus:def8c4ff9dd",
+      "specimen_id": "eddycus:cfg422a04dc",
+      "defect_type": "mis_orientation",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/45/45] orientation with a mis-orientation in the upper 90 ° stack"
+    },
+    {
+      "defect_instance_id": "eddycus:defbc313351",
+      "specimen_id": "eddycus:cfg5f88c42a",
+      "defect_type": "mis_orientation",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 3.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/45/45] orientation with a mis-orientation in the upper 90 ° stack"
+    },
+    {
+      "defect_instance_id": "eddycus:defd65d5a5f",
+      "specimen_id": "eddycus:cfg6b1e7dc2",
+      "defect_type": "mis_orientation",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 5.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/45/45] orientation with a mis-orientation in the upper 90 ° stack"
+    },
+    {
+      "defect_instance_id": "eddycus:def5681ef73",
+      "specimen_id": "eddycus:cfgd1666c60",
+      "defect_type": "ptfe_insert",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/45/45] orientation with 10 mm x 10 mm PTFE film insert as delamination"
+    },
+    {
+      "defect_instance_id": "eddycus:defa6ec1143",
+      "specimen_id": "eddycus:cfgf7a82c25",
+      "defect_type": "ptfe_insert",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.6,
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/45/45] orientation with 10 mm x 10 mm PTFE film insert as delamination"
+    },
+    {
+      "defect_instance_id": "eddycus:def9c969eb4",
+      "specimen_id": "eddycus:cfg7f5b74f3",
+      "defect_type": "ptfe_insert",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.9,
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/45/45] orientation with 10 mm x 10 mm PTFE film insert as delamination"
+    },
+    {
+      "defect_instance_id": "eddycus:def7f42055f",
+      "specimen_id": "eddycus:cfgcf402cb9",
+      "defect_type": "copper_foil",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/45/45] orientation with 10 mm x 10 mm copper film insert"
+    },
+    {
+      "defect_instance_id": "eddycus:def1e08fdda",
+      "specimen_id": "eddycus:cfg16d24afc",
+      "defect_type": "copper_foil",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.6,
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/45/45] orientation with 10 mm x 10 mm copper film insert"
+    },
+    {
+      "defect_instance_id": "eddycus:def8d0c0337",
+      "specimen_id": "eddycus:cfgb154612a",
+      "defect_type": "copper_foil",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.9,
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/45/45] orientation with 10 mm x 10 mm copper film insert"
+    },
+    {
+      "defect_instance_id": "eddycus:defe06100f4",
+      "specimen_id": "eddycus:cfg722b06d4",
+      "defect_type": "mis_orientation",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/90/0] orientation with a mis-orientation in the upper 90 ° stack"
+    },
+    {
+      "defect_instance_id": "eddycus:defa4a19db3",
+      "specimen_id": "eddycus:cfg59b4982e",
+      "defect_type": "mis_orientation",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 15.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/90/0] orientation with a mis-orientation in the upper 90 ° stack"
+    },
+    {
+      "defect_instance_id": "eddycus:def3d9d934e",
+      "specimen_id": "eddycus:cfg285c0e02",
+      "defect_type": "mis_orientation",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 1.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/90/0] orientation with a mis-orientation in the upper 90 ° stack"
+    },
+    {
+      "defect_instance_id": "eddycus:def2bf40ae1",
+      "specimen_id": "eddycus:cfg73dc6730",
+      "defect_type": "mis_orientation",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 3.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/90/0] orientation with a mis-orientation in the upper 90 ° stack"
+    },
+    {
+      "defect_instance_id": "eddycus:def817b5c49",
+      "specimen_id": "eddycus:cfg15504b6a",
+      "defect_type": "mis_orientation",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 5.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/90/0] orientation with a mis-orientation in the upper 90 ° stack"
+    },
+    {
+      "defect_instance_id": "eddycus:def47cad126",
+      "specimen_id": "eddycus:cfg8350a65e",
+      "defect_type": "ptfe_insert",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/90/0] orientation with 10 mm x 10 mm PTFE film insert as delamination"
+    },
+    {
+      "defect_instance_id": "eddycus:deff4605863",
+      "specimen_id": "eddycus:cfgbb498b81",
+      "defect_type": "ptfe_insert",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.6,
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/90/0] orientation with 10 mm x 10 mm PTFE film insert as delamination"
+    },
+    {
+      "defect_instance_id": "eddycus:defa955ba82",
+      "specimen_id": "eddycus:cfgee779bc2",
+      "defect_type": "ptfe_insert",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.9,
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/90/0] orientation with 10 mm x 10 mm PTFE film insert as delamination"
+    },
+    {
+      "defect_instance_id": "eddycus:def2b9655df",
+      "specimen_id": "eddycus:cfg78024103",
+      "defect_type": "copper_foil",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/90/0] orientation with 10 mm x 10 mm copper film insert"
+    },
+    {
+      "defect_instance_id": "eddycus:def51408d9c",
+      "specimen_id": "eddycus:cfge85a4eee",
+      "defect_type": "copper_foil",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.6,
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/90/0] orientation with 10 mm x 10 mm copper film insert"
+    },
+    {
+      "defect_instance_id": "eddycus:def4b4e6bf3",
+      "specimen_id": "eddycus:cfgc6bac598",
+      "defect_type": "copper_foil",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.9,
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/90/0] orientation with 10 mm x 10 mm copper film insert"
+    },
+    {
+      "defect_instance_id": "eddycus:defc39e03aa",
+      "specimen_id": "eddycus:cfg4f36bd22",
+      "defect_type": "copper_roving",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": null,
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/90/0] orientation with a copper coated roving inserted for local resistivity increase"
+    },
+    {
+      "defect_instance_id": "eddycus:defd71132ef",
+      "specimen_id": "eddycus:cfg526be0ed",
+      "defect_type": "copper_roving",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.6,
+      "defect_size": null,
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/90/0] orientation with a copper coated roving inserted for local resistivity increase"
+    },
+    {
+      "defect_instance_id": "eddycus:deff51d8b79",
+      "specimen_id": "eddycus:cfg46f177c8",
+      "defect_type": "copper_roving",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.9,
+      "defect_size": null,
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/90/0] orientation with a copper coated roving inserted for local resistivity increase"
+    },
+    {
+      "defect_instance_id": "eddycus:def28a3d933",
+      "specimen_id": "eddycus:cfg7a0449d9",
+      "defect_type": "copper_roving",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 90.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/90/0] orientation with a copper coated roving inserted for local resistivity increase"
+    },
+    {
+      "defect_instance_id": "eddycus:def3a1745ab",
+      "specimen_id": "eddycus:cfg11af3464",
+      "defect_type": "copper_roving",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.6,
+      "defect_size": {
+        "length": 90.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/90/0] orientation with a copper coated roving inserted for local resistivity increase"
+    },
+    {
+      "defect_instance_id": "eddycus:def78976cb6",
+      "specimen_id": "eddycus:cfge85cbb31",
+      "defect_type": "copper_roving",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.9,
+      "defect_size": {
+        "length": 90.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/90/0] orientation with a copper coated roving inserted for local resistivity increase"
+    },
+    {
+      "defect_instance_id": "eddycus:defa73c9325",
+      "specimen_id": "eddycus:cfgfbf48db8",
+      "defect_type": "mis_orientation",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.3,
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=[0/90/90/90] orientation with a mis-orientation in the upper 90 ° stack"
+    },
+    {
+      "defect_instance_id": "eddycus:def8657c5da",
+      "specimen_id": "eddycus:cfg1a561983",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 3.5
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=0 sensor orientation, missing roving resulting in a 3.5 mm gap in 0° layer with 0 additional layers added above the gap"
+    },
+    {
+      "defect_instance_id": "eddycus:def12836f0b",
+      "specimen_id": "eddycus:cfg3b4e0707",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 3.5
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=90 sensor orientation, missing roving resulting in a 3.5 mm gap in 0° layer with 0 additional layers added above the gap"
+    },
+    {
+      "defect_instance_id": "eddycus:def02e3fa18",
+      "specimen_id": "eddycus:cfg423fe5c2",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 3.5
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=45 sensor orientation, missing roving resulting in a 3.5 mm gap in 0° layer with 0 additional layers added above the gap"
+    },
+    {
+      "defect_instance_id": "eddycus:def5aa6da95",
+      "specimen_id": "eddycus:cfg933d0c6e",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.5,
+      "defect_size": {
+        "length": 3.5
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=0 sensor orientation, missing roving resulting in a 3.5 mm gap in 0° layer with 1 additional layers added above the gap"
+    },
+    {
+      "defect_instance_id": "eddycus:defdb8d4602",
+      "specimen_id": "eddycus:cfg49a36ca4",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.5,
+      "defect_size": {
+        "length": 3.5
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=90 sensor orientation, missing roving resulting in a 3.5 mm gap in 0° layer with 1 additional layers added above the gap"
+    },
+    {
+      "defect_instance_id": "eddycus:def8a2f05b6",
+      "specimen_id": "eddycus:cfg7812b915",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.5,
+      "defect_size": {
+        "length": 3.5
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=45 sensor orientation, missing roving resulting in a 3.5 mm gap in 0° layer with 1 additional layers added above the gap"
+    },
+    {
+      "defect_instance_id": "eddycus:defd9e91f6e",
+      "specimen_id": "eddycus:cfg85868e76",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 1.0,
+      "defect_size": {
+        "length": 3.5
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=0 sensor orientation, missing roving resulting in a 3.5 mm gap in 0° layer with 2 additional layers added above the gap"
+    },
+    {
+      "defect_instance_id": "eddycus:defa1241d2d",
+      "specimen_id": "eddycus:cfg7fe9c201",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 1.0,
+      "defect_size": {
+        "length": 3.5
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=90 sensor orientation, missing roving resulting in a 3.5 mm gap in 0° layer with 2 additional layers added above the gap"
+    },
+    {
+      "defect_instance_id": "eddycus:defcd1ba791",
+      "specimen_id": "eddycus:cfgc57a30e1",
+      "defect_type": "ondulation",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 5.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=0 sensor orientation, ondulation of 5 mm amplitude over a length of 75 mm in the top layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def9010a658",
+      "specimen_id": "eddycus:cfg5b071907",
+      "defect_type": "fuzz_ball",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 180.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=90° sensor orientation, fuzzy ball of carbon fibers with 180 mg in the top layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def08107ff8",
+      "specimen_id": "eddycus:cfgf86b8767",
+      "defect_type": "fuzz_ball",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 60.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=90° sensor orientation, fuzzy ball of carbon fibers with 60 mg in the top layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def077e42d3",
+      "specimen_id": "eddycus:cfg4c32320b",
+      "defect_type": "fuzz_ball",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 120.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=90° sensor orientation, fuzzy ball of carbon fibers with 120 mg in the top layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def10a2a4f5",
+      "specimen_id": "eddycus:cfg8197692a",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 3.6
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=90° sensor orientation, gap of 1 roving or 3.6 mm in the top layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def8ad444d2",
+      "specimen_id": "eddycus:cfg728b6167",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 7.2
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=90° sensor orientation, gap of 2 rovings or 7.2 mm in the top layer"
+    },
+    {
+      "defect_instance_id": "eddycus:defc0d5587e",
+      "specimen_id": "eddycus:cfg2c387731",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 10.8
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=90° sensor orientation, gap of 3 rovings or 10.8 mm in the top layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def34924f53",
+      "specimen_id": "eddycus:cfgf1cda1f3",
+      "defect_type": "ondulation",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.5,
+      "defect_size": {
+        "length": 5.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=0 sensor orientation, ondulation of 5 mm amplitude over a length of 75 mm in third layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def0315b909",
+      "specimen_id": "eddycus:cfg203ce08f",
+      "defect_type": "ondulation",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.5,
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=0 sensor orientation, ondulation of 10 mm amplitude over a length of 75 mm in third layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def0aabb573",
+      "specimen_id": "eddycus:cfg9e0e0b13",
+      "defect_type": "ondulation",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 10.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=0 sensor orientation, ondulation of 10 mm amplitude over a length of 75 mm in top layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def1116985f",
+      "specimen_id": "eddycus:cfg6de438e4",
+      "defect_type": "ondulation",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": null,
+      "defect_size": {
+        "length": 15.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=0 sensor orientation, ondulation of 15 mm amplitude over a length of 75 mm in top layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def03273adb",
+      "specimen_id": "eddycus:cfg57cdadcb",
+      "defect_type": "ondulation",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 0.5,
+      "defect_size": {
+        "length": 15.0
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=0 sensor orientation, ondulation of 15 mm amplitude over a length of 75 mm in third layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def05c9745b",
+      "specimen_id": "eddycus:cfg230dd9e1",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 1.0,
+      "defect_size": {
+        "length": 3.6
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=90° sensor orientation, gap of 1 roving or 3.6 mm in the fifth layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def9b7b6649",
+      "specimen_id": "eddycus:cfg3c11bc6e",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 1.0,
+      "defect_size": {
+        "length": 7.2
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=90° sensor orientation, gap of 2 rovings or 7.2 mm in the fifth layer"
+    },
+    {
+      "defect_instance_id": "eddycus:def5291a116",
+      "specimen_id": "eddycus:cfg0ede77a4",
+      "defect_type": "gap",
+      "data_origin": "measured",
+      "defect_origin": "manufacturing",
+      "defect_depth": 1.0,
+      "defect_size": {
+        "length": 10.8
+      },
+      "label_source": "sample_properties (HDF5 attrs)",
+      "label_confidence": 1.0,
+      "notes": "description=90° sensor orientation, gap of 3 rovings or 10.8 mm in the fifth layer"
+    }
+  ],
+  "tensors": [
+    {
+      "key": "iq",
+      "path": "raw/EddyCus-HDF5/output/scan_*.h5",
+      "format": "hdf5",
+      "axes": [
+        "n_points",
+        "iq"
+      ],
+      "dtype": "float64",
+      "unit": "arbitrary (real/imaginary)",
+      "n_records": 738,
+      "note": "每文件 f1..f4 共 4 频率；signal_data/fN/{real,imaginary,complex_impedance}+ analysis_results/fN/{magnitude,phase_degrees,phase_radians}；spatial_data/{track_number,sample_number,x_mm,y_mm,z_mm} 可重建 2D 栅格"
+    }
+  ],
+  "data_policy": {
+    "specimen_count_proxy": 148,
+    "defect_group_count": 133,
+    "scan_is_record": true,
+    "scan_is_not_specimen": true,
+    "n_signal_files": 695,
+    "n_nan_spatial_files": 36,
+    "n_freq_per_file": 4,
+    "n_sensors": 8,
+    "n_materials": 5,
+    "split_by": "defect_instance_id | specimen_id(cfg) | sensor | material",
+    "forbid": "sensor×frequency 或扫描级随机划分当独立物理样本",
+    "audit_ref": "docs/M0_2C_eddycus_data_audit.md"
+  }
+}

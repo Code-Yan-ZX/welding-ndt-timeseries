@@ -22,6 +22,7 @@ REPO = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO / "src"))
 
 from wndt.data.adapters.base import NDTInstance      # noqa: E402
+from wndt.data.adapters.eddycus import EddyCusAdapter  # noqa: E402
 from wndt.data.adapters.ml_ndt import MLNDTAdapter    # noqa: E402
 from wndt.data.adapters.ndt_ml_flaw import NDTMLFlawAdapter  # noqa: E402
 from wndt.data.adapters.penelope import PENELOPEAdapter  # noqa: E402
@@ -30,6 +31,7 @@ ADAPTERS = {
     "penelope_paut": PENELOPEAdapter,
     "ml_ndt": MLNDTAdapter,
     "ndt_ml_flaw": NDTMLFlawAdapter,
+    "eddycus": EddyCusAdapter,
 }
 
 

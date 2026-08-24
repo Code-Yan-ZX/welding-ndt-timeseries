@@ -1,0 +1,110 @@
+{
+  "root": "data/raw/EddyCus-HDF5/output",
+  "n_files": 738,
+  "total_uncompressed_bytes": 3741148209,
+  "zip": {
+    "size_bytes": 3657641862,
+    "md5": "814f496342d77eb2eeabb1e0d34645c3"
+  },
+  "n_sensors": 9,
+  "sensors": {
+    "S13131 P3,3A 7,3 MHz": 650,
+    "\"S13131 P3,3A 7,3 MHz\"": 42,
+    "S15152 P3,3H 24,3MHz": 10,
+    "S15172 P2,4H 8,5 MHz": 9,
+    "S14150 P5,8H 9,2 MHz": 6,
+    "S14152 P3,3H 24,3 MHz": 6,
+    "S17257 P7H 17,0 MHz": 6,
+    "S13132 P5,8A 6,1MHz": 6,
+    "S13132 P5,8A 6,1 MHz": 3
+  },
+  "n_materials": 25,
+  "materials": {
+    "HP-U300/122C|HT 50K|[45/90]": 99,
+    "HP-U300/122C|HT 50K|[90/45]": 99,
+    "HP-U300/122C|HT 50K|[0/90/90/0]": 71,
+    "HP-U300/122C|HT 50K|[90/90]": 69,
+    "HP-U300/122C|HT 50K|[0/90]": 61,
+    "HP-U300/122C|HT 50K|[90/0]": 54,
+    "HP-U300/122C|HT 50K|[0/90/45/45]": 48,
+    "HP-U300/122C|HT 50K|[90]": 45,
+    "HP-U300/122C|HT 50K|[0/0]": 31,
+    "Kohlegelege ST 50g|ZOLTEK PX35 50K|[0]": 30,
+    "Kohlegelege ST 50g|ZOLTEK PX35 50K|[0/90/45/45/45/45/90/0]": 24,
+    "Kohlegelege ST 50g|ZOLTEK PX35 50K|[0/90/45/45]": 24,
+    "HP-U300/122C|HT 50K|[0]": 19,
+    "0/90° Fabric 524 g/m²|Toho Tenax HTS40 12K|[0/90]": 15,
+    "0/90° Fabric 524 g/m²|Toho Tenax HTS40 12K|[0/90/[0/90]]": 14,
+    "0/90 Fabric 565 g/m²|Toho Tenax HTS45-E23 12K|[0/90]": 8,
+    "0/90° Fabric 524 g/m²|Toho Tenax HTS40 12K|[0/90/[0/90/[0/90]]]": 7,
+    "Kohlegelege ST 50g|ZOLTEK PX35 50K|[0/90/90/0]": 4,
+    "Kohlegelege ST 50g|ZOLTEK PX35 50K|[0/90]": 4,
+    "HP-U300/122C|HT 50K|[45]": 3,
+    "0/90 Fabric 565 g/m²|Toho Tenax HTS45-E23 12K|[0/90/0/90]": 3,
+    "0/90 Fabric 565 g/m²|Toho Tenax HTS45-E23 12K|[0/90/0/90/0/90]": 3,
+    "HP-U300/122C|HT 50K|[0/90/90/90]": 1,
+    "0/90° Fabric 565 g/m²|Toho Tenax HTS45-E23 12K|[0/90]": 1,
+    "0/90/45/-45° Fabric 1013 g/m²|Toho Tenax HTS45-E23 12K|[0/90/45/-45]": 1
+  },
+  "n_defect_groups": 133,
+  "defects_top": {
+    "[0] as reference without defect|depth=0.0|size=0.0": 47,
+    "[0/90] Degree fiber orientation with 10 mm gap in second layer|depth=0.3|size=10.0": 9,
+    "[0/90] Degree fiber orientation with 15 mm gap in second layer|depth=0.3|size=15.0": 9,
+    "[0/90] Degree fiber orientation with 20 mm gap in second layer|depth=0.3|size=20.0": 9,
+    "[0/90] Degree fiber orientation with 25 mm gap in second layer|depth=0.3|size=25.0": 9,
+    "[0/90] Degree fiber orientation with 30 mm gap in second layer|depth=0.3|size=30.0": 9,
+    "[0/90] Degree fiber orientation with 0 mm gap in first layer|depth=0.0|size=0.0": 9,
+    "[45/90] Degree fiber orientation with 10 mm gap in first layer|depth=0.0|size=10.0": 9,
+    "[45/90] Degree fiber orientation with 15 mm gap in first layer|depth=0.0|size=15.0": 9,
+    "[45/90] Degree fiber orientation with 20 mm gap in first layer|depth=0.0|size=20.0": 9,
+    "[45/90] Degree fiber orientation with 25 mm gap in first layer|depth=0.0|size=25.0": 9,
+    "[45/90] Degree fiber orientation with 30 mm gap in first layer|depth=0.0|size=30.0": 9,
+    "[45/90] Degree fiber orientation with 10 mm gap in second layer|depth=0.3|size=10.0": 9,
+    "[45/90] Degree fiber orientation with 15 mm gap in second layer|depth=0.3|size=15.0": 9,
+    "[45/90] Degree fiber orientation with 20 mm gap in second layer|depth=0.3|size=20.0": 9,
+    "[45/90] Degree fiber orientation with 25 mm gap in second layer|depth=0.3|size=25.0": 9,
+    "[45/90] Degree fiber orientation with 30 mm gap in second layer|depth=0.3|size=30.0": 9,
+    "[45/90] Degree fiber orientation with 0 mm gap in first layer|depth=0.0|size=0.0": 9,
+    "[90/0] Degree fiber orientation with 10 mm gap in first layer|depth=0.0|size=10.0": 9,
+    "[90/0] Degree fiber orientation with 15 mm gap in first layer|depth=0.0|size=15.0": 9
+  },
+  "n_freq_per_file": {
+    "4": 738
+  },
+  "freq_sets_by_sensor_group": {
+    "(12.0, 4.0, 7.0, 8.0)": 456,
+    "(12.0, 4.0, 6.0, 8.0)": 188,
+    "(0.0, 0.0, 0.0, 0.0)": 42,
+    "(2.0, 4.1, 6.3, 8.2)": 18,
+    "(16.0, 22.6, 4.0, 8.5)": 10,
+    "(2.0, 4.1, 6.3, 7.5)": 9,
+    "(1.8, 4.3, 5.0, 7.0)": 6,
+    "(14.2, 23.5, 6.1, 9.1)": 6,
+    "(3.0, 4.1, 6.3, 8.2)": 3
+  },
+  "grids": {
+    "tracks=101xsamples=451": 442,
+    "tracks=51xsamples=451": 184,
+    "tracks=202xsamples=1067": 34,
+    "tracks=101xsamples=450": 15,
+    "tracks=501xsamples=560": 9,
+    "tracks=251xsamples=560": 6,
+    "tracks=37xsamples=451": 1,
+    "tracks=51xsamples=450": 1,
+    "tracks=203xsamples=1067": 1,
+    "tracks=204xsamples=1067": 1,
+    "tracks=501xsamples=564": 1
+  },
+  "has_signal": {
+    "true": 695,
+    "false": 43
+  },
+  "has_spatial_mm": {
+    "true": 659,
+    "false": 79
+  },
+  "n_distinct_signal_lengths": 153,
+  "audit_script": "scripts/m0_2c_eddycus_audit.py",
+  "full_dump": "experiments/results/m0_2c_eddycus_audit_full.json (gitignored)"
+}

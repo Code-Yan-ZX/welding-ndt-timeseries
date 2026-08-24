@@ -79,20 +79,34 @@
   - **在获得可验证的同试件、同坐标、成对 UT+ECT 公共数据之前，不做真正的融合
     训练**，严禁把不同试件/材料/任务的 UT 与 ECT 强行拼接后称为"多模态融合"；
     严禁把 VTT 虚拟缺陷数据当作"数万条独立真实缺陷"或跨试件泛化证据。
-- **M0-2C（当前，第一步=本地 ECT 盘点，未训练）**：为 **PAUT SSL encoder →
-  ECT continued SSL pretraining** 做本地涡流数据盘点。
-  - **核心结论：本机 ECT 数据 = 0**（全盘搜索含 gitignore 区/共享盘/归档/HF
-    cache 均无涡流文件；项目内三外部数据集均为超声，见
-    `docs/M0_2C_local_ect_inventory.md`）。
-  - **首选候选**：EddyCus-HDF5（Zenodo 19251759，CFRP 多传感器多频 ECT，738
-    扫描，CC BY 4.0，免登录，3.7 GB）——2D 空间网格 + I/Q 复数阻抗，与 PAUT
-    2D 卷积 encoder 结构匹配；MDDECT（真实金属 1D I/Q，Kaggle 登录/license
-    未定）仅作独立 1D 基线。
-  - **推荐输入方案 B**：单频点单传感器 → `(I,Q) 双通道 (2,49,512)`，只改
-    `conv.0` in_channels=1→2（双通道复制初始化），其余 22/23 权重可加载
-    `ssl_ae_both/encoder.pt`；**必须新建 ECT decoder + 2D 空间块掩码**
-    （不沿用 PAUT beam 掩码）；判据沿用 M0-2B：E2−E0 ≥ +0.01 且 ≥2/3 seed 为正。
-  - 交付物：`docs/M0_2C_local_ect_inventory.md`（盘点 + 接入方案 + 最小实验矩阵 S0–S5）。
+- **M0-2C（当前，下载 + 真实审计 + 接入设计已完成，未训练）**：为 **PAUT SSL
+  encoder → ECT continued SSL pretraining** 落地涡流数据。
+  - **盘点结论**：本轮前本机 ECT=0（全盘搜索含 gitignore 区/共享盘/归档/HF
+    cache 均无涡流文件；项目内三外部数据集均为超声）。
+  - **EddyCus-HDF5 已下载并审计**（Zenodo 19251759，3.66 GB，md5
+    `814f496342d77eb2eeabb1e0d34645c3` 校验通过，CC BY 4.0，免登录）：**738 次
+    扫描 / 每文件 4 频率 / 8 传感器 / 5 材料 / 8 缺陷类**（gap 492 / clean 84 /
+    mis-orientation 80 / Cu foil 24 / Cu roving 24 / PTFE 24 / ondulation 6 /
+    fuzz ball 4）；2D 栅格主流 **101×451**（另有 51×451 / 202×1067 / 501×560）；
+    I/Q（real/imaginary float64）+ magnitude/phase。**独立性**：`id` 是扫描序号
+    非试件号，物理配置组 148 / 缺陷组 133；43 文件（5.8%）仅元数据无信号、
+    36 文件缺 x/y/z mm。**禁止 sensor×frequency 或扫描级随机划分**。
+  - **迁移源修正**：主源 = **`experiments/runs/ssl_ae/encoder.pt`（P1 beam-mask，
+    非PP4 0.579±0.007）**；`ssl_ae_both`（P4b beam+depth ~0.566）仅可选消融。
+  - **推荐输入方案 B**：每（扫描, 频率）→ **I/Q 双通道 `(2,H,W)`，保留原生栅格**
+    （H=track、W=每 track 采样，~101×451；**不强制 49×512**；尺寸不一致 batch
+    内 padding，仅超大网格才等比例下采样）；第一层 `Conv2d(1,32,3×7)→
+    Conv2d(2,32,3×7)` 用 `old.repeat(1,2,1,1)/2` 初始化（已数值验证），其余
+    22/23 权重加载；**必须新建 ECT decoder + 2D 空间块掩码**。
+  - **实验设计（下一轮训练）**：E（scratch）vs **P→E**（加载 `ssl_ae/encoder.pt`
+    续训），同数据/steps/decoder/head/seed；评估含 **ECT 下游**（cross-material /
+    cross-sensor，判据 P→E−E ≥ +0.01 且 ≥2/3 seed 正）与 **PP3–PP7 回测**
+    （灾难性遗忘 vs 0.579±0.007）。
+  - 交付物：`docs/M0_2C_local_ect_inventory.md`（盘点）、
+    `docs/M0_2C_eddycus_data_audit.md`（真实审计 + 接入设计）、
+    `data/manifests/eddycus/`（manifest + records）、
+    `src/wndt/data/adapters/eddycus.py` + `EddyCusStem`、
+    `scripts/m0_2c_eddycus_audit.py`、`tests/test_m0_2c.py`（8 项全过）。
 
 > ⚠ 限制：本阶段不进行超 10 GB 的新下载、不自动下载全部 LOTSA/UTSD、不做正式
 > 训练、不跑长时 GPU 任务。公开小数据实验不代表最终课题结论。

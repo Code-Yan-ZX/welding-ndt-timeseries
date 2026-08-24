@@ -90,7 +90,8 @@ def run(dataset_name: str, n: int, seed: int) -> None:
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("dataset", choices=["penelope_paut", "ml_ndt", "ndt_ml_flaw"])
+    ap.add_argument("dataset",
+                    choices=["penelope_paut", "ml_ndt", "ndt_ml_flaw", "eddycus"])
     ap.add_argument("--n", type=int, default=32)
     ap.add_argument("--seed", type=int, default=0)
     args = ap.parse_args()
