@@ -79,6 +79,20 @@
   - **在获得可验证的同试件、同坐标、成对 UT+ECT 公共数据之前，不做真正的融合
     训练**，严禁把不同试件/材料/任务的 UT 与 ECT 强行拼接后称为"多模态融合"；
     严禁把 VTT 虚拟缺陷数据当作"数万条独立真实缺陷"或跨试件泛化证据。
+- **M0-2C（当前，第一步=本地 ECT 盘点，未训练）**：为 **PAUT SSL encoder →
+  ECT continued SSL pretraining** 做本地涡流数据盘点。
+  - **核心结论：本机 ECT 数据 = 0**（全盘搜索含 gitignore 区/共享盘/归档/HF
+    cache 均无涡流文件；项目内三外部数据集均为超声，见
+    `docs/M0_2C_local_ect_inventory.md`）。
+  - **首选候选**：EddyCus-HDF5（Zenodo 19251759，CFRP 多传感器多频 ECT，738
+    扫描，CC BY 4.0，免登录，3.7 GB）——2D 空间网格 + I/Q 复数阻抗，与 PAUT
+    2D 卷积 encoder 结构匹配；MDDECT（真实金属 1D I/Q，Kaggle 登录/license
+    未定）仅作独立 1D 基线。
+  - **推荐输入方案 B**：单频点单传感器 → `(I,Q) 双通道 (2,49,512)`，只改
+    `conv.0` in_channels=1→2（双通道复制初始化），其余 22/23 权重可加载
+    `ssl_ae_both/encoder.pt`；**必须新建 ECT decoder + 2D 空间块掩码**
+    （不沿用 PAUT beam 掩码）；判据沿用 M0-2B：E2−E0 ≥ +0.01 且 ≥2/3 seed 为正。
+  - 交付物：`docs/M0_2C_local_ect_inventory.md`（盘点 + 接入方案 + 最小实验矩阵 S0–S5）。
 
 > ⚠ 限制：本阶段不进行超 10 GB 的新下载、不自动下载全部 LOTSA/UTSD、不做正式
 > 训练、不跑长时 GPU 任务。公开小数据实验不代表最终课题结论。
