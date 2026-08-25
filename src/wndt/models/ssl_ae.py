@@ -191,3 +191,69 @@ class ECTMaskedAE(nn.Module):
         diff = (recon - target) * masked
         denom = masked.sum().clamp(min=1)
         return F.smooth_l1_loss(diff, torch.zeros_like(diff), reduction="sum") / denom
+
+
+# ---------------------------------------------------------------------------
+# M0-3 外部真实焊缝 FMC：单通道变尺寸掩码自编码器（P1 MAEEncoder 共享结构）
+# ---------------------------------------------------------------------------
+class FlexDecoder(nn.Module):
+    """z (d_model) -> 重建 (B,1,H,W)，H/W 由当前 batch 决定。
+
+    与 PAUT ``MAEDecoder`` / ECT ``ECTDecoder`` 同构：fc -> (B,128,mid_h,mid_w)
+    -> 插值到 (H,W) -> 3 层 refine conv（末层输出 1 通道 = 时间信号）。
+    ``mid_h*mid_w`` 固定，decoder 权重与 batch 尺寸无关。
+    """
+
+    def __init__(self, d_model: int = 128, mid_h: int = 8, mid_w: int = 32):
+        super().__init__()
+        self.mid_h, self.mid_w = mid_h, mid_w
+        self.fc = nn.Linear(d_model, 128 * mid_h * mid_w)
+        self.refine = nn.Sequential(
+            nn.Conv2d(128, 64, 3, padding=1), nn.GELU(),
+            nn.Conv2d(64, 32, 3, padding=1), nn.GELU(),
+            nn.Conv2d(32, 1, 3, padding=1),
+        )
+
+    def forward(self, z: torch.Tensor, H: int, W: int) -> torch.Tensor:
+        h = self.fc(z).reshape(z.size(0), 128, self.mid_h, self.mid_w)
+        h = F.interpolate(h, size=(H, W), mode="bilinear", align_corners=False)
+        return self.refine(h)
+
+
+class ExternalUTMaskedAE(nn.Module):
+    """外部焊缝 FMC 掩码自编码器（M0-3 阶段 1，W→P 条件）。
+
+    - 输入 ``(B,1,Rx,T)``（每个 transmit event = 1 个 view，Rx×time 二维
+      物理结构；同 batch 同尺寸，由 bucket 保证）；
+    - ``block=16×16`` 空间块掩码，``mask_ratio`` 比例块被置零；
+    - encoder = ``MAEEncoder(in_channels=1)``（P1 卷积结构，W→P 迁移源）；
+    - decoder = ``FlexDecoder``，输出当前 batch 的 Rx×T（1 通道重建）；
+    - ``recon_loss`` 只计算 **masked ∩ valid** 像素（padding / 缺失点绝不进）。
+    - **与 PAUT decoder 分离**：阶段 2 新建 PAUT decoder，不迁移本 decoder。
+    """
+
+    def __init__(self, d_model: int = 128, mask_ratio: float = 0.3,
+                 block: int = 16, dropout: float = 0.2, in_channels: int = 1):
+        super().__init__()
+        self.encoder = MAEEncoder(d_model, dropout, in_channels=in_channels)
+        self.decoder = FlexDecoder(d_model)
+        self.mask_ratio = mask_ratio
+        self.block = block
+
+    def forward(self, x: torch.Tensor, valid: torch.Tensor,
+                mask: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor,
+                                             torch.Tensor, torch.Tensor]:
+        """x (B,1,H,W)；valid (B,H,W) bool；mask (B,1,H,W)，0=masked。
+        返回 (recon, target, mask, valid)。"""
+        xm = x * mask
+        z = self.encoder(xm)
+        recon = self.decoder(z, x.shape[-2], x.shape[-1])
+        return recon, x, mask, valid
+
+    def recon_loss(self, recon: torch.Tensor, target: torch.Tensor,
+                   mask: torch.Tensor, valid: torch.Tensor) -> torch.Tensor:
+        """masked∩valid 上的 Huber 重建损失；padding/缺失点绝不进入。"""
+        masked = (1.0 - mask) * valid.unsqueeze(1).float()   # (B,1,H,W)
+        diff = (recon - target) * masked
+        denom = masked.sum().clamp(min=1)
+        return F.smooth_l1_loss(diff, torch.zeros_like(diff), reduction="sum") / denom

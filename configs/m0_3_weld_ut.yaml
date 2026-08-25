@@ -1,0 +1,60 @@
+# M0-3 真实焊缝多源超声 SSL 预训练配置（P-long vs W→P，Protocol V2）。
+#
+# 主问题：外部真实焊缝 UT/FMC 预训练能否改善 PP3–PP7 严格跨试件 PAUT 表征。
+#
+# 两个等计算预算条件（唯一差别 = 阶段 1 的数据源）：
+#   P-long : 阶段1 PAUT(train coupons) SSL × external_steps + 阶段2 PAUT SSL × target_steps
+#   W→P    : 阶段1 外部真实焊缝 FMC SSL × external_steps + 阶段2 PAUT SSL × target_steps
+#   - 总 optimizer steps 完全相同（external_steps + target_steps）；
+#   - 阶段边界都重建 optimizer（lr 计划在每阶段重启动）；
+#   - 阶段 2 都新建 PAUT decoder，只加载阶段 1 的 encoder 权重（不迁移 decoder）；
+#   - mask 计划 / batch / 数据顺序 / 优化器 / 头协议 / seed 完全一致。
+#
+# seed 职责分离（沿用 M0-2B det_v2 / M0-2C）：
+#   split_seed —— 只控制 coupon train/val/test 划分；
+#   data_seed  —— 只控制数据采样（FMC bucket/PAUT 样本顺序）；
+#   model_seed —— 只控制模型初始化 / mask 计划 / 训练随机性 / 头初始化。
+#
+# 预算：pilot = 2000+2000（seed42 全 folds）；正式 = 5000+5000（三 seeds，
+# 不搜索超参）。预算固定在 config，不以 pilot 结果调参。
+
+model:
+  d_model: 128
+  in_channels: 1
+  mask_ratio: 0.3
+  block: 16
+  dropout: 0.2
+
+pretrain:
+  lr: 1.0e-3
+  weight_decay: 1.0e-4
+  batch_size: 32
+  grad_clip: 1.0
+  warmup_steps: 100
+  # 预算（固定；pilot/正式通过 --steps 覆盖）
+  pilot_external_steps: 2000
+  pilot_target_steps: 2000
+  full_external_steps: 5000
+  full_target_steps: 5000
+  data_seed: 42
+  split_seed: 42
+  model_seeds: [42, 43, 44]
+  # FMC 超大尺寸等比例下采样阈值（预先声明，P-long/W→P 一致）
+  max_fmc_h: 256
+  max_fmc_w: 1024
+
+# 规范头协议（冻结 encoder 下游二分类；与 M0-2B/PAUT 规范一致）
+head:
+  lr: 1.0e-3
+  weight_decay: 1.0e-4
+  batch_size: 128
+  epochs: 80
+  patience: 20
+  class_balance: true
+  dropout: 0.3
+
+eval:
+  main_metric: nonPP4_fold_mean      # PP3/PP5/PP6/PP7 逐折均值（排除近零缺陷 PP4）
+  folds: [PP3, PP4, PP5, PP6, PP7]
+  pilot_go: {min_delta: 0.01, min_positive_folds: 3, max_single_fold_drop: 0.05}
+  formal_go: {min_delta: 0.01, min_positive_seeds: 2}
