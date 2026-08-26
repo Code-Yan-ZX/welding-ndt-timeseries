@@ -44,7 +44,12 @@ def fmc_tmp(tmp_path_factory):
     for src, n_tx in (("A", 8), ("B", 6)):
         d = root / src
         d.mkdir()
-        fmc = rng.normal(size=(n_tx, 16, 512)).astype(np.float64)
+        fmc = rng.normal(size=(n_tx, 16, 512))
+        # 时间轴（axis -1）做移动平均：模拟 A-scan 时间连续性，保证
+        # canonical_fmc 的时间轴平滑度启发式（真实数据即如此）能识别时间轴。
+        kern = np.ones(9) / 9.0
+        fmc = np.apply_along_axis(lambda v: np.convolve(v, kern, mode="same"),
+                                  -1, fmc).astype(np.float64)
         tvec = np.linspace(0, 5e-5, 512)
         savemat(d / SOURCES[src]["mat"],
                 {"FMC": fmc, "time": tvec, "probe": {"freq": 5e6}})

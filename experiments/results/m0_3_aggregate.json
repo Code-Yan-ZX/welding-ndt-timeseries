@@ -1,0 +1,56 @@
+{
+  "exp": "m0_3_aggregate",
+  "run_type": "full",
+  "ext_steps": 2000,
+  "tgt_steps": 2000,
+  "model_seeds": [
+    42
+  ],
+  "is_pilot": true,
+  "main_metric": "nonPP4_fold_mean ROC-AUC (PP3/PP5/PP6/PP7)",
+  "per_seed": {
+    "42": {
+      "seed": 42,
+      "P-long": 0.5551,
+      "WP": 0.5413,
+      "d_nonPP4": -0.0138,
+      "pooled": {
+        "P-long": 0.5772,
+        "WP": 0.5827,
+        "d": 0.0055
+      },
+      "pp4": {
+        "P-long": 0.3757,
+        "WP": 0.5362,
+        "d": 0.1605
+      },
+      "per_fold_d": {
+        "PP3": -0.0179,
+        "PP5": -0.0368,
+        "PP6": -0.0029,
+        "PP7": 0.0022
+      },
+      "n_folds_no_drop": 1,
+      "max_fold_drop": -0.0368
+    }
+  },
+  "mean_d_nonPP4": -0.0138,
+  "n_seeds_wp_gt_plong": 0,
+  "fold_mean_d": {
+    "PP3": -0.0179,
+    "PP5": -0.0368,
+    "PP6": -0.0029,
+    "PP7": 0.0022
+  },
+  "max_single_fold_drop": -0.0368,
+  "n_seeds_with_ge3_folds_no_drop": 0,
+  "pilot_go": false,
+  "formal_go": null,
+  "verdict": "pilot GO 判据不通过：W→P−P-long 非PP4 mean=-0.0138（需 ≥+0.01），未下降折 1/4（需 ≥3），最大单折下降 -0.0368（需 >−0.05）。立即停止；不调参；不跑 3 seeds；结论写为'少量外部真实焊缝 FMC 未带来稳定迁移'。",
+  "notes": [
+    "pooled 与 PP4 仅参考，不驱动判据（主指标 = 非PP4 逐折均值）；",
+    "判据失败时立即停止，不调参、不跑 3 seeds、不做补救实验；",
+    "真实独立焊缝试件 < 10 时结论必须标注 exploratory。"
+  ],
+  "code_commit": "9fd9102ff811"
+}

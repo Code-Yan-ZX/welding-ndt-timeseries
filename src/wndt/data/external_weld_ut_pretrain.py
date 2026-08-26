@@ -34,8 +34,8 @@ from wndt.data.ultrasound_pretrain import (
     COUPONS, PROCESSED_PAUT, load_paut, paut_fold_split,
 )
 
-MAX_FMC_H = 256            # FMC 等比例下采样阈值（预先声明，与 config 一致）
-MAX_FMC_W = 1024
+MAX_FMC_H = 128            # FMC 阵元/beam 维度下采样阈值（预先声明，与 config 一致）
+MAX_FMC_W = 2048           # FMC 时间轴下采样阈值（真实数据 T 最多 10000）
 BLOCK = 16
 DEFAULT_MASK_RATIO = 0.3
 
@@ -73,8 +73,8 @@ class ExtView:
 
 
 def build_ext_views(data_root: Path = DATA_ROOT,
-                    sources: Sequence[str] = ("A", "B", "C")) -> list[ExtView]:
-    """外部 FMC 全部 transmit views（含下采样后尺寸）。"""
+                    sources: Sequence[str] = ("A", "B", "C", "D")) -> list[ExtView]:
+    """外部全部 views（FMC transmit events + PAUT B-scans，含下采样后尺寸）。"""
     out: list[ExtView] = []
     for v in build_view_index(data_root, sources):
         S = downsample_scale(v.rx, v.t)

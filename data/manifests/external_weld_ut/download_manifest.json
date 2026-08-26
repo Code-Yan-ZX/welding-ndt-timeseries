@@ -2,15 +2,31 @@
   "exp": "M0-3",
   "purpose": "真实焊缝多源超声预训练（PAUT/FMC 外部源）",
   "note": "全部数据源来自 University of Strathclyde Pure Portal，CC BY 4.0，DOI 永久标识。",
-  "download_status": "BLOCKED_2026-08-25",
-  "blocker": "Pure Portal 的 /files/ 端点由 Cloudflare managed challenge（cf-mitigated: challenge）保护。自动下载全部尝试均失败：\n  1. curl/wget（含完整浏览器 header + cookie jar）：HTTP 403，返回 challenge HTML（~5-6KB），cf_clearance 永不发放；\n  2. WebFetch：403 Forbidden；\n  3. 系统 Firefox（snap 版）headless：环境内启动即挂死（连 --version 都不返回，snap 沙箱问题）；\n  4. Playwright Chromium headless（经本机代理 127.0.0.1:7890）：/files/ 页面停在 challenge 页，25s+ 无 cf_clearance cookie，浏览器进程间歇性崩溃（EPIPE），下载事件永不触发；\n  5. 环境无 Xvfb，无法跑 headed 模式。\n按项目纪律不做 stealth/exploit 绕过；需浏览器人工下载。",
-  "checksums": "下载完成后由 scripts/m0_3_download_external_weld_ut.sh 写入 data/raw/external_weld_ut/checksums.txt（md5+sha256+size），当前为空（无成功下载）。",
-  "manual_download": "用普通浏览器打开各 source.page 的 'Download' 链接即可（CC BY 4.0 公开数据，无需登录）。或 bash scripts/m0_3_download_external_weld_ut.sh --urls 打印全部直链后浏览器逐个下载，按 files[].path 放到 data/raw/external_weld_ut/ 下，再重跑 audit + build_manifest。",
+  "download_status": "DOWNLOADED_2026-08-26（浏览器人工下载）",
+  "blocker": "Pure Portal 的 /files/ 端点由 Cloudflare managed challenge（cf-mitigated: challenge）保护，自动下载全部失败（见 attempts）；按项目纪律不做 stealth/exploit 绕过，最终由浏览器人工下载成功。",
+  "checksums": "data/raw/external_weld_ut/checksums.txt（md5+sha256+size）：A 272341239/146afc07…；B 34699543/e11add4c…；C 47060975/e790588f…；D 103673425/58281538…",
+  "manual_download": "浏览器打开各 source.page，点 Download；或 bash scripts/m0_3_download_external_weld_ut.sh --urls 打印全部直链。下载后按 files[].path 放到 data/raw/external_weld_ut/ 下，再重跑 audit。",
   "attempts": [
-    {"when": "2026-08-25T15:40Z", "method": "curl -L（浏览器 UA + cookies + referer）", "result": "403 cf-mitigated: challenge"},
-    {"when": "2026-08-25T15:43Z", "method": "WebFetch direct file URL", "result": "403 Forbidden"},
-    {"when": "2026-08-25T15:50Z", "method": "Firefox snap headless", "result": "进程挂死（snap 沙箱），无法使用"},
-    {"when": "2026-08-25T16:05Z", "method": "Playwright Chromium headless + 本机代理", "result": "challenge 不自动通过（无 cf_clearance），浏览器间歇 EPIPE 崩溃，无下载"}
+    {
+      "when": "2026-08-25T15:40Z",
+      "method": "curl -L（浏览器 UA + cookies + referer）",
+      "result": "403 cf-mitigated: challenge"
+    },
+    {
+      "when": "2026-08-25T15:43Z",
+      "method": "WebFetch direct file URL",
+      "result": "403 Forbidden"
+    },
+    {
+      "when": "2026-08-25T15:50Z",
+      "method": "Firefox snap headless",
+      "result": "进程挂死（snap 沙箱），无法使用"
+    },
+    {
+      "when": "2026-08-25T16:05Z",
+      "method": "Playwright Chromium headless + 本机代理",
+      "result": "challenge 不自动通过（无 cf_clearance），浏览器间歇 EPIPE 崩溃，无下载"
+    }
   ],
   "sources": [
     {
@@ -22,10 +38,23 @@
       "creator": "Katherine Tant (Univ. of Strathclyde)",
       "content": "316L 奥氏体不锈钢焊缝 lack-of-fusion 裂纹（与 x 轴成 50°）FMC 全矩阵采集；MATLAB .mat 260MB + .ods 元数据 53KB。",
       "files": [
-        {"path": "A/Lack_of_fusion_FMC_DORT_2016.mat", "url": "https://pureportal.strath.ac.uk/files/46166162/Lack_of_fusion_FMC_DORT_2016.mat", "size_bytes_expected": null, "size_display": "260MB"},
-        {"path": "A/Lack_of_fusion_FMC_DORT_2016.ods", "url": "https://pureportal.strath.ac.uk/files/46166161/Lack_of_fusion_FMC_DORT_2016.ods", "size_bytes_expected": null, "size_display": "53KB"}
+        {
+          "path": "A/Lack_of_fusion_FMC_DORT_2016.mat",
+          "url": "https://pureportal.strath.ac.uk/files/46166162/Lack_of_fusion_FMC_DORT_2016.mat",
+          "size_bytes_expected": 272341239,
+          "size_display": "260MB"
+        },
+        {
+          "path": "A/Lack_of_fusion_FMC_DORT_2016.ods",
+          "url": "https://pureportal.strath.ac.uk/files/46166161/Lack_of_fusion_FMC_DORT_2016.ods",
+          "size_bytes_expected": null,
+          "size_display": "53KB"
+        }
       ],
-      "related": ["Cunningham et al. Proc R Soc A 2016 (10.1098/rspa.2015.0500)", "Tant et al. Acta Acustica 2017 (10.3813/AAA.919125)"]
+      "related": [
+        "Cunningham et al. Proc R Soc A 2016 (10.1098/rspa.2015.0500)",
+        "Tant et al. Acta Acustica 2017 (10.3813/AAA.919125)"
+      ]
     },
     {
       "id": "B",
@@ -36,10 +65,22 @@
       "creator": "Katherine Tant (Univ. of Strathclyde)",
       "content": "Inconel 82/182 焊缝中心竖直流向粗糙裂纹（12mm 长，距换能器面 37mm 内嵌）；母材右侧 316L、左侧碳钢+Inconel 182 覆层；.mat 33.1MB + .xlsx 元数据 8.86KB。",
       "files": [
-        {"path": "B/FMC_2012_04_26_at_16_16.mat", "url": "https://pureportal.strath.ac.uk/files/46012157/FMC_2012_04_26_at_16_16.mat", "size_bytes_expected": null, "size_display": "33.1MB"},
-        {"path": "B/12mm_verticle_crack_in_austenitic_weld_experimental_FMC_metadata_FMC_2012_04_26_AT_16_18.xlsx", "url": "https://pureportal.strath.ac.uk/files/46012288/12mm_verticle_crack_in_austenitic_weld_experimental_FMC_metadata_FMC_2012_04_26_AT_16_18.xlsx", "size_bytes_expected": null, "size_display": "8.86KB"}
+        {
+          "path": "B/FMC_2012_04_26_at_16_16.mat",
+          "url": "https://pureportal.strath.ac.uk/files/46012157/FMC_2012_04_26_at_16_16.mat",
+          "size_bytes_expected": 34699543,
+          "size_display": "33.1MB"
+        },
+        {
+          "path": "B/12mm_verticle_crack_in_austenitic_weld_experimental_FMC_metadata_FMC_2012_04_26_AT_16_18.xlsx",
+          "url": "https://pureportal.strath.ac.uk/files/46012288/12mm_verticle_crack_in_austenitic_weld_experimental_FMC_metadata_FMC_2012_04_26_AT_16_18.xlsx",
+          "size_bytes_expected": null,
+          "size_display": "8.86KB"
+        }
       ],
-      "related": ["Cunningham et al. Proc R Soc A 2016 (10.1098/rspa.2015.0500)"]
+      "related": [
+        "Cunningham et al. Proc R Soc A 2016 (10.1098/rspa.2015.0500)"
+      ]
     },
     {
       "id": "C",
@@ -50,10 +91,22 @@
       "creator": "Katherine Tant (Univ. of Strathclyde)",
       "content": "304SS 块含 MMA 焊缝 + 3mm 直径侧钻孔（SDH）参考反射体；文件名 2_25MHz 提示 2.25MHz 探头；.mat 44.9MB + .xlsx 元数据 10.1KB。iNEED 项目 EP/P005268/1。",
       "files": [
-        {"path": "C/FMC_RR3_2_25MHz_3mmsdh.mat", "url": "https://pureportal.strath.ac.uk/files/67484223/FMC_RR3_2_25MHz_3mmsdh.mat", "size_bytes_expected": null, "size_display": "44.9MB"},
-        {"path": "C/FMC_RR3_2_25MHz_3mmsdh_metadata.xlsx", "url": "https://pureportal.strath.ac.uk/files/67484224/FMC_RR3_2_25MHz_3mmsdh_metadata.xlsx", "size_bytes_expected": null, "size_display": "10.1KB"}
+        {
+          "path": "C/FMC_RR3_2_25MHz_3mmsdh.mat",
+          "url": "https://pureportal.strath.ac.uk/files/67484223/FMC_RR3_2_25MHz_3mmsdh.mat",
+          "size_bytes_expected": 47060975,
+          "size_display": "44.9MB"
+        },
+        {
+          "path": "C/FMC_RR3_2_25MHz_3mmsdh_metadata.xlsx",
+          "url": "https://pureportal.strath.ac.uk/files/67484224/FMC_RR3_2_25MHz_3mmsdh_metadata.xlsx",
+          "size_bytes_expected": null,
+          "size_display": "10.1KB"
+        }
       ],
-      "related": ["iNEED project EP/P005268/1"]
+      "related": [
+        "iNEED project EP/P005268/1"
+      ]
     },
     {
       "id": "D",
@@ -64,12 +117,18 @@
       "creator": "Adam Gilmour (Univ. of Strathclyde)",
       "content": "相控阵超声图像（探头定位/焊缝材料识别），PAUT.zip 98.9MB，内部格式待下载后确认（可能 .mat/.hdf5/图像）。",
       "files": [
-        {"path": "D/PAUT.zip", "url": "https://pureportal.strath.ac.uk/files/287644161/PAUT.zip", "size_bytes_expected": null, "size_display": "98.9MB"}
+        {
+          "path": "D/PAUT.zip",
+          "url": "https://pureportal.strath.ac.uk/files/287644161/PAUT.zip",
+          "size_bytes_expected": 103673425,
+          "size_display": "98.9MB"
+        }
       ],
-      "related": ["Gilmour et al. IEEE OJ I&C 2023, 2, 7500110"]
+      "related": [
+        "Gilmour et al. IEEE OJ I&C 2023, 2, 7500110"
+      ]
     }
   ],
-  "manual_download": "浏览器打开各 source.page，点 Download；或 bash scripts/m0_3_download_external_weld_ut.sh --urls 打印全部直链。下载后按 files[].path 放到 data/raw/external_weld_ut/ 下，再重跑 audit。",
   "ete_optional": {
     "name": "NDE Open File Format (ndeformat.com) example files",
     "status": "NOT_ATTEMPTED",

@@ -1,0 +1,86 @@
+{
+  "manifest_version": "0.2.0",
+  "dataset_name": "external_weld_ut",
+  "primary_modality": "ultrasonic",
+  "license": "CC BY 4.0",
+  "source": {
+    "official_name": "Strathclyde weld FMC/PAUT datasets (A/B/C/D)",
+    "url": "https://pureportal.strath.ac.uk/ (see download_manifest.json)",
+    "doi": [
+      "10.15129/086404bd-eb69-429b-978c-2c35cdbfcf87",
+      "10.15129/179e1b38-e701-443d-b995-a4449851330c",
+      "10.15129/60b6a5b8-e78e-4742-8414-aaba9399a9c8",
+      "10.15129/bfb5a77d-dabe-4be4-82c9-b10e8c237dea"
+    ],
+    "size_bytes": 457775182,
+    "downloadable": true,
+    "audit_ref": "docs/M0_3_external_weld_ut_audit.md"
+  },
+  "n_specimens": 4,
+  "n_defect_instances": 4,
+  "n_records": 690,
+  "specimens": [
+    {
+      "specimen_id": "external_weld_ut:A:spec1",
+      "dataset_name": "external_weld_ut",
+      "material": "316L SS (austenitic weld)",
+      "manufacturing": "316L plate weld",
+      "geometry": "FMC rx=128 t=10000",
+      "source_file": "A/Lack_of_fusion_FMC_DORT_2016.mat",
+      "notes": "group_id = 物理试件/采集配置（一个 .mat = 一个 group，审计确认后细分）；Tx×Rx/scan/重复扫查共享 group_id，禁止当独立试件"
+    },
+    {
+      "specimen_id": "external_weld_ut:B:spec1",
+      "dataset_name": "external_weld_ut",
+      "material": "Inconel 82/182 + 316L + carbon steel",
+      "manufacturing": "Inconel 82/182 weld",
+      "geometry": "FMC rx=45 t=10000",
+      "source_file": "B/FMC_2012_04_26_at_16_16.mat",
+      "notes": "group_id = 物理试件/采集配置（一个 .mat = 一个 group，审计确认后细分）；Tx×Rx/scan/重复扫查共享 group_id，禁止当独立试件"
+    },
+    {
+      "specimen_id": "external_weld_ut:C:spec1",
+      "dataset_name": "external_weld_ut",
+      "material": "304SS",
+      "manufacturing": "MMA weld",
+      "geometry": "FMC rx=128 t=976",
+      "source_file": "C/FMC_RR3_2_25MHz_3mmsdh.mat",
+      "notes": "group_id = 物理试件/采集配置（一个 .mat = 一个 group，审计确认后细分）；Tx×Rx/scan/重复扫查共享 group_id，禁止当独立试件"
+    },
+    {
+      "specimen_id": "external_weld_ut:D:spec1",
+      "dataset_name": "external_weld_ut",
+      "material": "steel weld (unspecified)",
+      "manufacturing": "weld (probe localisation)",
+      "geometry": "FMC rx=401 t=762",
+      "source_file": "D/PAUT.zip#PAUT/A01.txt",
+      "notes": "group_id = 物理试件/采集配置（一个 .mat = 一个 group，审计确认后细分）；Tx×Rx/scan/重复扫查共享 group_id，禁止当独立试件"
+    }
+  ],
+  "defects": [],
+  "tensors": [
+    {
+      "key": "view",
+      "path": "raw/external_weld_ut/{A,B,C}/*.mat",
+      "format": "matlab (v5 or v7.3)",
+      "axes": [
+        "rx",
+        "time"
+      ],
+      "dtype": "float",
+      "unit": "voltage (ADC)",
+      "n_records": 690,
+      "note": "每 transmit event = 1 view (Rx,T)；group_id 继承物理试件；变长输入 + valid mask；recon loss 只算 masked∩valid"
+    }
+  ],
+  "data_policy": {
+    "specimen_count": 4,
+    "view_is_not_specimen": true,
+    "view_is_transmit_event": true,
+    "split_by": "specimen_id (group_id)",
+    "forbid": "Tx×Rx / scan position / 切片数当独立试件；缺陷标签用于 SSL 采样捷径",
+    "exploratory": true,
+    "exploratory_note": "真实独立焊缝试件 < 10 -> exploratory external pretraining source，不称为 foundation-scale dataset",
+    "audit_ref": "docs/M0_3_external_weld_ut_audit.md"
+  }
+}

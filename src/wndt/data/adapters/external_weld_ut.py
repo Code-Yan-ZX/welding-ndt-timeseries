@@ -54,16 +54,23 @@ DATA_ROOT = RAW / "external_weld_ut"
 MANIFEST_DIR = REPO / "data" / "manifests" / "external_weld_ut"
 LICENSE = "CC BY 4.0"
 
-# 数据源静态信息（与 download_manifest.json 一致）
+# 数据源静态信息（与 download_manifest.json 一致；审计后按真实结构更新）
 SOURCES = {
     "A": {"mat": "Lack_of_fusion_FMC_DORT_2016.mat", "doi": "10.15129/086404bd-eb69-429b-978c-2c35cdbfcf87",
           "material": "316L SS (austenitic weld)", "weld": "316L plate weld",
-          "defect": "lack-of-fusion crack (50° to x-axis)"},
+          "defect": "lack-of-fusion crack (50° to x-axis)",
+          "layout": "FMC_new (T=10000, Tx=128, Rx=128) int32", "n_specimens": 1},
     "B": {"mat": "FMC_2012_04_26_at_16_16.mat", "doi": "10.15129/179e1b38-e701-443d-b995-a4449851330c",
           "material": "Inconel 82/182 + 316L + carbon steel", "weld": "Inconel 82/182 weld",
-          "defect": "centreline vertical rough crack 12mm"},
+          "defect": "centreline vertical rough crack 12mm",
+          "layout": "FMC_new (T=10000, Tx=45, Rx=45) int32", "n_specimens": 1},
     "C": {"mat": "FMC_RR3_2_25MHz_3mmsdh.mat", "doi": "10.15129/60b6a5b8-e78e-4742-8414-aaba9399a9c8",
-          "material": "304SS", "weld": "MMA weld", "defect": "3mm side drilled hole"},
+          "material": "304SS", "weld": "MMA weld", "defect": "3mm side drilled hole",
+          "layout": "fmc (Tx=128, Rx=128, T=976) float64", "n_specimens": 1},
+    "D": {"mat": "PAUT.zip", "doi": "10.15129/bfb5a77d-dabe-4be4-82c9-b10e8c237dea",
+          "material": "steel weld (unspecified)", "weld": "weld (probe localisation)",
+          "defect": "none (probe localisation / weld material ID)",
+          "layout": "389 × PAUT B-scan txt (time=762, beam=401)", "n_specimens": 1},
 }
 
 
@@ -100,32 +107,64 @@ def load_mat(path: Path) -> dict[str, Any]:
 
 
 # ---------------------------------------------------------------------------
-# FMC 数组检测（审计后按真实结构精化）
+# FMC 数组检测（按真实数据审计结果：A/B 时间轴在 axis0，C 在 axis-1）
 # ---------------------------------------------------------------------------
+def _time_axis_smoothness(a: np.ndarray) -> float:
+    """轴的时间平滑度：mean|diff|。时间轴相邻采样高度相关 -> 值小。"""
+    a = a.astype(np.float64)
+    s = tuple(min(d, 512) for d in a.shape)
+    sub = a[tuple(slice(0, x) for x in s)]
+    return float(np.abs(np.diff(sub, axis=0)).mean())
+
+
+def canonical_fmc(fmc: np.ndarray) -> np.ndarray:
+    """把任意 FMC 布局规范化为 ``(Tx, Rx, T)``（时间轴移到最后）。
+
+    真实数据确认两种布局：
+    - A/B ``FMC_new`` (T, Tx, Rx) = (10000, 128/45, 128/45) int32：时间在 axis0；
+    - C ``fmc`` (Tx, Rx, T) = (128, 128, 976) float64：时间在 axis-1。
+    时间轴判定：axis0 与 axis-1 中相邻采样更平滑者（mean|diff| 更小）为时间轴
+    （超声 A-scan 时间序列平滑，而阵元/通道间不连续）。
+    """
+    fmc = np.asarray(fmc)
+    if fmc.ndim == 2:
+        return fmc[None]                          # (Rx, T) 单 transmit
+    if fmc.ndim != 3:
+        raise ValueError(f"FMC 数组必须是 2D/3D，got {fmc.shape}")
+    d0 = _time_axis_smoothness(fmc)
+    d1 = _time_axis_smoothness(np.moveaxis(fmc, -1, 0))
+    if d0 <= d1:
+        # 时间在 axis0：(T, Tx, Rx) -> moveaxis(0, -1) = (Tx, Rx, T)
+        return np.moveaxis(fmc, 0, -1)
+    return fmc                                   # 时间已在 axis-1：(Tx, Rx, T)
+
+
 def detect_fmc_arrays(mat: dict[str, Any]) -> tuple[Optional[np.ndarray], Optional[np.ndarray]]:
     """从 mat 变量中探测 (FMC 数组, time 向量)。
 
-    启发式（按真实数据审计结果精化）：
-    - FMC 数组：三维 (Tx, Rx, T) 的数值数组，或包含多个 (Rx, T) 子数组的
-      struct/cell（此时合并为 (Tx, Rx, T)）；
-    - time 向量：形状 (T,) 的 1D 数值数组（候选名含 time / t / dt 或 T==第三维）。
+    - FMC 数组：三维数值数组（shape 任一大维 > 10）——真实数据为 (T,Tx,Rx)
+      或 (Tx,Rx,T)，统一经 ``canonical_fmc`` 规范化为 (Tx,Rx,T)；
+    - time 向量：1D（或 MATLAB 行/列向量 (1,N)/(N,1)）数值数组，候选名含
+      time/t/dt 或长度 == FMC 时间轴长。真实数据 .mat 内无 time 向量（None）。
     """
-    fmc: Optional[np.ndarray] = None
+    fmc_raw: Optional[np.ndarray] = None
     time_vec: Optional[np.ndarray] = None
     for k, v in mat.items():
         a = np.asarray(v)
-        if a.dtype.kind in "fc" and a.ndim == 3 and a.shape[-1] > 10:
-            if fmc is None or a.size > fmc.size:
-                fmc = a
+        # 数值数组（float/complex/int；真实 A/B 为 int32 ADC 计数）
+        if a.dtype.kind in "fci" and a.ndim == 3 and a.shape[-1] > 10:
+            if fmc_raw is None or a.size > fmc_raw.size:
+                fmc_raw = a
         # time 向量：1D 或 MATLAB 行向量 (1, N) / 列向量 (N, 1)
         flat = a.reshape(-1) if (a.ndim in (1, 2) and 1 in a.shape) else a
-        if a.dtype.kind in "fc" and flat.ndim == 1 and flat.size > 10:
+        if a.dtype.kind in "fci" and flat.ndim == 1 and flat.size > 10:
             tl = k.lower()
-            if any(s in tl for s in ("time", "timestep", "t_axis", "t_vec")) or \
-                    (fmc is not None and flat.size == fmc.shape[-1]):
+            if any(s in tl for s in ("time", "timestep", "t_axis", "t_vec")):
                 if time_vec is None or "time" in tl:
                     time_vec = flat
-    return fmc, time_vec
+    if fmc_raw is None:
+        return None, time_vec
+    return canonical_fmc(fmc_raw), time_vec
 
 
 def group_id_for(source: str, mat: dict[str, Any],
@@ -144,9 +183,9 @@ def group_id_for(source: str, mat: dict[str, Any],
 # ---------------------------------------------------------------------------
 @dataclass
 class WeldUTView:
-    source: str                 # A/B/C
-    tx: int                     # transmit event 索引（view 维度）
-    rx: int                     # 接收阵元数
+    source: str                 # A/B/C/D
+    tx: int                     # transmit event / 文件索引（view 维度）
+    rx: int                     # 接收阵元数（FMC）或 beam 数（PAUT）
     t: int                      # 时间采样数
     group_id: str               # 物理试件/采集配置（split/group 键）
     record_id: str
@@ -155,23 +194,61 @@ class WeldUTView:
     material: str
 
 
+def _paut_txt_views(zip_path: Path) -> list[dict[str, Any]]:
+    """PAUT.zip 内全部 .txt B-scan（每文件 = 1 个 view，time×beam -> beam×time）。
+
+    所有 txt 网格同构（审计确认 762×401）；形状从第一个文件读取一次缓存。
+    """
+    import zipfile
+    out: list[dict[str, Any]] = []
+    with zipfile.ZipFile(zip_path) as z:
+        names = sorted(n for n in z.namelist() if n.endswith(".txt"))
+        shape = None
+        for name in names:
+            stem = Path(name).stem                    # 如 A01
+            letter, num = stem[0], int(stem[1:])
+            if shape is None:
+                raw = z.read(name).decode("utf-8", errors="replace")
+                rows = [ln for ln in raw.split("\n") if ln.strip()]
+                shape = (len(rows[0].split("\t")), len(rows))   # (beam, time)
+            out.append({
+                "name": name, "letter": letter, "num": num,
+                "group_id": f"{DATASET_NAME}:D:spec1",
+                "record_id": f"{DATASET_NAME}:D:{stem}",
+                "rx": shape[0], "t": shape[1],
+            })
+    return out
+
+
 def build_view_index(data_root: Path = DATA_ROOT,
-                     sources: Sequence[str] = ("A", "B", "C")) -> list[WeldUTView]:
-    """每个 FMC 的每个 transmit event = 1 个 view。"""
+                     sources: Sequence[str] = ("A", "B", "C", "D")) -> list[WeldUTView]:
+    """每个 FMC transmit event / 每张 PAUT B-scan = 1 个 view。
+
+    A/B/C 布局经 ``canonical_fmc`` 规范化为 (Tx, Rx, T)；D 为 (beam, time)。
+    全部 view 继承物理试件的 group_id（一个 .mat / 一个 zip = 一个 group，
+    审计确认后再细分）。
+    """
     views: list[WeldUTView] = []
     for sid in sources:
         info = SOURCES[sid]
         p = data_root / sid / info["mat"]
         if not p.exists():
             continue
+        gid = group_id_for(sid, {}, np.empty((0,)))
+        if sid == "D":
+            for e in _paut_txt_views(p):
+                views.append(WeldUTView(
+                    source=sid, tx=e["num"], rx=e["rx"], t=e["t"],
+                    group_id=e["group_id"], record_id=e["record_id"],
+                    mat_relpath=f"{sid}/{info['mat']}#{e['name']}",
+                    defect_type=info["defect"], material=info["material"],
+                ))
+            continue
         mat = load_mat(p)
         fmc, _tv = detect_fmc_arrays(mat)
         if fmc is None:
             continue
-        fmc = np.asarray(fmc)
-        if fmc.ndim == 2:                       # (Rx, T)：单 transmit
-            fmc = fmc[None]
-        gid = group_id_for(sid, mat, fmc)
+        fmc = np.asarray(fmc)                        # (Tx, Rx, T)
         for tx in range(fmc.shape[0]):
             views.append(WeldUTView(
                 source=sid, tx=tx, rx=int(fmc.shape[1]), t=int(fmc.shape[2]),
@@ -185,14 +262,26 @@ def build_view_index(data_root: Path = DATA_ROOT,
 
 
 def read_view(data_root: Path, v: WeldUTView) -> tuple[np.ndarray, np.ndarray]:
-    """读取一个 transmit view -> ``(1, Rx, T) float32`` + ``(Rx, T) bool``。
+    """读取一个 view -> ``(1, Rx/T? , T) float32`` + ``(Rx, T) bool``。
 
-    逐 view 独立 median/MAD robust 归一化（在 valid 像素上；FMC 为全密
-    矩阵，valid 恒 True，padding 场景由调用方构造 valid）。
+    - FMC (A/B/C)：``(Rx, T)`` = canonical[tx]；
+    - PAUT (D)：``(beam, time)`` = txt 网格转置（time×beam -> beam×time）。
+    逐 view 独立 median/MAD robust 归一化（valid 像素上；真实数据全密，
+    valid 恒 True）。
     """
-    mat = load_mat(data_root / v.mat_relpath)
-    fmc, _tv = detect_fmc_arrays(mat)
-    a = np.asarray(fmc)[v.tx].astype(np.float32)     # (Rx, T)
+    if v.source == "D":
+        import zipfile
+        zip_path, entry = v.mat_relpath.split("#", 1)
+        with zipfile.ZipFile(data_root / zip_path) as z:
+            raw = z.read(entry).decode("utf-8", errors="replace")
+        rows = [ln for ln in raw.split("\n") if ln.strip()]
+        a = np.array([list(map(float, ln.split("\t"))) for ln in rows],
+                     dtype=np.float32)               # (time, beam)
+        a = a.T                                     # (beam, time)
+    else:
+        mat = load_mat(data_root / v.mat_relpath)
+        fmc, _tv = detect_fmc_arrays(mat)
+        a = np.asarray(fmc)[v.tx].astype(np.float32)     # (Rx, T)
     med = float(np.median(a))
     mad = float(np.median(np.abs(a - med)))
     scale = 1.4826 * mad + 1e-6

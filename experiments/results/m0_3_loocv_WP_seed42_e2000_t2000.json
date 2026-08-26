@@ -1,0 +1,125 @@
+{
+  "exp": "m0_3_loocv",
+  "cond": "WP",
+  "model_seed": 42,
+  "split_seed": 42,
+  "data_seed": 42,
+  "run_type": "full",
+  "protocol": "Protocol V2：test=1 coupon；inner val=1 coupon；train=其余；归一化/SSL/头训练只读 train coupons；val 只做模型选择；test 全程不可见",
+  "ext_steps": 2000,
+  "tgt_steps": 2000,
+  "total_ssl_steps": 4000,
+  "head": {
+    "lr": 0.001,
+    "epochs": 80,
+    "batch_size": 128,
+    "class_balance": true
+  },
+  "folds": [
+    {
+      "test_coupon": "PP3",
+      "train_coupons": [
+        "PP4",
+        "PP5",
+        "PP6"
+      ],
+      "val_coupon": "PP7",
+      "n_test": 601,
+      "n_pos": 345,
+      "defect_rate": 0.574,
+      "val_auc": 0.6486,
+      "thr": 0.5858,
+      "test_auc": 0.4749,
+      "pr_auc": 0.5486,
+      "balanced_acc": 0.5019,
+      "epochs_run": 21,
+      "wall_s": 29.0
+    },
+    {
+      "test_coupon": "PP4",
+      "train_coupons": [
+        "PP3",
+        "PP5",
+        "PP6"
+      ],
+      "val_coupon": "PP7",
+      "n_test": 601,
+      "n_pos": 3,
+      "defect_rate": 0.005,
+      "val_auc": 0.6733,
+      "thr": 0.5232,
+      "test_auc": 0.5362,
+      "pr_auc": 0.007,
+      "balanced_acc": 0.4941,
+      "epochs_run": 27,
+      "wall_s": 27.9
+    },
+    {
+      "test_coupon": "PP5",
+      "train_coupons": [
+        "PP3",
+        "PP4",
+        "PP6"
+      ],
+      "val_coupon": "PP7",
+      "n_test": 596,
+      "n_pos": 261,
+      "defect_rate": 0.4379,
+      "val_auc": 0.6677,
+      "thr": 0.8027,
+      "test_auc": 0.5116,
+      "pr_auc": 0.5253,
+      "balanced_acc": 0.5304,
+      "epochs_run": 26,
+      "wall_s": 27.3
+    },
+    {
+      "test_coupon": "PP6",
+      "train_coupons": [
+        "PP3",
+        "PP4",
+        "PP5"
+      ],
+      "val_coupon": "PP7",
+      "n_test": 601,
+      "n_pos": 459,
+      "defect_rate": 0.7637,
+      "val_auc": 0.6494,
+      "thr": 0.6056,
+      "test_auc": 0.5169,
+      "pr_auc": 0.7866,
+      "balanced_acc": 0.497,
+      "epochs_run": 53,
+      "wall_s": 56.3
+    },
+    {
+      "test_coupon": "PP7",
+      "train_coupons": [
+        "PP3",
+        "PP4",
+        "PP5"
+      ],
+      "val_coupon": "PP6",
+      "n_test": 601,
+      "n_pos": 83,
+      "defect_rate": 0.1381,
+      "val_auc": 0.5338,
+      "thr": 0.2648,
+      "test_auc": 0.6616,
+      "pr_auc": 0.2577,
+      "balanced_acc": 0.5,
+      "epochs_run": 80,
+      "wall_s": 80.8
+    }
+  ],
+  "all_folds_mean_auc": 0.5402,
+  "all_folds_std_auc": 0.0638,
+  "nonPP4_mean_auc": 0.5413,
+  "nonPP4_std_auc": 0.0713,
+  "nonPP4_mean_pr_auc": 0.5295,
+  "nonPP4_mean_balanced_acc": 0.5073,
+  "pooled_auc": 0.5827,
+  "pp4_auc": 0.5362,
+  "code_commit": "9fd9102ff811",
+  "code_dirty": true
+}

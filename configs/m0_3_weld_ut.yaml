@@ -39,9 +39,10 @@ pretrain:
   data_seed: 42
   split_seed: 42
   model_seeds: [42, 43, 44]
-  # FMC 超大尺寸等比例下采样阈值（预先声明，P-long/W→P 一致）
-  max_fmc_h: 256
-  max_fmc_w: 1024
+  # FMC/PAUT 超大尺寸等比例下采样阈值（预先声明，P-long/W→P 一致；
+  # 按真实数据审计：FMC (128/45 阵元 × ≤10000 时间)，PAUT (401 beam × 762 time)）
+  max_fmc_h: 128
+  max_fmc_w: 2048
 
 # 规范头协议（冻结 encoder 下游二分类；与 M0-2B/PAUT 规范一致）
 head:

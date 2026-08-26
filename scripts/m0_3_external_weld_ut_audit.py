@@ -269,17 +269,41 @@ def full(root: Path, out_path: Path | None) -> dict:
     # ---- 每 source 汇总 + 独立试件/采集数（结构驱动）----
     for sid, (sname, _exp_file) in SOURCES.items():
         sfiles = [f for f in agg["files"] if f["source"] == sid]
+        # 结构驱动的独立试件/采集估计：FMC 一个 .mat = 1 试件 1 采集；
+        # PAUT zip = 1 试件、每 txt 文件 = 1 次采集（位置）
+        n_mat = sum(1 for f in sfiles
+                    if (f.get("structure") or {}).get("format") == "matlab_v5")
+        n_txt = 0
+        n_zip = 0
+        for f in sfiles:
+            st = f.get("structure") or {}
+            if st.get("format") == "zip":
+                n_zip += 1
+                n_txt += sum(1 for e in st.get("files", [])
+                             if e["name"].endswith(".txt"))
+        n_spec = n_mat + n_zip                       # 每源 1 试件（审计确认）
+        n_acq = (n_mat + n_txt) if n_txt else n_mat
         s = {
             "name": sname, "n_files": len(sfiles),
             "files": [{"rel": f["rel"], "size": f["size"], "sha256": f["sha256"],
                        "format": (f.get("structure") or {}).get("format"),
                        "error": f.get("error")} for f in sfiles],
             "sha256_dups": _dup_groups(sfiles),
-            "independent_specimens_est": None,   # 结构审计后由人工/后续分析填写
-            "n_acquisitions_est": None,
-            "flags": {"ssl_pretrain_usable": None, "downstream_label_usable": None,
-                      "metadata_only": None, "incompatible": None},
-            "notes": [],
+            "independent_specimens_est": n_spec,
+            "n_acquisitions_est": n_acq,
+            "flags": {
+                # 真实焊缝 FMC/PAUT：可做 SSL 预训练；无逐位置缺陷标签 -> 下游
+                # 分类不可用（仅整试件已知缺陷/无缺陷，不作 per-position 标签）
+                "ssl_pretrain_usable": bool(n_spec),
+                "downstream_label_usable": False,
+                "metadata_only": False,
+                "incompatible": False,
+            },
+            "notes": [
+                "一个 .mat / 一个 zip = 一个物理试件（审计确认：A/B/C 各 1 个",
+                "带已知缺陷的试件；D 为 1 焊缝多位置 PAUT 扫查，无缺陷标签）；",
+                "Tx×Rx / 文件编号 / scan position 均共享 group_id，禁止当独立试件",
+            ],
         }
         agg["sources"][sid] = s
 

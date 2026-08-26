@@ -1,0 +1,10461 @@
+{
+  "root": "/home/yzx/doct/welding-ndt-timeseries/data/raw/external_weld_ut",
+  "n_files": 4,
+  "files": [
+    {
+      "file": "Lack_of_fusion_FMC_DORT_2016.mat",
+      "rel": "A/Lack_of_fusion_FMC_DORT_2016.mat",
+      "source": "A",
+      "size": 272341239,
+      "sha256": "90c01b23a687b539e70e0b849b726f2dd12c2ecbd788bc274d8101f901102533",
+      "structure": {
+        "format": "matlab_v5",
+        "keys": [
+          "FMC_new"
+        ],
+        "items": [
+          {
+            "type": "array",
+            "name": "FMC_new",
+            "shape": [
+              10000,
+              128,
+              128
+            ],
+            "dtype": "int32",
+            "stats": {
+              "dtype": "int32",
+              "shape": [
+                10000,
+                128,
+                128
+              ],
+              "min": -23533,
+              "max": 13966,
+              "uniq_n": null,
+              "uniq_head": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "file": "FMC_2012_04_26_at_16_16.mat",
+      "rel": "B/FMC_2012_04_26_at_16_16.mat",
+      "source": "B",
+      "size": 34699543,
+      "sha256": "267a393931a303050a77165c29362c7f13f31a0a9bffa07bdbc4169bf7377b13",
+      "structure": {
+        "format": "matlab_v5",
+        "keys": [
+          "FMC_new"
+        ],
+        "items": [
+          {
+            "type": "array",
+            "name": "FMC_new",
+            "shape": [
+              10000,
+              45,
+              45
+            ],
+            "dtype": "int32",
+            "stats": {
+              "dtype": "int32",
+              "shape": [
+                10000,
+                45,
+                45
+              ],
+              "min": -32768,
+              "max": 32767,
+              "uniq_n": null,
+              "uniq_head": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "file": "FMC_RR3_2_25MHz_3mmsdh.mat",
+      "rel": "C/FMC_RR3_2_25MHz_3mmsdh.mat",
+      "source": "C",
+      "size": 47060975,
+      "sha256": "371745dab24b4a42e01bea4249ea00e214c58cf2dbdb83bde008acca53118213",
+      "structure": {
+        "format": "matlab_v5",
+        "keys": [
+          "fmc"
+        ],
+        "items": [
+          {
+            "type": "array",
+            "name": "fmc",
+            "shape": [
+              128,
+              128,
+              976
+            ],
+            "dtype": "float64",
+            "stats": {
+              "dtype": "float64",
+              "shape": [
+                128,
+                128,
+                976
+              ],
+              "min": -32768.0,
+              "max": 32767.0,
+              "mean": 99.56616361439228,
+              "std": 3931.767117659585,
+              "n_nan": 0,
+              "n_inf": 0,
+              "sampled": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "file": "PAUT.zip",
+      "rel": "D/PAUT.zip",
+      "source": "D",
+      "size": 103673425,
+      "sha256": "8d3dbcf0958e26008c154fdf5bbd28a12c7acdde85168d08b0d923541ef8f5c9",
+      "structure": {
+        "format": "zip",
+        "n_files": 390,
+        "total_uncompressed": 379019488,
+        "files": [
+          {
+            "name": "PAUT/",
+            "size": 0,
+            "compress_size": 0
+          },
+          {
+            "name": "PAUT/A01.txt",
+            "size": 1001304,
+            "compress_size": 278786
+          },
+          {
+            "name": "PAUT/A02.txt",
+            "size": 999610,
+            "compress_size": 278031
+          },
+          {
+            "name": "PAUT/A03.txt",
+            "size": 987271,
+            "compress_size": 274254
+          },
+          {
+            "name": "PAUT/A04.txt",
+            "size": 978203,
+            "compress_size": 270840
+          },
+          {
+            "name": "PAUT/A05.txt",
+            "size": 979572,
+            "compress_size": 271845
+          },
+          {
+            "name": "PAUT/A06.txt",
+            "size": 982977,
+            "compress_size": 271705
+          },
+          {
+            "name": "PAUT/A07.txt",
+            "size": 985491,
+            "compress_size": 272944
+          },
+          {
+            "name": "PAUT/A09.txt",
+            "size": 979971,
+            "compress_size": 270043
+          },
+          {
+            "name": "PAUT/A10.txt",
+            "size": 977764,
+            "compress_size": 268786
+          },
+          {
+            "name": "PAUT/A11.txt",
+            "size": 971077,
+            "compress_size": 265269
+          },
+          {
+            "name": "PAUT/A12.txt",
+            "size": 963871,
+            "compress_size": 260403
+          },
+          {
+            "name": "PAUT/A13.txt",
+            "size": 962241,
+            "compress_size": 258662
+          },
+          {
+            "name": "PAUT/A14.txt",
+            "size": 958958,
+            "compress_size": 255846
+          },
+          {
+            "name": "PAUT/A15.txt",
+            "size": 953541,
+            "compress_size": 251306
+          },
+          {
+            "name": "PAUT/A16.txt",
+            "size": 961562,
+            "compress_size": 254752
+          },
+          {
+            "name": "PAUT/A17.txt",
+            "size": 965988,
+            "compress_size": 257787
+          },
+          {
+            "name": "PAUT/A18.txt",
+            "size": 962345,
+            "compress_size": 256839
+          },
+          {
+            "name": "PAUT/A19.txt",
+            "size": 964759,
+            "compress_size": 260068
+          },
+          {
+            "name": "PAUT/A20.txt",
+            "size": 967786,
+            "compress_size": 263512
+          },
+          {
+            "name": "PAUT/A21.txt",
+            "size": 971020,
+            "compress_size": 265713
+          },
+          {
+            "name": "PAUT/A22.txt",
+            "size": 974024,
+            "compress_size": 268752
+          },
+          {
+            "name": "PAUT/A23.txt",
+            "size": 981685,
+            "compress_size": 273765
+          },
+          {
+            "name": "PAUT/A24.txt",
+            "size": 984801,
+            "compress_size": 274180
+          },
+          {
+            "name": "PAUT/A25.txt",
+            "size": 972560,
+            "compress_size": 266181
+          },
+          {
+            "name": "PAUT/A26.txt",
+            "size": 973186,
+            "compress_size": 267523
+          },
+          {
+            "name": "PAUT/A27.txt",
+            "size": 976496,
+            "compress_size": 268950
+          },
+          {
+            "name": "PAUT/A28.txt",
+            "size": 978001,
+            "compress_size": 270446
+          },
+          {
+            "name": "PAUT/A29.txt",
+            "size": 978323,
+            "compress_size": 269415
+          },
+          {
+            "name": "PAUT/A30.txt",
+            "size": 987770,
+            "compress_size": 273813
+          },
+          {
+            "name": "PAUT/B01.txt",
+            "size": 1011896,
+            "compress_size": 282033
+          },
+          {
+            "name": "PAUT/B02.txt",
+            "size": 998083,
+            "compress_size": 277327
+          },
+          {
+            "name": "PAUT/B03.txt",
+            "size": 981783,
+            "compress_size": 271464
+          },
+          {
+            "name": "PAUT/B04.txt",
+            "size": 979268,
+            "compress_size": 271443
+          },
+          {
+            "name": "PAUT/B05.txt",
+            "size": 976869,
+            "compress_size": 269535
+          },
+          {
+            "name": "PAUT/B06.txt",
+            "size": 976251,
+            "compress_size": 269031
+          },
+          {
+            "name": "PAUT/B07.txt",
+            "size": 978490,
+            "compress_size": 270043
+          },
+          {
+            "name": "PAUT/B08.txt",
+            "size": 990660,
+            "compress_size": 275516
+          },
+          {
+            "name": "PAUT/B09.txt",
+            "size": 993526,
+            "compress_size": 275273
+          },
+          {
+            "name": "PAUT/B10.txt",
+            "size": 982891,
+            "compress_size": 271172
+          },
+          {
+            "name": "PAUT/B11.txt",
+            "size": 972799,
+            "compress_size": 266263
+          },
+          {
+            "name": "PAUT/B12.txt",
+            "size": 970246,
+            "compress_size": 264432
+          },
+          {
+            "name": "PAUT/B13.txt",
+            "size": 965188,
+            "compress_size": 259248
+          },
+          {
+            "name": "PAUT/B14.txt",
+            "size": 968162,
+            "compress_size": 258509
+          },
+          {
+            "name": "PAUT/B15.txt",
+            "size": 946599,
+            "compress_size": 244877
+          },
+          {
+            "name": "PAUT/B16.txt",
+            "size": 972984,
+            "compress_size": 261155
+          },
+          {
+            "name": "PAUT/B17.txt",
+            "size": 970300,
+            "compress_size": 260133
+          },
+          {
+            "name": "PAUT/B18.txt",
+            "size": 966181,
+            "compress_size": 258613
+          },
+          {
+            "name": "PAUT/B19.txt",
+            "size": 967089,
+            "compress_size": 261182
+          },
+          {
+            "name": "PAUT/B20.txt",
+            "size": 969217,
+            "compress_size": 262828
+          },
+          {
+            "name": "PAUT/B21.txt",
+            "size": 974241,
+            "compress_size": 266613
+          },
+          {
+            "name": "PAUT/B22.txt",
+            "size": 980076,
+            "compress_size": 271789
+          },
+          {
+            "name": "PAUT/B23.txt",
+            "size": 984243,
+            "compress_size": 274636
+          },
+          {
+            "name": "PAUT/B24.txt",
+            "size": 989192,
+            "compress_size": 276811
+          },
+          {
+            "name": "PAUT/B25.txt",
+            "size": 984865,
+            "compress_size": 274350
+          },
+          {
+            "name": "PAUT/B26.txt",
+            "size": 982407,
+            "compress_size": 272531
+          },
+          {
+            "name": "PAUT/B27.txt",
+            "size": 983968,
+            "compress_size": 274154
+          },
+          {
+            "name": "PAUT/B28.txt",
+            "size": 987928,
+            "compress_size": 274875
+          },
+          {
+            "name": "PAUT/B29.txt",
+            "size": 986642,
+            "compress_size": 273731
+          },
+          {
+            "name": "PAUT/B30.txt",
+            "size": 986357,
+            "compress_size": 272648
+          },
+          {
+            "name": "PAUT/C01.txt",
+            "size": 993284,
+            "compress_size": 277012
+          },
+          {
+            "name": "PAUT/C02.txt",
+            "size": 988476,
+            "compress_size": 274914
+          },
+          {
+            "name": "PAUT/C03.txt",
+            "size": 987633,
+            "compress_size": 274787
+          },
+          {
+            "name": "PAUT/C04.txt",
+            "size": 987069,
+            "compress_size": 273761
+          },
+          {
+            "name": "PAUT/C05.txt",
+            "size": 987367,
+            "compress_size": 274061
+          },
+          {
+            "name": "PAUT/C06.txt",
+            "size": 987561,
+            "compress_size": 273358
+          },
+          {
+            "name": "PAUT/C07.txt",
+            "size": 990145,
+            "compress_size": 274508
+          },
+          {
+            "name": "PAUT/C08.txt",
+            "size": 998306,
+            "compress_size": 277299
+          },
+          {
+            "name": "PAUT/C09.txt",
+            "size": 991433,
+            "compress_size": 274767
+          },
+          {
+            "name": "PAUT/C10.txt",
+            "size": 975206,
+            "compress_size": 268377
+          },
+          {
+            "name": "PAUT/C11.txt",
+            "size": 974639,
+            "compress_size": 267510
+          },
+          {
+            "name": "PAUT/C12.txt",
+            "size": 975807,
+            "compress_size": 267123
+          },
+          {
+            "name": "PAUT/C13.txt",
+            "size": 968364,
+            "compress_size": 262127
+          },
+          {
+            "name": "PAUT/C14.txt",
+            "size": 963987,
+            "compress_size": 256942
+          },
+          {
+            "name": "PAUT/C15.txt",
+            "size": 966401,
+            "compress_size": 256383
+          },
+          {
+            "name": "PAUT/C16.txt",
+            "size": 967050,
+            "compress_size": 258447
+          },
+          {
+            "name": "PAUT/C17.txt",
+            "size": 970229,
+            "compress_size": 259292
+          },
+          {
+            "name": "PAUT/C18.txt",
+            "size": 966746,
+            "compress_size": 259528
+          },
+          {
+            "name": "PAUT/C19.txt",
+            "size": 961379,
+            "compress_size": 257198
+          },
+          {
+            "name": "PAUT/C20.txt",
+            "size": 965943,
+            "compress_size": 261293
+          },
+          {
+            "name": "PAUT/C21.txt",
+            "size": 968559,
+            "compress_size": 263938
+          },
+          {
+            "name": "PAUT/C22.txt",
+            "size": 974817,
+            "compress_size": 267932
+          },
+          {
+            "name": "PAUT/C23.txt",
+            "size": 980189,
+            "compress_size": 272515
+          },
+          {
+            "name": "PAUT/C24.txt",
+            "size": 982548,
+            "compress_size": 273107
+          },
+          {
+            "name": "PAUT/C25.txt",
+            "size": 982670,
+            "compress_size": 272844
+          },
+          {
+            "name": "PAUT/C26.txt",
+            "size": 979941,
+            "compress_size": 271556
+          },
+          {
+            "name": "PAUT/C27.txt",
+            "size": 981300,
+            "compress_size": 272498
+          },
+          {
+            "name": "PAUT/C28.txt",
+            "size": 980885,
+            "compress_size": 271689
+          },
+          {
+            "name": "PAUT/C29.txt",
+            "size": 982008,
+            "compress_size": 271855
+          },
+          {
+            "name": "PAUT/C30.txt",
+            "size": 990577,
+            "compress_size": 275422
+          },
+          {
+            "name": "PAUT/D01.txt",
+            "size": 996184,
+            "compress_size": 279334
+          },
+          {
+            "name": "PAUT/D02.txt",
+            "size": 991232,
+            "compress_size": 276974
+          },
+          {
+            "name": "PAUT/D03.txt",
+            "size": 986754,
+            "compress_size": 274235
+          },
+          {
+            "name": "PAUT/D04.txt",
+            "size": 976720,
+            "compress_size": 269530
+          },
+          {
+            "name": "PAUT/D05.txt",
+            "size": 979006,
+            "compress_size": 271281
+          },
+          {
+            "name": "PAUT/D06.txt",
+            "size": 981575,
+            "compress_size": 272839
+          },
+          {
+            "name": "PAUT/D07.txt",
+            "size": 986042,
+            "compress_size": 274605
+          },
+          {
+            "name": "PAUT/D08.txt",
+            "size": 989706,
+            "compress_size": 275831
+          },
+          {
+            "name": "PAUT/D09.txt",
+            "size": 984760,
+            "compress_size": 273552
+          },
+          {
+            "name": "PAUT/D10.txt",
+            "size": 979052,
+            "compress_size": 271027
+          },
+          {
+            "name": "PAUT/D11.txt",
+            "size": 968268,
+            "compress_size": 263636
+          },
+          {
+            "name": "PAUT/D12.txt",
+            "size": 957597,
+            "compress_size": 255020
+          },
+          {
+            "name": "PAUT/D13.txt",
+            "size": 953718,
+            "compress_size": 252203
+          },
+          {
+            "name": "PAUT/D14.txt",
+            "size": 940122,
+            "compress_size": 241846
+          },
+          {
+            "name": "PAUT/D15.txt",
+            "size": 937539,
+            "compress_size": 239449
+          },
+          {
+            "name": "PAUT/D16.txt",
+            "size": 941263,
+            "compress_size": 243829
+          },
+          {
+            "name": "PAUT/D17.txt",
+            "size": 958406,
+            "compress_size": 254097
+          },
+          {
+            "name": "PAUT/D18.txt",
+            "size": 963475,
+            "compress_size": 256833
+          },
+          {
+            "name": "PAUT/D19.txt",
+            "size": 964176,
+            "compress_size": 259366
+          },
+          {
+            "name": "PAUT/D20.txt",
+            "size": 967702,
+            "compress_size": 262289
+          },
+          {
+            "name": "PAUT/D21.txt",
+            "size": 972436,
+            "compress_size": 264806
+          },
+          {
+            "name": "PAUT/D22.txt",
+            "size": 975648,
+            "compress_size": 269085
+          },
+          {
+            "name": "PAUT/D23.txt",
+            "size": 979507,
+            "compress_size": 272011
+          },
+          {
+            "name": "PAUT/D24.txt",
+            "size": 986343,
+            "compress_size": 275528
+          },
+          {
+            "name": "PAUT/D25.txt",
+            "size": 987049,
+            "compress_size": 274516
+          },
+          {
+            "name": "PAUT/D26.txt",
+            "size": 981237,
+            "compress_size": 271942
+          },
+          {
+            "name": "PAUT/D27.txt",
+            "size": 984327,
+            "compress_size": 273336
+          },
+          {
+            "name": "PAUT/D28.txt",
+            "size": 983693,
+            "compress_size": 272928
+          },
+          {
+            "name": "PAUT/D29.txt",
+            "size": 984394,
+            "compress_size": 273244
+          },
+          {
+            "name": "PAUT/D30.txt",
+            "size": 988684,
+            "compress_size": 274344
+          },
+          {
+            "name": "PAUT/E01.txt",
+            "size": 986716,
+            "compress_size": 274799
+          },
+          {
+            "name": "PAUT/E02.txt",
+            "size": 983671,
+            "compress_size": 273847
+          },
+          {
+            "name": "PAUT/E03.txt",
+            "size": 984798,
+            "compress_size": 274515
+          },
+          {
+            "name": "PAUT/E04.txt",
+            "size": 974877,
+            "compress_size": 267917
+          },
+          {
+            "name": "PAUT/E05.txt",
+            "size": 972562,
+            "compress_size": 267185
+          },
+          {
+            "name": "PAUT/E06.txt",
+            "size": 983322,
+            "compress_size": 273577
+          },
+          {
+            "name": "PAUT/E07.txt",
+            "size": 989881,
+            "compress_size": 275884
+          },
+          {
+            "name": "PAUT/E08.txt",
+            "size": 985318,
+            "compress_size": 273848
+          },
+          {
+            "name": "PAUT/E09.txt",
+            "size": 980962,
+            "compress_size": 271204
+          },
+          {
+            "name": "PAUT/E10.txt",
+            "size": 978575,
+            "compress_size": 268886
+          },
+          {
+            "name": "PAUT/E11.txt",
+            "size": 978593,
+            "compress_size": 269023
+          },
+          {
+            "name": "PAUT/E12.txt",
+            "size": 969130,
+            "compress_size": 264742
+          },
+          {
+            "name": "PAUT/E13.txt",
+            "size": 967155,
+            "compress_size": 262747
+          },
+          {
+            "name": "PAUT/E14.txt",
+            "size": 959446,
+            "compress_size": 255852
+          },
+          {
+            "name": "PAUT/E15.txt",
+            "size": 968387,
+            "compress_size": 258494
+          },
+          {
+            "name": "PAUT/E16.txt",
+            "size": 966954,
+            "compress_size": 258443
+          },
+          {
+            "name": "PAUT/E17.txt",
+            "size": 974223,
+            "compress_size": 260737
+          },
+          {
+            "name": "PAUT/E18.txt",
+            "size": 975391,
+            "compress_size": 261131
+          },
+          {
+            "name": "PAUT/E19.txt",
+            "size": 973246,
+            "compress_size": 262500
+          },
+          {
+            "name": "PAUT/E20.txt",
+            "size": 969486,
+            "compress_size": 262843
+          },
+          {
+            "name": "PAUT/E21.txt",
+            "size": 976444,
+            "compress_size": 266501
+          },
+          {
+            "name": "PAUT/E22.txt",
+            "size": 971306,
+            "compress_size": 265204
+          },
+          {
+            "name": "PAUT/E23.txt",
+            "size": 972690,
+            "compress_size": 265275
+          },
+          {
+            "name": "PAUT/E24.txt",
+            "size": 975955,
+            "compress_size": 268724
+          },
+          {
+            "name": "PAUT/E25.txt",
+            "size": 980161,
+            "compress_size": 271538
+          },
+          {
+            "name": "PAUT/E26.txt",
+            "size": 980683,
+            "compress_size": 271504
+          },
+          {
+            "name": "PAUT/E27.txt",
+            "size": 976810,
+            "compress_size": 269096
+          },
+          {
+            "name": "PAUT/E28.txt",
+            "size": 979121,
+            "compress_size": 269606
+          },
+          {
+            "name": "PAUT/E29.txt",
+            "size": 977265,
+            "compress_size": 268717
+          },
+          {
+            "name": "PAUT/E30.txt",
+            "size": 978455,
+            "compress_size": 269311
+          },
+          {
+            "name": "PAUT/F01.txt",
+            "size": 994890,
+            "compress_size": 276759
+          },
+          {
+            "name": "PAUT/F02.txt",
+            "size": 988528,
+            "compress_size": 274720
+          },
+          {
+            "name": "PAUT/F03.txt",
+            "size": 986172,
+            "compress_size": 272856
+          },
+          {
+            "name": "PAUT/F04.txt",
+            "size": 992154,
+            "compress_size": 275259
+          },
+          {
+            "name": "PAUT/F05.txt",
+            "size": 991786,
+            "compress_size": 276722
+          },
+          {
+            "name": "PAUT/F06.txt",
+            "size": 984378,
+            "compress_size": 273899
+          },
+          {
+            "name": "PAUT/F07.txt",
+            "size": 982119,
+            "compress_size": 272551
+          },
+          {
+            "name": "PAUT/F08.txt",
+            "size": 981236,
+            "compress_size": 271479
+          },
+          {
+            "name": "PAUT/F09.txt",
+            "size": 974409,
+            "compress_size": 268114
+          },
+          {
+            "name": "PAUT/F10.txt",
+            "size": 966569,
+            "compress_size": 263011
+          },
+          {
+            "name": "PAUT/F11.txt",
+            "size": 968903,
+            "compress_size": 265281
+          },
+          {
+            "name": "PAUT/F12.txt",
+            "size": 968335,
+            "compress_size": 264311
+          },
+          {
+            "name": "PAUT/F13.txt",
+            "size": 960814,
+            "compress_size": 257777
+          },
+          {
+            "name": "PAUT/F14.txt",
+            "size": 953896,
+            "compress_size": 250418
+          },
+          {
+            "name": "PAUT/F15.txt",
+            "size": 949816,
+            "compress_size": 247126
+          },
+          {
+            "name": "PAUT/F16.txt",
+            "size": 973505,
+            "compress_size": 259893
+          },
+          {
+            "name": "PAUT/F17.txt",
+            "size": 980884,
+            "compress_size": 264108
+          },
+          {
+            "name": "PAUT/F18.txt",
+            "size": 973799,
+            "compress_size": 262504
+          },
+          {
+            "name": "PAUT/F19.txt",
+            "size": 968325,
+            "compress_size": 261226
+          },
+          {
+            "name": "PAUT/F20.txt",
+            "size": 961934,
+            "compress_size": 258413
+          },
+          {
+            "name": "PAUT/F21.txt",
+            "size": 964563,
+            "compress_size": 261664
+          },
+          {
+            "name": "PAUT/F22.txt",
+            "size": 964995,
+            "compress_size": 261818
+          },
+          {
+            "name": "PAUT/F23.txt",
+            "size": 967518,
+            "compress_size": 264992
+          },
+          {
+            "name": "PAUT/F24.txt",
+            "size": 967539,
+            "compress_size": 265140
+          },
+          {
+            "name": "PAUT/F25.txt",
+            "size": 964879,
+            "compress_size": 263243
+          },
+          {
+            "name": "PAUT/F26.txt",
+            "size": 963314,
+            "compress_size": 261457
+          },
+          {
+            "name": "PAUT/F27.txt",
+            "size": 967202,
+            "compress_size": 264728
+          },
+          {
+            "name": "PAUT/F28.txt",
+            "size": 973715,
+            "compress_size": 266646
+          },
+          {
+            "name": "PAUT/F29.txt",
+            "size": 973909,
+            "compress_size": 266926
+          },
+          {
+            "name": "PAUT/F30.txt",
+            "size": 977002,
+            "compress_size": 267882
+          },
+          {
+            "name": "PAUT/G01.txt",
+            "size": 1001208,
+            "compress_size": 278935
+          },
+          {
+            "name": "PAUT/G02.txt",
+            "size": 982729,
+            "compress_size": 273420
+          },
+          {
+            "name": "PAUT/G03.txt",
+            "size": 982190,
+            "compress_size": 272846
+          },
+          {
+            "name": "PAUT/G04.txt",
+            "size": 981411,
+            "compress_size": 272460
+          },
+          {
+            "name": "PAUT/G05.txt",
+            "size": 993915,
+            "compress_size": 277834
+          },
+          {
+            "name": "PAUT/G06.txt",
+            "size": 984448,
+            "compress_size": 273800
+          },
+          {
+            "name": "PAUT/G07.txt",
+            "size": 982391,
+            "compress_size": 272307
+          },
+          {
+            "name": "PAUT/G08.txt",
+            "size": 982103,
+            "compress_size": 273138
+          },
+          {
+            "name": "PAUT/G09.txt",
+            "size": 968118,
+            "compress_size": 263944
+          },
+          {
+            "name": "PAUT/G10.txt",
+            "size": 960146,
+            "compress_size": 258687
+          },
+          {
+            "name": "PAUT/G11.txt",
+            "size": 958820,
+            "compress_size": 257416
+          },
+          {
+            "name": "PAUT/G12.txt",
+            "size": 957583,
+            "compress_size": 255399
+          },
+          {
+            "name": "PAUT/G13.txt",
+            "size": 953154,
+            "compress_size": 250965
+          },
+          {
+            "name": "PAUT/G14.txt",
+            "size": 945496,
+            "compress_size": 243518
+          },
+          {
+            "name": "PAUT/G15.txt",
+            "size": 931808,
+            "compress_size": 234900
+          },
+          {
+            "name": "PAUT/G16.txt",
+            "size": 974646,
+            "compress_size": 261120
+          },
+          {
+            "name": "PAUT/G17.txt",
+            "size": 965322,
+            "compress_size": 256313
+          },
+          {
+            "name": "PAUT/G18.txt",
+            "size": 960718,
+            "compress_size": 256553
+          },
+          {
+            "name": "PAUT/G19.txt",
+            "size": 956995,
+            "compress_size": 255753
+          },
+          {
+            "name": "PAUT/G20.txt",
+            "size": 957908,
+            "compress_size": 256226
+          },
+          {
+            "name": "PAUT/G21.txt",
+            "size": 958220,
+            "compress_size": 257138
+          },
+          {
+            "name": "PAUT/G22.txt",
+            "size": 964804,
+            "compress_size": 263480
+          },
+          {
+            "name": "PAUT/G23.txt",
+            "size": 966704,
+            "compress_size": 264889
+          },
+          {
+            "name": "PAUT/G24.txt",
+            "size": 963933,
+            "compress_size": 262585
+          },
+          {
+            "name": "PAUT/G25.txt",
+            "size": 959236,
+            "compress_size": 259773
+          },
+          {
+            "name": "PAUT/G26.txt",
+            "size": 962057,
+            "compress_size": 261843
+          },
+          {
+            "name": "PAUT/G27.txt",
+            "size": 963098,
+            "compress_size": 262970
+          },
+          {
+            "name": "PAUT/G28.txt",
+            "size": 961364,
+            "compress_size": 258797
+          },
+          {
+            "name": "PAUT/G29.txt",
+            "size": 966788,
+            "compress_size": 261760
+          },
+          {
+            "name": "PAUT/G30.txt",
+            "size": 973897,
+            "compress_size": 268106
+          },
+          {
+            "name": "PAUT/H01.txt",
+            "size": 999297,
+            "compress_size": 279311
+          },
+          {
+            "name": "PAUT/H02.txt",
+            "size": 998925,
+            "compress_size": 279495
+          },
+          {
+            "name": "PAUT/H03.txt",
+            "size": 992982,
+            "compress_size": 278174
+          },
+          {
+            "name": "PAUT/H04.txt",
+            "size": 996328,
+            "compress_size": 278650
+          },
+          {
+            "name": "PAUT/H05.txt",
+            "size": 994032,
+            "compress_size": 277977
+          },
+          {
+            "name": "PAUT/H06.txt",
+            "size": 991635,
+            "compress_size": 276265
+          },
+          {
+            "name": "PAUT/H07.txt",
+            "size": 988417,
+            "compress_size": 276419
+          },
+          {
+            "name": "PAUT/H08.txt",
+            "size": 978795,
+            "compress_size": 270067
+          },
+          {
+            "name": "PAUT/H09.txt",
+            "size": 976903,
+            "compress_size": 269509
+          },
+          {
+            "name": "PAUT/H10.txt",
+            "size": 974459,
+            "compress_size": 267471
+          },
+          {
+            "name": "PAUT/H11.txt",
+            "size": 970136,
+            "compress_size": 265378
+          },
+          {
+            "name": "PAUT/H12.txt",
+            "size": 965271,
+            "compress_size": 262959
+          },
+          {
+            "name": "PAUT/H13.txt",
+            "size": 957794,
+            "compress_size": 256089
+          },
+          {
+            "name": "PAUT/H14.txt",
+            "size": 949944,
+            "compress_size": 247676
+          },
+          {
+            "name": "PAUT/H15.txt",
+            "size": 939542,
+            "compress_size": 241834
+          },
+          {
+            "name": "PAUT/H16.txt",
+            "size": 967092,
+            "compress_size": 258276
+          },
+          {
+            "name": "PAUT/H17.txt",
+            "size": 971241,
+            "compress_size": 259768
+          },
+          {
+            "name": "PAUT/H18.txt",
+            "size": 964527,
+            "compress_size": 259369
+          },
+          {
+            "name": "PAUT/H19.txt",
+            "size": 953756,
+            "compress_size": 252625
+          },
+          {
+            "name": "PAUT/H20.txt",
+            "size": 957176,
+            "compress_size": 255935
+          },
+          {
+            "name": "PAUT/H21.txt",
+            "size": 963248,
+            "compress_size": 261139
+          },
+          {
+            "name": "PAUT/H22.txt",
+            "size": 970726,
+            "compress_size": 266663
+          },
+          {
+            "name": "PAUT/H23.txt",
+            "size": 972420,
+            "compress_size": 267838
+          },
+          {
+            "name": "PAUT/H24.txt",
+            "size": 971718,
+            "compress_size": 267658
+          },
+          {
+            "name": "PAUT/H25.txt",
+            "size": 969237,
+            "compress_size": 265729
+          },
+          {
+            "name": "PAUT/H26.txt",
+            "size": 968439,
+            "compress_size": 264947
+          },
+          {
+            "name": "PAUT/H27.txt",
+            "size": 966314,
+            "compress_size": 262446
+          },
+          {
+            "name": "PAUT/H28.txt",
+            "size": 964051,
+            "compress_size": 259685
+          },
+          {
+            "name": "PAUT/H29.txt",
+            "size": 975055,
+            "compress_size": 266639
+          },
+          {
+            "name": "PAUT/H30.txt",
+            "size": 974273,
+            "compress_size": 267483
+          },
+          {
+            "name": "PAUT/I01.txt",
+            "size": 1001452,
+            "compress_size": 278830
+          },
+          {
+            "name": "PAUT/I02.txt",
+            "size": 992585,
+            "compress_size": 276385
+          },
+          {
+            "name": "PAUT/I03.txt",
+            "size": 989696,
+            "compress_size": 274859
+          },
+          {
+            "name": "PAUT/I04.txt",
+            "size": 990869,
+            "compress_size": 276539
+          },
+          {
+            "name": "PAUT/I05.txt",
+            "size": 993173,
+            "compress_size": 277641
+          },
+          {
+            "name": "PAUT/I06.txt",
+            "size": 991666,
+            "compress_size": 276778
+          },
+          {
+            "name": "PAUT/I07.txt",
+            "size": 989685,
+            "compress_size": 276328
+          },
+          {
+            "name": "PAUT/I08.txt",
+            "size": 987245,
+            "compress_size": 274555
+          },
+          {
+            "name": "PAUT/I09.txt",
+            "size": 982859,
+            "compress_size": 273622
+          },
+          {
+            "name": "PAUT/I10.txt",
+            "size": 980703,
+            "compress_size": 272345
+          },
+          {
+            "name": "PAUT/I11.txt",
+            "size": 969666,
+            "compress_size": 266370
+          },
+          {
+            "name": "PAUT/I12.txt",
+            "size": 959277,
+            "compress_size": 258827
+          },
+          {
+            "name": "PAUT/I13.txt",
+            "size": 955458,
+            "compress_size": 255385
+          },
+          {
+            "name": "PAUT/I14.txt",
+            "size": 956404,
+            "compress_size": 254537
+          },
+          {
+            "name": "PAUT/I15.txt",
+            "size": 961313,
+            "compress_size": 254622
+          },
+          {
+            "name": "PAUT/I16.txt",
+            "size": 966352,
+            "compress_size": 257636
+          },
+          {
+            "name": "PAUT/I17.txt",
+            "size": 967633,
+            "compress_size": 259423
+          },
+          {
+            "name": "PAUT/I18.txt",
+            "size": 963370,
+            "compress_size": 259653
+          },
+          {
+            "name": "PAUT/I19.txt",
+            "size": 961774,
+            "compress_size": 258899
+          },
+          {
+            "name": "PAUT/I20.txt",
+            "size": 966381,
+            "compress_size": 262025
+          },
+          {
+            "name": "PAUT/I21.txt",
+            "size": 971378,
+            "compress_size": 265580
+          },
+          {
+            "name": "PAUT/I22.txt",
+            "size": 966549,
+            "compress_size": 262947
+          },
+          {
+            "name": "PAUT/I23.txt",
+            "size": 968705,
+            "compress_size": 264071
+          },
+          {
+            "name": "PAUT/I24.txt",
+            "size": 967334,
+            "compress_size": 263921
+          },
+          {
+            "name": "PAUT/I25.txt",
+            "size": 964347,
+            "compress_size": 261563
+          },
+          {
+            "name": "PAUT/I26.txt",
+            "size": 962828,
+            "compress_size": 260546
+          },
+          {
+            "name": "PAUT/I27.txt",
+            "size": 963574,
+            "compress_size": 260299
+          },
+          {
+            "name": "PAUT/I28.txt",
+            "size": 972402,
+            "compress_size": 266437
+          },
+          {
+            "name": "PAUT/I29.txt",
+            "size": 974426,
+            "compress_size": 267407
+          },
+          {
+            "name": "PAUT/I30.txt",
+            "size": 976996,
+            "compress_size": 267732
+          },
+          {
+            "name": "PAUT/J01.txt",
+            "size": 991730,
+            "compress_size": 276488
+          },
+          {
+            "name": "PAUT/J02.txt",
+            "size": 988284,
+            "compress_size": 275851
+          },
+          {
+            "name": "PAUT/J03.txt",
+            "size": 983359,
+            "compress_size": 272599
+          },
+          {
+            "name": "PAUT/J04.txt",
+            "size": 989833,
+            "compress_size": 275625
+          },
+          {
+            "name": "PAUT/J05.txt",
+            "size": 991483,
+            "compress_size": 276323
+          },
+          {
+            "name": "PAUT/J06.txt",
+            "size": 990946,
+            "compress_size": 276143
+          },
+          {
+            "name": "PAUT/J07.txt",
+            "size": 985810,
+            "compress_size": 274440
+          },
+          {
+            "name": "PAUT/J08.txt",
+            "size": 981317,
+            "compress_size": 272405
+          },
+          {
+            "name": "PAUT/J09.txt",
+            "size": 970887,
+            "compress_size": 266698
+          },
+          {
+            "name": "PAUT/J10.txt",
+            "size": 971470,
+            "compress_size": 267047
+          },
+          {
+            "name": "PAUT/J11.txt",
+            "size": 969314,
+            "compress_size": 266188
+          },
+          {
+            "name": "PAUT/J12.txt",
+            "size": 966807,
+            "compress_size": 264874
+          },
+          {
+            "name": "PAUT/J13.txt",
+            "size": 965407,
+            "compress_size": 263197
+          },
+          {
+            "name": "PAUT/J14.txt",
+            "size": 962971,
+            "compress_size": 259161
+          },
+          {
+            "name": "PAUT/J15.txt",
+            "size": 965670,
+            "compress_size": 256942
+          },
+          {
+            "name": "PAUT/J16.txt",
+            "size": 952049,
+            "compress_size": 250696
+          },
+          {
+            "name": "PAUT/J17.txt",
+            "size": 971239,
+            "compress_size": 262797
+          },
+          {
+            "name": "PAUT/J18.txt",
+            "size": 969387,
+            "compress_size": 262018
+          },
+          {
+            "name": "PAUT/J19.txt",
+            "size": 968584,
+            "compress_size": 262908
+          },
+          {
+            "name": "PAUT/J20.txt",
+            "size": 969647,
+            "compress_size": 265274
+          },
+          {
+            "name": "PAUT/J21.txt",
+            "size": 969651,
+            "compress_size": 265022
+          },
+          {
+            "name": "PAUT/J22.txt",
+            "size": 969911,
+            "compress_size": 265162
+          },
+          {
+            "name": "PAUT/J23.txt",
+            "size": 964829,
+            "compress_size": 263316
+          },
+          {
+            "name": "PAUT/J24.txt",
+            "size": 972167,
+            "compress_size": 266314
+          },
+          {
+            "name": "PAUT/J25.txt",
+            "size": 972556,
+            "compress_size": 267007
+          },
+          {
+            "name": "PAUT/J26.txt",
+            "size": 972691,
+            "compress_size": 266682
+          },
+          {
+            "name": "PAUT/J27.txt",
+            "size": 972325,
+            "compress_size": 266425
+          },
+          {
+            "name": "PAUT/J28.txt",
+            "size": 974857,
+            "compress_size": 266015
+          },
+          {
+            "name": "PAUT/J29.txt",
+            "size": 977908,
+            "compress_size": 267621
+          },
+          {
+            "name": "PAUT/J30.txt",
+            "size": 979617,
+            "compress_size": 268644
+          },
+          {
+            "name": "PAUT/K01.txt",
+            "size": 996125,
+            "compress_size": 278207
+          },
+          {
+            "name": "PAUT/K02.txt",
+            "size": 988577,
+            "compress_size": 276685
+          },
+          {
+            "name": "PAUT/K03.txt",
+            "size": 976283,
+            "compress_size": 269863
+          },
+          {
+            "name": "PAUT/K04.txt",
+            "size": 981004,
+            "compress_size": 271661
+          },
+          {
+            "name": "PAUT/K05.txt",
+            "size": 979665,
+            "compress_size": 270956
+          },
+          {
+            "name": "PAUT/K06.txt",
+            "size": 975903,
+            "compress_size": 270272
+          },
+          {
+            "name": "PAUT/K07.txt",
+            "size": 975355,
+            "compress_size": 269206
+          },
+          {
+            "name": "PAUT/K08.txt",
+            "size": 975163,
+            "compress_size": 269674
+          },
+          {
+            "name": "PAUT/K09.txt",
+            "size": 971760,
+            "compress_size": 267562
+          },
+          {
+            "name": "PAUT/K10.txt",
+            "size": 965152,
+            "compress_size": 262831
+          },
+          {
+            "name": "PAUT/K11.txt",
+            "size": 966988,
+            "compress_size": 264279
+          },
+          {
+            "name": "PAUT/K12.txt",
+            "size": 965102,
+            "compress_size": 263721
+          },
+          {
+            "name": "PAUT/K13.txt",
+            "size": 962851,
+            "compress_size": 260978
+          },
+          {
+            "name": "PAUT/K14.txt",
+            "size": 962873,
+            "compress_size": 258767
+          },
+          {
+            "name": "PAUT/K15.txt",
+            "size": 964352,
+            "compress_size": 257505
+          },
+          {
+            "name": "PAUT/K16.txt",
+            "size": 947579,
+            "compress_size": 248460
+          },
+          {
+            "name": "PAUT/K17.txt",
+            "size": 970260,
+            "compress_size": 261265
+          },
+          {
+            "name": "PAUT/K18.txt",
+            "size": 973772,
+            "compress_size": 263246
+          },
+          {
+            "name": "PAUT/K19.txt",
+            "size": 971596,
+            "compress_size": 263976
+          },
+          {
+            "name": "PAUT/K20.txt",
+            "size": 969856,
+            "compress_size": 265028
+          },
+          {
+            "name": "PAUT/K21.txt",
+            "size": 969216,
+            "compress_size": 266084
+          },
+          {
+            "name": "PAUT/K22.txt",
+            "size": 968364,
+            "compress_size": 265373
+          },
+          {
+            "name": "PAUT/K23.txt",
+            "size": 969719,
+            "compress_size": 265535
+          },
+          {
+            "name": "PAUT/K24.txt",
+            "size": 972252,
+            "compress_size": 266717
+          },
+          {
+            "name": "PAUT/K25.txt",
+            "size": 964215,
+            "compress_size": 262047
+          },
+          {
+            "name": "PAUT/K26.txt",
+            "size": 966166,
+            "compress_size": 263362
+          },
+          {
+            "name": "PAUT/K27.txt",
+            "size": 976040,
+            "compress_size": 269142
+          },
+          {
+            "name": "PAUT/K28.txt",
+            "size": 955220,
+            "compress_size": 254491
+          },
+          {
+            "name": "PAUT/K29.txt",
+            "size": 961962,
+            "compress_size": 260391
+          },
+          {
+            "name": "PAUT/K30.txt",
+            "size": 973252,
+            "compress_size": 266644
+          },
+          {
+            "name": "PAUT/L01.txt",
+            "size": 1003603,
+            "compress_size": 280259
+          },
+          {
+            "name": "PAUT/L02.txt",
+            "size": 985018,
+            "compress_size": 274406
+          },
+          {
+            "name": "PAUT/L03.txt",
+            "size": 988862,
+            "compress_size": 275075
+          },
+          {
+            "name": "PAUT/L04.txt",
+            "size": 979414,
+            "compress_size": 270627
+          },
+          {
+            "name": "PAUT/L05.txt",
+            "size": 980186,
+            "compress_size": 271127
+          },
+          {
+            "name": "PAUT/L06.txt",
+            "size": 975359,
+            "compress_size": 269243
+          },
+          {
+            "name": "PAUT/L07.txt",
+            "size": 976470,
+            "compress_size": 269382
+          },
+          {
+            "name": "PAUT/L08.txt",
+            "size": 974102,
+            "compress_size": 268957
+          },
+          {
+            "name": "PAUT/L09.txt",
+            "size": 970124,
+            "compress_size": 266342
+          },
+          {
+            "name": "PAUT/L10.txt",
+            "size": 968382,
+            "compress_size": 265642
+          },
+          {
+            "name": "PAUT/L11.txt",
+            "size": 967298,
+            "compress_size": 265039
+          },
+          {
+            "name": "PAUT/L12.txt",
+            "size": 965814,
+            "compress_size": 263707
+          },
+          {
+            "name": "PAUT/L13.txt",
+            "size": 965675,
+            "compress_size": 262557
+          },
+          {
+            "name": "PAUT/L14.txt",
+            "size": 969467,
+            "compress_size": 259874
+          },
+          {
+            "name": "PAUT/L15.txt",
+            "size": 973710,
+            "compress_size": 259501
+          },
+          {
+            "name": "PAUT/L16.txt",
+            "size": 938563,
+            "compress_size": 241850
+          },
+          {
+            "name": "PAUT/L17.txt",
+            "size": 948703,
+            "compress_size": 248221
+          },
+          {
+            "name": "PAUT/L18.txt",
+            "size": 949464,
+            "compress_size": 249446
+          },
+          {
+            "name": "PAUT/L19.txt",
+            "size": 970944,
+            "compress_size": 263226
+          },
+          {
+            "name": "PAUT/L20.txt",
+            "size": 972821,
+            "compress_size": 266271
+          },
+          {
+            "name": "PAUT/L21.txt",
+            "size": 976200,
+            "compress_size": 268212
+          },
+          {
+            "name": "PAUT/L22.txt",
+            "size": 980753,
+            "compress_size": 269426
+          },
+          {
+            "name": "PAUT/L23.txt",
+            "size": 980548,
+            "compress_size": 269897
+          },
+          {
+            "name": "PAUT/L24.txt",
+            "size": 979796,
+            "compress_size": 269621
+          },
+          {
+            "name": "PAUT/L25.txt",
+            "size": 983529,
+            "compress_size": 272017
+          },
+          {
+            "name": "PAUT/L26.txt",
+            "size": 980597,
+            "compress_size": 269722
+          },
+          {
+            "name": "PAUT/L27.txt",
+            "size": 979127,
+            "compress_size": 270147
+          },
+          {
+            "name": "PAUT/L28.txt",
+            "size": 976216,
+            "compress_size": 268035
+          },
+          {
+            "name": "PAUT/L29.txt",
+            "size": 976819,
+            "compress_size": 268003
+          },
+          {
+            "name": "PAUT/L30.txt",
+            "size": 984536,
+            "compress_size": 271064
+          },
+          {
+            "name": "PAUT/M01.txt",
+            "size": 999289,
+            "compress_size": 279026
+          },
+          {
+            "name": "PAUT/M02.txt",
+            "size": 993845,
+            "compress_size": 277344
+          },
+          {
+            "name": "PAUT/M03.txt",
+            "size": 985979,
+            "compress_size": 274941
+          },
+          {
+            "name": "PAUT/M04.txt",
+            "size": 992410,
+            "compress_size": 275946
+          },
+          {
+            "name": "PAUT/M05.txt",
+            "size": 984672,
+            "compress_size": 273310
+          },
+          {
+            "name": "PAUT/M06.txt",
+            "size": 985609,
+            "compress_size": 273638
+          },
+          {
+            "name": "PAUT/M07.txt",
+            "size": 985938,
+            "compress_size": 273063
+          },
+          {
+            "name": "PAUT/M08.txt",
+            "size": 982135,
+            "compress_size": 271900
+          },
+          {
+            "name": "PAUT/M09.txt",
+            "size": 976742,
+            "compress_size": 269793
+          },
+          {
+            "name": "PAUT/M10.txt",
+            "size": 967486,
+            "compress_size": 265311
+          },
+          {
+            "name": "PAUT/M11.txt",
+            "size": 969864,
+            "compress_size": 266271
+          },
+          {
+            "name": "PAUT/M12.txt",
+            "size": 972869,
+            "compress_size": 268336
+          },
+          {
+            "name": "PAUT/M13.txt",
+            "size": 974611,
+            "compress_size": 265982
+          },
+          {
+            "name": "PAUT/M14.txt",
+            "size": 981676,
+            "compress_size": 264355
+          },
+          {
+            "name": "PAUT/M15.txt",
+            "size": 980118,
+            "compress_size": 261556
+          },
+          {
+            "name": "PAUT/M16.txt",
+            "size": 940094,
+            "compress_size": 242581
+          },
+          {
+            "name": "PAUT/M17.txt",
+            "size": 954492,
+            "compress_size": 251999
+          },
+          {
+            "name": "PAUT/M18.txt",
+            "size": 963154,
+            "compress_size": 258759
+          },
+          {
+            "name": "PAUT/M19.txt",
+            "size": 965092,
+            "compress_size": 261254
+          },
+          {
+            "name": "PAUT/M20.txt",
+            "size": 971432,
+            "compress_size": 264816
+          },
+          {
+            "name": "PAUT/M21.txt",
+            "size": 973424,
+            "compress_size": 265958
+          },
+          {
+            "name": "PAUT/M22.txt",
+            "size": 974168,
+            "compress_size": 265866
+          },
+          {
+            "name": "PAUT/M23.txt",
+            "size": 975471,
+            "compress_size": 267019
+          },
+          {
+            "name": "PAUT/M24.txt",
+            "size": 978339,
+            "compress_size": 268962
+          },
+          {
+            "name": "PAUT/M25.txt",
+            "size": 978740,
+            "compress_size": 268343
+          },
+          {
+            "name": "PAUT/M26.txt",
+            "size": 976733,
+            "compress_size": 267757
+          },
+          {
+            "name": "PAUT/M27.txt",
+            "size": 973760,
+            "compress_size": 266404
+          },
+          {
+            "name": "PAUT/M28.txt",
+            "size": 972547,
+            "compress_size": 265728
+          },
+          {
+            "name": "PAUT/M29.txt",
+            "size": 978800,
+            "compress_size": 269309
+          },
+          {
+            "name": "PAUT/M30.txt",
+            "size": 981165,
+            "compress_size": 269270
+          }
+        ]
+      }
+    }
+  ],
+  "sources": {
+    "A": {
+      "name": "316L lack-of-fusion FMC",
+      "n_files": 1,
+      "files": [
+        {
+          "rel": "A/Lack_of_fusion_FMC_DORT_2016.mat",
+          "size": 272341239,
+          "sha256": "90c01b23a687b539e70e0b849b726f2dd12c2ecbd788bc274d8101f901102533",
+          "format": "matlab_v5",
+          "error": null
+        }
+      ],
+      "sha256_dups": {},
+      "independent_specimens_est": 1,
+      "n_acquisitions_est": 1,
+      "flags": {
+        "ssl_pretrain_usable": true,
+        "downstream_label_usable": false,
+        "metadata_only": false,
+        "incompatible": false
+      },
+      "notes": [
+        "一个 .mat / 一个 zip = 一个物理试件（审计确认：A/B/C 各 1 个",
+        "带已知缺陷的试件；D 为 1 焊缝多位置 PAUT 扫查，无缺陷标签）；",
+        "Tx×Rx / 文件编号 / scan position 均共享 group_id，禁止当独立试件"
+      ]
+    },
+    "B": {
+      "name": "Inconel 82/182 centreline crack FMC",
+      "n_files": 1,
+      "files": [
+        {
+          "rel": "B/FMC_2012_04_26_at_16_16.mat",
+          "size": 34699543,
+          "sha256": "267a393931a303050a77165c29362c7f13f31a0a9bffa07bdbc4169bf7377b13",
+          "format": "matlab_v5",
+          "error": null
+        }
+      ],
+      "sha256_dups": {},
+      "independent_specimens_est": 1,
+      "n_acquisitions_est": 1,
+      "flags": {
+        "ssl_pretrain_usable": true,
+        "downstream_label_usable": false,
+        "metadata_only": false,
+        "incompatible": false
+      },
+      "notes": [
+        "一个 .mat / 一个 zip = 一个物理试件（审计确认：A/B/C 各 1 个",
+        "带已知缺陷的试件；D 为 1 焊缝多位置 PAUT 扫查，无缺陷标签）；",
+        "Tx×Rx / 文件编号 / scan position 均共享 group_id，禁止当独立试件"
+      ]
+    },
+    "C": {
+      "name": "304SS MMA 3mm SDH FMC",
+      "n_files": 1,
+      "files": [
+        {
+          "rel": "C/FMC_RR3_2_25MHz_3mmsdh.mat",
+          "size": 47060975,
+          "sha256": "371745dab24b4a42e01bea4249ea00e214c58cf2dbdb83bde008acca53118213",
+          "format": "matlab_v5",
+          "error": null
+        }
+      ],
+      "sha256_dups": {},
+      "independent_specimens_est": 1,
+      "n_acquisitions_est": 1,
+      "flags": {
+        "ssl_pretrain_usable": true,
+        "downstream_label_usable": false,
+        "metadata_only": false,
+        "incompatible": false
+      },
+      "notes": [
+        "一个 .mat / 一个 zip = 一个物理试件（审计确认：A/B/C 各 1 个",
+        "带已知缺陷的试件；D 为 1 焊缝多位置 PAUT 扫查，无缺陷标签）；",
+        "Tx×Rx / 文件编号 / scan position 均共享 group_id，禁止当独立试件"
+      ]
+    },
+    "D": {
+      "name": "PAUT probe localisation",
+      "n_files": 1,
+      "files": [
+        {
+          "rel": "D/PAUT.zip",
+          "size": 103673425,
+          "sha256": "8d3dbcf0958e26008c154fdf5bbd28a12c7acdde85168d08b0d923541ef8f5c9",
+          "format": "zip",
+          "error": null
+        }
+      ],
+      "sha256_dups": {},
+      "independent_specimens_est": 1,
+      "n_acquisitions_est": 389,
+      "flags": {
+        "ssl_pretrain_usable": true,
+        "downstream_label_usable": false,
+        "metadata_only": false,
+        "incompatible": false
+      },
+      "notes": [
+        "一个 .mat / 一个 zip = 一个物理试件（审计确认：A/B/C 各 1 个",
+        "带已知缺陷的试件；D 为 1 焊缝多位置 PAUT 扫查，无缺陷标签）；",
+        "Tx×Rx / 文件编号 / scan position 均共享 group_id，禁止当独立试件"
+      ]
+    }
+  },
+  "dataset_paths": {
+    "A:FMC_new": {
+      "shapes": [
+        [
+          10000,
+          128,
+          128
+        ]
+      ],
+      "dtypes": [
+        "int32"
+      ],
+      "files": [
+        "A/Lack_of_fusion_FMC_DORT_2016.mat"
+      ],
+      "shape_set": [
+        [
+          10000,
+          128,
+          128
+        ]
+      ],
+      "dtype_set": [
+        "int32"
+      ]
+    },
+    "B:FMC_new": {
+      "shapes": [
+        [
+          10000,
+          45,
+          45
+        ]
+      ],
+      "dtypes": [
+        "int32"
+      ],
+      "files": [
+        "B/FMC_2012_04_26_at_16_16.mat"
+      ],
+      "shape_set": [
+        [
+          10000,
+          45,
+          45
+        ]
+      ],
+      "dtype_set": [
+        "int32"
+      ]
+    },
+    "C:fmc": {
+      "shapes": [
+        [
+          128,
+          128,
+          976
+        ]
+      ],
+      "dtypes": [
+        "float64"
+      ],
+      "files": [
+        "C/FMC_RR3_2_25MHz_3mmsdh.mat"
+      ],
+      "shape_set": [
+        [
+          128,
+          128,
+          976
+        ]
+      ],
+      "dtype_set": [
+        "float64"
+      ]
+    },
+    "D:PAUT/": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/A01.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/A02.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/A03.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/A04.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/A05.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/A06.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/A07.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/A09.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/A10.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/A11.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/A12.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/A13.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/A14.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/A15.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/A16.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/A17.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/A18.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/A19.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/A20.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/A21.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/A22.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/A23.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/A24.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/A25.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/A26.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/A27.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/A28.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/A29.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/A30.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/B01.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/B02.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/B03.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/B04.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/B05.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/B06.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/B07.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/B08.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/B09.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/B10.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/B11.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/B12.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/B13.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/B14.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/B15.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/B16.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/B17.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/B18.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/B19.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/B20.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/B21.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/B22.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/B23.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/B24.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/B25.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/B26.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/B27.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/B28.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/B29.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/B30.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/C01.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/C02.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/C03.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/C04.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/C05.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/C06.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/C07.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/C08.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/C09.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/C10.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/C11.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/C12.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/C13.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/C14.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/C15.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/C16.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/C17.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/C18.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/C19.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/C20.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/C21.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/C22.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/C23.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/C24.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/C25.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/C26.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/C27.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/C28.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/C29.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/C30.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/D01.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/D02.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/D03.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/D04.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/D05.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/D06.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/D07.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/D08.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/D09.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/D10.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/D11.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/D12.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/D13.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/D14.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/D15.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/D16.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/D17.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/D18.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/D19.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/D20.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/D21.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/D22.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/D23.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/D24.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/D25.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/D26.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/D27.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/D28.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/D29.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/D30.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/E01.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/E02.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/E03.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/E04.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/E05.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/E06.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/E07.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/E08.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/E09.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/E10.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/E11.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/E12.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/E13.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/E14.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/E15.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/E16.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/E17.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/E18.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/E19.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/E20.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/E21.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/E22.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/E23.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/E24.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/E25.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/E26.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/E27.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/E28.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/E29.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/E30.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/F01.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/F02.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/F03.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/F04.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/F05.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/F06.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/F07.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/F08.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/F09.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/F10.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/F11.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/F12.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/F13.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/F14.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/F15.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/F16.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/F17.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/F18.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/F19.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/F20.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/F21.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/F22.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/F23.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/F24.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/F25.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/F26.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/F27.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/F28.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/F29.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/F30.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/G01.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/G02.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/G03.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/G04.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/G05.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/G06.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/G07.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/G08.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/G09.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/G10.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/G11.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/G12.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/G13.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/G14.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/G15.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/G16.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/G17.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/G18.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/G19.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/G20.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/G21.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/G22.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/G23.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/G24.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/G25.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/G26.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/G27.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/G28.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/G29.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/G30.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/H01.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/H02.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/H03.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/H04.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/H05.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/H06.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/H07.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/H08.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/H09.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/H10.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/H11.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/H12.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/H13.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/H14.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/H15.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/H16.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/H17.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/H18.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/H19.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/H20.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/H21.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/H22.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/H23.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/H24.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/H25.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/H26.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/H27.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/H28.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/H29.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/H30.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/I01.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/I02.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/I03.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/I04.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/I05.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/I06.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/I07.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/I08.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/I09.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/I10.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/I11.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/I12.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/I13.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/I14.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/I15.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/I16.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/I17.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/I18.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/I19.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/I20.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/I21.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/I22.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/I23.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/I24.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/I25.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/I26.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/I27.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/I28.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/I29.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/I30.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/J01.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/J02.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/J03.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/J04.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/J05.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/J06.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/J07.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/J08.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/J09.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/J10.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/J11.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/J12.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/J13.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/J14.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/J15.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/J16.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/J17.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/J18.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/J19.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/J20.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/J21.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/J22.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/J23.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/J24.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/J25.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/J26.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/J27.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/J28.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/J29.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/J30.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/K01.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/K02.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/K03.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/K04.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/K05.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/K06.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/K07.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/K08.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/K09.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/K10.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/K11.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/K12.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/K13.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/K14.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/K15.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/K16.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/K17.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/K18.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/K19.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/K20.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/K21.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/K22.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/K23.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/K24.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/K25.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/K26.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/K27.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/K28.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/K29.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/K30.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/L01.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/L02.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/L03.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/L04.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/L05.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/L06.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/L07.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/L08.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/L09.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/L10.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/L11.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/L12.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/L13.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/L14.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/L15.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/L16.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/L17.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/L18.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/L19.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/L20.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/L21.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/L22.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/L23.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/L24.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/L25.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/L26.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/L27.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/L28.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/L29.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/L30.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/M01.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/M02.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/M03.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/M04.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/M05.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/M06.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/M07.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/M08.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/M09.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/M10.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/M11.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/M12.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/M13.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/M14.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/M15.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/M16.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/M17.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/M18.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/M19.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/M20.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/M21.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/M22.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/M23.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/M24.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/M25.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/M26.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/M27.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/M28.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/M29.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    },
+    "D:PAUT/M30.txt": {
+      "shapes": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtypes": [
+        "?"
+      ],
+      "files": [
+        "D/PAUT.zip"
+      ],
+      "shape_set": [
+        [
+          "zip-entry"
+        ]
+      ],
+      "dtype_set": [
+        "?"
+      ]
+    }
+  }
+}

@@ -122,31 +122,38 @@
     `reports/M0_2C_ECT顺序SSL实验报告.md`、
     `experiments/results/m0_2c_*_seed{42,43,44}.json` + `m0_2c_aggregate.{json,md}`；
     checkpoint 在 `experiments/runs/m0_2c/ect/`（不覆盖 `ssl_ae/encoder.pt`）。
-- **M0-3（当前，真实焊缝多源超声预训练迁移，待数据）**：验证"外部**真实焊缝**
-  FMC/PAUT 预训练 → PP3–PP7 PAUT SSL"是否优于等预算 PAUT-only SSL（只研究超声
-  内部迁移，不混入 ECT/CFRP/岩石超声）。
-  - **数据**：Strathclyde 4 个 CC BY 4.0 数据集（316L lack-of-fusion FMC /
-    Inconel 82/182 中心线裂纹 FMC / 304SS MMA 3mm SDH FMC / PAUT 探头定位）。
-    **下载被 Cloudflare managed challenge 阻止**（curl/WebFetch/Firefox(snap)/
-    Playwright Chromium headless 均失败，已按纪律记录失败原因与人工下载地址，
-    见 `data/manifests/external_weld_ut/download_manifest.json`）；真实独立试件
-    大概率 < 10 → 结论口径为 **exploratory external pretraining source**。
+- **M0-3（当前，真实焊缝多源超声预训练迁移，pilot 判据未过 → 结束）**：验证
+  "外部**真实焊缝** FMC/PAUT 预训练 → PP3–PP7 PAUT SSL"是否优于等预算 PAUT-only
+  SSL（只研究超声内部迁移，不混入 ECT/CFRP/岩石超声）。
+  - **数据已下载并审计**：Strathclyde 4 个 CC BY 4.0 数据集（316L lack-of-fusion
+    FMC / Inconel 82/182 中心线裂纹 FMC / 304SS MMA 3mm SDH FMC / PAUT 探头定位）。
+    `/files/` 端点由 Cloudflare managed challenge 保护，自动下载（curl/WebFetch/
+    Firefox snap/Playwright Chromium）全部失败、已按纪律记录，**最终浏览器人工
+    下载**（校验和见 `download_manifest.json` + `data/raw/external_weld_ut/checksums.txt`）。
+    结构审计：A/B `(T=10000,Tx=128/45,Rx=128/45) int32`、C `(Tx=128,Rx=128,T=976)`、
+    D 389×`(time=762,beam=401)` B-scan；**690 views / 4 独立试件（<10 →
+    exploratory external pretraining source）**；全部 ssl_pretrain_usable、
+    均无逐位置缺陷标签。
   - **设计**：Protocol V2 严格 LOOCV（test/val=train 各 1 完整 coupon）；等预算
     P-long（两阶段都用本折 PAUT train）vs W→P（阶段 1 外部 FMC + 阶段 2 PAUT，
     新建 PAUT decoder、只迁移 encoder、不迁移 decoder）；P1 `MAEEncoder` 共享
     结构 + 数据源专用 `FlexDecoder`，变长输入 + valid mask，recon loss 只算
     masked∩valid；主指标非PP4 逐折 mean ROC-AUC。
-  - **闸门**：Stage A smoke（合成 FMC 数据全链路通过：audit→adapter→pretrain→
-    LOOCV→aggregate，`tests/test_m0_3.py` 9 项全过）→ Stage B pilot（seed 42,
-    ext 2000 + tgt 2000，全 folds，判据 W→P−P-long ≥ +0.01 且 ≥3 折未降且无单折
-    降 >0.05）→ 通过才 Stage C 3 seeds（固定预算 ext 5000 + tgt 5000）。
-    **真实数据落地后重跑 audit → pilot →（判据通过才）正式**。
+  - **pilot 结果（seed 42，ext 2000 + tgt 2000，全 5 折）**：非PP4 逐折 mean
+    W→P 0.5413 vs P-long 0.5551，**Δ = −0.0138**（需 ≥ +0.01），仅 1/4 非PP4 折
+    未下降（PP7 +0.0022；PP3/PP5/PP6 均降），最大单折下降 −0.0368。WP 仅 PP4
+    （+0.16，近零缺陷试件）与 pooled（+0.005）"看似"更好，均按协议排除。
+    **pilot GO 判据未通过 → 按纪律立即停止，不调参、不跑 3 seeds；结论 =
+    "少量外部真实焊缝 FMC 未带来稳定迁移"（exploratory）**。
   - 交付物：`docs/M0_3_external_weld_ut_audit.md`、
-    `reports/M0_3_真实焊缝多源超声SSL实验报告.md`、`data/manifests/external_weld_ut/`、
+    `reports/M0_3_真实焊缝多源超声SSL实验报告.md`、`data/manifests/external_weld_ut/`
+    （download_manifest + dataset_card + records.parquet）、
     `src/wndt/data/adapters/external_weld_ut.py`、`src/wndt/data/external_weld_ut_pretrain.py`、
     `src/wndt/models/ssl_ae.py`（FlexDecoder/ExternalUTMaskedAE）、
     `scripts/m0_3_{audit,weld_ut_pretrain,loocv,aggregate,download_*}.py`、
-    `configs/m0_3_weld_ut.yaml`、`tests/test_m0_3.py`。
+    `configs/m0_3_weld_ut.yaml`、`tests/test_m0_3.py`（9 项全过）、
+    `experiments/results/m0_3_loocv_{P-long,WP}_seed42_e2000_t2000.json` +
+    `m0_3_aggregate.{json,md}`；checkpoint 在 `experiments/runs/m0_3/pretrain/`。
 
 > ⚠ 限制：本阶段不进行超 10 GB 的新下载、不自动下载全部 LOTSA/UTSD、不做正式
 > 训练、不跑长时 GPU 任务。公开小数据实验不代表最终课题结论。
