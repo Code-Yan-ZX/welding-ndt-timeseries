@@ -22,16 +22,16 @@
 
 | # | 数据集 | 模态 | 独立单元 | 样本(记录) | 原始波形 | license | 下载 | 分级 |
 |---|---|---|---|---|---|---|---|---|
-| 1 | PENELOPE PAUT（补充） | 超声 PAUT | 5 coupon | 3,000 位置 | ✅ .nde | CC-BY-4.0 | ✅ 已本地 | **A** |
-| 2 | EddyCus-HDF5 | 涡流 ECT | 148 配置组 | 738 扫描 | ✅ HDF5 | CC-BY-4.0 | ✅ 已本地 | **A/B** |
-| 3 | ML-NDT | 超声 PAUT 体积 | 1 试件 / 3 裂纹 | 20,010 B-scan | ✅ .bins | LGPL-3.0 | ✅ 已本地 | **B** |
-| 4 | NDT_ML_Flaw | 超声 B-scan | 1 试件 / 6 缺陷 | 17,000 条带 | ✅ .xz | LGPL-3.0 | ✅ 已本地 | **B** |
-| 5 | Long-term GW SHM（Sci. Data 2025） | 超声导波 | 1 铝板 / 13 损伤 | ~640 万测量 | ✅ 1 MHz pickle | CC BY-NC-ND | ⚠ Figshare 需人工验证 | **A/B** |
+| 1 | PENELOPE PAUT（补充） | 超声 PAUT | 5 coupon | 3,000 位置 | ✅ .nde | CC-BY-4.0 | ✅ 已本地 | **A**（小规模，勿作唯一基准） |
+| 2 | EddyCus-HDF5 | 涡流 ECT | 148 配置组 | 738 扫描 | ✅ HDF5 | CC-BY-4.0 | ✅ 已本地 | **A**（层级待确认） |
+| 3 | ML-NDT | 超声 B-scan（minibatch 容器） | 1 试件 / **3 真实裂纹模板** | 20,010 B-scan | ✅ .bins | LGPL-3.0 | ✅ 已本地 | **D (quarantined)** |
+| 4 | NDT_ML_Flaw | 超声 B-scan | 1 试件 / **6 真实缺陷 + 10 CIVA 模板** | 17,000 条带 | ✅ .xz | LGPL-3.0 | ✅ 已本地 | **D (quarantined)** |
+| 5 | Long-term GW SHM（Sci. Data 2025） | 超声导波 | **1 铝板** / 13 损伤 | ~640 万测量 | ✅ 1 MHz pickle | CC BY-NC-ND | ⚠ Figshare 需人工验证 | **B/C**（单结构，非 A） |
 | 6 | USimgAIST | 超声成像（图像） | 未知 | 7,000+ 图 | ❌ 图像 | 未知 | ⚠ 无法确认 | **D**（先确认下载） |
 | 7 | Open Guided Waves | 超声导波 | 多板/长桁 | 多组 h5 波场 | ✅ HDF5 | #4 CC-BY-4.0 | ✅ 免登录 | **C** |
 | 8 | UGW-3Mat-2SN（补充） | 超声导波 | 3 板×2 阵列 | 43.5 GB | ✅ .mat | CC-BY-4.0 | ✅ 免登录 | **C** |
 | 9 | Pipeline UGW（DiB 2022） | 超声导波 | 1 钢管 | 236 信号 | ✅ 195 kHz | CC BY 4.0 | ✅ Mendeley | **C** |
-| 10 | MDDECT | 涡流 ECT | 18 缺陷 | 48,000 扫描 | ✅（1D/2D 待核实） | 未知 | ⚠ Kaggle 登录 | **C** |
+| 10 | MDDECT | 涡流 ECT | 18 缺陷 | 48,000 扫描 | ✅（1D/2D 待核实） | 未知 | ⚠ Kaggle 登录 | **C**（分组待调查） |
 | 11 | NASA SiC/SiC AE（补充） | 声发射 | 3 试件 | ~11 MB | ✅ 波形 | Unlicense | ✅ GitHub | **B/C** |
 | 12 | ORION-AE（补充） | 声发射 | 螺栓结构 | 5 MHz | ✅ .mat | 待核实 | ✅ Harvard Dataverse | **C** |
 | 13 | Composite AE（广义） | 声发射 | 视子集 | 特征/波形 | 混合 | 混合 | 混合 | **C/D** |
@@ -40,6 +40,10 @@
 | 16 | Wind-turbine-blade SHM | 振动加速度 | 缩比风机 | — | ✅ 102.4 kHz | CC BY 4.0 | ✅ Mendeley | **C/D** |
 | 17 | Evident NDE examples（补充） | 超声 .nde | 示例 | 13 文件 | ✅ | 无声明 | ✅ 免登录 | **C**（工具） |
 
+> **quarantined 红线**：ML-NDT / NDT_ML_Flaw 因 shortcut 高风险被隔离（见 §"Quarantined
+> datasets and shortcut-learning evidence"），**不得作为核心 benchmark / 论文主结果 / 跨试件
+> 泛化 claim 的证据**。
+>
 > 模态红线：**LANL SHM 与风机叶片数据为振动/加速度模态**，严格说属于结构动力学而非
 > 超声/涡流/导波/声发射这类"波传播型 NDT 信号"。为避免混模态污染第一阶段预训练，均按 D 处理
 > （LANL 同时因官方下载页失效）。若后续需要振动域外部迁移，可单独降级讨论为 C。
@@ -59,30 +63,48 @@
 - 泄漏：按 coupon 严格划分（Protocol V2）；PP4 近零缺陷已知
 - 定位：**下游严格评测基准之一**；5 试件缺陷率耦合（0.5%–76%）是评估时的已知约束
 
-### 2. ML-NDT → **B（无标签预训练，严格分组）**
+### 2. ML-NDT → **D（quarantined / shortcut 高风险）**
 
 - 来源：https://github.com/iikka-v/ML-NDT；arXiv:1903.11399（Virkkunen et al. 2019）
-- 内容：316L 奥氏体管道单焊头；3 条真实热疲劳裂纹（1.6/4.0/8.6 mm，Trueflaw）
-  + eFlaw 虚拟缺陷重植入增强
-- 格式：`.bins` UInt16 256×256×100（100 帧 × 256×256 B-scan）= 每体积 13.1 MB；201 容器 ≈ 2.6 GB
-- 样本：20,010 B-scan（12,128 缺陷 / 7,882 干净）
+- 内容：316L 奥氏体管道单焊头；**仅 3 条真实热疲劳裂纹**（1.6/4.0/8.6 mm，Trueflaw）；
+  其余 20,010 张图全部由 **eFlaw 流程生成**（将提取的裂纹信号**植入**到扫描数据的
+  不同位置/背景），作者公开声明（"The flaw signals extracted can be moved to different
+  samples"）
+- 格式：`.bins` UInt16 256×256×100 = **minibatch 容器（100 张 B-scan 图，非三维体积采集）**
+- 样本：20,010 B-scan（12,128 缺陷 / 7,882 干净）；有效独立单元 ≈ **3 条真实裂纹模板**
 - 设备：Zetec Dynaray 64/64PR-Lite + Imasonic 1.5 MHz 矩阵探头；TRS 相控阵单 45°
 - 标签：0/1 + equivalent_flaw_size；location（帧范围）
 - license：LGPL-3.0（对数据授权语义模糊）
-- 泄漏：**高**（3 裂纹模板近重复 cos>0.99 占 99.7%）；必须按 defect_instance_id 分组，
-  禁止随机样本级划分
-- 定位：**B**（原始体积级预训练素材，模态与 PAUT 最匹配）；不可作独立多试件基准
+- **shortcut 证据（docs/M0_2B_VTT_virtual_flaw_data_audit_v2.md, 2026-08-20）**：
+  - 随机样本级小 CNN 缺陷检测 **AUC≈1.0**（近饱和）；
+  - test 样本 **99.3–99.7%** 可在 train 找到 **cos>0.99 同模板近重复**（最近邻 100% 同模板）
+    → 泄漏单元是**缺陷模板**；
+  - **leave-template-out**：8.6mm AUC=1.0 / **1.6mm AUC=0.41（低于机会）** / 4.0mm AUC=0.76
+    → 对新尺寸模板（尤其小裂纹）**不能泛化**；
+  - background-only（探索性）AUC≈0.9887 → 存在背景/植入残留捷径的探索性证据；
+  - E2 外部预训练对 PAUT 负迁移（E2−E0 = −0.0075，判据未过）。
+- 定位：**D（quarantined）**——仅限受控用途（smoke/合成缺陷消融/shortcut-leakage 负对照/
+  模板依赖验证），**不得用于论文主结果、跨试件 claim、与真实工业数据直接比较**
 
-### 3. NDT_ML_Flaw → **B（无标签预训练，严格分组）**
+### 3. NDT_ML_Flaw → **D（quarantined / shortcut 高风险）**
 
 - 来源：https://github.com/koomas/NDT_ML_Flaw（VTT，Tuomas Koskinen——与 ML-NDT 同源）
-- 内容：异种金属焊缝 P41；5 裂纹（2–26 mm）+ 1 EDM notch + 10 批 CIVA 仿真
+- 内容：异种金属焊缝 P41；**6 个真实缺陷**（5 裂纹 + 1 EDM notch）+ **10 批 CIVA 仿真模板**；
+  真实批含 0.4–1.0 幅度缩放增强
 - 格式：`.xz`/`.lzma` uint16 条带（480 深度 × 7168 扫描）；17 批 × 1000 = 17,000 条带
 - 标签：7 列（Flaw 0/1, 增强量, 深度, 位置, 尺寸, 索引, 类型）
 - license：LGPL-3.0（授权语义模糊，建议使用前与作者确认）
-- 泄漏：同缺陷沿扫描轴连续条带重叠 + 0.4–1.0 幅度缩放增强 → 中-高；必须按
-  defect_instance_id + real/sim 分组
-- 定位：**B**（缺陷形态最接近焊缝 PAUT 的预训练/缺陷模板池）；不可作独立基准
+- **shortcut 证据（同上审计）**：
+  - 随机样本级小 CNN 缺陷检测 **AUC≈1.0**（近饱和）；
+  - **leave-one-real-defect-out 修复后 AUC 仍=1.0**，但 acc 跌到 ~0.17–0.21（阈值不校准）——
+    这是**同试件内（P41）缺陷间泛化，不是跨试件/新焊缝泛化**；
+  - leave-container / leave-batch 后 AUC 仍≈1.0；
+  - 有效独立单元 ≈ 6 真实缺陷 + 10 CIVA 模板，远小于 nominal 17,000。
+- 定位：**D（quarantined）**——与 ML-NDT 同为 VTT 单试件 + 虚拟/仿真缺陷语料，均保留
+  **high shortcut risk**；仅限受控用途（同上）
+- ⚠ 注入机制表述：ML-NDT 为 **eFlaw 植入（提取真实裂纹信号重植入）**，NDT_ML_Flaw 为
+  **CIVA 仿真模板 + 幅度缩放增强**——两者**生成机制不同**（未证实完全相同），但都满足
+  "重复缺陷模板 / 虚拟缺陷 / 样本相关性" → 均判 high shortcut risk。
 
 ### 4. USimgAIST → **D（暂不使用；先人工核实下载）**
 
@@ -103,7 +125,7 @@
 
 ## 二、导波（Guided Waves）
 
-### 5. Long-term Guided Wave SHM dataset（Sci. Data 2025）→ **A/B（高优先）**
+### 5. Long-term Guided Wave SHM dataset（Sci. Data 2025）→ **B/C（单结构，非 A）**
 
 - 来源：Yang, K. et al., *Dataset on guided waves from long-term SHM under uncontrolled and dynamic
   conditions*, **Scientific Data 12 (2025)**, DOI 10.1038/s41597-025-05300-5（OA，PMC12162875）
@@ -117,8 +139,10 @@
 - 标签：损伤引入时间线 + 环境信道（温度/湿度/光照/气压/天气）
 - license：**CC BY-NC-ND 4.0**（非商业、禁改——合规需评估）
 - 泄漏：**高（时间相关）**——单板跨 4.5 年连续采样，必须按时间分段划分
-- 定位：**A/B**——"原始波形 + 多损伤 + 长期多环境 + 正式发表"的导波代表；
-  但 NC-ND 许可与单结构是硬约束
+- 定位：**B/C**——"原始波形 + 多损伤 + 长期多环境 + 正式发表"的导波代表；
+  **但只有 1 块铝板（单结构）→ 不满足 A 级核心基准准入（多独立 specimen）**，
+  仅作无标签预训练语料（B）+ 单结构损伤严重度/环境迁移验证（C）；
+  NC-ND 许可与单结构是硬约束
 
 ### 6. Open Guided Waves → **C（迁移验证）**
 
@@ -232,54 +256,133 @@
 
 ---
 
-## 六、分级汇总
+## 六、Quarantined datasets and shortcut-learning evidence
 
-### A 核心 benchmark（可严格下游评测）
-1. **PENELOPE PAUT**（超声，5 coupon，CC-BY-4.0，已本地）——严格 LOOCV 基准
-2. **EddyCus-HDF5**（涡流 ECT，148 配置组，CC-BY-4.0，已本地）——cross-config 基准、跨模态端
-3. **Long-term GW SHM**（导波，13 损伤，Sci. Data 2025，CC BY-NC-ND）——**前提**：人工核实
-   Figshare 下载与 NC-ND 合规；按时间分段划分
+> 本节依据仓库既有审计证据，**不重复训练**。核心来源：
+> `docs/M0_2B_VTT_virtual_flaw_data_audit.md` 与 `docs/M0_2B_VTT_virtual_flaw_data_audit_v2.md`
+> （2026-08-20，det_v2 实验 + 审计脚本 `scripts/m0_2b_vtt_data_audit.py` 实测）；
+> 迁移结论交叉验证于 `docs/M0_2B_external_ultrasound_transfer_report.md`。
 
-### B 仅用于无标签预训练
-4. **ML-NDT**（超声体积，严格 defect_instance 分组，LGPL）
-5. **NDT_ML_Flaw**（超声条带，严格分组，LGPL）
-6. **NASA SiC/SiC AE**（AE 波形，3 试件，Unlicense）
-7. **合成超声**（synth_ut_50x2k，10 万，本地）
+### 6.1 缺陷生成 / 注入方式（区分表述，不宣称两者机制完全相同）
 
-### C 仅用于外部迁移验证
-8. **Open Guided Waves**（导波）
-9. **UGW-3Mat-2SN**（导波，43.5 GB，需批准）
-10. **Pipeline UGW**（管道导波，CC BY 4.0，易下载）
-11. **MDDECT**（涡流，先核实 license/分组）
-12. **ORION-AE**（AE 螺栓）
-13. **Evident NDE examples**（工具/格式测试，无标签）
+| 项 | ML-NDT | NDT_ML_Flaw |
+|---|---|---|
+| 物理试件 | 1 个（316L 奥氏体管道单焊头） | 1 个（P41 异种金属焊缝） |
+| 真实缺陷 | **3 条热疲劳裂纹**（1.6/4.0/8.6 mm） | **6 个**（5 裂纹 + 1 EDM notch） |
+| 生成/注入方式 | **eFlaw 流程**：提取真实裂纹信号，**植入**到扫描数据不同位置/背景（作者公开声明） | **CIVA 仿真模板**（10 批）+ 真实批 **0.4–1.0 幅度缩放**增强 |
+| nominal 样本 | 20,010 张 B-scan（minibatch 容器，非体积采集） | 17,000 条带 |
+| 有效独立单元 | ≈ **3 条真实裂纹模板** | ≈ **6 真实缺陷 + 10 CIVA 模板** |
+| 共享缺陷模板 | **是**（3 模板驱动全部 12,128 张缺陷图） | **是**（同缺陷沿扫描轴连续条带 + 模板复用） |
 
-### D 暂不使用
-14. **USimgAIST**（图像 + 下载不可确认；先人工联系作者）
-15. **LANL SHM**（振动模态 + 下载失效）
-16. **Wind-turbine SHM**（振动模态；或按用户确认后作 C）
-17. **Stanford AE**（无法确认存在）
-18. **EddyNet**（无 license、纯仿真、停更）
-19. **Chalmers 风机**（SCADA，非 NDT 信号）
-20. **任意表面 RGB 缺陷检测数据**（本阶段明确排除）
+> ⚠ **表述纪律**：ML-NDT（eFlaw 植入）与 NDT_ML_Flaw（CIVA 仿真 + 缩放）的**生成机制并不
+> 完全相同**，现有证据不支持"两数据集完全同一种注入机制"的结论。但两者都满足
+> **重复缺陷模板 + 虚拟/仿真缺陷 + 样本高度相关** → 均保留 **high shortcut risk** 标记。
+
+### 6.2 已有 shortcut 证据（小 CNN 缺陷检测，审计实测）
+
+| 证据 | ML-NDT | NDT_ML_Flaw |
+|---|---|---|
+| 随机样本级检测 | **AUC≈1.0**（近饱和） | **AUC≈1.0**（近饱和） |
+| 近重复（template 泄漏） | test 样本 **99.3–99.7%** 在 train 有 cos>0.99 同模板近重复；最近邻 100% 同模板 | 同缺陷沿扫描轴连续条带 |
+| leave-template-out | 8.6mm AUC=1.0 / **1.6mm AUC=0.41（低于机会）** / 4.0mm AUC=0.76 → 新尺寸小裂纹不能泛化 | — |
+| leave-real-defect-out | — | **AUC 仍=1.0** 但 acc≈0.17–0.21（同试件内泛化，非跨试件） |
+| leave-container/batch | — | AUC 仍≈1.0 |
+| background-only（探索性） | **AUC≈0.9887**（背景/植入残留捷径的探索性证据） | 因标签相关裁剪已删除 |
+| metadata-only（批次指纹） | ~0.58（弱，非主导捷径） | ~0.49（弱） |
+
+### 6.3 为什么随机切分结果不能代表跨试件泛化
+
+- 泄漏单元是**缺陷模板**（近重复**跨容器**但**同模板** 100%）而非采集批次；
+- 随机样本级 AUC≈1.0 主要是模型匹配 train 中近重复模板的缺陷形态，不是学习"新"缺陷泛化
+  规律（leave-template-out 崩塌即为直接证据）；
+- 同试件内缺陷间泛化（NDT_ML_Flaw leave-one-real-defect-out 仍=1.0）**不等于**跨试件/新焊缝
+  泛化。
+
+### 6.4 为什么不能与真实工业 NDT 数据直接比较
+
+- 两数据集均**单试件** + 虚拟/仿真缺陷为主，不存在独立多试件结构；
+- 背景/采集纹理（VTT 超声系统 + 单试件）是共享捷径，会污染与真实工业数据（不同试件/设备/
+  环境）的比较；
+- 预训练（E2）实际看到的是"单试件虚拟缺陷语料"（ML-NDT 60.4% 帧为 3 裂纹副本；NDT_ML_Flaw
+  ~2/3 窗口只是背景），且对 PAUT 为**负迁移**（E2−E0 = −0.0075，判据未过）——不能作为
+  "通用真实缺陷物理表征"的证据。
+
+### 6.5 仍可用的受控用途（不删除数据/loader/历史结果）
+
+1. dataset loader 与训练管线 **smoke test**（格式兼容 / adapter 验证）；
+2. **合成缺陷预训练的受控消融**（virtual-flaw 方法学本身）；
+3. **shortcut learning / leakage detection 负对照**；
+4. 比较 **random split vs grouped split 的虚高差异**；
+5. 验证模型是否**依赖注入模板**（template-dependence 探针）；
+6. 研究**合成数据如何导致负迁移**。
+
+**禁止用途**：论文主结果 / 通用 NDT 表征有效性的主要证据 / 跨试件泛化 claim /
+与工业真实数据直接比较 / SOTA claim。
 
 ---
 
-## 七、待人工核实清单
+## 七、分级汇总（v2，quarantined 后重新评估）
 
-1. **Long-term GW SHM**：Figshare 实际文件列表/大小；NC-ND 许可使用合规性；时间分段划分元数据
-2. **USimgAIST**：联系 Ye/Toyama（或查 IEEE Access 正文 Data Availability）确认下载与许可
-3. **LANL SHM**：查找有效镜像（如确需振动域）
-4. **MDDECT**：Kaggle 目录结构 / license / operator 与 lift-off 分组（需登录）
-5. **external_weld_ut**（本地）：来源 / license / 标签说明（Strathclyde？Cloudflare 阻止下载记录）
-6. **ML-NDT / NDT_ML_Flaw**：LGPL-3.0 对"数据"的授权边界（建议使用前与作者确认）
+> 准入原则：**没有足够证据放入 A 就放 B/C**，不为凑数量降低标准（详见
+> phase1_experiment_protocol.md §"Core Benchmark Admission Criteria"）。
 
-## 八、结论
+### A 核心严格 benchmark（唯一能支撑严格下游评测的集合）
+1. **PENELOPE PAUT**（超声，5 coupon，CC-BY-4.0，已本地）——coupon LOOCV；
+   ⚠ **仅 5 coupon，作为严格外部/探索验证基准，不宜作为唯一核心基准**，需与 EddyCus 联合。
+2. **EddyCus-HDF5**（涡流 ECT，148 配置组，CC-BY-4.0，已本地）——cross-config/cross-sensor
+   评测；⚠ **specimen/sensor/scan 层级需人工确认**（见待核实清单）。
 
-1. **第一阶段真实数据核心组合（A 级）**：PENELOPE（超声）+ EddyCus（涡流）+ Long-term GW SHM（导波，
-   待核实）——三种"波传播型 NDT 信号"模态齐全，构成"多源通用表征"的最小跨模态骨架。
-2. **B 级预训练语料**：VTT 超声（ML-NDT/NDT_ML_Flaw，严格分组）+ NASA AE + 合成超声。
-3. **C 级迁移验证**：管道导波 / MDDECT / ORION-AE 等作外部迁移与 cross-domain 测试。
-4. **模态红线**：振动/SCADA/表面 RGB 数据不混入第一阶段；LANL 与风机叶片按 D 处理。
-5. **下载纪律**：Long-term GW SHM（Figshare）与 MDDECT（Kaggle）需用户批准/人工下载；
+### B 仅用于无标签预训练（非 quarantined）
+3. **Long-term GW SHM**（导波，1 板/13 损伤，CC BY-NC-ND）——**单结构 → 不作 A**，仅预训练 +
+   单结构迁移验证（B/C）
+4. **NASA SiC/SiC AE**（AE 波形，3 试件，Unlicense）
+5. **合成超声**（synth_ut_50x2k，10 万，本地）
+6. **external_weld_ut**（真实 FMC，4 试件，本地）——**待补 license/标签**后方可用（候选 B）
+
+### C 仅用于外部迁移/泛化验证
+7. **Open Guided Waves**（导波，按结构/传感器分组）
+8. **UGW-3Mat-2SN**（导波，3 板×2 阵列，43.5 GB，需批准）
+9. **Pipeline UGW**（管道导波，CC BY 4.0，易下载，单管小样本）
+10. **MDDECT**（涡流，**先调查物理缺陷/试件/扫描批次/采集条件分组**，license 待核实）
+11. **ORION-AE**（AE 螺栓，多传感器）
+12. **Evident NDE examples**（工具/格式测试，无标签）
+
+### D quarantined / shortcut-risk
+13. **ML-NDT**（见 §6）
+14. **NDT_ML_Flaw**（见 §6）
+
+### D（hold）暂不使用（原因不变）
+15. **USimgAIST**（图像 + 下载不可确认）｜16. **LANL SHM**（振动 + 下载失效）｜
+17. **Wind-turbine SHM**（振动；用户确认后可作 C）｜18. **Stanford AE**（无法确认存在）｜
+19. **EddyNet**（无 license、纯仿真、停更）｜20. **Chalmers 风机**（SCADA，非 NDT 信号）｜
+21. **任意表面 RGB 缺陷检测数据**（本阶段明确排除）
+
+---
+
+## 八、待人工核实清单
+
+1. **EddyCus-HDF5（A 级准入所需）**：确认 specimen（148 配置组）/ sensor（8）/ scan（738）
+   三层级关系；是否可按 sensor×material 严格分组（A 级核心基准的前置条件）。
+2. **MDDECT（C→可能的 A）**：Kaggle 目录结构 / license / **能否按物理缺陷、试件、扫描批次或
+   采集条件分组** / operator 与 lift-off（需登录；若可分独立单元可升级评估）。
+3. **Long-term GW SHM**：Figshare 实际文件列表/大小；NC-ND 许可使用合规性；时间分段划分元数据
+   （单结构 → 维持 B/C，不作 A）。
+4. **USimgAIST**：联系 Ye/Toyama（或查 IEEE Access 正文 Data Availability）确认下载与许可
+   （若取得，须按独立试板划分，禁止随机按图像划分）。
+5. **LANL SHM**：查找有效镜像（如确需振动域）。
+6. **external_weld_ut**（本地）：来源 / license / 标签说明（Strathclyde？Cloudflare 阻止下载记录）。
+7. **ML-NDT / NDT_ML_Flaw（quarantined 用途前置）**：LGPL-3.0 对"数据"的授权边界
+   （建议使用前与作者确认，即使只做受控消融）。
+
+## 九、结论（v2）
+
+1. **A 级核心严格基准**：**PENELOPE（超声, 5 coupon, 需联合多基准）+ EddyCus（涡流,
+   148 组, 层级待确认）**——**不用作唯一基准**；其余数据集在准入证据不足时一律放 B/C。
+2. **ML-NDT / NDT_ML_Flaw 已 quarantine**：shortcut 证据确凿（随机 AUC≈1.0、近重复
+   99.3–99.7%、leave-template 崩塌、E2 负迁移）→ 仅限受控用途，禁止主结果/跨试件/工业对比。
+3. **B 级预训练语料**：Long-term GW SHM（单结构）+ NASA AE + 合成超声 +（待补许可的）
+   external_weld_ut。
+4. **C 级迁移验证**：Open GW / UGW-3Mat-2SN / Pipeline UGW / MDDECT（分组待调查）/ ORION-AE。
+5. **模态红线**：振动/SCADA/表面 RGB 数据不混入第一阶段；LANL 与风机叶片按 D 处理。
+6. **下载纪律**：MDDECT（Kaggle）与 Long-term GW SHM（Figshare）需用户批准/人工下载；
    其余大文件（UGW 43.5 GB）也需批准。**本阶段不立即下载，registry 先落 YAML。**

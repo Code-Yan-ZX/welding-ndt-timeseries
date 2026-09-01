@@ -11,21 +11,32 @@
 > 在不同信号型 NDT 数据（超声/PAUT、导波、涡流、声发射）之间学习**可迁移的通用表征**，
 > 并改善**少样本、跨试件和跨域泛化**？
 >
+> **研究动机（v2，含 shortcut 视角）**：
+> 现有 NDT 深度学习结果容易受到**随机切片、重复缺陷模板、仿真注入痕迹及背景相关性**的影响。
+> 我们关注的**不是**在相关样本划分上取得接近饱和的分类准确率，而是**在独立试件、独立结构、
+> 跨传感器和跨环境条件下**学习可靠的通用表征。⚠ 该动机是研究导向而非最终贡献声明，需后续
+> novelty audit 与实验支撑。
+>
 > 本规格只定义 **第一版可实际实现的最小结构**，不堆砌全部模块；novelty 审计列为待办。
 
 ---
 
 ## 〇、设计约束（来自 Phase 0/1 审计，必须正面回应）
 
-1. **已知负面证据**：普通单编码器 + 单一重建目标跨物理模态迁移 → 负迁移
+1. **已知负面证据（迁移）**：普通单编码器 + 单一重建目标跨物理模态迁移 → 负迁移
    （M0-2B E2−E0 = −0.0075；M0-2C E→P→E 顺序 SSL 保持 PAUT 灾难性遗忘 −0.0606）。
    → 方法必须包含**显式模态对齐机制**，且**多源必须联合训练**（不允许顺序式灾难性遗忘路径）。
-2. **可用真实数据**：PENELOPE（超声，5 coupon，3000 位置）、EddyCus（涡流，148 组，738 扫描）
-   已本地且可严格评测；VTT 超声与合成超声只作预训练语料（严格防泄漏分组）。
-3. **统一 token 空间**：现有 `UltrasoundMAE` 是 2D patch Transformer MAE（可复用），
+2. **已知负面证据（shortcut / 数据）**：ML-NDT 与 NDT_ML_Flaw 已 **quarantine** ——
+   随机样本级小 CNN AUC≈1.0 由模板近重复（99.3–99.7%）+ 背景捷径驱动，leave-template-out
+   崩塌；**随机切片划分结果不代表跨试件泛化**。→ 评测必须在独立物理实体上分组，且
+   **quarantined 数据仅限受控消融**，不作为通用表征有效性的主要证据。
+3. **可用真实数据（v2）**：PENELOPE（超声，5 coupon，**仅作严格基准之一，勿作唯一**）、
+   EddyCus（涡流，148 组，层级待确认）可严格评测；合成超声只作预训练扩充；ML-NDT/NDT_ML_Flaw
+   仅限受控用途（见 phase1_dataset_landscape.md §六）。
+4. **统一 token 空间**：现有 `UltrasoundMAE` 是 2D patch Transformer MAE（可复用），
    但 batch 内不支持混合 shape → 设计需在 **adapter 层把各模态统一到固定 token 网格**。
-4. **严格评测纪律**：同试件切片/增强副本/同缺陷重复采样绝不随机跨 train/test；
-   每折均值±std；负迁移审计。
+5. **严格评测纪律**：同试件切片/增强副本/同缺陷重复采样绝不随机跨 train/test；
+   每折均值±std；负迁移审计；**核心基准准入规则**见 experiment protocol。
 
 ---
 
@@ -143,14 +154,18 @@ L_inv   = 1/|P| · Σ_{(a,b)∈P} || E(x_a^l) − E(x_b^l) ||₂²    # 同物�
   （EddyCus：同配置多传感器；PENELOPE：90/270 族）。无配对数据时 λ₃=0。
   作用：显式注入跨传感器不变性（物理量不变、传感器响应不同）。
 
-### 3.6 下游任务（Evaluation）
+### 3.6 下游任务（Evaluation, v2）
+
+> ⚠ ML-NDT / NDT_ML_Flaw 已 **quarantined**（shortcut 高风险），**不得作为下游主证据**。
+> 表内标注"受控"者仅用于消融/负对照，不进入主结果。
 
 | 任务 | 数据集候选 | 指标 |
 |---|---|---|
-| 缺陷/健康二分类 | PENELOPE（5 coupon LOOCV）、EddyCus（cross-config） | AUROC、balanced acc、Macro-F1 |
-| 多类缺陷分类 | EddyCus（8 类）、VTT 超声 | Macro-F1、confusion |
-| 严重度/深度回归 | ML-NDT（eq. size）、MDDECT（深度 18 档）、Long-term GW（13 级） | MAE/RMSE、秩相关 |
+| 缺陷/健康二分类 | **PENELOPE（5 coupon LOOCV，严格基准之一）**、EddyCus（cross-config，层级待确认） | AUROC、balanced acc、Macro-F1 |
+| 多类缺陷分类 | EddyCus（8 类） | Macro-F1、confusion |
+| 严重度/深度回归 | MDDECT（深度 18 档，**前提：分组调查通过**）、Long-term GW（13 级，单结构，仅迁移验证）；ML-NDT（eq. size，**受控消融**） | MAE/RMSE、秩相关 |
 | 正常样本训练的异常检测 | PENELOPE clean 位置、EddyCus clean(84)、Pipeline UGW healthy(207) | AUROC/AUPRC（留一结构） |
+| shortcut / leakage 负对照（受控） | ML-NDT、NDT_ML_Flaw（random vs grouped split、模板依赖探针） | AUC 虚高差、近重复率 |
 
 ## 四、数学目标汇总
 

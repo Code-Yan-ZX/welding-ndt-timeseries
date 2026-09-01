@@ -7,10 +7,23 @@
 #       不立即下载全部数据。
 #
 # 分级:
-#   A 核心 benchmark   —— 可严格下游评测 (多独立单元 + 可靠标签 + 许可清晰)
-#   B 无标签预训练     —— 原始信号语料 (标签弱/单试件, 仅预训练, 需防泄漏分组)
-#   C 外部迁移验证     —— 模态相关可下载, 但规模小/单结构, 仅迁移对照
-#   D 暂不使用         —— 模态错位 / 下载失效 / 许可不明 / 仅处理后图像
+#   A 核心 benchmark     —— 可严格下游评测 (多独立单元 + 可靠标签 + 许可清晰)
+#   B 无标签预训练       —— 原始信号语料 (标签弱/单试件, 仅预训练, 需防泄漏分组)
+#   C 外部迁移验证       —— 模态相关可下载, 但规模小/单结构, 仅迁移对照
+#   D quarantined        —— shortcut/shortcut 高风险: 重复缺陷模板 / 虚拟缺陷注入 /
+#                           背景相关性显著 (如 ML-NDT / NDT_ML_Flaw), 仅限受控用途
+#
+# 数据集状态 (status):
+#   ready       —— 可正常接入训练/评测
+#   quarantined —— 仅限受控用途 (见下), 不得作为核心 benchmark / 论文主结果
+#
+# quarantine 数据集允许用途:
+#   1) loader 与管线 smoke test; 2) 合成缺陷预训练的受控消融;
+#   3) shortcut/leakage detection 负对照; 4) random split vs grouped split 虚高对比;
+#   5) 模板依赖验证; 6) 合成数据负迁移机理研究
+# 禁止用途:
+#   论文主结果 / 通用表征有效性主要证据 / 跨试件泛化 claim /
+#   与工业真实数据直接比较 / SOTA claim
 #
 # 严格评测原则 (勿忘):
 #   1) 同试件切片 / 增强副本 / 同缺陷重复采样 绝不随机跨 train/test;
@@ -18,7 +31,7 @@
 #   3) 评估统一 每折均值±std + 负迁移审计, 不比较 pooled 与逐折。
 # ============================================================
 
-schema_version: 1.0
+schema_version: 1.1
 
 # 模态枚举 (与 manifest schema 对齐)
 modalities:
@@ -71,7 +84,7 @@ datasets:
     notes: "CFRP 非金属焊缝; 模态差异大"
 
   longterm_guided_wave_shm:
-    tier: A
+    tier: B
     modality: guided_wave
     name: "Long-term Guided Wave SHM (Sci. Data 2025)"
     source: "DOI 10.1038/s41597-025-05300-5; Figshare 10.6084/m9.figshare.28112504"
@@ -86,33 +99,53 @@ datasets:
     labels: "13 递进损伤 (D1-D13) + 环境信道 (温度/湿度等)"
     split_protocol: "按时间分段划分 (防时间相关泄漏)"
     leak_risk: {specimen: high, slice: high, augmentation: none}
-    reuse: "导波域核心预训练 + 损伤严重度迁移"
-    notes: "4.5 年长期监测; NC-ND 许可合规需评估"
+    reuse: "导波域无标签预训练 (B) + 损伤严重度/环境迁移验证 (C)"
+    notes: "4.5 年长期监测; 单结构(1 铝板) → 非多结构核心基准; NC-ND 许可合规需评估; 时间分段严格划分"
+    admission_note: "单结构不满足 A 级准入 (多独立 specimen); 仅作预训练语料 + 单结构迁移验证"
 
-# ---------------- B 级: 仅无标签预训练 ----------------
+# ---------------- D 级: quarantined (shortcut 高风险) ----------------
+# 依据: docs/M0_2B_VTT_virtual_flaw_data_audit_v2.md (2026-08-20)
+#   - 单试件 + 重复缺陷模板 + 虚拟缺陷注入/增强 + 背景相关性;
+#   - 随机样本级小 CNN 缺陷检测 AUC≈1.0 (近饱和), 99.3-99.7% test 样本在 train
+#     中有 cos>0.99 同模板近重复; leave-template-out 后小裂纹崩塌 (AUC 0.41<机会);
+#   - E2 外部预训练对 PAUT 为负迁移 (E2−E0 = −0.0075, 判据未过)。
+#   → 随机划分结果不代表跨试件泛化, 不得与真实工业 NDT 数据直接比较。
   ml_ndt:
-    tier: B
+    tier: D
+    status: quarantined
+    shortcut_risk: high
+    core_benchmark: false
+    headline_results_allowed: false
+    cross_specimen_claim_allowed: false
+    sota_claim_allowed: false
     modality: ultrasonic
-    name: "ML-NDT (VTT 管道焊缝)"
+    name: "ML-NDT (VTT 管道焊缝) — QUARANTINED"
     source: "github.com/iikka-v/ML-NDT; arXiv:1903.11399"
     license: "LGPL-3.0 (数据授权语义待确认)"
     download: "已本地 (data/raw/ML-NDT/, 2.5GB)"
-    format: ".bins UInt16 256x256x100 体积"
+    format: ".bins UInt16 256x256x100 (minibatch 容器 = 100 张 B-scan, 非体积采集)"
     independent_units: {specimens: 1, defects: 3}
     samples: 20010
     channels: 1
     length: 256
     spatial_scan: true
     labels: "0/1 + equivalent_flaw_size"
-    split_protocol: "defect_instance_id 分组 (禁随机样本级)"
+    split_protocol: "仅限受控实验 (defect_instance_id 分组); 随机样本级结果无效"
     leak_risk: {specimen: "n/a", slice: high, augmentation: high}
-    reuse: "PAUT 体积级预训练素材 (模态最匹配)"
-    notes: "eFlaw 虚拟缺陷重植入增强; 近重复 cos>0.99 占 99.7%"
+    reuse: "仅受控: smoke/管线测试 / 合成缺陷预训练消融 / shortcut-leakage 负对照 / 模板依赖验证"
+    forbidden: "论文主结果 / 通用表征主要证据 / 跨试件 claim / 与真实工业数据直接比较 / SOTA claim"
+    notes: "eFlaw 流程: 3 条真实裂纹信号植入不同位置/背景 → 20,010 图; 随机 AUC≈1.0 为模板近重复+背景捷径; 近重复 cos>0.99 占 99.3-99.7%; leave-template 小裂纹崩塌"
 
   ndt_ml_flaw:
-    tier: B
+    tier: D
+    status: quarantined
+    shortcut_risk: high
+    core_benchmark: false
+    headline_results_allowed: false
+    cross_specimen_claim_allowed: false
+    sota_claim_allowed: false
     modality: ultrasonic
-    name: "NDT_ML_Flaw (VTT 异种金属焊缝)"
+    name: "NDT_ML_Flaw (VTT 异种金属焊缝) — QUARANTINED"
     source: "github.com/koomas/NDT_ML_Flaw"
     license: "LGPL-3.0 (数据授权语义待确认)"
     download: "已本地 (data/raw/NDT_ML_Flaw/, 227MB 压缩)"
@@ -123,10 +156,13 @@ datasets:
     length: 480
     spatial_scan: true
     labels: "0/1 + 深度/位置/尺寸/类型"
-    split_protocol: "defect_instance_id + real/sim 分组"
+    split_protocol: "仅限受控实验 (defect_instance_id + real/sim 分组); 随机样本级结果无效"
     leak_risk: {specimen: "n/a", slice: medium, augmentation: high}
-    reuse: "缺陷形态最接近焊缝 PAUT 的预训练/缺陷模板池"
-    notes: "含 10 批 CIVA 仿真; 真实批 0.4-1.0 幅度缩放增强"
+    reuse: "仅受控: smoke/管线测试 / 合成缺陷预训练消融 / shortcut-leakage 负对照 / 模板依赖验证"
+    forbidden: "论文主结果 / 通用表征主要证据 / 跨试件 claim / 与真实工业数据直接比较 / SOTA claim"
+    notes: "单试件 P41 + 6 真实缺陷 + 10 CIVA 模板; 真实批 0.4-1.0 幅度缩放; 随机 AUC≈1.0; leave-one-real-defect-out AUC 仍=1.0 但为同试件内泛化 (非跨试件)"
+
+# ---------------- B 级: 仅无标签预训练 (非 quarantined) ----------------
 
   nasa_sicsic_ae:
     tier: B

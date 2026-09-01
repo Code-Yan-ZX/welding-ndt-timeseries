@@ -23,8 +23,8 @@
 | external_weld_ut（M0-3 新引入） | 超声 FMC + PAUT | **4**（A/B/C/D） | A:10000 帧 / B:10000 帧 / C:976 位置 / D:389 B-scan | 128×128 或 45×45 FMC；D 单通道 | 有 | **未知** | 437 MB | 有潜力（真实 FMC） | **不可**（无标签/无文档） |
 | PENELOPE PAUT | 超声 PAUT | **5**（PP3–PP7；Coupon1/2 无 NDT） | 3,000 位置级 | 49 波束 | 有（~600 mm 线扫） | CC-BY-4.0 | 12.7 GB zip / 69 GB 解压 | 部分（规模小） | **最适合**（Protocol V2 已建） |
 | PENELOPE SAW（工艺） | 工艺电信号 | 5（PP3–PP7） | 172,424 窗口 | 4 | 无（时序） | CC-BY-4.0 | 4.0 GB（processed） | 否（非信号型 NDT） | 否（对照） |
-| ML-NDT | 超声 PAUT 体积 | **1**（316L 单焊头） | 20,010 B-scan | 1 | 有（256 扫描位） | LGPL-3.0 | 2.5 GB | 有限（单试件+虚拟增强） | **不可**（单试件） |
-| NDT_ML_Flaw | 超声 B-scan 条带 | **1**（P41） | 17,000 条带 | 1 | 有（7168 扫描位） | LGPL-3.0 | 227 MB（压缩）/ ~117 GB（解压） | 有限（单试件） | **不可**（单试件） |
+| ML-NDT | 超声 B-scan（minibatch 容器） | **1**（316L 单焊头） | 20,010 B-scan | 1 | 有（256 扫描位） | LGPL-3.0 | 2.5 GB | **QUARANTINED**（shortcut 高风险） | **不可**（quarantined） |
+| NDT_ML_Flaw | 超声 B-scan 条带 | **1**（P41） | 17,000 条带 | 1 | 有（7168 扫描位） | LGPL-3.0 | 227 MB（压缩）/ ~117 GB（解压） | **QUARANTINED**（shortcut 高风险） | **不可**（quarantined） |
 | EddyCus-HDF5 | 涡流 ECT（CFRP） | **148 配置组** | 738 扫描（695 有信号） | 8（4 频 × I/Q） | 有（2D C-scan 栅格） | CC-BY-4.0 | 6.9 GB | 部分（跨模态源） | 较适合（cross-config） |
 | synth_ut（P7 小） | 合成超声 B-scan | 12 虚拟 coupon | 12,000 | 1 | 有 | 合成 | 1.2 GB | 适合（预训练扩充） | 否（合成） |
 | synth_ut_50x2k（P7 大） | 合成超声 B-scan | 50 虚拟 coupon | 100,000 | 1 | 有 | 合成 | 9.4 GB | 最适合（规模大） | 否（合成） |
@@ -64,29 +64,41 @@
 - 结论：**仓库内唯一可做严格多试件跨试件评测的数据集**（5 件）；缺陷率-试件耦合已知（0.5%–76%）
   是"表征天花板"问题的根源。作为通用 NDT 主线，它是下游评估的目标域之一，但**不是唯一重心**。
 
-### 3. ML-NDT（VTT 管道焊缝超声）
+### 3. ML-NDT（VTT 管道焊缝超声）→ **QUARANTINED（shortcut 高风险）**
 
-- 路径：`data/raw/ML-NDT/`（2.5 GB）；`.bins`（uint16, 256×256×100 体积）+ `.meta/.jsons/.labels`
-- 独立试件：**1**（316L 奥氏体管道单对焊接头）；独立缺陷：**3 条真实热疲劳裂纹**（1.6/4.0/8.6 mm）
-- 样本：201 容器 = 20,010 B-scan（12,128 缺陷 / 7,882 干净；eFlaw 虚拟缺陷重植入增强）
+- 路径：`data/raw/ML-NDT/`（2.5 GB）；`.bins`（uint16, 256×256×100 **minibatch 容器 = 100 张
+  B-scan 图，非体积采集**）+ `.meta/.jsons/.labels`
+- 独立试件：**1**（316L 奥氏体管道单对焊接头）；独立缺陷：**仅 3 条真实热疲劳裂纹**
+  （1.6/4.0/8.6 mm）——其余 20,010 张图全部由 **eFlaw 流程**生成（提取裂纹信号**植入**到
+  不同位置/背景，作者公开声明）
+- 样本：201 容器 = 20,010 B-scan（12,128 缺陷 / 7,882 干净）
 - 标签：0/1 + equivalent_flaw_size（回归）；缺陷类型 thermal_fatigue_crack
 - 划分：按 `defect_instance_id`（3 裂纹模板不跨 split）；**单试件无法跨试件评测**
-- 泄漏：**切片泄漏高**（同模板近重复 cos>0.99 占 99.7%）；**增强泄漏高**（eFlaw 重植入）
+- 泄漏：**切片泄漏高**（同模板近重复 cos>0.99 占 99.3–99.7%，最近邻 100% 同模板）；
+  **增强泄漏高**（eFlaw 重植入）；**模板泄漏 = 主导捷径**
 - license：LGPL-3.0（对"数据"授权语义模糊）
-- 结论：名义 2 万样本但有效独立单元极少；随机样本级 AUC≈1.0 是模板泄漏伪影；M0-2B det_v2 已证
-  外部超声预训练对 PAUT 跨试件泛化为**负迁移**（E2−E0 = −0.0075，判据未过）。可作预训练语料
-  （带严格防泄漏分组），**不可作独立多试件基准**。
+- **shortcut 证据**：随机样本级小 CNN 检测 **AUC≈1.0**；**leave-template-out** 后
+  1.6mm AUC=0.41（低于机会）→ 不能泛化到新尺寸模板；background-only（探索性）AUC≈0.9887；
+  M0-2B det_v2 外部预训练对 PAUT 为**负迁移**（E2−E0 = −0.0075，判据未过）。
+- 结论（v2）：**QUARANTINED** —— 仅限受控用途（smoke/合成缺陷消融/shortcut-leakage 负对照/
+  模板依赖验证/负迁移机理），**禁止主结果/跨试件 claim/与真实工业数据直接比较/SOTA claim**。
+  详见 `phase1_dataset_landscape.md` §六 与 `docs/M0_2B_VTT_virtual_flaw_data_audit_v2.md`。
 
-### 4. NDT_ML_Flaw（VTT 异种金属焊缝超声）
+### 4. NDT_ML_Flaw（VTT 异种金属焊缝超声）→ **QUARANTINED（shortcut 高风险）**
 
 - 路径：`data/raw/NDT_ML_Flaw/`（227 MB 压缩 / ~117 GB 解压）；`.xz/.lzma` uint16 条带 + `.txt`
-- 独立试件：**1**（P41）；独立缺陷：**6**（P41_01~05 裂纹 2–26 mm + P41_06 EDM notch）+ 10 批 CIVA 仿真
-- 样本：17 批 × 1000 = 17,000 条带（480 深度 × 7168 扫描）
+- 独立试件：**1**（P41）；独立缺陷：**6**（P41_01~05 裂纹 2–26 mm + P41_06 EDM notch）
+  + 10 批 CIVA 仿真模板
+- 样本：17 批 × 1000 = 17,000 条带（480 深度 × 7168 扫描）；真实批含 0.4–1.0 幅度缩放增强
 - 标签：0/1 + 缺陷深度/位置/原始尺寸/类型
-- 泄漏：同缺陷沿扫描轴连续条带高度重叠；真实批含 0.4–1.0 幅度缩放增强 → **切片/增强泄漏中-高**
+- 泄漏：同缺陷沿扫描轴连续条带高度重叠；幅度缩放增强 → **切片/增强泄漏中-高**
 - license：LGPL-3.0
-- 结论：与 ML-NDT 同源（VTT），同构"单试件+极少独立缺陷"；缺陷形态最接近焊缝 PAUT。
-  仅作预训练素材/缺陷模板池，不可作独立基准。
+- **shortcut 证据**：随机样本级小 CNN 检测 **AUC≈1.0**；leave-one-real-defect-out AUC 仍=1.0
+  但 acc≈0.17–0.21（**同试件内**泛化，非跨试件）；leave-container/batch AUC 仍≈1.0。
+- 结论（v2）：**QUARANTINED** —— 与 ML-NDT 同为 VTT 单试件 + 虚拟/仿真缺陷语料，保留
+  **high shortcut risk**；仅限受控用途（同 ML-NDT）。⚠ 两数据集生成机制**不完全相同**
+  （ML-NDT=eFlaw 植入 / NDT_ML_Flaw=CIVA+缩放），但都满足"重复模板+虚拟缺陷+样本相关"
+  → 均判 high shortcut risk。
 
 ### 5. EddyCus-HDF5（CFRP 涡流，唯一 ECT）
 
@@ -132,8 +144,8 @@
 | external_weld_ut | 无（4 件独立） | 待核实 | 待核实 |
 | PENELOPE PAUT | 无（coupon 严格划分） | 低（物理自相关，不跨 split） | 无 |
 | PENELOPE SAW | 无（coupon 划分） | 高（stride=256 窗口 50% 重叠，不跨 coupon） | 无 |
-| ML-NDT | N/A（1 试件） | 高（近重复 99.7%） | 高（eFlaw 重植入） |
-| NDT_ML_Flaw | N/A（1 试件） | 中-高（连续条带重叠） | 高（幅度缩放 + CIVA 模板） |
+| ML-NDT 🔒QUARANTINED | N/A（1 试件） | 高（近重复 99.3–99.7%） | 高（eFlaw 重植入） |
+| NDT_ML_Flaw 🔒QUARANTINED | N/A（1 试件） | 中-高（连续条带重叠） | 高（幅度缩放 + CIVA 模板） |
 | EddyCus-HDF5 | 低（148 组可分组） | 中（组内多传感器/频率相关） | 无 |
 | synth_ut / synth_ut_50x2k | 不适用（合成） | 低 | 不适用（合成） |
 
@@ -189,19 +201,25 @@
 
 ---
 
-## 三、审计结论
+## 三、审计结论（v2，quarantined 后更新）
 
 1. **严格多试件下游评测基准**：目前仅 **PENELOPE PAUT（5 coupon, Protocol V2 LOOCV）** 与
-   **EddyCus-HDF5（148 配置组, cross-config）** 两个可靠基准。两者模态不同（超声/涡流），
-   恰构成"跨模态迁移验证"的天然两端。
-2. **预训练语料**：合成超声（synth_ut_50x2k, 10 万）+ 无标签真实信号（external_weld_ut 4 试件
-   FMC, 待补许可/标签）+ 单试件 VTT 超声（ML-NDT / NDT_ML_Flaw, 需严格防泄漏分组）。
+   **EddyCus-HDF5（148 配置组, cross-config, 层级待确认）** 两个可靠候选。两者模态不同
+   （超声/涡流），构成"跨模态迁移验证"的天然两端；⚠ **PENELOPE 仅 5 coupon，不得作为唯一
+   核心基准**（准入规则见 phase1_experiment_protocol.md）。
+2. **预训练语料（v2，剔除 quarantined）**：合成超声（synth_ut_50x2k, 10 万）+ 无标签真实信号
+   （external_weld_ut 4 试件 FMC, 待补许可/标签）+ Long-term GW SHM（导波, 单结构, 待下载）
+   + NASA AE。**ML-NDT / NDT_ML_Flaw 已 quarantine**，仅限受控用途，不再作为常规预训练语料。
 3. **已知负面证据（必须在方法设计中正面回应，而非回避）**：
    - 普通单编码器 + 单一重建目标跨物理模态迁移 → 负迁移（M0-2B E2−E0 = −0.0075；
      M0-2C E→P→E 顺序 SSL 保持 PAUT 灾难性遗忘 −0.0606）。
    - 5 试件缺陷率-试件耦合下表征级天花板 ~0.58–0.60；合成缺陷注入 SSL 无效（P5）；跨试件
      监督对比学习失效（P5b）；TTT 无效（P5d）；样式不变 SSL 全负面（P6）。
-   - **结论**：这些证据只说明"普通方法与单一目标"不行，**不说明"无损检测表征没有价值"**。
-     新主线通过 模态适配 + 物理感知掩码 + 时域-时频联合 + 多源自监督 正面挑战该结论。
+   - **VTT 虚拟缺陷语料 shortcut（新增证据）**：随机样本级 AUC≈1.0、模板近重复 99.3–99.7%、
+     leave-template 崩塌 → **随机切片划分结果不能代表跨试件泛化**。
+   - **结论**：这些证据只说明"普通方法与单一目标"不行、且**相关样本划分下的饱和准确率不能
+     代表泛化**，**不说明"无损检测表征没有价值"**。新主线通过 模态适配 + 物理感知掩码 +
+     时域-时频联合 + 多源自监督，在**独立试件/独立结构/跨传感器/跨环境**条件下正面挑战该结论。
 4. **代码底座**：现有 adapter/manifest/splitter/checkpoint/metrics 体系 80% 可复用；新包
-   `src/general_ndt/` 平行建设，旧代码零改动。
+   `src/general_ndt/` 平行建设，旧代码零改动。ML-NDT/NDT_ML_Flaw 的 loader 保留（受控用途），
+   不删除历史结果。

@@ -122,6 +122,20 @@
     `reports/M0_2C_ECT顺序SSL实验报告.md`、
     `experiments/results/m0_2c_*_seed{42,43,44}.json` + `m0_2c_aggregate.{json,md}`；
     checkpoint 在 `experiments/runs/m0_2c/ect/`（不覆盖 `ssl_ae/encoder.pt`）。
+- **General NDT Foundation（新长期主线, 分支 `research/general-ndt-foundation`, Phase 0–1）**：
+  面向多源 NDT 信号的物理感知自监督表征学习（工作题目非最终方法）。
+  - **仓库审计 + 数据集全景**：`docs/general_ndt_foundation/`（phase0 仓库审计 /
+    phase1 数据集全景 / 方法规格 V0 / 实验协议）+ `configs/general_ndt_datasets.yaml`
+    （20 数据集 registry）。
+  - **数据集隔离（重要）**：**ML-NDT / NDT_ML_Flaw 标记为 quarantined（tier D,
+    shortcut 高风险）**——随机样本级小 CNN AUC≈1.0、模板近重复 99.3–99.7%、
+    leave-template-out 崩塌、E2 负迁移；**仅限受控用途**（smoke/合成缺陷消融/
+    shortcut-leakage 负对照/模板依赖验证），**禁止主结果/跨试件 claim/工业对比/SOTA**。
+    A 级核心基准仅 PENELOPE（勿作唯一）+ EddyCus（层级待确认）。
+  - **准入规则**：实验协议新增 Core Benchmark Admission Criteria + S1–S8 sanity checks。
+  - 代码：`src/general_ndt/`（统一样本结构/registry/penelope+eddycus loader/collate/
+    数据审计/物理感知掩码/重建+时频一致性目标/leave-one-specimen 划分 + probe），
+    `tests/test_general_ndt.py`（22 用例全过）。
 
 > ⚠ 限制：本阶段不进行超 10 GB 的新下载、不自动下载全部 LOTSA/UTSD、不做正式
 > 训练、不跑长时 GPU 任务。公开小数据实验不代表最终课题结论。
