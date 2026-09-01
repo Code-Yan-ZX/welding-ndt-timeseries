@@ -1,0 +1,417 @@
+# ============================================================
+# General NDT Foundation — 多源 NDT 数据集 Registry (Phase 1)
+# 分支: research/general-ndt-foundation
+# 日期: 2026-09-01
+#
+# 目的: 建立公开/本地 NDT 数据集的统一注册表。本阶段只做 registry,
+#       不立即下载全部数据。
+#
+# 分级:
+#   A 核心 benchmark   —— 可严格下游评测 (多独立单元 + 可靠标签 + 许可清晰)
+#   B 无标签预训练     —— 原始信号语料 (标签弱/单试件, 仅预训练, 需防泄漏分组)
+#   C 外部迁移验证     —— 模态相关可下载, 但规模小/单结构, 仅迁移对照
+#   D 暂不使用         —— 模态错位 / 下载失效 / 许可不明 / 仅处理后图像
+#
+# 严格评测原则 (勿忘):
+#   1) 同试件切片 / 增强副本 / 同缺陷重复采样 绝不随机跨 train/test;
+#   2) 样本数 ≠ 独立缺陷数 ≠ 独立试件数;
+#   3) 评估统一 每折均值±std + 负迁移审计, 不比较 pooled 与逐折。
+# ============================================================
+
+schema_version: 1.0
+
+# 模态枚举 (与 manifest schema 对齐)
+modalities:
+  - ultrasonic      # PAUT / FMC / TOFD / B-scan
+  - guided_wave     # Lamb / 扭转-弯曲导波
+  - eddy_current    # ECT
+  - acoustic_emission
+  - vibration       # 振动加速度 (模态红线: 默认 D)
+  - process         # 工艺电信号 (非 NDT 信号, 排除)
+  - fusion          # 成对多模态 (当前无公开数据, 融合训练推迟)
+
+# ---------------- A 级: 核心 benchmark ----------------
+datasets:
+  penelope_paut:
+    tier: A
+    modality: ultrasonic
+    name: "PENELOPE / Submerged Arc Welding Open Repository"
+    source: "Zenodo 15083865, DOI 10.5281/zenodo.15083865"
+    license: "CC-BY-4.0"
+    download: "已本地 (data/raw/saw/, 12.7GB zip)"
+    format: ".nde (HDF5, OmniScan X3)"
+    independent_units: {specimens: 5, coupons: 5, defects: 243}
+    samples: 3000
+    channels: 49
+    length: 512
+    spatial_scan: true
+    labels: "0/1 + 缺陷类型码 (6类); 无深度/尺寸"
+    split_protocol: "Protocol V2: coupon LOOCV (非PP4 逐折均值)"
+    leak_risk: {specimen: none, slice: low, augmentation: none}
+    reuse: "目标域严格评测基准 (之一)"
+    notes: "PP4 近零缺陷已知; 缺陷率-试件耦合 0.5%-76%"
+
+  eddycus_hdf5:
+    tier: A
+    modality: eddy_current
+    name: "EddyCus-HDF5 / Open-Source Multi-Sensor ECT Database"
+    source: "Zenodo 19251759, DOI 10.5281/zenodo.19251759"
+    license: "CC-BY-4.0 (数据) / MIT (软件)"
+    download: "已本地 (data/raw/EddyCus-HDF5/, 6.9GB)"
+    format: "HDF5 (四层组, signal_data/fN real/imag)"
+    independent_units: {specimens: 148, config_groups: 148, defects: 8}
+    samples: 738
+    channels: 8
+    length: 45551
+    spatial_scan: true
+    labels: "8 类缺陷"
+    split_protocol: "cross-material / cross-sensor / cross-config (manifest split_group)"
+    leak_risk: {specimen: low, slice: medium, augmentation: none}
+    reuse: "跨模态迁移 (超声→涡流) 关键源/目标域; cross-config 严格评测"
+    notes: "CFRP 非金属焊缝; 模态差异大"
+
+  longterm_guided_wave_shm:
+    tier: A
+    modality: guided_wave
+    name: "Long-term Guided Wave SHM (Sci. Data 2025)"
+    source: "DOI 10.1038/s41597-025-05300-5; Figshare 10.6084/m9.figshare.28112504"
+    license: "CC BY-NC-ND 4.0 (非商业, 禁改)"
+    download: "待人工核实 (Figshare; 本机被 Cloudflare 拦截)"
+    format: ".pickle 原始时域波形 (1 MHz)"
+    independent_units: {specimens: 1, damage_states: 13}
+    samples: 6400000
+    channels: 8
+    length: 2000
+    spatial_scan: false
+    labels: "13 递进损伤 (D1-D13) + 环境信道 (温度/湿度等)"
+    split_protocol: "按时间分段划分 (防时间相关泄漏)"
+    leak_risk: {specimen: high, slice: high, augmentation: none}
+    reuse: "导波域核心预训练 + 损伤严重度迁移"
+    notes: "4.5 年长期监测; NC-ND 许可合规需评估"
+
+# ---------------- B 级: 仅无标签预训练 ----------------
+  ml_ndt:
+    tier: B
+    modality: ultrasonic
+    name: "ML-NDT (VTT 管道焊缝)"
+    source: "github.com/iikka-v/ML-NDT; arXiv:1903.11399"
+    license: "LGPL-3.0 (数据授权语义待确认)"
+    download: "已本地 (data/raw/ML-NDT/, 2.5GB)"
+    format: ".bins UInt16 256x256x100 体积"
+    independent_units: {specimens: 1, defects: 3}
+    samples: 20010
+    channels: 1
+    length: 256
+    spatial_scan: true
+    labels: "0/1 + equivalent_flaw_size"
+    split_protocol: "defect_instance_id 分组 (禁随机样本级)"
+    leak_risk: {specimen: "n/a", slice: high, augmentation: high}
+    reuse: "PAUT 体积级预训练素材 (模态最匹配)"
+    notes: "eFlaw 虚拟缺陷重植入增强; 近重复 cos>0.99 占 99.7%"
+
+  ndt_ml_flaw:
+    tier: B
+    modality: ultrasonic
+    name: "NDT_ML_Flaw (VTT 异种金属焊缝)"
+    source: "github.com/koomas/NDT_ML_Flaw"
+    license: "LGPL-3.0 (数据授权语义待确认)"
+    download: "已本地 (data/raw/NDT_ML_Flaw/, 227MB 压缩)"
+    format: ".xz/.lzma uint16 条带 (480x7168)"
+    independent_units: {specimens: 1, defects: 6}
+    samples: 17000
+    channels: 1
+    length: 480
+    spatial_scan: true
+    labels: "0/1 + 深度/位置/尺寸/类型"
+    split_protocol: "defect_instance_id + real/sim 分组"
+    leak_risk: {specimen: "n/a", slice: medium, augmentation: high}
+    reuse: "缺陷形态最接近焊缝 PAUT 的预训练/缺陷模板池"
+    notes: "含 10 批 CIVA 仿真; 真实批 0.4-1.0 幅度缩放增强"
+
+  nasa_sicsic_ae:
+    tier: B
+    modality: acoustic_emission
+    name: "NASA SiC/SiC Composite AE (Muir-UCSB)"
+    source: "github.com/Muir-UCSB/AE-ML_Framework; npj Comput. Mater. 7:146 (2021)"
+    license: "Unlicense"
+    download: "GitHub (~11MB), 免登录"
+    format: "AE 波形 (*_data.json + Waveforms zip)"
+    independent_units: {specimens: 3}
+    samples: 0   # 待解析核实
+    channels: 1
+    length: 0   # 待解析核实
+    spatial_scan: false
+    labels: "损伤机制 (matrix/fiber/interface, 无监督)"
+    split_protocol: "按试件划分"
+    leak_risk: {specimen: low, slice: unknown, augmentation: none}
+    reuse: "AE 域预训练语料"
+    notes: "材料 SiC/SiC 陶瓷基复合 (非焊缝)"
+
+  synth_ut_50x2k:
+    tier: B
+    modality: ultrasonic
+    name: "程序生成合成超声 (P7, 大版本)"
+    source: "本地程序生成 (physics-inspired procedural)"
+    license: "合成 (内部)"
+    download: "已本地 (data/processed/synth_ut_50x2k/, 9.4GB)"
+    format: ".npy (100000, 49, 512) float32"
+    independent_units: {specimens: 50}
+    samples: 100000
+    channels: 1
+    length: 512
+    spatial_scan: true
+    labels: "0/1 (缺陷率 ~5.9%)"
+    split_protocol: "虚拟 coupon 划分"
+    leak_risk: {specimen: "n/a", slice: low, augmentation: "n/a"}
+    reuse: "最大规模超声预训练扩充 (物理保真度有限)"
+    notes: "非 CIVA 级; 不可作严格评测"
+
+# ---------------- C 级: 仅外部迁移验证 ----------------
+  open_guided_waves:
+    tier: C
+    modality: guided_wave
+    name: "Open Guided Waves"
+    source: "openguidedwaves.de/downloads/"
+    license: "#4 CC-BY-4.0; #1-3 待核实"
+    download: "免登录 (Nextcloud/figshare)"
+    format: "HDF5 .h5"
+    independent_units: {specimens: "多板/长桁"}
+    samples: "多组波场"
+    channels: "PZT"
+    length: 0
+    spatial_scan: true
+    labels: "人工缺陷/脱粘"
+    split_protocol: "按结构/传感器"
+    leak_risk: {specimen: low, slice: unknown, augmentation: none}
+    reuse: "导波低层表征/域适配对照"
+    notes: "Kudela 2022 (Zenodo 10.5281/zenodo.5105861) 各波场 ~6GB"
+
+  ugw_3mat_2sn:
+    tier: C
+    modality: guided_wave
+    name: "UGW-3Mat-2SN (复合板 Lamb 波)"
+    source: "Zenodo 10.5281/zenodo.15688321; SHM 2023 doi:10.1177/14759217231189972"
+    license: "CC-BY-4.0"
+    download: "免登录, 但 43.5GB (需用户批准)"
+    format: "MATLAB .mat"
+    independent_units: {specimens: 3, arrays: 6}
+    samples: 0
+    channels: "PZT"
+    length: 0
+    spatial_scan: true
+    labels: "pseudo-damage (待核实)"
+    split_protocol: "cross-material / cross-array"
+    leak_risk: {specimen: low, slice: unknown, augmentation: none}
+    reuse: "跨材料域适配对照"
+    notes: "含 Before/After MPCA 处理"
+
+  pipeline_ugw:
+    tier: C
+    modality: guided_wave
+    name: "Pipeline Ultrasonic Guided Waves (Data in Brief 2022)"
+    source: "Mendeley DOI 10.17632/ttb63krg6d.1; DiB 42:108756"
+    license: "CC BY 4.0"
+    download: "Mendeley 免费直下 (已验证在线)"
+    format: "Excel (A 扫时域, 195 kHz)"
+    independent_units: {specimens: 1, damage_levels: 6}
+    samples: 236
+    channels: 4
+    length: 2057
+    spatial_scan: false
+    labels: "健康/损伤 + 严重度"
+    split_protocol: "按损伤状态 (注意同状态重复采集)"
+    leak_risk: {specimen: low, slice: medium, augmentation: none}
+    reuse: "管道导波外部迁移小样本验证"
+    notes: "Wavemaker G4; 激励 14/18/24/30/37 kHz"
+
+  mddect:
+    tier: C
+    modality: eddy_current
+    name: "MDDECT (304 不锈钢 ECT 深度)"
+    source: "arXiv:2104.02472; Kaggle (需登录)"
+    license: "未知 (待核实)"
+    download: "Kaggle 登录后可下 (总量未知)"
+    format: "1D/2D ECT 扫描 (待核实)"
+    independent_units: {specimens: 1, defects: 18, operators: "待核实"}
+    samples: 48000
+    channels: 1
+    length: 0
+    spatial_scan: "待核实"
+    labels: "18 深度档 (0.3-2.0mm)"
+    split_protocol: "defect x operator 组合划分 (禁随机扫描级)"
+    leak_risk: {specimen: low, slice: high, augmentation: none}
+    reuse: "真实金属 ECT 迁移验证"
+    notes: "平面试件 vs 焊缝几何差异大"
+
+  orion_ae:
+    tier: C
+    modality: acoustic_emission
+    name: "ORION-AE (螺栓松动多传感器 AE)"
+    source: "Harvard Dataverse DOI 10.7910/DVN/FBRDU0"
+    license: "待核实"
+    download: "Harvard Dataverse 在线可下"
+    format: ".mat (5 MHz)"
+    independent_units: {specimens: "螺栓结构"}
+    samples: 0
+    channels: 4
+    length: 0
+    spatial_scan: false
+    labels: "7 级拧紧扭矩 (5-60 cNm)"
+    split_protocol: "按结构/扭矩级"
+    leak_risk: {specimen: low, slice: unknown, augmentation: none}
+    reuse: "AE 多传感器迁移验证"
+    notes: "micro80/F50A/micro200HF + 激光测振仪"
+
+  evident_nde_examples:
+    tier: C
+    modality: ultrasonic
+    name: "Evident NDE Open File Format examples"
+    source: "ndeformat.com/4.0/examples/example-files/"
+    license: "格式库 MIT; 示例数据无独立 license"
+    download: "免登录直链 (13 个 .nde)"
+    format: ".nde (HDF5 + JSON 元数据)"
+    independent_units: {specimens: "示例"}
+    samples: 13
+    channels: 0
+    length: 0
+    spatial_scan: true
+    labels: "无 (解析器兼容测试)"
+    split_protocol: "n/a"
+    leak_risk: {specimen: "n/a", slice: "n/a", augmentation: "n/a"}
+    reuse: "格式兼容 / 无标签工程测试"
+    notes: "含 FMC 全矩阵 (fmc.nde 37.4MB)"
+
+# ---------------- D 级: 暂不使用 ----------------
+  usimgaist:
+    tier: D
+    modality: ultrasonic
+    name: "USimgAIST (AIST 超声图像)"
+    source: "IEEE Access 9:36986-36994 (2021) DOI 10.1109/ACCESS.2021.3062860"
+    license: "未知"
+    download: "无法确认公开托管 (疑似按需索取)"
+    format: "处理后图像 (非原始波形)"
+    independent_units: {specimens: "未知"}
+    samples: 7000
+    channels: 0
+    length: 0
+    spatial_scan: false
+    labels: "缺陷分类 (图像级)"
+    split_protocol: "n/a"
+    leak_risk: {specimen: unknown, slice: unknown, augmentation: unknown}
+    reuse: "暂不使用"
+    notes: "先联系 Ye/Toyama 确认下载与许可, 再重评"
+
+  lanl_shm:
+    tier: D
+    modality: vibration
+    name: "LANL SHM benchmark"
+    source: "OSTI 10.2172/922532; 10.2172/961604"
+    license: "未核实"
+    download: "官方页面失效 (404)"
+    format: "加速度时域"
+    independent_units: {specimens: 1}
+    samples: 0
+    channels: 0
+    length: 0
+    spatial_scan: false
+    labels: "损伤状态"
+    split_protocol: "n/a"
+    leak_risk: {specimen: unknown, slice: unknown, augmentation: unknown}
+    reuse: "暂不使用 (振动模态 + 下载失效)"
+    notes: "若需振动域迁移, 先找有效镜像再降级 C"
+
+  wind_turbine_blade_shm:
+    tier: D
+    modality: vibration
+    name: "Wind-turbine-blade SHM (Data in Brief 2023)"
+    source: "Mendeley DOI 10.17632/5d7vbdp8f7; DiB 48:109414"
+    license: "CC BY 4.0"
+    download: "Mendeley 免费直下"
+    format: "振动加速度 (102.4 kHz)"
+    independent_units: {specimens: "缩比风机"}
+    samples: 0
+    channels: 1
+    length: 0
+    spatial_scan: false
+    labels: "侵蚀/裂纹/质量不平衡/扭转 + 健康"
+    split_protocol: "n/a"
+    leak_risk: {specimen: unknown, slice: unknown, augmentation: none}
+    reuse: "暂不使用 (振动模态); 用户确认后可作 C"
+    notes: "Chalmers 风机数据为 SCADA, 明确排除"
+
+  stanford_ae_waveforms:
+    tier: D
+    modality: acoustic_emission
+    name: "Stanford AE waveforms"
+    source: "无法确认独立公开数据集"
+    license: "未知"
+    download: "无"
+    format: "n/a"
+    independent_units: {specimens: 0}
+    samples: 0
+    channels: 0
+    length: 0
+    spatial_scan: false
+    labels: "n/a"
+    split_protocol: "n/a"
+    leak_risk: {specimen: unknown, slice: unknown, augmentation: unknown}
+    reuse: "暂不使用"
+    notes: "若用户有具体论文/链接可重新定位"
+
+  eddynet:
+    tier: D
+    modality: eddy_current
+    name: "EddyNet (ECT 逆问题, 仿真)"
+    source: "github.com/askerlee/EddyNet"
+    license: "无 (null, 保留所有权利)"
+    download: "clone 可得"
+    format: "仿真图像"
+    independent_units: {specimens: 0}
+    samples: 0
+    channels: 0
+    length: 0
+    spatial_scan: false
+    labels: "n/a"
+    split_protocol: "n/a"
+    leak_risk: {specimen: "n/a", slice: "n/a", augmentation: "n/a"}
+    reuse: "暂不使用"
+    notes: "无 license / 纯仿真 / 停更 7 年; 仅作反面案例"
+
+  composite_ae_kaggle:
+    tier: D
+    modality: acoustic_emission
+    name: "Kaggle Composite AE (ziya07)"
+    source: "kaggle.com/datasets/ziya07/acoustic-emission-dataset"
+    license: "CC0"
+    download: "Kaggle (~0.1MB)"
+    format: "特征级 (峰幅等), 非原始波形"
+    independent_units: {specimens: 0}
+    samples: 0
+    channels: 0
+    length: 0
+    spatial_scan: false
+    labels: "Matrix/Fiber/Delamination"
+    split_protocol: "n/a"
+    leak_risk: {specimen: unknown, slice: unknown, augmentation: unknown}
+    reuse: "暂不使用 (特征级, 不适合预训练)"
+    notes: ""
+
+# ---------------- 本地待核实数据 ----------------
+  external_weld_ut:
+    tier: "待定 (候选 B)"
+    modality: ultrasonic
+    name: "external_weld_ut (M0-3 真实焊缝 FMC/PAUT)"
+    source: "本地 data/raw/external_weld_ut/ (来源/license 待核实)"
+    license: "未知 (待核实)"
+    download: "已本地 (437MB)"
+    format: "MATLAB .mat (FMC) + .txt B-scan (PAUT)"
+    independent_units: {specimens: 4}
+    samples: 30000
+    channels: "128x128 / 45x45 FMC; 1 (D)"
+    length: "10000 / 976 / 401"
+    spatial_scan: true
+    labels: "无独立标签文件"
+    split_protocol: "无 (未接入)"
+    leak_risk: {specimen: none, slice: "待核实", augmentation: "待核实"}
+    reuse: "无标签真实 FMC 预训练候选"
+    notes: "文件名含 Lack_of_fusion / RR3 SDH 线索; 需补齐来源/license/标签说明"
