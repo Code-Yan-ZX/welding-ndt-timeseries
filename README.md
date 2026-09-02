@@ -234,6 +234,42 @@ python scripts/paut_make_table.py            # 汇总表 + 跨模态对照
 
 **主线结论**：PAUT 跨试件泛化困难（裸 SSF 非PP4 0.538）；**域内 SSL 预训练是唯一有效路线**（P1 0.572 → P4a 规范基线 0.579±0.007），VLM 视觉先验（0.593 pooled）曾被误判为最优，统一口径后 **SSL ≥ VLM**、VLM 从未超过 SSL；注入物理/文本条件或微调反而退化（VLM 瓶颈是感知而非推理）。**评估统一规范头协议**（冻结 SSL 编码器 + 分类头 lr=1e-3/80ep，即 P1 SSL 同超参；P4a–P5d 数字均为该口径；P0 的 SSF 与 P2/P3 的 VLM 为各自独立协议，仅同 LOOCV 非PP4 指标可比）。**天花板被完整验证（P0–P5d 全部证伪；P6 为 single-seed exploratory negative evidence）**：所有廉价杠杆（增强/微调/TTA/融合/形态头/掩码目标/合成注入/监督对比 per-fold 严格/推理时 SSL-MAE TTT/**文献驱动的样式不变 SSL 预训练**）均未突破 0.58（P4a 0.579 / P4b both 0.566、depth 0.511 / P5 0.545 / P5b 0.487 / P5d 0.551 / P6 dimae 0.521、multidec 0.517 —— P6 仅 seed42 单 seed，表述为探索性负证据，不写"完整证伪"）。**P6 关键诊断（探索性）**：BSS/去模糊/DiMAE 三机制独立验证——任何"移除试件样式/统计"的预训练改动都使稀疏缺陷试件（PP7, 缺陷率 12%）崩塌（-0.03~-0.15），因缺陷强度与试件身份强耦合；DiMAE 重建式域不变（理论上是 DANN 对抗式的替代）同样失败。**P5b 失败诊断**：跨试件监督对比学习在 per-fold 严格 (cold-start) 设定下 0.487 < baseline 0.579 (-0.092)，val-test gap 0.51 = 4 试件过拟合；监督 SSL 评估必须 per-fold 严格 pretrain 避免信息泄露。**P5d 关键诊断**：TTT 机制成立（recon 一致下降=编码器真适配 test 分布）但跨试件判别力未增；三档预算全负（PP7 缺陷稀疏试件崩塌），val-domain 对照 ≈0（非 test 特异）→ 天花板是表征级，不是"模型没见过 test 试件"。**目标'超过 VLM 0.59+'未达成**。翻盘路径（资源型）：新试件数据解耦"缺陷存在"与"试件缺陷率"、或 CIVA 级合成教"缺陷回波物理"。汇总对比表见 [`experiments/results/paut_loocv_table.md`](experiments/results/paut_loocv_table.md)。
 
+## General NDT Foundation（长期主线, Phase 2A — 2026-09-02）
+
+> 分支 `research/general-ndt-foundation`。目标是 **模态适配 + 物理感知掩码 + 多源自监督学习**
+> 的通用 NDT 信号基础模型。Phase 2A = **Admission Resolution and Implementation Correctness Gate**。
+
+- **EddyCus 准入修正**：manifest 的 `specimen_id` 是 `(material,fiber,layup,description,
+  defect,thickness)` 的 **SHA1 推断配置组哈希**，非显式物理试件 ID → **148 = inferred
+  configuration groups，不是 148 个独立物理 specimen**；`specimen_id_available:false`、
+  `core_benchmark:false`、`headline_results_allowed:false`、`benchmark_tier: B/C pending
+  admission`。仅可作无标签预训练 + cross-config/cross-sensor **探索（exploratory）**。
+  完整层级审计：`docs/general_ndt_foundation/phase2_eddycus_admission.md`（738 HDF5 全量扫描：
+  无显式试件 ID；original_file_path 未保留文件名；5 板候选同含 clean/defect；2D 栅格
+  695/695 可无歧义重建，680 有空洞需 valid mask）。
+- **实现正确性修复**：Stem1D 改为 **per-channel 共享 patch embedding**（原实现把全部输入
+  通道混进一个 Conv1d 后 expand 到 C 行 → 各通道 token 是复制品）；PatchTransformer 的
+  token valid mask 真正进入 `src_key_padding_mask`（CLS 恒 valid，padded 不参与 attention）；
+  新增**网格位置编码**（1d 通道+时间 / 2d 通道+行+列，支持可变长度）；token 级 valid mask
+  （channel padding / 被 padding 覆盖的 patch / native 空洞均无效）；mask 只作用于 valid token。
+- **EddyCus 双表示**：`exploratory_flat_1d`（仅工程 smoke）+ `native_grid_2d`（按 track/sample
+  scatter 重建 H×W，I/Q+频率作通道，空洞 valid mask，坐标不足报告阻塞不伪造 reshape）。
+- **M0 vanilla MAE 最小闭环**：`src/general_ndt/models/mae.py` + `trainers/ssl_trainer.py` +
+  `scripts/general_ndt_pretrain.py` / `general_ndt_probe.py` / `general_ndt_split_manifest.py`
+  + `configs/general_ndt_mae_smoke.yaml`。
+- **PENELOPE smoke（非方法结果，仅证明闭环正确）**：300 步 vanilla MAE loss 11.7→4.93 下降；
+  checkpoint 重载后特征逐位一致；coupon LOOCV 无泄漏（4 折，PP4 排除）；冻结线性探针逐折
+  记录（AUROC 0.448±0.032，smoke 规模近随机，不作为结果）；random-label sanity ≈ 机会
+  （0.503±0.050）。正式 split manifest：`artifacts/general_ndt/splits/penelope_paut_loocv.json`。
+- **五项数据准入**：`docs/general_ndt_foundation/phase2_dataset_admission_matrix.md` ——
+  仅 **external_weld_ut license 由"未知"确认为 CC BY 4.0**（Strathclyde Pure Portal，
+  M0-3 audit；无标签 → 仅预训练候选 B）；MDDECT（C）/ Long-term GW SHM（B/C，待人工下载+
+  NC-ND）/ USimgAIST（D）/ ML-NDT/NDT_ML_Flaw（D，LGPL 数据授权不明）**均因无法在线核实
+  保持原分级，无猜测性升级**。
+- 当前状态与下一动作：`STATE.md`（Phase 1 completed / **Phase 2A in progress**）；
+  下一轮唯一推荐动作 = **Phase 2A Gate 全部通过后，运行 PENELOPE（5 coupon LOOCV）E0
+  严格基线**。
+
 ## 目录结构
 
 ```

@@ -14,17 +14,18 @@
 - **工作题目（非最终方法）**：*Physics-Aware Self-Supervised Representation Learning for
   General-Purpose NDT Signals*。未宣称 novel。
 
-### 当前阶段（Phase 1 completed / **Phase 2A in progress**）
+### 当前阶段（Phase 1 completed / **Phase 2A Gate 已通过 (2026-09-02)**）
 - **Phase 1 已完成**：数据 registry、方法规格、实验协议、最小代码（见下）。
-- **Phase 2A（Admission Resolution and Implementation Correctness Gate）进行中**：
+- **Phase 2A（Admission Resolution and Implementation Correctness Gate）已完成**：
   1. 纠正数据准入表述（EddyCus 降为 inferred configuration groups，B/C pending admission）；
-  2. 完成 EddyCus 真实层级审计（explicit vs inferred ID）；
-  3. 修复实现正确性：Stem1D per-channel patch、Transformer valid mask + 网格位置编码、
+  2. EddyCus 真实层级审计（explicit vs inferred ID）→ `phase2_eddycus_admission.md`；
+  3. 实现正确性修复：Stem1D per-channel patch、Transformer valid mask + 网格位置编码、
      token 级 valid mask、EddyCus 双表示；
-  4. 最小 vanilla MAE 训练闭环 + PENELOPE 正式可比 smoke；
+  4. 最小 vanilla MAE 训练闭环 + PENELOPE 正式可比 smoke（非方法结果）；
   5. 其余数据准入文档确认 → `phase2_dataset_admission_matrix.md`。
-- **⚠ 尚未满足 E1/E2 正式运行门槛**：在 Phase 2A Gate 通过（10 项条件）前，
-  **不得表述为可以正式运行多源物理感知 SSL**。
+- **Gate 10 项条件全部满足**（见下"Phase 2A Gate 检查"）。
+- **下一步（E1/E2 前置）**：先运行 PENELOPE（5 coupon LOOCV）E0 严格基线（scratch 监督），
+  再 E1/E2 多源 SSL —— 在 E0 之前不得把多源物理感知 SSL 当作可正式运行的既定方法。
 
 ### 已完成（Phase 0–1 + 最小代码）
 - [x] 分支 `research/general-ndt-foundation` 已创建并推送（upstream 已设）。
@@ -56,20 +57,28 @@
     collate(pad+valid mask)、数据审计 CLI、物理感知掩码控制器、重建/时频一致性目标、
     leave-one-specimen 划分 + logistic probe。22 测试全绿。
 
-### 正在进行（Phase 2A）
-- **EddyCus 准入修正**：148 = inferred configuration groups（不是 148 个独立物理 specimen）；
-  specimen_id_available: false；inferred_group_available: true；inferred_group_contains_label: true；
-  benchmark_tier: B/C pending admission；core_benchmark: false；headline_results_allowed: false。
-  仅当原始文件/官方论文/作者元数据证明配置组与独立物理试件一一对应，才可重新申请 A 级。
-- **实现正确性 Gate**：Stem1D per-channel patch embedding / Transformer valid mask + 网格位置编码 /
-  token 级 valid mask / EddyCus 双表示 / 最小 vanilla MAE 闭环 / PENELOPE smoke。
-- 详见 `docs/general_ndt_foundation/phase2_eddycus_admission.md` 与
-  `docs/general_ndt_foundation/phase2_dataset_admission_matrix.md`。
+### 正在进行
+- 无（Phase 2A Gate 已通过，等待下一阶段指令）。
+
+### Phase 2A Gate 检查（10/10 满足, 2026-09-02）
+1. ✅ EddyCus 不再被错误称为 148 个物理 specimen（config/docs/audit 全部修正为 inferred groups）；
+2. ✅ Stem1D 不再复制相同通道 token（per-channel 共享 Conv1d，单元测试证明交换/修改通道 → token 变化）；
+3. ✅ padding valid mask 真正进入 attention（src_key_padding_mask，测试证明 mask 实际改变结果）；
+4. ✅ channel/time（1d）与 row/column（2d）网格位置编码（支持可变长度）；
+5. ✅ mask 只作用于 valid token（MaskController valid 采样 + token 级 valid mask）；
+6. ✅ PENELOPE vanilla MAE 端到端 smoke（300 步 loss 11.7→4.93，非方法结果）；
+7. ✅ checkpoint 可加载（重载特征逐位一致，指纹校验防跨数据集串用）；
+8. ✅ coupon split 无泄漏（`artifacts/general_ndt/splits/penelope_paut_loocv.json`，4 折，PP4 排除）；
+9. ✅ Phase 2 admission matrix 完成（`phase2_dataset_admission_matrix.md`）；
+10. ✅ 测试通过（Phase 2A + general_ndt 43 项全绿；全库 150 passed + 2 个预先存在的无关失败
+    —— `test_models.py` 的 Qwen3 本地模型路径问题，只 import 旧 wndt 代码，与本次改动无关）。
 
 ### 下一阶段（建议）
-1. **Phase 2A Gate 通过后**：PENELOPE（5 coupon LOOCV）E0 严格基线 + EddyCus(cross-config, exploratory)。
-2. 人工核实并（若合规）下载 **Long-term GW SHM**（Figshare, CC BY-NC-ND, 单结构 → 仅预训练+
-   迁移验证）；external_weld_ut 补来源/license/标签说明。
+1. **PENELOPE E0 严格基线**（5 coupon LOOCV，scratch 监督，规范头 lr=1e-3/80ep，≥3 seed）
+   —— E1/E2 多源物理感知 SSL 的对照前提。
+2. EddyCus 无标签预训练 + cross-config/cross-sensor 探索（exploratory）。
+3. 人工核实并（若合规）下载 **Long-term GW SHM**（Figshare, CC BY-NC-ND, 单结构 → 仅预训练+
+   迁移验证）；external_weld_ut 补配套元数据（.ods/.xlsx）。
 2. 人工核实并（若合规）下载 **Long-term GW SHM**（Figshare, CC BY-NC-ND, 单结构 → 仅预训练+
    迁移验证）；external_weld_ut 补来源/license/标签说明。
 3. **E0 基线**：PENELOPE(5 coupon LOOCV) + EddyCus(cross-config) 的 scratch 监督 baseline

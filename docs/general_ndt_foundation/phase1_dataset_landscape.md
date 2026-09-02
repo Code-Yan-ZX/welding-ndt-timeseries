@@ -347,7 +347,8 @@
    单结构迁移验证（B/C）
 4. **NASA SiC/SiC AE**（AE 波形，3 试件，Unlicense）
 5. **合成超声**（synth_ut_50x2k，10 万，本地）
-6. **external_weld_ut**（真实 FMC，4 试件，本地）——**待补 license/标签**后方可用（候选 B）
+6. **external_weld_ut**（真实 FMC，4 试件，Strathclyde **CC BY 4.0**（Phase 2A 确认））——
+   无下游标签 → 仅无标签预训练（候选 B，exploratory）
 
 ### C 仅用于外部迁移/泛化验证
 7. **Open Guided Waves**（导波，按结构/传感器分组）
@@ -381,7 +382,8 @@
 4. **USimgAIST**：联系 Ye/Toyama（或查 IEEE Access 正文 Data Availability）确认下载与许可
    （若取得，须按独立试板划分，禁止随机按图像划分）。
 5. **LANL SHM**：查找有效镜像（如确需振动域）。
-6. **external_weld_ut**（本地）：来源 / license / 标签说明（Strathclyde？Cloudflare 阻止下载记录）。
+6. **external_weld_ut**（本地）：来源已确认为 **Strathclyde Pure Portal / CC BY 4.0**
+   （Phase 2A）；仍待补配套元数据（.ods/.xlsx）与逐位置标签（无标签 → 仅预训练）。
 7. **ML-NDT / NDT_ML_Flaw（quarantined 用途前置）**：LGPL-3.0 对"数据"的授权边界
    （建议使用前与作者确认，即使只做受控消融）。
 

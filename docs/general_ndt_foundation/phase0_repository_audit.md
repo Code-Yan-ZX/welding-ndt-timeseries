@@ -20,7 +20,7 @@
 
 | 数据集 | 模态 | 独立试件 | 样本(记录)数 | 通道 | 空间扫描维 | license | 磁盘 | 通用预训练 | 严格下游评测 |
 |---|---|---|---|---|---|---|---|---|---|
-| external_weld_ut（M0-3 新引入） | 超声 FMC + PAUT | **4**（A/B/C/D） | A:10000 帧 / B:10000 帧 / C:976 位置 / D:389 B-scan | 128×128 或 45×45 FMC；D 单通道 | 有 | **未知** | 437 MB | 有潜力（真实 FMC） | **不可**（无标签/无文档） |
+| external_weld_ut（M0-3 新引入） | 超声 FMC + PAUT | **4**（A/B/C/D） | A:10000 帧 / B:10000 帧 / C:976 位置 / D:389 B-scan | 128×128 或 45×45 FMC；D 单通道 | 有 | **CC BY 4.0**（Strathclyde, Phase 2A 确认） | 437 MB | 有潜力（真实 FMC） | **不可**（无标签, 仅预训练） |
 | PENELOPE PAUT | 超声 PAUT | **5**（PP3–PP7；Coupon1/2 无 NDT） | 3,000 位置级 | 49 波束 | 有（~600 mm 线扫） | CC-BY-4.0 | 12.7 GB zip / 69 GB 解压 | 部分（规模小） | **最适合**（Protocol V2 已建） |
 | PENELOPE SAW（工艺） | 工艺电信号 | 5（PP3–PP7） | 172,424 窗口 | 4 | 无（时序） | CC-BY-4.0 | 4.0 GB（processed） | 否（非信号型 NDT） | 否（对照） |
 | ML-NDT | 超声 B-scan（minibatch 容器） | **1**（316L 单焊头） | 20,010 B-scan | 1 | 有（256 扫描位） | LGPL-3.0 | 2.5 GB | **QUARANTINED**（shortcut 高风险） | **不可**（quarantined） |
@@ -42,11 +42,13 @@
   - D：389 个 PAUT B-scan，401 深度 × 762 扫描位置；内部分 A–M 13 组
 - **独立试件：4 个物理试件（A/B/C/D）**
 - 通道/长度：A/B 10,000 点/道；C 976 点/道；D 2D B-scan
-- 标签：**无独立标签文件 / 无 README / 无 license**（仅 `checksums.txt` 哈希）
-- 划分协议：无（未接入训练管线；也无 manifest）
+- 标签：**无下游逐位置缺陷标签**（仅整试件已知缺陷；无 README；仅 `checksums.txt` 哈希）
+- license：**CC BY 4.0**（Strathclyde Pure Portal；Phase 2A 确认，见
+  `phase2_dataset_admission_matrix.md`）
+- 划分协议：按 4 独立试件（A/B/C/D）分组（M0-3 已建 manifest/group_id）
 - 泄漏风险：试件级无（4 件物理独立）；切片级"待核实"（同试件帧/位置重叠未知）；增强级"待核实"
-- 结论：**模态最丰富（真实 FMC）但信息最不完整**。适合通用预训练的"无标签原始信号"候选，
-  但必须先补齐来源/license/标签说明。**严禁**在许可与标签不明时用于严格评测。
+- 结论：**模态最丰富（真实 FMC）**。license 已确认 → 可作**无标签 SSL 预训练语料**
+  （exploratory；4 试件 < 10，非 foundation-scale）。**无标签 → 严禁用于任何监督评测**。
 
 ### 2. PENELOPE PAUT（目标域核心）
 

@@ -443,20 +443,20 @@ datasets:
 
 # ---------------- 本地待核实数据 ----------------
   external_weld_ut:
-    tier: "待定 (候选 B)"
+    tier: "B (无标签预训练候选; 无标签不可评测)"
     modality: ultrasonic
-    name: "external_weld_ut (M0-3 真实焊缝 FMC/PAUT)"
-    source: "本地 data/raw/external_weld_ut/ (来源/license 待核实)"
-    license: "未知 (待核实)"
-    download: "已本地 (437MB)"
+    name: "external_weld_ut (M0-3 真实焊缝 FMC/PAUT, Strathclyde)"
+    source: "Strathclyde Pure Portal (M0-3 audit 确认); 本地 data/raw/external_weld_ut/"
+    license: "CC BY 4.0 (Phase 2A 确认, 见 phase2_dataset_admission_matrix.md)"
+    download: "已本地 (437MB, 浏览器人工下载; Cloudflare 阻止自动下载)"
     format: "MATLAB .mat (FMC) + .txt B-scan (PAUT)"
     independent_units: {specimens: 4}
-    samples: 30000
+    samples: 690          # views (A=128/B=45/C=128/D=389)
     channels: "128x128 / 45x45 FMC; 1 (D)"
     length: "10000 / 976 / 401"
     spatial_scan: true
-    labels: "无独立标签文件"
-    split_protocol: "无 (未接入)"
+    labels: "无下游逐位置缺陷标签 (仅整试件已知缺陷) → 仅 SSL 预训练, 不可评测"
+    split_protocol: "按 4 独立试件 (A/B/C/D) 分组; 同 group_id 不跨集合"
     leak_risk: {specimen: none, slice: "待核实", augmentation: "待核实"}
-    reuse: "无标签真实 FMC 预训练候选"
-    notes: "文件名含 Lack_of_fusion / RR3 SDH 线索; 需补齐来源/license/标签说明"
+    reuse: "无标签真实 FMC 预训练语料 (exploratory; 4 试件 < 10)"
+    notes: "4 独立物理试件; 配套 .ods/.xlsx 元数据未落地 (不影响 SSL 预训练)"
