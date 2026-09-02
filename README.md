@@ -266,9 +266,15 @@ python scripts/paut_make_table.py            # 汇总表 + 跨模态对照
   M0-3 audit；无标签 → 仅预训练候选 B）；MDDECT（C）/ Long-term GW SHM（B/C，待人工下载+
   NC-ND）/ USimgAIST（D）/ ML-NDT/NDT_ML_Flaw（D，LGPL 数据授权不明）**均因无法在线核实
   保持原分级，无猜测性升级**。
-- 当前状态与下一动作：`STATE.md`（Phase 1 completed / **Phase 2A in progress**）；
-  下一轮唯一推荐动作 = **Phase 2A Gate 全部通过后，运行 PENELOPE（5 coupon LOOCV）E0
-  严格基线**。
+- **E0 scratch-supervised 严格基线（PENELOPE, 2026-09-02）**：general_ndt 骨干（与 E1/E2
+  同架构）从头监督，coupon LOOCV，P4a 规范头（lr=1e-3/≤80ep/val AUC 早停/class-weighted），
+  3 seed（seed 职责分离）。**主指标 = 非PP4 逐折均值 AUROC 0.5254 ± 0.0801（12 折×seed）**；
+  val AUC（0.84–0.91）≫ test AUC（0.39–0.66）→ 跨 coupon 泛化鸿沟再次确认（val 为同 coupon
+  留出位置，test 为完整留出 coupon）；PP7 稀疏缺陷折最弱。详见
+  [`reports/General_NDT_E0_严格基线报告.md`](reports/General_NDT_E0_严格基线报告.md)。
+- 当前状态与下一动作：`STATE.md`（Phase 1 completed / **Phase 2A Gate 已通过** / E0 已完成）；
+  下一步 = **E1 单域 SSL（PENELOPE vanilla MAE 预训练 → 冻结探针 coupon LOOCV）对照 E0**，
+  再 E2 多源 SSL。
 
 ## 目录结构
 

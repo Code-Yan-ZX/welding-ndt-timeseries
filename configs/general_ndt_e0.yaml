@@ -1,0 +1,35 @@
+# ============================================================
+# General NDT Foundation — E0 scratch-supervised 严格基线 (PENELOPE)
+# 协议 (对齐 P4a 规范头): coupon LOOCV (非PP4 逐折均值), lr=1e-3 / ≤80ep
+#   val AUC 早停, class-weighted sampler, AdamW + cosine, grad clip 1.0
+#   骨干 = general_ndt ModalAdapter + PatchTransformer (与 E1/E2 同架构)
+#   per-sample z-score 标准化 (无泄漏) | ≥3 model_seed (seed 职责分离)
+# ============================================================
+
+dataset: penelope_paut
+dataset_config:
+  label_type: binary
+
+model:
+  d_model: 128
+  patch_len: 16
+  patch2d: 16
+  n_layers_enc: 4
+  n_heads: 4
+  n_modalities: 8
+  n_sensors: 32
+  dropout: 0.1
+
+train:
+  epochs: 80                 # 规范头 80ep 上限 (val AUC 早停)
+  batch_size: 32
+  lr: 1.0e-3                 # 规范头 lr
+  weight_decay: 1.0e-4
+  patience: 20               # val AUC 早停耐心
+  grad_clip: 1.0
+  val_frac: 0.15             # rest 85/15 分层切 train/val (P4a 规范)
+  normalize: per_sample
+  data_seed: 42              # 划分/采样 seed
+  model_seeds: [0, 1, 2]     # ≥3 seed, seed 职责分离
+
+output_dir: experiments/runs/general_ndt_e0

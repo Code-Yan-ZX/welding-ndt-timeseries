@@ -73,9 +73,17 @@
 10. ✅ 测试通过（Phase 2A + general_ndt 43 项全绿；全库 150 passed + 2 个预先存在的无关失败
     —— `test_models.py` 的 Qwen3 本地模型路径问题，只 import 旧 wndt 代码，与本次改动无关）。
 
+### E0 严格基线（已完成, 2026-09-02）
+- **PENELOPE scratch-supervised E0**：general_ndt 骨干（ModalAdapter+PT, 与 E1/E2 同架构），
+  coupon LOOCV，P4a 规范头（lr=1e-3/≤80ep/val AUC 早停/class-weighted），3 seed（职责分离）。
+- **主指标 = 非PP4 逐折均值 AUROC 0.5254 ± 0.0801（12 折×seed）**；每 seed 0.503/0.534/0.540。
+- 诊断：val AUC（0.84–0.91）≫ test AUC（0.39–0.66）→ 跨 coupon 泛化鸿沟再次确认
+  （val=同 coupon 留出位置/早停乐观；test=完整留出 coupon）；PP7 稀疏缺陷折最弱。
+- 结果：`reports/General_NDT_E0_严格基线报告.md`；JSON：`experiments/runs/general_ndt_e0/e0_results.json`。
+
 ### 下一阶段（建议）
-1. **PENELOPE E0 严格基线**（5 coupon LOOCV，scratch 监督，规范头 lr=1e-3/80ep，≥3 seed）
-   —— E1/E2 多源物理感知 SSL 的对照前提。
+1. **E1 单域 SSL**：PENELOPE vanilla MAE 预训练（更大规模/更长训练）→ 冻结探针 coupon LOOCV，
+   对照 E0 0.5254（同骨干同协议；负迁移审计判据 Δ≥+0.01 且 ≥2/3 seed）。
 2. EddyCus 无标签预训练 + cross-config/cross-sensor 探索（exploratory）。
 3. 人工核实并（若合规）下载 **Long-term GW SHM**（Figshare, CC BY-NC-ND, 单结构 → 仅预训练+
    迁移验证）；external_weld_ut 补配套元数据（.ods/.xlsx）。
