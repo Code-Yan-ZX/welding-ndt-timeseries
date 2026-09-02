@@ -65,23 +65,32 @@ datasets:
     notes: "PP4 近零缺陷已知; 缺陷率-试件耦合 0.5%-76%"
 
   eddycus_hdf5:
-    tier: A
+    tier: "B/C (pending admission)"
+    benchmark_tier: "B/C pending admission"
+    core_benchmark: false
+    headline_results_allowed: false
+    cross_specimen_claim_allowed: false
+    sota_claim_allowed: false
+    specimen_id_available: false
+    inferred_group_available: true
+    inferred_group_contains_label: true
     modality: eddy_current
     name: "EddyCus-HDF5 / Open-Source Multi-Sensor ECT Database"
     source: "Zenodo 19251759, DOI 10.5281/zenodo.19251759"
     license: "CC-BY-4.0 (数据) / MIT (软件)"
     download: "已本地 (data/raw/EddyCus-HDF5/, 6.9GB)"
     format: "HDF5 (四层组, signal_data/fN real/imag)"
-    independent_units: {specimens: 148, config_groups: 148, defects: 8}
+    independent_units: {specimens_explicit: 0, config_groups_inferred: 148, defects: 8}
     samples: 738
     channels: 8
     length: 45551
     spatial_scan: true
     labels: "8 类缺陷"
-    split_protocol: "cross-material / cross-sensor / cross-config (manifest split_group)"
-    leak_risk: {specimen: low, slice: medium, augmentation: none}
-    reuse: "跨模态迁移 (超声→涡流) 关键源/目标域; cross-config 严格评测"
-    notes: "CFRP 非金属焊缝; 模态差异大"
+    split_protocol: "cross-config (inferred group) / cross-sensor / cross-material — 仅 exploratory; 禁止 cross-specimen claim"
+    leak_risk: {specimen: "n/a (无显式试件)", slice: medium, augmentation: none}
+    reuse: "无标签预训练语料 + cross-sensor/cross-material 探索实验 (exploratory)"
+    admission_note: "148 为代码推断的配置组哈希 (material|fiber|layup|description|defect_depth|defect_size|thickness), 不是数据集显式物理试件 ID; 只有原始文件/官方论文/作者元数据证明配置组与独立物理试件一一对应, 才允许重新申请 A 级"
+    notes: "CFRP 非金属焊缝; 模态差异大; 支持 exploratory_flat_1d 与 native_grid_2d 两种表示"
 
   longterm_guided_wave_shm:
     tier: B

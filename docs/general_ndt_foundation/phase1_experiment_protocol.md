@@ -66,7 +66,7 @@
 | 数据集 | 分级 | 最小物理独立单元 | 推荐协议 | 禁止 |
 |---|---|---|---|---|
 | PENELOPE PAUT | A | coupon（试件） | `specimen` LOOCV（5 折，非PP4 逐折均值） | 位置级随机划分 |
-| EddyCus-HDF5 | A（层级待确认） | 配置组（material×fiber×layup×defect×thickness） | `config` 分组 LOOCV / cross-material / cross-sensor | 扫描级随机划分 |
+| EddyCus-HDF5 | **B/C pending admission**（Phase 2A 修正） | **推断配置组**（material×fiber×layup×desc×defect×thickness 哈希，非显式物理试件） | `config` 分组 cross-config / cross-material / cross-sensor —— **仅 exploratory，不得声称 cross-specimen 泛化** | 扫描级随机当独立样本 |
 | ML-NDT | 🔒D quarantined | defect_instance（3 裂纹模板） | 仅受控消融（leave-template / random-vs-grouped 负对照） | 作主结果/跨试件 claim |
 | NDT_ML_Flaw | 🔒D quarantined | defect_instance × source(real/sim) | 仅受控消融（同上） | 作主结果/跨试件 claim |
 | Long-term GW SHM | B/C（单结构） | 时间窗（按损伤引入时间线） | 按时间分段划分 train/val/test | 随机时间点 |
@@ -81,8 +81,8 @@
 - 目标：每个数据集各自的"从头监督"天花板（同骨干、同下游协议）。
 - 内容：骨干随机初始化，直接用该数据集标签训练（linear probe 等价形式 + 全量 FT 两种）。
 - 输出：AUROC / Macro-F1 / balanced acc 的逐折均值±std。
-- ⚠ E0 只对 **A 级核心基准（PENELOPE / EddyCus）** 做主结果；ML-NDT / NDT_ML_Flaw 的
-  E0 仅作 shortcut 负对照（S8 simple-CNN baseline），不进入主结果。
+- ⚠ E0 只对 **A 级核心基准（PENELOPE；EddyCus 已降 B/C，仅 exploratory）** 做主结果；
+  ML-NDT / NDT_ML_Flaw 的 E0 仅作 shortcut 负对照（S8 simple-CNN baseline），不进入主结果。
 
 ### E1. 单数据集自监督预训练（single-source SSL）
 
@@ -167,7 +167,7 @@
 
 ## 七、第一阶段执行顺序（建议）
 
-1. E0 基线（PENELOPE + EddyCus，先跑通 smoke）。
+1. E0 基线（PENELOPE 严格基准 + EddyCus cross-config exploratory，先跑通 smoke）。
 2. E1 单域 SSL（两域）。
 3. E2 多源联合 SSL（超声+涡流；合成超声作为扩充）。
 4. E3 少样本（1/5/10/100%）。

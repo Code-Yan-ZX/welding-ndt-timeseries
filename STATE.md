@@ -14,6 +14,18 @@
 - **工作题目（非最终方法）**：*Physics-Aware Self-Supervised Representation Learning for
   General-Purpose NDT Signals*。未宣称 novel。
 
+### 当前阶段（Phase 1 completed / **Phase 2A in progress**）
+- **Phase 1 已完成**：数据 registry、方法规格、实验协议、最小代码（见下）。
+- **Phase 2A（Admission Resolution and Implementation Correctness Gate）进行中**：
+  1. 纠正数据准入表述（EddyCus 降为 inferred configuration groups，B/C pending admission）；
+  2. 完成 EddyCus 真实层级审计（explicit vs inferred ID）；
+  3. 修复实现正确性：Stem1D per-channel patch、Transformer valid mask + 网格位置编码、
+     token 级 valid mask、EddyCus 双表示；
+  4. 最小 vanilla MAE 训练闭环 + PENELOPE 正式可比 smoke；
+  5. 其余数据准入文档确认 → `phase2_dataset_admission_matrix.md`。
+- **⚠ 尚未满足 E1/E2 正式运行门槛**：在 Phase 2A Gate 通过（10 项条件）前，
+  **不得表述为可以正式运行多源物理感知 SSL**。
+
 ### 已完成（Phase 0–1 + 最小代码）
 - [x] 分支 `research/general-ndt-foundation` 已创建并推送（upstream 已设）。
 - [x] **Phase 0 仓库审计**：`docs/general_ndt_foundation/phase0_repository_audit.md`
@@ -23,7 +35,8 @@
     新包 `src/general_ndt/` 平行建设。
 - [x] **Phase 1 数据集全景**：`docs/general_ndt_foundation/phase1_dataset_landscape.md` +
     `configs/general_ndt_datasets.yaml`（20 数据集 registry）
-  - A 核心基准：PENELOPE（5 coupon，勿作唯一基准）/ EddyCus（148 组，层级待确认）
+  - A 核心基准：PENELOPE（5 coupon，勿作唯一基准）；EddyCus 已降为 B/C pending admission
+    （148 组为 inferred configuration groups，非显式物理 specimen）
   - B 预训练：Long-term GW SHM（单结构）/ NASA AE / 合成超声 /（待补许可的）external_weld_ut
   - C 迁移验证：Open GW / UGW-3Mat-2SN / Pipeline UGW / MDDECT / ORION-AE
   - D quarantined：**ML-NDT / NDT_ML_Flaw**（shortcut 高风险，见下）
@@ -43,12 +56,20 @@
     collate(pad+valid mask)、数据审计 CLI、物理感知掩码控制器、重建/时频一致性目标、
     leave-one-specimen 划分 + logistic probe。22 测试全绿。
 
-### 正在进行
-- 无（本阶段交付完成，等待下一阶段指令）。
+### 正在进行（Phase 2A）
+- **EddyCus 准入修正**：148 = inferred configuration groups（不是 148 个独立物理 specimen）；
+  specimen_id_available: false；inferred_group_available: true；inferred_group_contains_label: true；
+  benchmark_tier: B/C pending admission；core_benchmark: false；headline_results_allowed: false。
+  仅当原始文件/官方论文/作者元数据证明配置组与独立物理试件一一对应，才可重新申请 A 级。
+- **实现正确性 Gate**：Stem1D per-channel patch embedding / Transformer valid mask + 网格位置编码 /
+  token 级 valid mask / EddyCus 双表示 / 最小 vanilla MAE 闭环 / PENELOPE smoke。
+- 详见 `docs/general_ndt_foundation/phase2_eddycus_admission.md` 与
+  `docs/general_ndt_foundation/phase2_dataset_admission_matrix.md`。
 
 ### 下一阶段（建议）
-1. **A 级准入前置**：确认 EddyCus specimen/sensor/scan 层级；调查 MDDECT 能否按物理缺陷/
-   试件/批次/采集条件分组（若可分独立单元可升级评估）。
+1. **Phase 2A Gate 通过后**：PENELOPE（5 coupon LOOCV）E0 严格基线 + EddyCus(cross-config, exploratory)。
+2. 人工核实并（若合规）下载 **Long-term GW SHM**（Figshare, CC BY-NC-ND, 单结构 → 仅预训练+
+   迁移验证）；external_weld_ut 补来源/license/标签说明。
 2. 人工核实并（若合规）下载 **Long-term GW SHM**（Figshare, CC BY-NC-ND, 单结构 → 仅预训练+
    迁移验证）；external_weld_ut 补来源/license/标签说明。
 3. **E0 基线**：PENELOPE(5 coupon LOOCV) + EddyCus(cross-config) 的 scratch 监督 baseline
@@ -61,8 +82,10 @@
 8. **novelty audit**（方法规格 §9 待办）：检索 NDT 基础模型/物理感知 SSL 文献并逐项对照。
 
 ### 已知风险
-- **严格评测数据稀缺**：可严格跨试件评测的只有 PENELOPE(5, 勿作唯一基准) 与
-  EddyCus(148组, 层级待确认)；导波/AE 多为单结构/样本小，只能迁移验证。
+- **严格评测数据稀缺**：可严格跨试件评测的只有 PENELOPE(5 coupon, 勿作唯一基准)。
+  EddyCus 的 148 组是 **inferred configuration groups**（非显式物理 specimen），
+  在证明"配置组 == 独立物理试件"前只能作无标签预训练 / cross-config exploratory，
+  **不得声称 cross-specimen 泛化**；导波/AE 多为单结构/样本小，只能迁移验证。
 - **负迁移风险仍在**：普通单编码器单目标已证负迁移（M0-2B/2C）；本方法能否正面翻盘未验证。
 - **shortcut 风险已证实**：ML-NDT / NDT_ML_Flaw 随机样本级 AUC≈1.0 为模板近重复+背景捷径
   （quarantined）；**任何新数据集进入 A 级前必须过 S1–S8 sanity checks**。
@@ -76,7 +99,7 @@
 | 数据集 | 状态 | 分级 | 许可 |
 |---|---|---|---|
 | PENELOPE PAUT | ✅ 已本地 + 严格评测（勿作唯一基准） | A | CC-BY-4.0 |
-| EddyCus-HDF5 | ✅ 已本地 + cross-config 评测（层级待确认） | A | CC-BY-4.0 |
+| EddyCus-HDF5 | ✅ 已本地 + 无标签预训练 / cross-config 探索（层级审计后定） | **B/C pending admission** | CC-BY-4.0 |
 | ML-NDT | 🔒 **QUARANTINED**（仅受控消融） | D | LGPL-3.0 |
 | NDT_ML_Flaw | 🔒 **QUARANTINED**（仅受控消融） | D | LGPL-3.0 |
 | 合成超声 | ✅ 已本地（预训练扩充） | B | 内部 |

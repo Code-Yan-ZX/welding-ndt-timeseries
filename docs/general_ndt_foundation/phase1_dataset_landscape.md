@@ -23,7 +23,7 @@
 | # | 数据集 | 模态 | 独立单元 | 样本(记录) | 原始波形 | license | 下载 | 分级 |
 |---|---|---|---|---|---|---|---|---|
 | 1 | PENELOPE PAUT（补充） | 超声 PAUT | 5 coupon | 3,000 位置 | ✅ .nde | CC-BY-4.0 | ✅ 已本地 | **A**（小规模，勿作唯一基准） |
-| 2 | EddyCus-HDF5 | 涡流 ECT | 148 配置组 | 738 扫描 | ✅ HDF5 | CC-BY-4.0 | ✅ 已本地 | **A**（层级待确认） |
+| 2 | EddyCus-HDF5 | 涡流 ECT | 148 **推断配置组**（非显式试件） | 738 扫描 | ✅ HDF5 | CC-BY-4.0 | ✅ 已本地 | **B/C pending admission**（无显式试件 ID） |
 | 3 | ML-NDT | 超声 B-scan（minibatch 容器） | 1 试件 / **3 真实裂纹模板** | 20,010 B-scan | ✅ .bins | LGPL-3.0 | ✅ 已本地 | **D (quarantined)** |
 | 4 | NDT_ML_Flaw | 超声 B-scan | 1 试件 / **6 真实缺陷 + 10 CIVA 模板** | 17,000 条带 | ✅ .xz | LGPL-3.0 | ✅ 已本地 | **D (quarantined)** |
 | 5 | Long-term GW SHM（Sci. Data 2025） | 超声导波 | **1 铝板** / 13 损伤 | ~640 万测量 | ✅ 1 MHz pickle | CC BY-NC-ND | ⚠ Figshare 需人工验证 | **B/C**（单结构，非 A） |
@@ -177,18 +177,25 @@
 
 ## 三、涡流（ECT）
 
-### 9. EddyCus-HDF5 / Open-Source Multi-Sensor ECT Database → **A/B**
+### 9. EddyCus-HDF5 / Open-Source Multi-Sensor ECT Database → **B/C（pending admission，Phase 2A 修正）**
 
 - 来源：Zenodo 19251759，DOI 10.5281/zenodo.19251759（TU Dresden + Fraunhofer IKTS，2026-03 v1.0）
 - 内容：CFRP 碳纤维（3 种无屈曲织物）；**8 个 Fraunhofer IKTS 传感器**（3 绝对 + 5 差分半透射，
   6.1–24.3 MHz）
 - 格式：HDF5 四层组（measurement_metadata / spatial_data / signal_data/fN/（real/imaginary/
   complex_impedance）/ analysis_results/fN/（magnitude/phase））；gzip L6+shuffle
-- 样本：738 扫描（695 有信号）；**8 类缺陷**；独立配置组 **148**（material×fiber×layup×defect×thickness）
+- 样本：738 扫描（695 有信号）；**8 类缺陷**；**148 = 推断配置组**（material×fiber×layup×
+  description×defect×thickness 的 SHA1 哈希），**非显式物理试件**
+- **⚠ 准入修正（2026-09-02）**：数据集无显式 specimen ID；`specimen_id_available: false`、
+  `inferred_group_available: true`、`inferred_group_contains_label: true`；
+  `benchmark_tier: B/C pending admission`、`core_benchmark: false`、
+  `headline_results_allowed: false`、`cross_specimen_claim_allowed: false`。
 - license：数据 **CC BY 4.0**；转换软件 MIT
-- 泄漏：低（148 组可严格 cross-config 划分）；组内多传感器/频率相关（切片级中）
-- 定位：**A/B**——已本地、许可清晰、多试件/多传感器/多频，跨模态（超声→涡流）迁移与
-  cross-sensor/cross-material 协议开发的**关键源/目标域**
+- 泄漏：无显式试件 → 无试件级分组；组内多传感器/频率相关（切片级中）
+- 定位：**B/C pending admission**——可作**无标签预训练数据** + **cross-sensor/cross-material
+  探索实验（结果标 exploratory）**；**不得声称 cross-specimen 泛化**。只有原始文件/官方论文/
+  作者元数据证明配置组 == 独立物理试件，才可重新申请 A 级（见
+  `phase2_eddycus_admission.md`）。
 
 ### 10. MDDECT → **C（先核实 license 与分组）**
 
@@ -328,9 +335,12 @@
 
 ### A 核心严格 benchmark（唯一能支撑严格下游评测的集合）
 1. **PENELOPE PAUT**（超声，5 coupon，CC-BY-4.0，已本地）——coupon LOOCV；
-   ⚠ **仅 5 coupon，作为严格外部/探索验证基准，不宜作为唯一核心基准**，需与 EddyCus 联合。
-2. **EddyCus-HDF5**（涡流 ECT，148 配置组，CC-BY-4.0，已本地）——cross-config/cross-sensor
-   评测；⚠ **specimen/sensor/scan 层级需人工确认**（见待核实清单）。
+   ⚠ **仅 5 coupon，作为严格外部/探索验证基准，不宜作为唯一核心基准**。
+2. ~~**EddyCus-HDF5**~~ → **已降级为 B/C pending admission（Phase 2A，2026-09-02）**：
+   148 为推断配置组（非显式物理试件），`specimen_id_available: false`、
+   `core_benchmark: false`、`headline_results_allowed: false`；仅无标签预训练 +
+   cross-config/cross-sensor 探索（exploratory）。只有证明配置组 == 独立物理试件才能
+   重新申请 A 级。
 
 ### B 仅用于无标签预训练（非 quarantined）
 3. **Long-term GW SHM**（导波，1 板/13 损伤，CC BY-NC-ND）——**单结构 → 不作 A**，仅预训练 +
@@ -361,8 +371,9 @@
 
 ## 八、待人工核实清单
 
-1. **EddyCus-HDF5（A 级准入所需）**：确认 specimen（148 配置组）/ sensor（8）/ scan（738）
-   三层级关系；是否可按 sensor×material 严格分组（A 级核心基准的前置条件）。
+1. **EddyCus-HDF5（B/C → A 级恢复所需）**：已确认 148 为**推断配置组**（无显式试件 ID，
+   Phase 2A 审计）；仅当原始文件/官方论文/作者元数据证明配置组 == 独立物理试件，才可
+   重新申请 A 级（当前保持 B/C pending admission，cross-config 结果标 exploratory）。
 2. **MDDECT（C→可能的 A）**：Kaggle 目录结构 / license / **能否按物理缺陷、试件、扫描批次或
    采集条件分组** / operator 与 lift-off（需登录；若可分独立单元可升级评估）。
 3. **Long-term GW SHM**：Figshare 实际文件列表/大小；NC-ND 许可使用合规性；时间分段划分元数据
@@ -376,8 +387,9 @@
 
 ## 九、结论（v2）
 
-1. **A 级核心严格基准**：**PENELOPE（超声, 5 coupon, 需联合多基准）+ EddyCus（涡流,
-   148 组, 层级待确认）**——**不用作唯一基准**；其余数据集在准入证据不足时一律放 B/C。
+1. **A 级核心严格基准**：**PENELOPE（超声, 5 coupon, 需联合多基准）**（Phase 2A 修正：
+   EddyCus 已降为 B/C pending admission，因其无显式物理试件 ID）——**不用作唯一基准**；
+   其余数据集在准入证据不足时一律放 B/C。
 2. **ML-NDT / NDT_ML_Flaw 已 quarantine**：shortcut 证据确凿（随机 AUC≈1.0、近重复
    99.3–99.7%、leave-template 崩塌、E2 负迁移）→ 仅限受控用途，禁止主结果/跨试件/工业对比。
 3. **B 级预训练语料**：Long-term GW SHM（单结构）+ NASA AE + 合成超声 +（待补许可的）

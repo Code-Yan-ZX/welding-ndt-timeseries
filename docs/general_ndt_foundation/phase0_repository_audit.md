@@ -25,7 +25,7 @@
 | PENELOPE SAW（工艺） | 工艺电信号 | 5（PP3–PP7） | 172,424 窗口 | 4 | 无（时序） | CC-BY-4.0 | 4.0 GB（processed） | 否（非信号型 NDT） | 否（对照） |
 | ML-NDT | 超声 B-scan（minibatch 容器） | **1**（316L 单焊头） | 20,010 B-scan | 1 | 有（256 扫描位） | LGPL-3.0 | 2.5 GB | **QUARANTINED**（shortcut 高风险） | **不可**（quarantined） |
 | NDT_ML_Flaw | 超声 B-scan 条带 | **1**（P41） | 17,000 条带 | 1 | 有（7168 扫描位） | LGPL-3.0 | 227 MB（压缩）/ ~117 GB（解压） | **QUARANTINED**（shortcut 高风险） | **不可**（quarantined） |
-| EddyCus-HDF5 | 涡流 ECT（CFRP） | **148 配置组** | 738 扫描（695 有信号） | 8（4 频 × I/Q） | 有（2D C-scan 栅格） | CC-BY-4.0 | 6.9 GB | 部分（跨模态源） | 较适合（cross-config） |
+| EddyCus-HDF5 | 涡流 ECT（CFRP） | **148 推断配置组**（非显式物理试件；B/C pending admission） | 738 扫描（695 有信号） | 8（4 频 × I/Q） | 有（2D C-scan 栅格） | CC-BY-4.0 | 6.9 GB | 部分（跨模态源） | 仅探索（cross-config exploratory，禁 cross-specimen claim） |
 | synth_ut（P7 小） | 合成超声 B-scan | 12 虚拟 coupon | 12,000 | 1 | 有 | 合成 | 1.2 GB | 适合（预训练扩充） | 否（合成） |
 | synth_ut_50x2k（P7 大） | 合成超声 B-scan | 50 虚拟 coupon | 100,000 | 1 | 有 | 合成 | 9.4 GB | 最适合（规模大） | 否（合成） |
 
@@ -100,19 +100,30 @@
   （ML-NDT=eFlaw 植入 / NDT_ML_Flaw=CIVA+缩放），但都满足"重复模板+虚拟缺陷+样本相关"
   → 均判 high shortcut risk。
 
-### 5. EddyCus-HDF5（CFRP 涡流，唯一 ECT）
+### 5. EddyCus-HDF5（CFRP 涡流，唯一 ECT）— 准入修正（Phase 2A）
 
 - 路径：`data/raw/EddyCus-HDF5/output/`（6.9 GB）；HDF5，每文件一次扫描
-- 独立试件/配置：**148 个物理配置组**（material×fiber×layup×defect×thickness）
+- **⚠ 层级修正（2026-09-02）**：数据集**无显式物理试件 ID**。manifest 中的
+  `specimen_id = eddycus:cfg<sha1(material|fiber|layup|description|defect_depth|defect_size|thickness)>`
+  是**代码推断的配置组哈希**，不是数据集明确提供的试件号。因此：
+  - **148 = inferred configuration groups**，**不能写成 148 个独立物理 specimen**；
+  - `specimen_id_available: false`；`inferred_group_available: true`；
+    `inferred_group_contains_label: true`；
+  - `benchmark_tier: B/C pending admission`；`core_benchmark: false`；
+    `headline_results_allowed: false`；`cross_specimen_claim_allowed: false`。
 - 样本：738 扫描（695 有信号）；8 类缺陷（gap 492 / clean 84 / mis-orientation 80 / Cu foil 24 /
   Cu roving 24 / PTFE 24 / ondulation 6 / fuzz ball 4）
 - 通道：4 频率 × I/Q 双通道 = 8 信号通道
 - 空间维：有（2D 栅格 C-scan，track×sample，x/y/z mm 坐标）
-- 划分：按物理配置组（cross-material / cross-sensor）；manifest 有 `split_group` 字段
-- 泄漏：试件级低（148 组可严格分组）；同组多传感器/多频率相关（切片级中）
+- 划分：仅 cross-config（inferred group）/ cross-sensor / cross-material **探索实验**；
+  manifest 有 `split_group` 字段；**不得声称 cross-specimen 泛化**，cross-config 结果只能标
+  **exploratory**。
+- 泄漏：无显式试件 → 无法评估试件级泄漏；同配置组多传感器/多频率相关（切片级中）
 - license：**CC-BY-4.0**（数据）+ MIT（转换软件）
-- 结论：**唯一跨模态（超声→涡流）数据**；CFRP 非金属焊缝，模态差异大。适合跨模态预训练源域
-  与 cross-sensor/cross-material 协议开发；可作严格评测（148 组 cross-config）。
+- 结论：**唯一跨模态（超声→涡流）数据**；CFRP 非金属焊缝，模态差异大。现阶段可作**无标签
+  预训练数据**与 **cross-sensor/cross-material 探索实验**；只有原始文件/官方论文/作者元数据
+  证明配置组与独立物理试件一一对应，才允许重新申请 A 级（见
+  `phase2_eddycus_admission.md`）。
 
 ### 6. 合成超声数据（P7）
 
@@ -146,7 +157,7 @@
 | PENELOPE SAW | 无（coupon 划分） | 高（stride=256 窗口 50% 重叠，不跨 coupon） | 无 |
 | ML-NDT 🔒QUARANTINED | N/A（1 试件） | 高（近重复 99.3–99.7%） | 高（eFlaw 重植入） |
 | NDT_ML_Flaw 🔒QUARANTINED | N/A（1 试件） | 中-高（连续条带重叠） | 高（幅度缩放 + CIVA 模板） |
-| EddyCus-HDF5 | 低（148 组可分组） | 中（组内多传感器/频率相关） | 无 |
+| EddyCus-HDF5 | n/a（无显式试件；配置组 exploratory） | 中（组内多传感器/频率相关） | 无 |
 | synth_ut / synth_ut_50x2k | 不适用（合成） | 低 | 不适用（合成） |
 
 ---
