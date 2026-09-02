@@ -1,8 +1,11 @@
 """统一 batch / collate: 变长样本 pad + valid mask。
 
 - batch 内要求 shape_kind 一致 (1d 或 2d);
-- 1d: (C, T) → (B, C_max, L_max); 2d: (H, W) → (B, H_max, W_max);
-- valid_mask 记录真实位置 (1) / padding (0);
+- 1d: (C, T) → (B, C_max, L_max);  valid_mask (B, L_max) 记录时间有效 (1=真实, 0=padding);
+- 2d: (H, W)/(C, H, W) → (B, C_max, H_max, W_max) (单通道归一化为 C=1);
+      valid_mask (B, H_max, W_max) 记录空间有效区 (1=有效, 0=padding/空洞)。
+- batch.shapes 记录每样本真实形状 → token 级 valid mask 用它区分 channel padding 与
+  time/spatial padding (见 ssl/token_masks.py)。
 - 长度差异较大的批量建议按 (channels, length) bucket 分组, 减少 padding 浪费
   (第一版提供 bucket_indices 工具函数, 训练时可选使用)。
 """
@@ -28,19 +31,50 @@ def collate_general_ndt(samples: Sequence[GeneralNDTSample]) -> GeneralNDTBatch:
         l_max = max(s.signal.shape[1] for s in samples)
         padded = np.zeros((len(samples), c_max, l_max), dtype=np.float32)
         valid = np.zeros((len(samples), l_max), dtype=np.int64)
+        shapes = []
         for b, s in enumerate(samples):
             c, l = s.signal.shape
             padded[b, :c, :l] = s.signal
-            valid[b, :l] = 1
-    else:  # 2d
-        h_max = max(s.signal.shape[0] for s in samples)
-        w_max = max(s.signal.shape[1] for s in samples)
-        padded = np.zeros((len(samples), h_max, w_max), dtype=np.float32)
+            if s.valid_mask is None:
+                valid[b, :l] = 1
+            else:
+                vm = np.asarray(s.valid_mask, dtype=np.int64)
+                # 允许 (T,) 或 (C, T); 投影到时间维: 任一通道有效则时间有效
+                if vm.ndim == 1:
+                    valid[b, : min(l, vm.shape[0])] = vm[: min(l, vm.shape[0])]
+                else:
+                    valid[b, : min(l, vm.shape[1])] = (
+                        vm[:, : min(l, vm.shape[1])].any(axis=0)
+                    )
+            shapes.append((c, l))
+    else:  # 2d — 归一化为 (C, H, W)
+        def _to3(s: GeneralNDTSample) -> np.ndarray:
+            sig = np.asarray(s.signal)
+            return sig[None, ...] if sig.ndim == 2 else sig
+
+        c_max = max(_to3(s).shape[0] for s in samples)
+        h_max = max(_to3(s).shape[1] for s in samples)
+        w_max = max(_to3(s).shape[2] for s in samples)
+        padded = np.zeros((len(samples), c_max, h_max, w_max), dtype=np.float32)
         valid = np.zeros((len(samples), h_max, w_max), dtype=np.int64)
+        shapes = []
         for b, s in enumerate(samples):
-            h, w = s.signal.shape
-            padded[b, :h, :w] = s.signal
-            valid[b, :h, :w] = 1
+            sig = _to3(s)
+            c, h, w = sig.shape
+            padded[b, :c, :h, :w] = sig
+            if s.valid_mask is None:
+                valid[b, :h, :w] = 1
+            else:
+                vm = np.asarray(s.valid_mask)
+                if vm.ndim == 2:
+                    valid[b, : min(h, vm.shape[0]), : min(w, vm.shape[1])] = (
+                        vm[: min(h, vm.shape[0]), : min(w, vm.shape[1])]
+                    )
+                else:
+                    valid[b, : min(h, vm.shape[1]), : min(w, vm.shape[2])] = (
+                        vm[:, : min(h, vm.shape[1]), : min(w, vm.shape[2])].any(axis=0)
+                    )
+            shapes.append((c, h, w))
 
     return GeneralNDTBatch(
         padded_signal=padded,
@@ -51,6 +85,7 @@ def collate_general_ndt(samples: Sequence[GeneralNDTSample]) -> GeneralNDTBatch:
         labels=[s.label for s in samples],
         modalities=[s.modality for s in samples],
         metadata=[s.metadata for s in samples],
+        shapes=shapes,
     )
 
 
