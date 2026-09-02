@@ -79,12 +79,23 @@
 - **主指标 = 非PP4 逐折均值 AUROC 0.5254 ± 0.0801（12 折×seed）**；每 seed 0.503/0.534/0.540。
 - 诊断：val AUC（0.84–0.91）≫ test AUC（0.39–0.66）→ 跨 coupon 泛化鸿沟再次确认
   （val=同 coupon 留出位置/早停乐观；test=完整留出 coupon）；PP7 稀疏缺陷折最弱。
-- 结果：`reports/General_NDT_E0_严格基线报告.md`；JSON：`experiments/runs/general_ndt_e0/e0_results.json`。
+- 结果：`reports/General_NDT_E0_严格基线报告.md`；JSON：`experiments/results/general_ndt_e0_results.json`。
+
+### E1 单域 SSL（已完成, 2026-09-02）
+- **per-fold 严格预训练**：每折只在非 test 的 4 coupon（无标签）上预训练 vanilla MAE
+  （random mask 0.5, d=128/4 层 enc/1 层 dec, 3000 步≈40ep, 对齐 P1）；test coupon 信号
+  不进预训练（无 transductive 泄漏）。
+- 冻结 CLS pooled 特征 + logistic 探针（E0 同划分 rest 85/15 + test=coupon），3 seed。
+- **主指标 = 非PP4 逐折均值 AUROC 0.5680 ± 0.0701（12 折×seed）**；每 seed 0.556/0.574/0.574。
+- **Δ = E1 − E0 = +0.0427，3/3 seed 为正 → 判正迁移 ✅**。
+- **PP7（稀疏缺陷）从 E0 最弱折（0.39–0.53）变为 E1 最强折（0.57–0.67）**：SSL 在标签稀疏时
+  收益最大。
+- 结果：`reports/General_NDT_E1_单域SSL报告.md`；JSON：`experiments/results/general_ndt_e1_results.json`。
 
 ### 下一阶段（建议）
-1. **E1 单域 SSL**：PENELOPE vanilla MAE 预训练（更大规模/更长训练）→ 冻结探针 coupon LOOCV，
-   对照 E0 0.5254（同骨干同协议；负迁移审计判据 Δ≥+0.01 且 ≥2/3 seed）。
-2. EddyCus 无标签预训练 + cross-config/cross-sensor 探索（exploratory）。
+1. **E2 多源 SSL**：PENELOPE + EddyCus 无标签联合预训练 → 冻结探针 coupon LOOCV，
+   对照 E1 0.5680（同骨干同协议；判据 Δ≥+0.01 且 ≥2/3 seed）。
+2. EddyCus cross-config/cross-sensor 探索（exploratory；无显式试件，不作主结果）。
 3. 人工核实并（若合规）下载 **Long-term GW SHM**（Figshare, CC BY-NC-ND, 单结构 → 仅预训练+
    迁移验证）；external_weld_ut 补配套元数据（.ods/.xlsx）。
 2. 人工核实并（若合规）下载 **Long-term GW SHM**（Figshare, CC BY-NC-ND, 单结构 → 仅预训练+

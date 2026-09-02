@@ -1,0 +1,144 @@
+{
+  "config": "configs/general_ndt_e1_single_ssl.yaml",
+  "dataset": "penelope_paut",
+  "protocol": "E1 per-fold strict vanilla MAE pretrain + frozen logistic probe",
+  "model_seeds": [
+    0,
+    1,
+    2
+  ],
+  "data_seed": 42,
+  "n_folds_per_seed": 4,
+  "per_seed_mean_auroc": {
+    "0": 0.5739538286223208,
+    "1": 0.5557442240471461,
+    "2": 0.5744050585925434
+  },
+  "auroc_mean": 0.5680343704206702,
+  "auroc_std": 0.07012438733652221,
+  "per_fold_auroc": [
+    0.45776721014492755,
+    0.4649116847826087,
+    0.4435348731884058,
+    0.6198890604449019,
+    0.589077600503231,
+    0.5894092754617717,
+    0.5745343520819909,
+    0.5965356408604131,
+    0.5986529196968302,
+    0.643624691817463,
+    0.5724519700423315,
+    0.6660231660231659
+  ],
+  "results": [
+    {
+      "auroc": 0.45776721014492755,
+      "macro_f1": 0.4305138937332868,
+      "balanced_acc": 0.5008322010869565,
+      "acc": 0.45757071547420963,
+      "test_coupon": "PP3",
+      "model_seed": 0,
+      "ckpt": "experiments/runs/general_ndt_e1/ckpts/PP3_seed0/mae_step3000.pt"
+    },
+    {
+      "auroc": 0.4649116847826087,
+      "macro_f1": 0.41243609979033663,
+      "balanced_acc": 0.49465579710144925,
+      "acc": 0.4475873544093178,
+      "test_coupon": "PP3",
+      "model_seed": 1,
+      "ckpt": "experiments/runs/general_ndt_e1/ckpts/PP3_seed1/mae_step3000.pt"
+    },
+    {
+      "auroc": 0.4435348731884058,
+      "macro_f1": 0.45132770876612827,
+      "balanced_acc": 0.49459918478260867,
+      "acc": 0.46256239600665555,
+      "test_coupon": "PP3",
+      "model_seed": 2,
+      "ckpt": "experiments/runs/general_ndt_e1/ckpts/PP3_seed2/mae_step3000.pt"
+    },
+    {
+      "auroc": 0.6198890604449019,
+      "macro_f1": 0.5635334913909853,
+      "balanced_acc": 0.5923085720821182,
+      "acc": 0.6325503355704698,
+      "test_coupon": "PP5",
+      "model_seed": 0,
+      "ckpt": "experiments/runs/general_ndt_e1/ckpts/PP5_seed0/mae_step3000.pt"
+    },
+    {
+      "auroc": 0.589077600503231,
+      "macro_f1": 0.48908671282558525,
+      "balanced_acc": 0.5399382398353063,
+      "acc": 0.5855704697986577,
+      "test_coupon": "PP5",
+      "model_seed": 1,
+      "ckpt": "experiments/runs/general_ndt_e1/ckpts/PP5_seed1/mae_step3000.pt"
+    },
+    {
+      "auroc": 0.5894092754617717,
+      "macro_f1": 0.5698089291582554,
+      "balanced_acc": 0.5710527820666781,
+      "acc": 0.587248322147651,
+      "test_coupon": "PP5",
+      "model_seed": 2,
+      "ckpt": "experiments/runs/general_ndt_e1/ckpts/PP5_seed2/mae_step3000.pt"
+    },
+    {
+      "auroc": 0.5745343520819909,
+      "macro_f1": 0.46800312418640977,
+      "balanced_acc": 0.5050400441866888,
+      "acc": 0.7454242928452579,
+      "test_coupon": "PP6",
+      "model_seed": 0,
+      "ckpt": "experiments/runs/general_ndt_e1/ckpts/PP6_seed0/mae_step3000.pt"
+    },
+    {
+      "auroc": 0.5965356408604131,
+      "macro_f1": 0.48739338464738924,
+      "balanced_acc": 0.5076482862315506,
+      "acc": 0.7271214642262895,
+      "test_coupon": "PP6",
+      "model_seed": 1,
+      "ckpt": "experiments/runs/general_ndt_e1/ckpts/PP6_seed1/mae_step3000.pt"
+    },
+    {
+      "auroc": 0.5986529196968302,
+      "macro_f1": 0.48471742110235533,
+      "balanced_acc": 0.5104099542790512,
+      "acc": 0.7387687188019967,
+      "test_coupon": "PP6",
+      "model_seed": 2,
+      "ckpt": "experiments/runs/general_ndt_e1/ckpts/PP6_seed2/mae_step3000.pt"
+    },
+    {
+      "auroc": 0.643624691817463,
+      "macro_f1": 0.576223381751516,
+      "balanced_acc": 0.5863957761548123,
+      "acc": 0.7753743760399334,
+      "test_coupon": "PP7",
+      "model_seed": 0,
+      "ckpt": "experiments/runs/general_ndt_e1/ckpts/PP7_seed0/mae_step3000.pt"
+    },
+    {
+      "auroc": 0.5724519700423315,
+      "macro_f1": 0.5495541184020968,
+      "balanced_acc": 0.5757431269479463,
+      "acc": 0.7221297836938436,
+      "test_coupon": "PP7",
+      "model_seed": 1,
+      "ckpt": "experiments/runs/general_ndt_e1/ckpts/PP7_seed1/mae_step3000.pt"
+    },
+    {
+      "auroc": 0.6660231660231659,
+      "macro_f1": 0.6333984441931394,
+      "balanced_acc": 0.6156207842954831,
+      "acc": 0.8519134775374376,
+      "test_coupon": "PP7",
+      "model_seed": 2,
+      "ckpt": "experiments/runs/general_ndt_e1/ckpts/PP7_seed2/mae_step3000.pt"
+    }
+  ],
+  "wall_seconds": 5705.0
+}

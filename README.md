@@ -272,9 +272,16 @@ python scripts/paut_make_table.py            # 汇总表 + 跨模态对照
   val AUC（0.84–0.91）≫ test AUC（0.39–0.66）→ 跨 coupon 泛化鸿沟再次确认（val 为同 coupon
   留出位置，test 为完整留出 coupon）；PP7 稀疏缺陷折最弱。详见
   [`reports/General_NDT_E0_严格基线报告.md`](reports/General_NDT_E0_严格基线报告.md)。
-- 当前状态与下一动作：`STATE.md`（Phase 1 completed / **Phase 2A Gate 已通过** / E0 已完成）；
-  下一步 = **E1 单域 SSL（PENELOPE vanilla MAE 预训练 → 冻结探针 coupon LOOCV）对照 E0**，
-  再 E2 多源 SSL。
+- **E1 单域 SSL（PENELOPE vanilla MAE + 冻结探针, 2026-09-02）**：**per-fold 严格预训练**
+  （每折只在非 test 的 4 coupon 上无标签预训练 MAE，test coupon 信号不进预训练），冻结 CLS
+  pooled 特征 + logistic 探针（E0 同划分），3 seed。**主指标 = 非PP4 逐折均值 AUROC
+  0.5680 ± 0.0701（12 折×seed）**；**Δ = E1 − E0 = +0.0427，3/3 seed 为正 → 判正迁移 ✅**；
+  **PP7（稀疏缺陷）从 E0 最弱折（0.39–0.53）变为 E1 最强折（0.57–0.67）** —— SSL 预训练在
+  标签稀疏时收益最大。详见
+  [`reports/General_NDT_E1_单域SSL报告.md`](reports/General_NDT_E1_单域SSL报告.md)。
+- 当前状态与下一动作：`STATE.md`（Phase 1 completed / Phase 2A Gate 已通过 / E0 / **E1 完成**）；
+  下一步 = **E2 多源 SSL（PENELOPE + EddyCus 无标签联合预训练 → 冻结探针 coupon LOOCV）
+  对照 E1 0.5680**。
 
 ## 目录结构
 

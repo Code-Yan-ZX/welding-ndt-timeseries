@@ -1,0 +1,39 @@
+# ============================================================
+# General NDT Foundation — E1 单域 SSL: PENELOPE vanilla MAE 预训练 + 冻结探针
+# 协议 (严格): per-fold 严格 pretrain —— 每折只在非 test 的 4 coupon (无标签) 上预训练,
+#   冻结 encoder 后在 E0 同划分 (85/15 分层 train/val, test=coupon) 上 logistic 探针。
+#   主指标 = 非PP4 逐折均值±std (跨 4 折 × 3 seed); 对照 E0 scratch 0.5254。
+# ============================================================
+
+dataset: penelope_paut
+dataset_config:
+  label_type: binary
+
+model:                       # 骨干与 E0 同架构 (ModalAdapter + PatchTransformer)
+  d_model: 128
+  patch_len: 16
+  patch2d: 16
+  n_layers_enc: 4
+  n_heads: 4
+  d_decoder: 128             # 轻量 decoder
+  n_layers_dec: 1
+  mask_ratio: 0.5            # vanilla MAE random mask
+  n_modalities: 8
+  n_sensors: 32
+  dropout: 0.1
+
+ssl:
+  n_steps: 3000              # 每折预训练步数 (2400 样本/折, batch 32 ≈ 40 epoch)
+  batch_size: 32
+  lr: 1.0e-3
+  weight_decay: 1.0e-4
+  normalize: per_sample
+  model_seeds: [0, 1, 2]
+  data_seed: 42
+  log_every: 500
+  ckpt_every: 3000
+
+probe:
+  val_frac: 0.15             # E0 同划分: rest 85/15 分层切 train/val, test=coupon
+
+output_dir: experiments/runs/general_ndt_e1
