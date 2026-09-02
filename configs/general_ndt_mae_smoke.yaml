@@ -1,0 +1,39 @@
+# ============================================================
+# General NDT Foundation — M0 vanilla MAE smoke 配置 (Phase 2A)
+# 目标: 证明最小 vanilla MAE 闭环正确 (loss 下降 / checkpoint 可加载 /
+#       逐折冻结线性探针可运行), 非新方法结果。
+# ============================================================
+
+dataset: penelope_paut            # penelope_paut | eddycus
+dataset_config:
+  sample_limit: 240               # smoke 用小样本
+  label_type: binary
+  # eddycus 专用 (representation: exploratory_flat_1d | native_grid_2d)
+  # representation: exploratory_flat_1d
+  # max_points: 2048
+
+model:
+  d_model: 64
+  patch_len: 16
+  patch2d: 16
+  n_layers_enc: 2
+  n_heads: 2
+  d_decoder: 64
+  n_layers_dec: 1
+  mask_ratio: 0.5
+  n_modalities: 8
+  n_sensors: 32
+  dropout: 0.0
+
+train:
+  n_steps: 300
+  batch_size: 8
+  lr: 1.0e-3
+  weight_decay: 0.0
+  normalize: per_sample       # MAE 目标=原始 patch, per-sample z-score 使 loss 量级正常
+  model_seed: 0
+  data_seed: 0
+  log_every: 25
+  ckpt_every: 300
+
+output_dir: experiments/runs/general_ndt_mae_smoke
