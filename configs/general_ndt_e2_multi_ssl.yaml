@@ -1,0 +1,45 @@
+# ============================================================
+# General NDT Foundation — E2 多源 SSL: PENELOPE(超声) + EddyCus(涡流) 联合预训练
+# 协议 (严格): per-fold 严格预训练 —— 每折只在非 test 的 4 PENELOPE coupon + 全部
+#   EddyCus (无标签) 上联合预训练, 冻结 encoder 后在 E0/E1 同划分上 logistic 探针。
+#   主指标 = 非PP4 逐折均值±std (4 折 × 3 seed); 对照 E1 0.5680 / E0 0.5254。
+# 采样: 1:1 确定性交替 (PENELOPE 曝光 3000 步 = E1 相同; EddyCus 小源过采样 3000 步)
+#   → 干净隔离"多源"效应 (PENELOPE 曝光相同, 仅额外跨模态数据)。
+# ============================================================
+
+dataset: penelope_paut
+dataset_config:
+  label_type: binary
+
+eddycus_config:               # 涡流无标签预训练源 (B/C pending admission, 仅预训练)
+  representation: exploratory_flat_1d
+  max_points: 2048
+
+model:                       # 骨干与 E0/E1 同架构
+  d_model: 128
+  patch_len: 16
+  patch2d: 16
+  n_layers_enc: 4
+  n_heads: 4
+  d_decoder: 128
+  n_layers_dec: 1
+  mask_ratio: 0.5
+  n_modalities: 8
+  n_sensors: 32
+  dropout: 0.1
+
+ssl:
+  n_steps: 6000              # 3000 PENELOPE + 3000 EddyCus (1:1 交替)
+  batch_size: 32
+  lr: 1.0e-3
+  weight_decay: 1.0e-4
+  normalize: per_sample
+  model_seeds: [0, 1, 2]
+  data_seed: 42
+  log_every: 1000
+  ckpt_every: 6000
+
+probe:
+  val_frac: 0.15             # E0/E1 同划分: rest 85/15 分层 train/val, test=coupon
+
+output_dir: experiments/runs/general_ndt_e2

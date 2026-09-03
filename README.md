@@ -279,9 +279,18 @@ python scripts/paut_make_table.py            # 汇总表 + 跨模态对照
   **PP7（稀疏缺陷）从 E0 最弱折（0.39–0.53）变为 E1 最强折（0.57–0.67）** —— SSL 预训练在
   标签稀疏时收益最大。详见
   [`reports/General_NDT_E1_单域SSL报告.md`](reports/General_NDT_E1_单域SSL报告.md)。
-- 当前状态与下一动作：`STATE.md`（Phase 1 completed / Phase 2A Gate 已通过 / E0 / **E1 完成**）；
-  下一步 = **E2 多源 SSL（PENELOPE + EddyCus 无标签联合预训练 → 冻结探针 coupon LOOCV）
-  对照 E1 0.5680**。
+- **E2 多源 SSL（PENELOPE + EddyCus 联合预训练, 2026-09-04）**：per-fold 严格（4 非 test
+  coupon + 全部 EddyCus 无标签联合预训练），**模态平衡 1:1 交替**（PENELOPE 曝光 3000 步
+  = E1 相同，EddyCus 过采样 3000 步），冻结探针，3 seed。**主指标 = 非PP4 逐折均值 AUROC
+  0.5335 ± 0.0678（12 折×seed）**；**Δ = E2 − E1 = −0.0345，3/3 seed 为负 → 判负迁移 ✗
+  （按协议停止"超声+涡流跨模态联合预训练"方向）**；相对 E0 也无正迁移（+0.008 < +0.01）。
+  诊断：跨模态数据稀释共享骨干容量，干扰 PENELOPE 表征；最显著单折崩塌 seed2 PP7
+  （Δ=−0.2205）—— 标签稀疏折受跨模态干扰伤害最大（E1 反向发现的镜像）。与仓库历史互证：
+  M0-2B/2C 外部迁移均负，E2 表明 general_ndt 多源 MAE 框架下超声+涡流联合仍无法翻盘。详见
+  [`reports/General_NDT_E2_多源SSL报告.md`](reports/General_NDT_E2_多源SSL报告.md)。
+- 当前状态与下一动作：`STATE.md`（Phase 1 completed / Phase 2A Gate 已通过 / E0 / E1 /
+  **E2 完成（负迁移）**）；下一步 = **E1 仍是最佳（0.5680）**，多源假设需换组合/架构再试
+  （如同模态多源 / 模态专用 stem），且必须先过负迁移审计。
 
 ## 目录结构
 

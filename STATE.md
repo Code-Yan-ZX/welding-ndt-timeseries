@@ -92,9 +92,21 @@
   收益最大。
 - 结果：`reports/General_NDT_E1_单域SSL报告.md`；JSON：`experiments/results/general_ndt_e1_results.json`。
 
+### E2 多源 SSL（已完成, 2026-09-04, 负迁移）
+- **per-fold 严格联合预训练**：每折只在 4 非 test PENELOPE coupon + 全部 EddyCus（无标签）
+  上联合预训练；模态平衡 1:1 交替（PENELOPE 曝光 3000 步 = E1 相同，EddyCus 过采样 3000 步）。
+- 冻结 CLS pooled 特征 + logistic 探针（E0/E1 同划分），3 seed。
+- **主指标 = 非PP4 逐折均值 AUROC 0.5335 ± 0.0678（12 折×seed）**；每 seed 0.500/0.533/0.567。
+- **Δ(E2−E1) = −0.0345，3/3 seed 为负 → 判负迁移，按协议停止"超声+涡流跨模态联合预训练"**；
+  Δ(E2−E0) = +0.008（< 门槛）。
+- 诊断：跨模态数据稀释共享骨干容量；最显著单折崩塌 seed2 PP7（Δ=−0.2205）；与 M0-2B/2C
+  外部迁移负结论互证（general_ndt 多源 MAE 框架亦无法翻盘）。
+- 结果：`reports/General_NDT_E2_多源SSL报告.md`；JSON：`experiments/results/general_ndt_e2_results.json`。
+
 ### 下一阶段（建议）
-1. **E2 多源 SSL**：PENELOPE + EddyCus 无标签联合预训练 → 冻结探针 coupon LOOCV，
-   对照 E1 0.5680（同骨干同协议；判据 Δ≥+0.01 且 ≥2/3 seed）。
+1. **多源假设换组合再试（需先过负迁移审计）**：同模态多源（PENELOPE + 合成超声 / external_weld_ut）
+   或模态专用 stem（不同模态不共享 patch 投影）；若仍负，则"多源物理感知 SSL 改善跨试件泛化"
+   主假设在现有骨干/规模下不成立，收口负面证据。
 2. EddyCus cross-config/cross-sensor 探索（exploratory；无显式试件，不作主结果）。
 3. 人工核实并（若合规）下载 **Long-term GW SHM**（Figshare, CC BY-NC-ND, 单结构 → 仅预训练+
    迁移验证）；external_weld_ut 补配套元数据（.ods/.xlsx）。

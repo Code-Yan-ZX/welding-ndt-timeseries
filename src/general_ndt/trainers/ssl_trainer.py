@@ -143,6 +143,62 @@ class SSLTrainer:
         return final_ckpt
 
     # ------------------------------------------------------------------
+    def train_multi(self, sources: list[tuple[str, Sequence[GeneralNDTSample]]],
+                    n_steps: int, batch_size: int = 16, log_every: int = 10,
+                    ckpt_every: int = 500,
+                    output_dir: str | Path = "experiments/runs/general_ndt_mae_multi") -> Path:
+        """多源自监督训练 (E2): 多源在同一共享 token 空间联合预训练。
+
+        - 每源独立构建 batch (per-sample 标准化 + data_seed shuffle);
+        - **确定性交替采样**: 每步按源轮转取下一 batch, 小源自然过采样 (模态平衡);
+        - 全部源的样本联合指纹写入 checkpoint (防跨数据集串用)。
+        """
+        self._init_weights()
+        out = Path(output_dir)
+        out.mkdir(parents=True, exist_ok=True)
+        sources = list(sources)
+        batch_lists = []
+        for name, samples in sources:
+            bl = self._build_batches(samples, batch_size)
+            if not bl:
+                raise ValueError(f"源 '{name}' 为空, 无法训练")
+            batch_lists.append(bl)
+            logger.info(f"[multi] 源 '{name}': {len(samples)} samples, {len(bl)} batches")
+        all_samples = [s for _, ss in sources for s in ss]
+        fp = dataset_fingerprint(all_samples)
+        pointers = [0] * len(batch_lists)
+        step, best_loss, final_ckpt = 0, float("inf"), None
+        while step < n_steps:
+            for si in range(len(batch_lists)):
+                if step >= n_steps:
+                    break
+                bl = batch_lists[si]
+                tb = bl[pointers[si] % len(bl)]
+                pointers[si] += 1
+                tb = {k: (v.to(self.device) if isinstance(v, torch.Tensor) else v)
+                      for k, v in tb.items()}
+                self.model.train()
+                self.optimizer.zero_grad()
+                mask_seed = self.data_seed * 1_000_000 + step
+                out_d = self.model(tb, mask_seed=mask_seed)
+                loss = out_d["loss"]
+                loss.backward()
+                self.optimizer.step()
+                cur = float(loss.detach().item())
+                if cur < best_loss:
+                    best_loss = cur
+                if (step + 1) % log_every == 0 or step == n_steps - 1:
+                    logger.info(
+                        f"[step {step+1}/{n_steps}] src={si}({sources[si][0]}) "
+                        f"loss={cur:.6f} best={best_loss:.6f}")
+                if (step + 1) % ckpt_every == 0 or step == n_steps - 1:
+                    ckpt = out / f"mae_step{step+1}.pt"
+                    self.save_checkpoint(ckpt, step=step + 1, loss=cur, fingerprint=fp)
+                    final_ckpt = ckpt
+                step += 1
+        return final_ckpt
+
+    # ------------------------------------------------------------------
     def save_checkpoint(self, path: str | Path, step: int, loss: float,
                         fingerprint: str) -> None:
         path = Path(path)
