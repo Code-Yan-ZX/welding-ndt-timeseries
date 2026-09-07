@@ -1,0 +1,48 @@
+# ============================================================
+# General NDT Foundation — E2b 多源 SSL 变体: 模态专用 stem
+# PENELOPE(超声) + EddyCus(涡流) 联合预训练, 但 patch 投影按模态分离:
+#   超声 stem 只被 PENELOPE 训练 (与 E1 完全相同), 涡流 stem 只被 EddyCus 训练,
+#   共享的只有 Transformer backbone + modality/sensor embedding。
+# → 与 E1 的唯一差异 = "共享 backbone 是否从跨模态数据获益" (隔离 E2 负迁移的
+#   "跨模态 stem 混淆"候选原因)。
+# 其余协议与 E2 完全相同 (per-fold 严格, 1:1 模态平衡, 3000+3000 步, 3 seed)。
+# 对照: E2 0.5335 (共享 stem) / E1 0.5680 (单域)。
+# ============================================================
+
+dataset: penelope_paut
+dataset_config:
+  label_type: binary
+
+eddycus_config:
+  representation: exploratory_flat_1d
+  max_points: 2048
+
+model:
+  d_model: 128
+  patch_len: 16
+  patch2d: 16
+  n_layers_enc: 4
+  n_heads: 4
+  d_decoder: 128
+  n_layers_dec: 1
+  mask_ratio: 0.5
+  n_modalities: 8
+  n_sensors: 32
+  dropout: 0.1
+  per_modality_stem: true    # E2b: 模态专用 stem
+
+ssl:
+  n_steps: 6000              # 3000 PENELOPE + 3000 EddyCus (1:1 交替)
+  batch_size: 32
+  lr: 1.0e-3
+  weight_decay: 1.0e-4
+  normalize: per_sample
+  model_seeds: [0, 1, 2]
+  data_seed: 42
+  log_every: 1000
+  ckpt_every: 6000
+
+probe:
+  val_frac: 0.15
+
+output_dir: experiments/runs/general_ndt_e2b

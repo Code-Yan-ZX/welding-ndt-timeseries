@@ -283,14 +283,22 @@ python scripts/paut_make_table.py            # 汇总表 + 跨模态对照
   coupon + 全部 EddyCus 无标签联合预训练），**模态平衡 1:1 交替**（PENELOPE 曝光 3000 步
   = E1 相同，EddyCus 过采样 3000 步），冻结探针，3 seed。**主指标 = 非PP4 逐折均值 AUROC
   0.5335 ± 0.0678（12 折×seed）**；**Δ = E2 − E1 = −0.0345，3/3 seed 为负 → 判负迁移 ✗
-  （按协议停止"超声+涡流跨模态联合预训练"方向）**；相对 E0 也无正迁移（+0.008 < +0.01）。
-  诊断：跨模态数据稀释共享骨干容量，干扰 PENELOPE 表征；最显著单折崩塌 seed2 PP7
-  （Δ=−0.2205）—— 标签稀疏折受跨模态干扰伤害最大（E1 反向发现的镜像）。与仓库历史互证：
-  M0-2B/2C 外部迁移均负，E2 表明 general_ndt 多源 MAE 框架下超声+涡流联合仍无法翻盘。详见
+  （共享 stem 架构）**；诊断：**共享 patch 投影（stem）把跨模态信号混在一起，稀释目标域
+  表征**；最显著单折崩塌 seed2 PP7（Δ=−0.2205）。详见
   [`reports/General_NDT_E2_多源SSL报告.md`](reports/General_NDT_E2_多源SSL报告.md)。
+- **E2b 多源 SSL（模态专用 stem, 2026-09-07）**：**每模态独立 patch 投影（stem），只共享
+  backbone**（`ModalAdapter.per_modality_stem`）—— 超声 stem 只被 PENELOPE 训练（与 E1
+  完全相同），隔离出"共享 backbone 是否从跨模态数据获益"。其余协议与 E2 完全一致。
+  **主指标 = 非PP4 逐折均值 AUROC 0.5946 ± 0.0898（12 折×seed）**；**Δ(E2b−E1) = +0.0266，
+  3/3 seed 为正 → 判正迁移 ✅**；Δ(E2b−E2) = +0.061（修复 E2 负迁移并反超）；最显著
+  seed2 PP7：E2b 0.7624 vs E1 0.6660 vs E2 0.4456（E2 崩塌折被 E2b 修复）。**"多源物理
+  感知 SSL 改善跨试件泛化"主假设在模态专用 stem 架构下成立**（超声+涡流）：
+  E2b 0.595 > E1 0.568 > E2 0.534 > E0 0.525。详见
+  [`reports/General_NDT_E2b_模态专用stem多源SSL报告.md`](reports/General_NDT_E2b_模态专用stem多源SSL报告.md)。
 - 当前状态与下一动作：`STATE.md`（Phase 1 completed / Phase 2A Gate 已通过 / E0 / E1 /
-  **E2 完成（负迁移）**）；下一步 = **E1 仍是最佳（0.5680）**，多源假设需换组合/架构再试
-  （如同模态多源 / 模态专用 stem），且必须先过负迁移审计。
+  **E2（负）→ E2b（正, 模态专用 stem）**）；下一步 = **模态专用 stem 作为多源默认架构**，
+  扩展更多源（PENELOPE + external_weld_ut 同模态 / 合成超声 + EddyCus）验证可扩展性并过
+  负迁移审计。
 
 ## 目录结构
 

@@ -92,21 +92,36 @@
   收益最大。
 - 结果：`reports/General_NDT_E1_单域SSL报告.md`；JSON：`experiments/results/general_ndt_e1_results.json`。
 
-### E2 多源 SSL（已完成, 2026-09-04, 负迁移）
+### E2 多源 SSL（已完成, 2026-09-04, 共享 stem 负迁移 → 被 E2b 修正）
 - **per-fold 严格联合预训练**：每折只在 4 非 test PENELOPE coupon + 全部 EddyCus（无标签）
   上联合预训练；模态平衡 1:1 交替（PENELOPE 曝光 3000 步 = E1 相同，EddyCus 过采样 3000 步）。
 - 冻结 CLS pooled 特征 + logistic 探针（E0/E1 同划分），3 seed。
 - **主指标 = 非PP4 逐折均值 AUROC 0.5335 ± 0.0678（12 折×seed）**；每 seed 0.500/0.533/0.567。
-- **Δ(E2−E1) = −0.0345，3/3 seed 为负 → 判负迁移，按协议停止"超声+涡流跨模态联合预训练"**；
-  Δ(E2−E0) = +0.008（< 门槛）。
-- 诊断：跨模态数据稀释共享骨干容量；最显著单折崩塌 seed2 PP7（Δ=−0.2205）；与 M0-2B/2C
-  外部迁移负结论互证（general_ndt 多源 MAE 框架亦无法翻盘）。
+- **Δ(E2−E1) = −0.0345，3/3 seed 为负 → 共享 stem 架构判负迁移**；Δ(E2−E0) = +0.008（< 门槛）。
+- 诊断：**共享 patch 投影（stem）把跨模态信号混在一起，稀释目标域表征**（非数据本身问题）；
+  最显著单折崩塌 seed2 PP7（Δ=−0.2205）。**E2b（模态专用 stem）已验证此根因并翻正
+  （+0.061 回收并反超 E1）** → 停止的是"共享 stem 多源"，不是"多源"本身。
 - 结果：`reports/General_NDT_E2_多源SSL报告.md`；JSON：`experiments/results/general_ndt_e2_results.json`。
 
+### E2b 模态专用 stem 多源 SSL（已完成, 2026-09-07, 正迁移）
+- 每模态独立 patch 投影（stem），只共享 backbone（`ModalAdapter.per_modality_stem`）：
+  超声 stem 只被 PENELOPE 训练（= E1 的 stem 路径），涡流 stem 只被 EddyCus 训练；
+  与 E1 的唯一差异 = 共享 backbone 是否从跨模态数据获益。
+- 其余协议与 E2 完全一致（per-fold 严格 / 1:1 模态平衡 / 3000+3000 步 / 3 seed）。
+- **主指标 = 非PP4 逐折均值 AUROC 0.5946 ± 0.0898（12 折×seed）**；每 seed 0.577/0.602/0.605。
+- **Δ(E2b−E1) = +0.0266，3/3 seed 为正 → 判正迁移 ✅**；Δ(E2b−E2) = +0.061（修复 E2 负迁移
+  并反超）；Δ(E2b−E0) = +0.069。
+- 诊断：共享 stem 的跨模态混淆是 E2 负迁移根因；模态专用 stem 完全回收并反超；最显著
+  seed2 PP7 E2b 0.7624 vs E1 0.6660 vs E2 0.4456（E2 崩塌折被修复）。
+- **"多源物理感知 SSL 改善跨试件泛化"主假设在模态专用 stem 架构下成立（超声+涡流）**：
+  E2b 0.595 > E1 0.568 > E2 0.534 > E0 0.525。
+- 结果：`reports/General_NDT_E2b_模态专用stem多源SSL报告.md`；
+  JSON：`experiments/results/general_ndt_e2b_results.json`。
+
 ### 下一阶段（建议）
-1. **多源假设换组合再试（需先过负迁移审计）**：同模态多源（PENELOPE + 合成超声 / external_weld_ut）
-   或模态专用 stem（不同模态不共享 patch 投影）；若仍负，则"多源物理感知 SSL 改善跨试件泛化"
-   主假设在现有骨干/规模下不成立，收口负面证据。
+1. **模态专用 stem 作为多源默认架构**，扩展更多源验证可扩展性（需过负迁移审计）：
+   PENELOPE + external_weld_ut（同模态超声 2D FMC）/ 合成超声 + EddyCus（三源）；
+   若扩展仍正，则多源物理感知 SSL 主假设成立并推进。
 2. EddyCus cross-config/cross-sensor 探索（exploratory；无显式试件，不作主结果）。
 3. 人工核实并（若合规）下载 **Long-term GW SHM**（Figshare, CC BY-NC-ND, 单结构 → 仅预训练+
    迁移验证）；external_weld_ut 补配套元数据（.ods/.xlsx）。

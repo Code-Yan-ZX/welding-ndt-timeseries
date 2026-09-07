@@ -43,6 +43,7 @@ class MaskedAutoencoder(nn.Module):
         n_sensors: int = 32,
         dropout: float = 0.1,
         max_rows: int = 128,
+        per_modality_stem: bool = False,
     ):
         super().__init__()
         self.patch_len = patch_len
@@ -51,6 +52,7 @@ class MaskedAutoencoder(nn.Module):
         self.adapter = ModalAdapter(
             d_model=d_model, patch_len=patch_len, patch2d=patch2d,
             n_modalities=n_modalities, n_sensors=n_sensors,
+            per_modality_stem=per_modality_stem,
         )
         self.encoder = PatchTransformer(
             d_model=d_model, n_layers=n_layers_enc, n_heads=n_heads,

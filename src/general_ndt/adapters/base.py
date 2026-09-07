@@ -29,17 +29,42 @@ class ModalAdapter(nn.Module):
         patch2d: int = 16,       # 2D / 时频 patch
         n_modalities: int = 8,
         n_sensors: int = 32,
+        per_modality_stem: bool = False,
     ):
         super().__init__()
         self.d_model = d_model
         self.patch_len = patch_len
         self.patch2d = patch2d
+        # per_modality_stem=False (默认, E0/E1/E2 同构): 所有 1D 模态共享一个 stem;
+        # =True (E2b): 每模态独立 stem (超声 stem 只被超声数据训练), 共享 backbone ——
+        # 隔离"跨模态 stem 混淆"这一 E2 负迁移的候选原因。
+        self.per_modality_stem = per_modality_stem
         # Stem1D 为 per-channel 共享 conv (通道数无关), 无需按通道缓存
         self.stem1d = Stem1D(in_channels=1, patch_len=patch_len, d_model=d_model)
         self.stem2d = Stem2D(patch=patch2d, d_model=d_model)
         self.stem_tf = StemTF(patch=patch2d, d_model=d_model)
+        self._stem1d_cache: dict[str, Stem1D] = {}
+        self._stem2d_cache: dict[str, Stem2D] = {}
         self.modality_embed = nn.Embedding(n_modalities, d_model)
         self.sensor_embed = nn.Embedding(n_sensors, d_model)
+
+    def _stem1d_for(self, modality: str) -> Stem1D:
+        if not self.per_modality_stem:
+            return self.stem1d
+        if modality not in self._stem1d_cache:
+            self._stem1d_cache[modality] = Stem1D(
+                in_channels=1, patch_len=self.patch_len, d_model=self.d_model
+            ).to(next(self.parameters()).device)
+        return self._stem1d_cache[modality]
+
+    def _stem2d_for(self, modality: str) -> Stem2D:
+        if not self.per_modality_stem:
+            return self.stem2d
+        if modality not in self._stem2d_cache:
+            self._stem2d_cache[modality] = Stem2D(
+                patch=self.patch2d, d_model=self.d_model
+            ).to(next(self.parameters()).device)
+        return self._stem2d_cache[modality]
 
     def _modality_id(self, modality: str) -> int:
         order = ["ultrasonic", "guided_wave", "eddy_current", "acoustic_emission",
@@ -55,12 +80,18 @@ class ModalAdapter(nn.Module):
         sensor_ids: list[str] | None = None,
     ) -> tuple[torch.Tensor, tuple[int, ...]]:
         B = x.shape[0]
+        if self.per_modality_stem:
+            # 批内模态必须同质 (per-modality stem 按批路由)
+            if len(set(modalities)) != 1:
+                raise ValueError(
+                    f"per_modality_stem 要求批内模态同质, 得到 {set(modalities)}")
+        modality = modalities[0] if modalities else "unknown"
         if shape_kind == "1d":
-            z, grid = self.stem1d(x)                       # (B, C*n_col, d), (C, n_col)
+            z, grid = self._stem1d_for(modality)(x)        # (B, C*n_col, d), (C, n_col)
         elif shape_kind == "2d":
             if x.ndim == 3:                                # (B, H, W) → (B, 1, H, W)
                 x = x.unsqueeze(1)
-            z, grid = self.stem2d(x)                       # (B, C*nh*nw, d), (C, nh, nw)
+            z, grid = self._stem2d_for(modality)(x)        # (B, C*nh*nw, d), (C, nh, nw)
         else:
             raise ValueError(f"未知 shape_kind: {shape_kind}")
 

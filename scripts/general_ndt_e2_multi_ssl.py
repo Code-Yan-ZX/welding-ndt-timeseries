@@ -49,6 +49,7 @@ def make_model(cfg, model_seed):
         d_decoder=int(m["d_decoder"]), n_layers_dec=int(m["n_layers_dec"]),
         mask_ratio=float(m["mask_ratio"]), n_modalities=int(m.get("n_modalities", 8)),
         n_sensors=int(m.get("n_sensors", 32)), dropout=float(m.get("dropout", 0.0)),
+        per_modality_stem=bool(m.get("per_modality_stem", False)),
     )
 
 
