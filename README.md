@@ -238,6 +238,7 @@ python scripts/paut_make_table.py            # 汇总表 + 跨模态对照
 
 > 分支 `research/general-ndt-foundation`。目标是 **模态适配 + 物理感知掩码 + 多源自监督学习**
 > 的通用 NDT 信号基础模型。Phase 2A = **Admission Resolution and Implementation Correctness Gate**。
+> 📋 **分支总览**（数据集/实验结果/分析与思路）：[`docs/general_ndt_foundation/BRANCH_SUMMARY.md`](docs/general_ndt_foundation/BRANCH_SUMMARY.md)
 
 - **EddyCus 准入修正**：manifest 的 `specimen_id` 是 `(material,fiber,layup,description,
   defect,thickness)` 的 **SHA1 推断配置组哈希**，非显式物理试件 ID → **148 = inferred
