@@ -7,6 +7,7 @@ from general_ndt.datasets.registry import DATASETS, build_dataset, register_data
 
 # 导入即注册 (顺序无关)
 from general_ndt.datasets import eddycus  # noqa: F401,E402
+from general_ndt.datasets import external_weld_ut  # noqa: F401,E402
 from general_ndt.datasets import penelope  # noqa: F401,E402
 
 __all__ = [

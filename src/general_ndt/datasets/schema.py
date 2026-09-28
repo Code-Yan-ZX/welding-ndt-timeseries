@@ -24,7 +24,9 @@ from typing import Any, Optional
 import numpy as np
 
 # 模态枚举 (与 manifest schema / configs/general_ndt_datasets.yaml 对齐)
-MODALITIES = ("ultrasonic", "guided_wave", "eddy_current", "acoustic_emission", "vibration")
+# F 系列追加 "radiographic" (焊缝 RT/X-ray 图像, 2D 形态); 追加不重排, 保持既有 id
+MODALITIES = ("ultrasonic", "guided_wave", "eddy_current", "acoustic_emission",
+              "vibration", "radiographic")
 
 # 标签类型
 LABEL_TYPES = ("binary", "multiclass", "regression", "none")

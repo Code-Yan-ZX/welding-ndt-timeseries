@@ -1,0 +1,62 @@
+# ============================================================
+# General NDT Foundation — F5: F4 同数据同步数, 全 random masking (去除缺陷语义对齐)
+# 用户矩阵 E5 对应。与 F4 完全相同的数据/步数/架构/seed, 唯一差异 = 全部源
+#   random masking (无任何 region_bias)。归因: F5−E1 = 多源数据量贡献;
+#   F4−F5 = 缺陷语义对齐贡献。checkpoint 训练签名自动区分 F4/F5。
+# 协议: E2b 同款 (per-fold 严格, 模态专用 stem, 冻结探针, 3 seed)。
+# 对照: E1 0.5680 (锚点) / 旧管线天花板 0.579。判据: Δ≤−0.01 = stop。
+# ============================================================
+experiment: F5
+
+sources:
+  - dataset: penelope_paut
+    steps: 3000
+    mask_policy: random
+    config: {label_type: binary}
+  - dataset: external_weld_ut
+    steps: 1000
+    mask_policy: random
+    config: {groups: [A, B, C, D]}
+  - dataset: swrd
+    steps: 1000
+    mask_policy: random
+    config: {image_size: 256}
+  - dataset: eddycus
+    steps: 1000
+    mask_policy: random
+    config: {representation: exploratory_flat_1d, max_points: 2048}
+
+model:
+  d_model: 128
+  patch_len: 16
+  patch2d: 16
+  n_layers_enc: 4
+  n_heads: 4
+  d_decoder: 128
+  n_layers_dec: 1
+  mask_ratio: 0.5
+  n_modalities: 9
+  n_sensors: 32
+  dropout: 0.1
+  per_modality_stem: true
+
+ssl:
+  n_steps: 6000
+  batch_size: 32
+  lr: 1.0e-3
+  weight_decay: 1.0e-4
+  normalize: per_sample
+  model_seeds: [0, 1, 2]
+  data_seed: 42
+  log_every: 1000
+  ckpt_every: 6000
+
+probe:
+  val_frac: 0.15
+
+baselines:
+  e1_mean: 0.5680
+  e1_per_seed: {0: 0.5740, 1: 0.5557, 2: 0.5744}
+  e2b_mean: 0.5946
+
+output_dir: experiments/runs/general_ndt_f5

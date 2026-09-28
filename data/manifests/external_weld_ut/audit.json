@@ -1,0 +1,140 @@
+{
+  "fmc": [
+    {
+      "tag": "B",
+      "file": "data/raw/external_weld_ut/B/FMC_2012_04_26_at_16_16.mat",
+      "variable": "FMC_new",
+      "shape": [
+        10000,
+        45,
+        45
+      ],
+      "dtype": "int32",
+      "min": -32768,
+      "max": 32767,
+      "smoothness_scores": {
+        "ax0": 0.1387,
+        "ax1": 1.4538,
+        "ax2": 1.472
+      },
+      "time_axis": 0,
+      "energy_front_quarter": 0.9984,
+      "whosmat": [
+        {
+          "name": "FMC_new",
+          "shape": [
+            10000,
+            45,
+            45
+          ],
+          "dtype": "int32"
+        }
+      ]
+    },
+    {
+      "tag": "C",
+      "file": "data/raw/external_weld_ut/C/FMC_RR3_2_25MHz_3mmsdh.mat",
+      "variable": "fmc",
+      "shape": [
+        128,
+        128,
+        976
+      ],
+      "dtype": "float64",
+      "min": -32768.0,
+      "max": 32767.0,
+      "smoothness_scores": {
+        "ax0": 0.6633,
+        "ax1": 0.8081,
+        "ax2": 0.5435
+      },
+      "time_axis": 2,
+      "energy_front_quarter": 0.0148,
+      "whosmat": [
+        {
+          "name": "fmc",
+          "shape": [
+            128,
+            128,
+            976
+          ],
+          "dtype": "double"
+        }
+      ]
+    },
+    {
+      "tag": "A",
+      "file": "data/raw/external_weld_ut/A/Lack_of_fusion_FMC_DORT_2016.mat",
+      "variable": "FMC_new",
+      "shape": [
+        10000,
+        128,
+        128
+      ],
+      "dtype": "int32",
+      "min": -23533,
+      "max": 21232,
+      "smoothness_scores": {
+        "ax0": 0.1704,
+        "ax1": 1.3205,
+        "ax2": 1.2984
+      },
+      "time_axis": 0,
+      "energy_front_quarter": 0.9881,
+      "whosmat": [
+        {
+          "name": "FMC_new",
+          "shape": [
+            10000,
+            128,
+            128
+          ],
+          "dtype": "int32"
+        }
+      ]
+    }
+  ],
+  "paut": {
+    "tag": "D",
+    "file": "data/raw/external_weld_ut/D/PAUT.zip",
+    "n_txt": 389,
+    "prefix_groups": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M"
+    ],
+    "example_shape": [
+      762,
+      401
+    ],
+    "example_min": 0.0,
+    "example_max": 33922.0,
+    "total_mb": 379.0
+  },
+  "decision": {
+    "axis_order": {
+      "A": "(T, Ne, Nr) — FMC_new (10000,128,128) int32, time_axis=ax0",
+      "B": "(T, Ne, Nr) — FMC_new (10000,45,45) int32, time_axis=ax0",
+      "C": "(Ne, Nr, T) — fmc (128,128,976) float64, time_axis=ax2"
+    },
+    "representation": "FMC: 每发射元素一个 view, 接收维均匀降采样 16, 时间 max-pool → 512; PAUT(D): 每 txt 一个 view, 位置维均匀降采样 16, 时间 401→零填充 512+valid_mask",
+    "n_views_expected": {
+      "A": 128,
+      "B": 45,
+      "C": 128,
+      "D": 389,
+      "total": 690
+    },
+    "dtype_note": "A/B 为 int32 容器存 int16 值域; C 为 float64 — 统一转 float32 输出"
+  }
+}

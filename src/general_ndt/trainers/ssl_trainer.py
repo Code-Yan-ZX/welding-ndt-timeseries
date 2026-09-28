@@ -96,6 +96,8 @@ class SSLTrainer:
                 "shapes": nb.shapes,
                 "sample_ids": nb.sample_ids,
                 "specimen_ids": nb.specimen_ids,
+                "defect_regions": [s.metadata.get("defect_regions") or []
+                                   for s in chunk],
             })
         return batches
 
@@ -143,33 +145,79 @@ class SSLTrainer:
         return final_ckpt
 
     # ------------------------------------------------------------------
-    def train_multi(self, sources: list[tuple[str, Sequence[GeneralNDTSample]]],
-                    n_steps: int, batch_size: int = 16, log_every: int = 10,
-                    ckpt_every: int = 500,
-                    output_dir: str | Path = "experiments/runs/general_ndt_mae_multi") -> Path:
-        """多源自监督训练 (E2): 多源在同一共享 token 空间联合预训练。
+    @staticmethod
+    def _normalize_sources(sources: list) -> list[tuple[str, Sequence[GeneralNDTSample], dict | None]]:
+        """源规格归一化: (name, samples) 元组 → policy=None (random);
+        dict {"name","samples","mask_policy"} → 带 per-source 掩码策略 (F 系列)。"""
+        norm = []
+        for src in sources:
+            if isinstance(src, dict):
+                norm.append((src["name"], src["samples"], src.get("mask_policy")))
+            else:
+                name, samples = src
+                norm.append((name, samples, None))
+        return norm
+
+    def _training_signature(self, norm_sources: list, n_steps: int, batch_size: int,
+                            fingerprint: str, order: list[int] | None = None) -> str:
+        """训练签名 (F 系列): 数据指纹只看 sample_id, 区分不了同数据不同 mask_policy
+        的训练 (F4 region_bias vs F5 random) — 签名把源规格+策略+训练配置一起哈希,
+        load 时校验, 防止策略不同的 checkpoint 互串。"""
+        adapter = getattr(self.model, "adapter", None)
+        desc = {
+            "sources": [
+                (name, len(ss), json.dumps(mp, sort_keys=True) if mp else None)
+                for name, ss, mp in norm_sources
+            ],
+            "order": order if order is None else [int(i) for i in order],
+            "n_steps": int(n_steps),
+            "batch_size": int(batch_size),
+            "mask_ratio": self.cfg.get("mask_ratio"),
+            "normalize": self.cfg.get("normalize", "per_sample"),
+            "lr": self.cfg.get("lr"), "weight_decay": self.cfg.get("weight_decay"),
+            "data_seed": self.data_seed,
+            "per_modality_stem": getattr(adapter, "per_modality_stem", None),
+            "dataset_fingerprint": fingerprint,
+        }
+        return hashlib.sha256(json.dumps(desc, sort_keys=True).encode("utf-8")).hexdigest()[:16]
+
+    def train_multi(self, sources: list, n_steps: int, batch_size: int = 16,
+                    log_every: int = 10, ckpt_every: int = 500,
+                    output_dir: str | Path = "experiments/runs/general_ndt_mae_multi",
+                    order: list[int] | None = None) -> Path:
+        """多源自监督训练 (E2/E2b/F 系列): 多源在同一共享 token 空间联合预训练。
 
         - 每源独立构建 batch (per-sample 标准化 + data_seed shuffle);
-        - **确定性交替采样**: 每步按源轮转取下一 batch, 小源自然过采样 (模态平衡);
-        - 全部源的样本联合指纹写入 checkpoint (防跨数据集串用)。
+        - **确定性交替采样**: order=None 时每步按源轮转 (E2/E2b 行为, 模态平衡);
+          order=源索引序列 (F 系列: 按步数配额展开的加权轮转表, len == n_steps);
+        - 每源可带独立 mask_policy (F 系列: PENELOPE/EddyCus/extUT random,
+          SWRD region_bias) — 每步按当前源策略采样;
+        - 全部源的样本联合指纹 + **训练签名** 写入 checkpoint (防跨数据集/跨策略串用)。
         """
         self._init_weights()
         out = Path(output_dir)
         out.mkdir(parents=True, exist_ok=True)
-        sources = list(sources)
+        norm_sources = self._normalize_sources(list(sources))
         batch_lists = []
-        for name, samples in sources:
+        for name, samples, _ in norm_sources:
             bl = self._build_batches(samples, batch_size)
             if not bl:
                 raise ValueError(f"源 '{name}' 为空, 无法训练")
             batch_lists.append(bl)
             logger.info(f"[multi] 源 '{name}': {len(samples)} samples, {len(bl)} batches")
-        all_samples = [s for _, ss in sources for s in ss]
+        all_samples = [s for _, ss, _ in norm_sources for s in ss]
         fp = dataset_fingerprint(all_samples)
+        sig = self._training_signature(norm_sources, n_steps, batch_size, fp, order=order)
+        if order is None:
+            order = []
+            while len(order) < n_steps:
+                for si in range(len(batch_lists)):
+                    order.append(si)
+        assert len(order) == n_steps, f"order 长度 {len(order)} ≠ n_steps {n_steps}"
         pointers = [0] * len(batch_lists)
         step, best_loss, final_ckpt = 0, float("inf"), None
         while step < n_steps:
-            for si in range(len(batch_lists)):
+            for si in order:
                 if step >= n_steps:
                     break
                 bl = batch_lists[si]
@@ -180,7 +228,8 @@ class SSLTrainer:
                 self.model.train()
                 self.optimizer.zero_grad()
                 mask_seed = self.data_seed * 1_000_000 + step
-                out_d = self.model(tb, mask_seed=mask_seed)
+                out_d = self.model(tb, mask_seed=mask_seed,
+                                   mask_policy=norm_sources[si][2])
                 loss = out_d["loss"]
                 loss.backward()
                 self.optimizer.step()
@@ -189,18 +238,19 @@ class SSLTrainer:
                     best_loss = cur
                 if (step + 1) % log_every == 0 or step == n_steps - 1:
                     logger.info(
-                        f"[step {step+1}/{n_steps}] src={si}({sources[si][0]}) "
+                        f"[step {step+1}/{n_steps}] src={si}({norm_sources[si][0]}) "
                         f"loss={cur:.6f} best={best_loss:.6f}")
                 if (step + 1) % ckpt_every == 0 or step == n_steps - 1:
                     ckpt = out / f"mae_step{step+1}.pt"
-                    self.save_checkpoint(ckpt, step=step + 1, loss=cur, fingerprint=fp)
+                    self.save_checkpoint(ckpt, step=step + 1, loss=cur,
+                                         fingerprint=fp, signature=sig)
                     final_ckpt = ckpt
                 step += 1
         return final_ckpt
 
     # ------------------------------------------------------------------
     def save_checkpoint(self, path: str | Path, step: int, loss: float,
-                        fingerprint: str) -> None:
+                        fingerprint: str, signature: str | None = None) -> None:
         path = Path(path)
         path.parent.mkdir(parents=True, exist_ok=True)
         torch.save({
@@ -209,10 +259,11 @@ class SSLTrainer:
             "step": step,
             "loss": loss,
             "dataset_fingerprint": fingerprint,
+            "training_signature": signature,
         }, path)
 
-    def load_checkpoint(self, path: str | Path, expected_fingerprint: str | None = None
-                        ) -> dict:
+    def load_checkpoint(self, path: str | Path, expected_fingerprint: str | None = None,
+                        expected_signature: str | None = None) -> dict:
         path = Path(path)
         ck = torch.load(path, map_location=self.device, weights_only=False)
         fp = ck.get("dataset_fingerprint")
@@ -220,6 +271,11 @@ class SSLTrainer:
             raise ValueError(
                 f"checkpoint 数据集指纹 {fp} 与当前数据集 {expected_fingerprint} 不一致; "
                 f"禁止跨数据集串用 checkpoint")
+        sg = ck.get("training_signature")
+        if expected_signature is not None and sg is not None and sg != expected_signature:
+            raise ValueError(
+                f"checkpoint 训练签名 {sg} 与当前训练配置 {expected_signature} 不一致; "
+                f"禁止跨策略 (mask_policy/步数/架构) 串用 checkpoint")
         self.model.load_state_dict(ck["model_state_dict"])
         return ck
 

@@ -1,0 +1,54 @@
+# ============================================================
+# General NDT Foundation — F2: PENELOPE + SWRD (焊缝 RT, 同缺陷语义不同物理模态)
+# 用户矩阵 E2 对应。预训练 = per-fold PENELOPE 3000 步 (random) + SWRD 3000 步
+#   (region_bias 0.5 — 缺陷感知掩码, bbox 语义对齐)。SWRD 为 2D 图像 → radiographic
+#   模态, 独立 Stem2D; PENELOPE 走 ultrasonic Stem1D (互不干扰, E2b 架构)。
+# 协议: E2b 同款 (per-fold 严格, 模态专用 stem, 冻结探针, 3 seed)。
+# 对照: E1 0.5680 (锚点) / 旧管线天花板 0.579。判据: Δ≤−0.01 = stop。
+# ============================================================
+experiment: F2
+
+sources:
+  - dataset: penelope_paut
+    steps: 3000
+    mask_policy: random
+    config: {label_type: binary}
+  - dataset: swrd
+    steps: 3000
+    mask_policy: {mode: region_bias, region_frac: 0.5}
+    config: {image_size: 256}
+
+model:
+  d_model: 128
+  patch_len: 16
+  patch2d: 16
+  n_layers_enc: 4
+  n_heads: 4
+  d_decoder: 128
+  n_layers_dec: 1
+  mask_ratio: 0.5
+  n_modalities: 9
+  n_sensors: 32
+  dropout: 0.1
+  per_modality_stem: true
+
+ssl:
+  n_steps: 6000
+  batch_size: 32
+  lr: 1.0e-3
+  weight_decay: 1.0e-4
+  normalize: per_sample
+  model_seeds: [0, 1, 2]
+  data_seed: 42
+  log_every: 1000
+  ckpt_every: 6000
+
+probe:
+  val_frac: 0.15
+
+baselines:
+  e1_mean: 0.5680
+  e1_per_seed: {0: 0.5740, 1: 0.5557, 2: 0.5744}
+  e2b_mean: 0.5946
+
+output_dir: experiments/runs/general_ndt_f2

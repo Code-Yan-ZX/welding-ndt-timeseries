@@ -67,8 +67,10 @@ class ModalAdapter(nn.Module):
         return self._stem2d_cache[modality]
 
     def _modality_id(self, modality: str) -> int:
+        # F 系列追加 "radiographic" (置于 unknown 前); 不重排既有顺序,
+        # ultrasonic/guided_wave/... 的 embedding id 保持不变
         order = ["ultrasonic", "guided_wave", "eddy_current", "acoustic_emission",
-                 "vibration", "process", "fusion", "unknown"]
+                 "vibration", "radiographic", "process", "fusion", "unknown"]
         return order.index(modality) if modality in order else len(order) - 1
 
     def forward(

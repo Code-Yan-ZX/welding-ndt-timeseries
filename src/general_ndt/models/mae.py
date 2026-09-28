@@ -10,8 +10,9 @@
   7. 预测被掩 patch 的原始值 → masked_recon_loss (只算 masked ∩ valid)
   8. encode_raw: 全视图 (unmasked) 编码 → pooled 表征, 供冻结线性探针
 
-只启用 M0: vanilla MAE + random mask。时频双视图 / 物理混合掩码 / 跨传感器不变性 /
-多源训练 暂不启用 (先证明基础闭环与严格评测正确)。
+只启用 M0: vanilla MAE + random mask (E0–E2b); F 系列扩展: mask_policy
+{"mode":"region_bias","region_frac":f} 缺陷感知掩码 (ssl/region_masks.py)。
+时频双视图 / 跨传感器不变性 暂不启用。
 """
 from __future__ import annotations
 
@@ -23,6 +24,7 @@ from general_ndt.adapters.base import ModalAdapter
 from general_ndt.models.backbone import PatchTransformer
 from general_ndt.ssl.masking import MaskController
 from general_ndt.ssl.objectives import masked_recon_loss
+from general_ndt.ssl.region_masks import sample_region_bias_mask
 from general_ndt.ssl.token_masks import patchify_target, token_valid_mask
 
 
@@ -84,19 +86,39 @@ class MaskedAutoencoder(nn.Module):
         return tokens, grid, tv, tv_np
 
     def _sample_mask(self, tv_np: np.ndarray, grid: tuple, device: torch.device,
-                     mask_seed: int | None) -> torch.Tensor:
+                     mask_seed: int | None, mask_policy: dict | None = None,
+                     defect_regions: list | None = None) -> torch.Tensor:
+        """按样本采样掩码。mask_policy None/{"mode":"random"} → 既有 MaskController
+        (random, E0–E2b 路径不变); {"mode":"region_bias","region_frac":f} →
+        缺陷感知采样 (该样本无 defect_regions 时自动退化为 random)。"""
         B = tv_np.shape[0]
+        policy = mask_policy or {"mode": "random"}
+        if policy.get("mode", "random") not in ("random", "region_bias"):
+            raise ValueError(f"未知 mask_policy.mode: {policy.get('mode')}")
+        region_bias = policy.get("mode") == "region_bias"
+        region_frac = float(policy.get("region_frac", 0.5))
         masks = []
         for b in range(B):
             seed = None if mask_seed is None else mask_seed + b
-            masks.append(
-                self.mask_controller(grid, valid=tv_np[b].reshape(grid), seed=seed)
-            )
+            grid_b = tv_np[b].reshape(grid)
+            if region_bias:
+                regions = (defect_regions or [])[b] if defect_regions else []
+                masks.append(
+                    sample_region_bias_mask(
+                        grid, self.mask_ratio, grid_b, regions,
+                        region_frac=region_frac, seed=seed,
+                    )
+                )
+            else:
+                masks.append(self.mask_controller(grid, valid=grid_b, seed=seed))
         return torch.from_numpy(np.stack(masks).reshape(B, -1)).to(device)
 
-    def forward(self, batch: dict, mask_seed: int | None = None) -> dict:
+    def forward(self, batch: dict, mask_seed: int | None = None,
+                mask_policy: dict | None = None) -> dict:
         tokens, grid, tv, tv_np = self._tokens_and_valid(batch, batch["x"].device)
-        mask = self._sample_mask(tv_np, grid, batch["x"].device, mask_seed)
+        mask = self._sample_mask(tv_np, grid, batch["x"].device, mask_seed,
+                                 mask_policy=mask_policy,
+                                 defect_regions=batch.get("defect_regions"))
         # masked token 替换 (mask_token 注入被掩位置)
         mt = tokens * (~mask)[..., None].float() + self.mask_token * mask[..., None].float()
         enc = self.encoder(mt, valid_mask=tv, grid=grid)      # (B, N+1, d)
