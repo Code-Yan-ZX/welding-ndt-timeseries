@@ -1,0 +1,121 @@
+{
+  "description": "One sample per modality exactly as fed to the experiments, plus specimen photos and rendered B-scan images",
+  "datasets": {
+    "gmaw": {
+      "record": {
+        "sample_id": "gmaw_sample_exp1_run10_row23051",
+        "modality": "GMAW process signals (arc voltage + welding current)",
+        "waveform_shape": [
+          2,
+          200
+        ],
+        "channels": [
+          "voltage",
+          "current"
+        ],
+        "units": [
+          "V",
+          "A"
+        ],
+        "sampling_rate_hz": 100000,
+        "window_duration_s": 0.002,
+        "label": 0,
+        "label_semantics": "1 = good quality, 0 = poor quality, -1 = unlabeled",
+        "source_record_id": {
+          "experiment": 1,
+          "welding_run": 10,
+          "csv_row_index": 23051
+        },
+        "split": "test (T-joint)",
+        "source_dataset": {
+          "name": "Metal Arc Welding - Predictive Quality Arc Welding Dataset (ASIMoW), v2",
+          "doi": "10.5281/zenodo.10017718",
+          "url": "https://zenodo.org/records/10017718",
+          "license": "CC-BY-4.0"
+        }
+      },
+      "note": "no specimen photos in this dataset; samples are welding cycles, not spatial scans"
+    },
+    "saw": {
+      "record": {
+        "sample_id": "saw_sample_PP7_16_win55",
+        "modality": "SAW process signals (two-wire submerged arc welding, dual-electrode current/voltage)",
+        "waveform_shape": [
+          4,
+          512
+        ],
+        "channels": [
+          "current_a",
+          "current_b",
+          "voltage_a",
+          "voltage_b"
+        ],
+        "units": [
+          "A",
+          "A",
+          "V",
+          "V"
+        ],
+        "sampling_rate_hz": 5000,
+        "window_duration_s": 0.1024,
+        "window_stride_samples": 256,
+        "label": 1,
+        "label_semantics": "1 = defect window (overlaps a defect sample range in defects_xlocation.xlsx), 0 = clean",
+        "defect_type": "Cracks",
+        "source_record_id": {
+          "coupon": "PP7",
+          "bead": "PP7_16",
+          "window_ordinal": 55,
+          "window_start_sample_data1": 14080,
+          "global_window_index": 156424
+        },
+        "split": "test coupon",
+        "source_dataset": {
+          "name": "Submerged Arc Welding dataset (PENELOPE)",
+          "doi": "10.5281/zenodo.15083865",
+          "url": "https://zenodo.org/records/15083865",
+          "license": "see Zenodo record"
+        }
+      },
+      "specimen_photos": [
+        "PP3_15_final_face_A1.jpeg",
+        "PP3_15_final_face_A2.jpeg",
+        "PP3_15_final_face_B1.jpg",
+        "PP3_15_final_face_B2.jpg",
+        "PP4_24_final_faceB1.jpg",
+        "PP4_24_final_faceB2.jpg",
+        "PP4_24_final_faceB3.jpg",
+        "PP4_24_final_faceB4.jpg",
+        "PP5_15_faceA_1.jpg",
+        "PP5_15_faceA_2.jpg",
+        "PP5_24_faceB_1.jpg",
+        "PP5_24_faceB_2.jpg",
+        "PP6_final_faceA_1.jpg",
+        "PP6_final_faceA_2.jpg",
+        "PP6_final_faceB_1.jpg",
+        "PP6_final_faceB_2.jpg",
+        "PP7_final_faceA_1.jpg",
+        "PP7_final_faceA_2.jpg",
+        "PP7_final_faceA_3.jpg",
+        "PP7_final_faceB_1.jpg",
+        "PP7_final_faceB_2.jpg"
+      ],
+      "photo_note": "weld face photos taken after welding (final face A/B), original dataset filenames"
+    },
+    "paut": {
+      "note": "B-scan waveform volumes (49 beams x 512 samples) for two positions were exported previously under data/exports/paut_sample/; the rendered images here correspond to the same two positions",
+      "rendered_images": [
+        "specimen-A_pos270_bscan.png",
+        "specimen-A_pos270_spec.png",
+        "specimen-B_pos2399_bscan.png",
+        "specimen-B_pos2399_spec.png"
+      ],
+      "image_note": "bscan = grayscale (49,512) envelope, 2-98 percentile normalized; spec = rfft log-magnitude turbo colormap",
+      "cross_reference": {
+        "specimen-A": "coupon PP3, scan position 270 (x=350 mm), defect = Cracks",
+        "specimen-B": "coupon PP7, scan position 0 (x=80 mm), clean"
+      }
+    }
+  },
+  "label_semantics_warning": "GMAW labels are QUALITY labels (1=good, 0=poor); SAW/PAUT labels are DEFECT labels (1=defect, 0=clean) -- do not mix"
+}
