@@ -1,0 +1,801 @@
+
+
+WRT-SAM: Foundation Model-Driven Segmentation for Generalized Weld Radiographic Testing
+
+  
+    
+      
+
+## Report GitHub Issue
+
+      ×
+    
+
+    
+      Title:
+      
+
+      Content selection saved. Describe the issue below:
+
+      Description:
+      
+    
+
+    
+      Submit without GitHub
+      Submit in GitHub
+    
+  
+
+    
+    arXiv is now an independent nonprofit!
+    Learn more
+    ×
+  
+
+  
+    
+      Back to arXiv
+    
+  
+
+  
+  
+    Why HTML?
+    
+      
+        
+      
+      Report Issue
+    
+    
+      
+        
+        
+      
+      Back to Abstract
+    
+    
+    
+      
+        
+      
+      Download PDF
+    
+    
+      
+        
+        
+      
+    
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+          
+          
+        
+      
+      
+        
+          
+          
+        
+      
+      
+        
+          
+          
+        
+      
+    
+  
+
+Abstract
+1 Introduction
+2 Related Work
+
+2.1 Deep Learning-Based Weld Radiographic Image Recognition
+2.2 Visual Tuning on SAM for Downstream Tasks
+
+3 Proposed Method
+
+3.1 Overview
+3.2 Frequency Prompt Generator
+3.3 Multi-scale Prompt Generator
+3.4 Loss Function
+
+4 Experiment and Analysis
+
+4.1 Datasets
+4.2 Evaluation Metrics
+4.3 Implementation Details
+4.4 Comparison with State-of-the-art Methods
+
+4.4.1 Comparisons on GDXray
+4.4.2 Comparisons on private dataset
+
+4.5 Ablation Studies and Analysis
+
+4.5.1  Role of the SAM adapter
+4.5.2 Influence of frequency prompt generator
+4.5.3  Impact of multi-scale prompt generator
+4.5.4 (Zero-shot) generalization analysis
+
+4.6 Visualization
+
+5 Conclusion
+References
+
+  
+    License: arXiv.org perpetual non-exclusive license
+  
+  
+arXiv:2502.11338v1 [cs.CV] 17 Feb 2025
+
+## WRT-SAM: Foundation Model-Driven Segmentation for Generalized Weld Radiographic Testing
+
+Journal: Expert Systems With Applications
+
+Yunyi Zhou, Kun Shi, Gang Hao
+
+Affiliation: China Special Equipment Inspection and Research Institute, , Beijing, 100029, , P.R. China
+
+## Abstract
+
+    
+Radiographic testing is a fundamental non-destructive evaluation technique for identifying weld defects and assessing quality in industrial applications due to its high-resolution imaging capabilities. Over the past decade, deep learning techniques have significantly advanced weld defect identification in radiographic images. However, conventional approaches, which rely on training small-scale, task-specific models on single-scenario datasets, exhibit poor cross-scenario generalization. Recently, the Segment Anything Model (SAM), a pre-trained visual foundation model trained on large-scale datasets, has demonstrated exceptional zero-shot generalization capabilities. Fine-tuning SAM with limited domain-specific data has yielded promising results in fields such as medical image segmentation and anomaly detection.
+To the best of our knowledge, this work is the first to introduce SAM-based segmentation for general weld radiographic testing images. We propose WRT-SAM, a novel weld radiographic defect segmentation model that leverages SAM through an adapter-based integration with a specialized prompt generator architecture. To improve adaptability to grayscale weld radiographic images, we introduce a frequency prompt generator module, which enhances the model’s sensitivity to frequency-domain information. Furthermore, to address the multi-scale nature of weld defects, we incorporate a multi-scale prompt generator module, enabling the model to effectively extract and encode defect information across varying scales.
+Extensive experimental evaluations demonstrate that WRT-SAM achieves a recall of 78.87%, precision of 84.04%, and an AUC of 0.9746, setting a new state-of-the-art (SOTA) benchmark. Moreover, the model exhibits superior zero-shot generalization performance, highlighting its potential for practical deployment in diverse radiographic testing scenarios.
+
+  
+
+## Keywords: 
+
+weld radiographic testing, image recognition, defect segmentation, segment anything model, prompt generator
+
+## 1 Introduction
+
+Welded structures are extensively utilized in industrial applications, particularly in the construction of pressure vessels (e.g., boilers and storage tanks) and pressure pipelines (e.g., gas and oil transportation systems) [1, 2]. These critical infrastructures often operate under extreme conditions, including high temperatures and pressures, while also containing flammable or hazardous substances. Any structural failure or leakage can lead to catastrophic industrial accidents, resulting in severe economic losses and posing significant threats to human safety and environmental integrity. Consequently, ensuring the structural integrity and reliability of welded components is of paramount importance.
+
+Radiographic testing (RT) is one of the most widely adopted NDT (non-destructive testing) methods for weld defect detection due to its ability to capture high-resolution internal structures and provide intuitive visual representations of defects [3, 4]. By analyzing RT images, engineers can identify defect locations, classify defect types, and assess their severity, which is essential for maintaining the quality and safety of welded components. With the increasing scale of industrial production and the corresponding rise in RT inspection workloads, there is a growing demand for enhanced efficiency and accuracy in defect evaluation. However, conventional manual inspection methods suffer from limitations such as low efficiency, subjectivity, poor reproducibility, and difficulties in standardization, leading to inconsistencies in defect assessments.
+
+Recent advancements in computer vision and artificial intelligence have enabled the automation of defect detection in RT images, significantly improving evaluation accuracy and efficiency. Early research [5, 6] primarily relied on traditional image processing techniques and machine learning models, which required handcrafted feature extraction and lacked adaptability across diverse scenarios. With the advent of deep learning, convolutional neural networks (CNNs) have become the dominant approach, achieving remarkable performance in defect classification, segmentation, and detection [1, 2, 7, 8, 9, 10]. However, these CNN-based methods are typically trained on limited datasets, making them prone to overfitting and restricting their generalization to unseen scenarios.
+
+The recent emergence of large-scale vision foundation models, exemplified by the Segment Anything Model (SAM)  [11], has introduced a paradigm shift in visual understanding. Pre-trained on massive datasets, these models exhibit strong zero-shot generalization capabilities and have demonstrated outstanding performance in various domains, including medical image segmentation and anomaly detection. Given their scalability and adaptability, fine-tuning vision foundation models for domain-specific applications has become an effective strategy for improving model robustness in complex industrial settings. However, the direct application of such models to RT-based weld defect identification presents unique challenges, primarily due to the grayscale nature of RT images and the multi-scale characteristics of welding defects.
+
+Unlike natural scene images, which contain rich color and texture information, RT images are grayscale, limiting the features that can be captured by standard CNN-based feature extractors. Existing deep learning approaches primarily rely on spatial domain feature extraction, while neglecting valuable frequency-domain information. Inspired by advancements in medical imaging, where frequency-domain analysis has been successfully incorporated to enhance segmentation performance [12, 13], we introduce a Frequency Prompt Generator (FPG) to improve SAM’s adaptability to grayscale RT images. By leveraging frequency-domain information, our model enhances defect feature representation and improves segmentation accuracy.
+
+Furthermore, welding defects exhibit significant variability in shape, size, and distribution, necessitating a model capable of extracting multi-scale features. Traditional CNN-based methods often struggle with multi-scale defect representation due to fixed receptive field constraints. To address this limitation, we introduce a Multi-Scale Prompt Generator (MSPG) , which enables our model to effectively capture defect features at varying scales, thereby improving segmentation performance across diverse defect types.
+
+In this paper, we propose WRT-SAM (Weld Radiographic Testing - Segment Anything Model), a novel segmentation framework that integrates SAM with a prompt generator architecture via an adapter mechanism. Our contributions can be summarized as follows:
+
+1. 
+
+To the best of our knowledge, this is the first study to introduce a SAM-based segmentation model for general weld RT image segmentation.
+
+2. 
+
+We propose a prompt generator architecture, consisting of the Frequency Prompt Generator (FPG) and the Multi-Scale Prompt Generator (MSPG), which enhances SAM’s ability to process grayscale RT images and improves its capability to extract defect features across multiple scales.
+
+3. 
+
+We conduct extensive evaluations on three weld RT image segmentation datasets, including GDXray and a proprietary dataset. WRT-SAM achieves state-of-the-art (SOTA) performance, demonstrating strong zero-shot generalization across different real-world scenarios.
+
+The remainder of this paper is structured as follows: Section 2 reviews related work on RT-based weld defect detection and vision foundation models. Section 3 presents the proposed WRT-SAM framework and its key components. Section 4.1 to  4.3 details the experimental setup, including dataset descriptions, evaluation metrics, and implementation details. Section 4.4 and  4.5 discusses the experimental results and comparative analyses. Finally, Section 5 concludes the paper and outlines potential directions for future research.
+
+## 2 Related Work
+
+## 2.1 Deep Learning-Based Weld Radiographic Image Recognition
+
+Recent advancements in deep learning have significantly improved the recognition of weld defects in radiographic testing images. Various approaches have been proposed to enhance defect detection, particularly in handling small targets, capturing low-sensitivity spatial information, and optimizing segmentation accuracy across multi-scale defects.
+YOLOV5  [14] enhances small-target detection and spatial feature extraction by integrating the coordinate attention (CA) mechanism, SIOU loss function, and FReLU activation function, facilitating global optimization for defect detection. Similarly, Improved-U-Net [15] introduces additional skip connections between encoder-decoder layers, mitigating information bottlenecks and improving segmentation performance on multi-scale welding defects.
+To further refine small-scale defect identification, MAU-Net [8] incorporates a convolutional block attention mechanism, optimizing large-scale feature extraction through multi-scale even convolution. Meanwhile, the multiple scale spaces (MSS)-empowered segmentation method [16] addresses the scale variability challenge by constructing three feature spaces: (1) a multi-scale feature space using dilated convolutions, (2) a multi-scale semantic space via max pooling with varying window sizes, and (3) a multi-scale relational space through a self-attention mechanism.
+
+Despite the significant progress in CNN-based segmentation architectures, existing studies predominantly focus on improving defect detection accuracy within specific scenarios, often neglecting cross-scenario generalization. As a result, these models exhibit limited adaptability to the complex and diverse real-world conditions encountered in industrial radiographic testing.
+
+## 2.2 Visual Tuning on SAM for Downstream Tasks
+
+Visual tuning techniques for adapting pre-trained models can be broadly classified into fine-tuning, prompt tuning, adapter tuning, parameter tuning, and remapping tuning [17]. Among these, prompt tuning and adapter tuning offer an efficient means to transfer pre-trained models to domain-specific applications.
+Segment Anything Model (SAM) [11], a foundational model for image segmentation, leverages prompt-based adaptation for diverse segmentation tasks. Several approaches have been proposed to refine its domain-specific performance. PA-SAM [18] enhances segmentation accuracy by refining mask decoder features at multiple prompt levels. SSPrompt-SAM learns spatial and semantic prompts through adaptive weighting, improving domain-specific adaptation. SAM-Adapter [19], a lightweight extension using multi-layer perceptrons (MLPs), effectively injects task-specific knowledge into SAM. RobustSAM [20] addresses image degradation issues while preserving SAM’s zero-shot learning capabilities through the anti-degradation output token generation (AOTG) and anti-degradation mask feature generation (AMFG) modules.
+Given the effectiveness of prompt and adapter tuning, recent studies in pose-guided generation and virtual dressing [21, 22] have demonstrated the potential of foundation models in structured generation tasks. Additionally, works on conditional diffusion models [23, 24] highlight the importance of rich contextual information in enhancing generative performance.
+
+Motivated by these advancements, we integrate both tuning strategies to optimize WRT-SAM for weld radiographic defect segmentation, ensuring its robustness and adaptability in non-destructive testing applications.
+
+## 3 Proposed Method
+
+## 3.1 Overview
+
+Figure 1: Overview of our proposed WRT-SAM framework.
+
+The framework of WRT-SAM proposed in this paper, as shown in Fig. 1, consists mainly of three parts: an adaptable Image Encoder, a frequency prompt generator, and a multi-scale prompt generator. Ultimately, these pieces of information are summed and injected into a frozen Mask Decoder together to generate the final segmentation mask.
+
+## 3.2 Frequency Prompt Generator
+
+The FcaNet[25] network has demonstrated exceptional performance in enhancing existing models for object detection and instance segmentation tasks by extracting features from frequency domain channel information using Discrete Cosine Transformation (DCT). This is particularly beneficial for grayscale images, such as X-ray inspection images, where frequency domain information helps differentiate between low-frequency content (typically the main subject) and high-frequency content (often noise or fine details), thereby increasing the prominence of defect-related information. Consequently, we have integrated an FcaNet-like structure into the frequency prompt generator component of our WRT-SAM network architecture.
+
+Specifically, the original input image XX
+is divided into patches, which are then fed into the DCT layer. In the DCT layer, corresponding filters are first derived based on a predefined quantization table. A 2D DCT transformation is then applied to the patched images. The transformed images are then passed through a fully connected layer (FC layer) for dimensional mapping to extract frequency information. Finally, the frequency information PfP_{f} is encoded to generate the frequency prompts.
+
+Pf=C​o​n​v​2​d​(f​c​(M​S​C​D​C​T​(X))).P_{f}=Conv2d(fc(MSCDCT(X))).
+
+(1)
+
+where X∈ℝC×H×WX\in\mathbb{R}^{C\times H\times W} is the input image, M​S​C​D​C​TMSCDCT is the multi spectral channel Discrete Cosine Transformation which can be further expressed in Eqs. 2, f​cfc denotes the mapping functions like fully connected layer, Conv2d is the embedding layer to generate the frequency prompts.
+
+M​S​C​D​C​T​(X)=c​a​t​([F​r​e​q0,F​r​e​q1,…,F​r​e​qn−1]CLOSE,MSCDCT(X)=cat([Freq^{0},Freq^{1},...,Freq^{n-1}],
+
+(2)
+
+where the input XX is split into many parts along the channel dimension. Denote [X0,X1,…,Xn−][X^{0},X^{1},...,X^{n-}], in which Xi∈ℝC′×H×WX^{i}\in\mathbb{R}^{C^{\prime}\times H\times W}, i∈0,1,…,n−1,C′=Cni\in{0,1,...,n-1},C^{\prime}=\frac{C}{n}, and CC should be divisible by nn. For each part, a corresponding 2D DCT results can be computed as,
+
+F​r​e​qi=2​D​D​C​Tui,vi​(Xi),=∑h=0H−1∑ω=0W−1X:h,ωiBh,ωui,vi\begin{split}Freq^{i}=2DDCT^{u_{i},v_{i}}(X^{i}),\\
+=\sum_{h=0}^{H-1}\sum_{\omega=0}^{W-1}X_{:h,\omega}^{i}B_{h,\omega}^{u_{i},v_{i}}\end{split}
+
+(3)
+
+s.t.i∈0,1,…,n−1,s.t.i\in{0,1,...,n-1},
+
+Bh,ωui,vi=c​o​s​(π​hH​(ui+12))​c​o​s​(π​ωW​(vi+12)).B_{h,\omega}^{u_{i},v_{i}}=cos(\frac{\pi h}{H}(u_{i}+\frac{1}{2}))cos(\frac{\pi\omega}{W}(v_{i}+\frac{1}{2})).
+
+(4)
+
+in which [ui,vi][u_{i},v_{i}] are the frequency component 2D indices corresponding to XiX^{i}, and F​r​e​qi∈ℝC′Freq^{i}\in\mathbb{R}^{C^{\prime}}, Bh,ωui,viB_{h,\omega}^{u_{i},v_{i}} is the basis function of 2D DCT.
+
+## 3.3 Multi-scale Prompt Generator
+
+In the multi-scale prompt generator component of our WRT-SAM network architecture, SegNeXt[26] demonstrates that convolutional attention is a more efficient and effective method for encoding contextual information than the self-attention mechanism in transformers. This is particularly relevant considering that the defect scales in weld radiographic testing images span a multidimensional range of small, medium, and large targets, as defined by MS COCO[27]. Consequently, the network must possess robust multi-scale feature extraction capabilities. Thus, we introduce the Multi-scale Convolutional Attention (MSCA) mechanism as the multi-scale prompt information extraction module, implemented as the multi-scale prompt generator shown in the diagram.
+
+Specifically, the original input image first passes through a Dconv layer to fuse local information, where Dconv refers to depthwise convolution. Subsequently, multi-branch depthwise strip convolutions are employed to capture multi-scale contextual information. Finally, a 1×11\times 1 convolution is applied to integrate information across different scale channels, resulting in the final multi-scale prompt Pm​sP_{ms}. The process described above can be defined as follows:
+
+Pm​s=(C​o​n​v1​X​1​(∑i=03S​c​a​l​ei​(D​c​o​n​v​(X))))​⨂X.P_{ms}=(Conv_{1X1}(\sum_{i=0}^{3}Scale_{i}(Dconv(X))))\bigotimes X.
+
+(5)
+
+where X∈ℝC×H×WX\in\mathbb{R}^{C\times H\times W} is the input image, ⨂\bigotimes is the elements-wise multiplication, D​c​o​n​vDconv denotes depth-wise convolution and S​c​a​l​ei,i∈{0,1,2,3}Scale_{i},i\in\left\{0,1,2,3\right\}, denotes the iith branch. S​c​a​l​e0Scale_{0} is the identity connection. In each branch, there are two depth-wise strip convolutions to approximate standard depth-wise convolutions with large kernels. Here, the kernel size for each branch is set to 7, 11, and 21, respectively. Pm​sP_{ms} denotes the multi-scale prompt.
+
+## 3.4 Loss Function
+
+When training the WRT-SAM, we choose to use the IOU (Intersection over Union) loss function to calculate the loss incurred by the deviation between the predicted value and the true value. The formula is as follows:
+
+LI​o​U​ = ​1​ — ​I​o​U.L_{IoU}\text{ = }1\text{ \textemdash }IoU.
+
+(6)
+
+I​o​U​ = ​I​n​t​e​r​s​e​cU​n​i​o​n.IoU\text{ = }\frac{Intersec}{Union}.
+
+(7)
+
+where I​n​t​e​r​s​e​cIntersec and U​n​i​o​nUnion are the intersection and union between precision and the Ground Truth respectively.
+
+## 4 Experiment and Analysis
+
+To validate the superiority and generalization of the proposed WRT-SAM method, it is compared with multiple state-of-the-art segmentation approaches on two datasets, namely, GDXray and our private dataset.
+
+## 4.1 Datasets
+
+GDxray [28] is a large dataset consisting of five image groups, each designed for different applications (i.e., Castings, Welds, Baggage, Nature, and Settings). The Welds category contains 68 weld radiographic test images, of which only 10 are provided with official segmentation annotations. We refer to these as GDXray-10, while the remaining 58 images are named GDXray-58.
+
+Our private dataset, WRTD contains 115 weld radiographic images collected from different projects and equipment. The welds were made using various materials and welding processes, and the radiographic images were obtained through different inspection methods. These factors contribute to variations in data distribution and increase the observable difficulty of detecting weld and defect features in the images.
+
+## 4.2 Evaluation Metrics
+
+To better verify the performance of proposed network model, some evaluation indicators are introduced here to verify the location results of welding defects.
+
+Precision(PP) and Recall(RR) are two important indicators of artificial intelligence to evaluate the neural network models, as shown in Eqs. 8 and 9.
+
+P=TpTp+Fp.P=\frac{T_{p}}{T_{p}+F_{p}}.
+
+(8)
+
+R=TpTp+Fn.R=\frac{T_{p}}{T_{p}+F_{n}}.
+
+(9)
+
+where TpT_{p} and TnT_{n} denote true positive and true negative. FpF_{p} and FnF_{n} denote false positive and false negative.
+
+Area under Precision-Recall Curve (A​U​CAUC): The value of A​U​CAUC represents the area under the curve, such as PP-RR Curve, which is between 0 and 1. It could evaluate the performance of network intuitively. The bigger the A​U​CAUC value, the better the performance of the model.
+
+IoU can also measure the similarity between the predicted region and the real region, as in Eqs. 7.
+
+## 4.3 Implementation Details
+
+For training our WRT-SAM, We use the AdamW optimizer, the learning rate is set to 0.00020.0002, the minimum learning rate is exp−7\exp{{}^{-7}}, the epoch is 2020. For the input images, we remain the hight of the original images and crop them through their width to make the input images have the same width of 640 pixels on the GDXray dataset.
+
+## 4.4 Comparison with State-of-the-art Methods
+
+## 4.4.1 Comparisons on GDXray
+
+As shown in Table 1, we trained our model on the GDXray dataset and compared it with several classic state-of-the-art (SOTA) segmentation algorithms and a baseline algorithm. Our WRT-SAM model achieved recall and precision rates of 78.87% and 84.04%, respectively, outperforming the other algorithms in comparison. Additionally, its Area Under the Curve (AUC) was 1.6% higher than that of the baseline. These results demonstrate that the SAM-based defect segmentation model has the potential to surpass existing SOTA algorithms and achieve improved performance in weld radiographic inspection image analysis.
+
+Table 1: the weld defect segmentation results on gdxray dataset in comparison with state-of-the art methods
+
+Methods
+Recall
+Precision
+AUC
+IoU
+
+U-Net
+74.34
+75.97
+×\times
+66.72
+
+Deeplabv3
+78.36
+79.52
+×\times
+73.54
+
+PspNet
+77.11
+78.75
+×\times
+71.23
+
+U-Net+CBMA
+77.33
+78.43
+×\times
+71.12
+
+SAM-Adapter(Baseline)
+78.87
+78.39
+0.9596
+49.25
+
+Ours
+78.87
+84.04
+0.9746
+51.36
+
+## 4.4.2 Comparisons on private dataset
+
+To demonstrate that our proposed method is better suited for practical application scenarios, we trained the model on our own dataset of 115 images and compared the results with those of the U-Net++ network and the baseline method. As shown in Table 2, our method achieved a recall rate of 79.61%, which is 11.13% and 2.18% higher than U-Net++ and the baseline, respectively. This is significant for weld quality management in real-world production scenarios. Additionally, although the SAM-based methods underperformed compared to U-Net++ in terms of the IoU metric, our WRT-SAM showed a 2.38% improvement over the baseline method, demonstrating the effectiveness of our approach.
+
+Table 2: the weld defect segmentation results on private dataset in comparison with state-of-the art methods
+
+Methods
+Recall
+Precision
+AUC
+IoU
+
+U-Net++
+71.64
+83.42
+×\times
+63.05
+
+SAM-Adapter(Baseline)
+77.91
+78.98
+0.9724
+57.96
+
+Ours
+79.61
+77.70
+0.9796
+59.34
+
+## 4.5 Ablation Studies and Analysis
+
+The comparison results presented in Table 3, Table 4, Table 5, 6 and Table 7, demonstrate that the proposed WRT-SAM method is superior to the foundation SAM and baseline method SAM Adapter [19]. In what follows, the proposed WRT-SAM method is comprehensively analyzed from 4 aspects to investigate the logic behind its superiority.
+
+## 4.5.1 Role of the SAM adapter
+
+The purpose of this experiment is to assess the adaptability of the SAM (Segmentation Anything Model) for weld radiographic testing image segmentation. We use 10 images with official defect annotations from the welds category in the GDXray dataset (GDXray-10) for training, validation, and testing. Using the ’Segment Everything’ mode of the foundation SAM model, we obtain segmentation masks and compare them with the official ground truth to calculate accuracy metrics. For the SAM adapter, we split the dataset into a training set and a validation set in an 8:2 ratio, freeze the base model, and train only the adapter component. Finally, we evaluate the model’s performance on the validation set. The experimental results are presented in Table 3. Compared to the baseline SAM, the SAM adapter demonstrates significant improvements across all metrics, thereby confirming the feasibility of applying SAM to the downstream task of weld radiographic testing image defect segmentation through adapter-based tuning.
+
+Table 3: ablation studies on role of adapter
+
+Methods
+Recall
+Precision
+AUC
+IoU
+
+SAM(Everything mode)
+39.79
+49.18
+×\times
+1.13
+
+SAM Adapter(Baseline)
+78.87
+78.39
+0.9596
+49.25
+
+## 4.5.2 Influence of frequency prompt generator
+
+The objective of this experiment is to introduce the Frequency Prompt Generator (FPG) module and evaluate its impact on defect segmentation performance. We continue to use the previously mentioned GDXray-10 dataset for training and validation. Building on the baseline model, we integrate the FPG module and, by adjusting the frequency ranges corresponding to the basis functions of the Discrete Cosine Transform (DCT) filter, select DCT parameters that yield optimal performance. The specific experimental results are presented in Table 4. After incorporating the FPG module, the model’s precision, AUC, and IoU all improve, while the recall decreases slightly. This is primarily due to the fact that DCT is a compression process, during which some image details are lost. After comprehensively comparing all metrics, we select the ’top 1’ mode parameters (where
+[ui,vi][u_{i},v_{i}] are both set to 0) for application in the final WRT-SAM model.
+
+Table 4: ablation studies on influence of frequency prompt generator
+
+Methods
+Recall
+Precision
+AUC
+IoU
+
+SAM Adapter(Baseline)
+78.87
+78.39
+0.9596
+49.25
+
+SAM Adapter+FPG(top1)
+78.32
+81.87
+0.9859
+51.87
+
+SAM Adapter+FPG(bot1)
+77.10
+83.66
+0.9779
+51.03
+
+## 4.5.3 Impact of multi-scale prompt generator
+
+The experimental setup for this section is similar to the ablation studies on the influence of the frequency prompt generator, with the aim of evaluating the impact of the multi-scale prompt generator (MSPG) module on defect segmentation accuracy. The specific results are presented in Table 5. The experimental results clearly show that after adding multi-scale information as prompts and integrating them into the baseline network, the model’s performance is comprehensively improved, highlighting the positive impact of the MSPG module. Therefore, we retain the MSPG module in the final WRT-SAM model.
+
+Table 5: ablation studies on impact of MSPG
+
+Methods
+Recall
+Precision
+AUC
+IoU
+
+SAM Adapter(Baseline)
+78.87
+78.39
+0.9596
+49.25
+
+SAM-Adapter+MSPG
+79.29
+82.14
+0.9837
+50.88
+
+## 4.5.4 (Zero-shot) generalization analysis
+
+The experimental results in this section are crucial for practical applications, as they evaluate the model’s generalization performance on unknown datasets in future scenarios. We use GDXray-10 as the training set and test the model on GDXray-58 and a private dataset to simulate unknown scenarios the model may encounter in future applications. The experimental results are presented in Table 6 and Table 7, respectively. In Table 6, our WRT-SAM model achieves the best AUC performance among the four models and outperforms the baseline in both recall and precision, particularly in recall, which is crucial for identifying defects related to the safe operation of equipment. Table 7 demonstrates the true zero-shot generalization of the model, illustrating its performance across data from different scenarios, equipment, materials, welding processes, and radiography techniques. The results indicate that our model significantly outperforms the baseline in recall and AUC, particularly in recall, which is critical for practical applications. The IoU has shown slight improvement, while precision remains lower than the baseline. Additionally, the zero-shot generalization performance of the MSPG module is generally strong, which we attribute to the diversity of defect sizes across scenarios. In summary, the WRT-SAM model demonstrates enhanced generalization, critical for its widespread future application.
+
+Table 6:  generalization analysis on gdxray-58
+
+Methods
+Recall
+Precision
+AUC
+IoU
+
+SAM Adapter(Baseline)
+9.31
+42.66
+0.5810
+23.51
+
+SAM Adapter+FPG
+41.68
+50.24
+0.8970
+10.92
+
+SAM Adapter+MSPG
+46.45
+47.92
+0.9216
+16.17
+
+Ours
+45.57
+46.87
+0.9288
+15.18
+
+Table 7: zero-shot generalization analysis on private dataset
+
+Methods
+Recall
+Precision
+AUC
+IoU
+
+SAM Adapter(Baseline)
+14.93
+74.03
+0.5610
+8.69
+
+SAM Adapter+FPG
+44.32
+58.49
+0.8900
+8.98
+
+SAM Adapter+MSPG
+52.15
+60.14
+0.9193
+9.03
+
+Ours
+46.47
+52.84
+0.9088
+8.90
+
+## 4.6 Visualization
+
+We present and compare the test results of ground truth, Baseline, and our WRT-SAM in Figures 2, 3 and 4, respectively.
+
+Figure 2: Comparison of baseline SAM-Adapter and our proposed WRT-SAM results visualization on GDXray-10. From left to right, each column is the original image, the ground truth, the Baseline network predicted results, and our WRT-SAM network predicted results.
+
+The visualization results presented in Fig. 2 correspond to the validation outcomes of the WRT-SAM and baseline algorithms in the ’Comparisons on GDXray’ section of the ’Comparison with State-of-the-art Methods’ part, illustrating the performance of WRT-SAM under a relatively consistent data distribution. Overall, in rows (a) to (f) of Fig. 2, both the baseline and WRT-SAM have successfully segmented the main defects. Furthermore, our method has a clear advantage in handling finer details, capable of identifying defects with lower contrast, as shown in row (f). However, for the defects in row (g), due to the extremely low contrast between the defects and the weld seams, both the baseline and WRT-SAM miss some detections. This also highlights areas for potential improvement in future research.
+
+Fig. 3 and 4 visualize the results of WRT-SAM trained on GDXray-10 and evaluated on GDXray-58 and our own dataset, respectively. These results are presented alongside the ground truth and Baseline algorithm outcomes, corresponding to the "(Zero-shot) generalization analysis" section in the "Ablation Studies and Analysis" chapter.
+
+Figure 3: Comparison of baseline SAM-Adapter and our proposed WRT-SAM results visualization on GDXray-58. From left to right, each column is the original image, the ground truth, the Baseline network predicted results, and our WRT-SAM network predicted results.
+
+Figure 4: Comparison of baseline SAM-Adapter and our proposed WRT-SAM results visualization on our private dataset. From left to right, each column is the original image, the ground truth, the Baseline network predicted results, and our WRT-SAM network predicted results.
+
+In rows (b) to (f) of Fig. 3, the baseline algorithm exhibits varying degrees of missed detections, while our WRT-SAM successfully segments the main defects. This suggests that the baseline model fails to handle defect samples from the GDXray dataset that it has not previously encountered. Although our WRT-SAM generates more defect segmentation masks, it still successfully performs defect segmentation on images with somewhat different data distributions, demonstrating the model’s strong generalization ability. We were pleased to find that in group (e), our WRT-SAM provided more detailed segmentation results than manual annotation. Future research could focus on methods to filter out redundant segmentation annotations.
+
+The conclusions presented in Fig. 4 are similar to those in Fig. 3, except that the test data come from a completely different dataset. For entirely unfamiliar data, the baseline model has more missed detections, while our method provides effective segmentation results that capture the correct answers, further demonstrating the zero-shot generalization of our model.
+
+## 5 Conclusion
+
+In conclusion, radiographic testing is essential for identifying weld defects and evaluating quality in industrial applications, owing to its non-destructive nature and intuitive imaging characteristics. In the past decade, significant advancements have been made in weld defect identification from radiographic images using machine learning. However, current methods, which involve training small-scale, specialized models on single-scenario datasets, are limited by poor cross-scenario generalization. The pre-trained SAM foundation model, trained on large-scale datasets, exhibits remarkable zero-shot generalization capabilities and has shown promising results in tasks such as medical image segmentation and anomaly detection after fine-tuning with small-scale downstream data. This study introduces the first SAM-based model for general weld radiographic testing image defect segmentation. Based on this study and related research, our proposed method and model have the potential to overcome the limitation of insufficient generalization in practical applications of existing weld radiographic testing image defect segmentation models. To improve the model’s adaptability to grayscale weld radiographic images, we introduced a frequency prompt generator module, enhancing the model’s focus on frequency domain information. Additionally, we added a multi-scale prompt generator module to address the multi-scale nature of welding defects, improving the model’s ability to extract and encode defect information across different scales. Experimental results demonstrated that the WRT-SAM model achieved state-of-the-art performance with a recall of 78.87%, precision of 84.04%, and an AUC of 0.9746, while also exhibiting impressive zero-shot generalization capabilities. In the future, our work will focus on: (1) improving the model’s detection accuracy for low-contrast defects, (2) enhancing defect segmentation precision while maintaining high recall, and (3) reducing unexpected segmentation.
+
+## References
+
+      
+[1]
+
+L. Li, J. Ren, P. Wang, Z. Lü, R. Di, X. Li, H. Gao, X. Zhao, Defect detection method for high-resolution weld based on wandering gaussian and multi-feature enhancement fusion, Mechanical Systems and Signal Processing 199 (2023) 110484.
+
+      
+[2]
+
+F. Zuo, J. Liu, X. Zhao, L. Chen, L. Wang, An x-ray-based automatic welding defect detection method for special equipment system, IEEE/ASME Transactions on Mechatronics (2023).
+
+      
+[3]
+
+S. M. Anouncia, R. Saravanan, Non-destructive testing using radiographic images a survey, Insight-Non-Destructive Testing and Condition Monitoring 48 (10) (2006) 592–597.
+
+      
+[4]
+
+J. Galos, B. Ghaffari, E. Hetrick, M. Jones, M. Benoit, T. Wood, P. Sanders, M. Easton, A. Mouritz, Novel non-destructive technique for detecting the weld fusion zone using a filler wire of high x-ray contrast, NDT & E International 124 (2021) 102537.
+
+      
+[5]
+
+J. Hu, Z. Huang, F. Shen, D. He, Q. Xian, A bag of tricks for fine-grained roof extraction, in: IGARSS 2023-2023 IEEE International Geoscience and Remote Sensing Symposium, IEEE, 2023.
+
+      
+[6]
+
+K. Yan, F. Shen, Z. Li, Enhancing landslide segmentation with guide attention mechanism and fast fourier transformer, in: International Conference on Intelligent Computing, Springer, 2024, pp. 296–307.
+
+      
+[7]
+
+D. Palma-Ramírez, B. D. Ross-Veitía, P. Font-Ariosa, A. Espinel-Hernández, A. Sanchez-Roca, H. Carvajal-Fals, J. R. Nuñez-Alvarez, H. Hernández-Herrera, Deep convolutional neural network for weld defect classification in radiographic images, Heliyon 10 (9) (2024).
+
+      
+[8]
+
+X. Wang, F. He, X. Huang, A new method for deep learning detection of defects in x-ray images of pressure vessel welds, Scientific Reports 14 (1) (2024) 6312.
+
+      
+[9]
+
+C. Ajmi, J. Zapata, S. Elferchichi, K. Laabidi, Advanced faster-rcnn model for automated recognition and detection of weld defects on limited x-ray image dataset, Journal of Nondestructive Evaluation 43 (1) (2024) 14.
+
+      
+[10]
+
+S. Perri, F. Spagnolo, F. Frustaci, P. Corsonello, Welding defects classification through a convolutional neural network, Manufacturing Letters 35 (2023) 29–32.
+
+      
+[11]
+
+A. Kirillov, E. Mintun, N. Ravi, H. Mao, C. Rolland, L. Gustafson, T. Xiao, S. Whitehead, A. C. Berg, W.-Y. Lo, et al., Segment anything, in: Proceedings of the IEEE/CVF International Conference on Computer Vision, 2023, pp. 4015–4026.
+
+      
+[12]
+
+J. Wu, R. Fu, H. Fang, Y. Zhang, Y. Yang, H. Xiong, H. Liu, Y. Xu, Medsegdiff: Medical image segmentation with diffusion probabilistic model, in: Medical Imaging with Deep Learning, PMLR, 2024, pp. 1623–1639.
+
+      
+[13]
+
+H. Yu, X. Li, H. Xie, X. Li, C. Hou, Improving the industrial defect recognition in radiographic testing by pre-training on medical radiographs, NDT & E International 149 (2025) 103260.
+
+      
+[14]
+
+L. Xu, S. Dong, H. Wei, Q. Ren, J. Huang, J. Liu, Defect signal intelligent recognition of weld radiographs based on yolo v5-improvement, Journal of Manufacturing Processes 99 (2023) 373–381.
+
+      
+[15]
+
+L. Yang, H. Wang, B. Huo, F. Li, Y. Liu, An automatic welding defect location algorithm based on deep learning, Ndt & E International 120 (2021) 102435.
+
+      
+[16]
+
+T. Liu, P. Zheng, X. Liu, A multiple scale spaces empowered approach for welding radiographic image defect segmentation, NDT & E International 139 (2023) 102934.
+
+      
+[17]
+
+B. X. Yu, J. Chang, H. Wang, L. Liu, S. Wang, Z. Wang, J. Lin, L. Xie, H. Li, Z. Lin, et al., Visual tuning, ACM Computing Surveys 56 (12) (2024) 1–38.
+
+      
+[18]
+
+Z. Xie, B. Guan, W. Jiang, M. Yi, Y. Ding, H. Lu, L. Zhang, Pa-sam: Prompt adapter sam for high-quality image segmentation, arXiv preprint arXiv:2401.13051 (2024).
+
+      
+[19]
+
+T. Chen, L. Zhu, C. Deng, R. Cao, Y. Wang, S. Zhang, Z. Li, L. Sun, Y. Zang, P. Mao, Sam-adapter: Adapting segment anything in underperformed scenes, in: Proceedings of the IEEE/CVF International Conference on Computer Vision, 2023, pp. 3367–3375.
+
+      
+[20]
+
+W.-T. Chen, Y.-J. Vong, S.-Y. Kuo, S. Ma, J. Wang, Robustsam: Segment anything robustly on degraded images, in: Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, 2024, pp. 4081–4091.
+
+      
+[21]
+
+F. Shen, J. Tang, Imagpose: A unified conditional framework for pose-guided person generation, in: The Thirty-eighth Annual Conference on Neural Information Processing Systems, 2024.
+
+      
+[22]
+
+F. Shen, X. Jiang, X. He, H. Ye, C. Wang, X. Du, Z. Li, J. Tang, Imagdressing-v1: Customizable virtual dressing, arXiv preprint arXiv:2407.12705 (2024).
+
+      
+[23]
+
+F. Shen, H. Ye, J. Zhang, C. Wang, X. Han, W. Yang, Advancing pose-guided image synthesis with progressive conditional diffusion models, arXiv preprint arXiv:2310.06313 (2023).
+
+      
+[24]
+
+F. Shen, H. Ye, S. Liu, J. Zhang, C. Wang, X. Han, W. Yang, Boosting consistency in story visualization with rich-contextual conditional diffusion models, arXiv preprint arXiv:2407.02482 (2024).
+
+      
+[25]
+
+Z. Qin, P. Zhang, F. Wu, X. Li, Fcanet: Frequency channel attention networks, in: Proceedings of the IEEE/CVF international conference on computer vision, 2021, pp. 783–792.
+
+      
+[26]
+
+M. Guo, C. Lu, Q. Hou, Z. Liu, M. Cheng, S. Hu, Segnext: Rethinking convolutional attention design for semantic segmentation. arxiv 2022, arXiv preprint arXiv:2209.08575 (2022).
+
+      
+[27]
+
+Microsoft, Microsoft common objects in context, http://cocodataset.org/#detection-leaderboard.
+
+      
+[28]
+
+D. Mery, V. Riffo, U. Zscherpel, G. Mondragón, I. Lillo, I. Zuccar, H. Lobel, M. Carrasco, Gdxray: The database of x-ray images for nondestructive testing, Journal of Nondestructive Evaluation 34 (4) (2015) 42.
+
+    
+
+  
+    Experimental support, please
+    view the build logs
+    for errors. Generated by
+    
+      
+        L
+        A
+        T
+        E
+      
+      xml
+      
+    .
+  
+
+  
+    
+
+## Instructions for reporting errors
+
+    We are continuing to improve HTML versions of papers, and your feedback helps enhance accessibility and mobile
+      support. To report errors in the HTML that will help us improve conversion and rendering, choose any of the
+      methods listed below:
+
+    
+      Click the "Report Issue" (
+            
+          ) button, located in the page header.
+    
+    Tip: You can select the relevant text first, to include it in your report.
+
+    Our team has already identified the following issues. We appreciate your time reviewing and reporting rendering errors we
+      may not have found yet. Your efforts will help us improve the HTML versions for all readers, because disability
+      should not be a barrier to accessing research. Thank you for your continued support in championing open access for
+      all.
+
+    Have a free development cycle? Help support accessibility at arXiv! Our collaborators at LaTeXML maintain a list of packages that need conversion, and welcome developer contributions.
+
+  
+
+  
+    
+      
+        We gratefully acknowledge support from
+        our major funders,
+        member institutions, ,
+        and all contributors.
+      
+
+      
+        About
+        ·
+        Help
+        ·
+        Contact
+        ·
+        Subscribe
+        ·
+        Copyright
+        ·
+        Privacy
+        ·
+        Accessibility
+        ·
+        Operational Status (opens in new tab)
+      
+    
+
+    
+      Major funding support from
+
+      
+        
+          
+        
+        
+          
+        
+        
+          
+        
+      
+
+    
+
+  
+
+  
+    
+      
+    
+  
+

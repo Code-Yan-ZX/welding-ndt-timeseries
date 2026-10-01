@@ -1,0 +1,89 @@
+{
+ "micro": {
+  "recall": 0.0,
+  "precision": 0.0,
+  "iou": 0.0,
+  "auc": 0.025034351352780614
+ },
+ "macro": {
+  "recall": 0.0,
+  "precision": 0.0,
+  "iou": 0.2,
+  "auc": 0.027536874633933662
+ },
+ "per_image": [
+  {
+   "recall": 0.0,
+   "precision": 0.0,
+   "iou": 0.0,
+   "auc": 0.10582283752234355,
+   "image": 1
+  },
+  {
+   "recall": 0.0,
+   "precision": 0.0,
+   "iou": 0.0,
+   "auc": 0.00885164257979459,
+   "image": 2
+  },
+  {
+   "recall": 0.0,
+   "precision": 0.0,
+   "iou": 1.0,
+   "auc": NaN,
+   "image": 3
+  },
+  {
+   "recall": 0.0,
+   "precision": 0.0,
+   "iou": 0.0,
+   "auc": 0.020245798403672934,
+   "image": 4
+  },
+  {
+   "recall": 0.0,
+   "precision": 0.0,
+   "iou": 0.0,
+   "auc": 0.008357591010364327,
+   "image": 5
+  },
+  {
+   "recall": 0.0,
+   "precision": 0.0,
+   "iou": 0.0,
+   "auc": 0.006897560881653328,
+   "image": 6
+  },
+  {
+   "recall": 0.0,
+   "precision": 0.0,
+   "iou": 0.0,
+   "auc": 0.02336186886428597,
+   "image": 7
+  },
+  {
+   "recall": 0.0,
+   "precision": 0.0,
+   "iou": 1.0,
+   "auc": NaN,
+   "image": 8
+  },
+  {
+   "recall": 0.0,
+   "precision": 0.0,
+   "iou": 0.0,
+   "auc": 0.032812110687221445,
+   "image": 9
+  },
+  {
+   "recall": 0.0,
+   "precision": 0.0,
+   "iou": 0.0,
+   "auc": 0.01394558712213314,
+   "image": 10
+  }
+ ],
+ "ckpt": "experiments/wrt-sam/baseline/best.pt",
+ "split": "all",
+ "mode": "strip"
+}

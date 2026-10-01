@@ -296,6 +296,14 @@ python scripts/paut_make_table.py            # 汇总表 + 跨模态对照
   感知 SSL 改善跨试件泛化"主假设在模态专用 stem 架构下成立**（超声+涡流）：
   E2b 0.595 > E1 0.568 > E2 0.534 > E0 0.525。详见
   [`reports/General_NDT_E2b_模态专用stem多源SSL报告.md`](reports/General_NDT_E2b_模态专用stem多源SSL报告.md)。
+- **WRT-SAM 复现（焊缝 RT 分割, 2026-10-01）**：复现 arXiv:2502.11338（SAM-Adapter +
+  FPG/MSPG prompt 生成器）。GDXray Welds 经 Kaggle 匿名镜像获取（W0001/W0002 = 论文
+  GDXray-10 官方分割标注, 已核验; WRTD 私有不可得）。按论文文字协议**完全不收敛**——
+  需三处修正（纯 IoU loss 防 BCE 全零塌缩 / "裁宽 640"应为随机条带增强 / decoder 可训练）,
+  修正后 baseline/WRT-SAM val IoU 0.433/0.440（论文 0.493/0.514, 量级一致, 相对改进方向
+  复现成功）；但训练呈双峰不稳定性（4 种子仅 1 次逃逸全零盆地）, FPG/MSPG 单模块消融与
+  论文相反, Table 2/6/7 无法定量复现（私有数据 / GDXray-58 无 GT）。代码 `src/wrt_sam/`,
+  详见 [`reports/WRT-SAM复现报告.md`](reports/WRT-SAM复现报告.md)。
 - 当前状态与下一动作：`STATE.md`（Phase 1 completed / Phase 2A Gate 已通过 / E0 / E1 /
   **E2（负）→ E2b（正, 模态专用 stem）**）；下一步 = **模态专用 stem 作为多源默认架构**，
   扩展更多源（PENELOPE + external_weld_ut 同模态 / 合成超声 + EddyCus）验证可扩展性并过
