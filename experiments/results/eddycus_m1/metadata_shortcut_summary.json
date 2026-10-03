@@ -1,0 +1,489 @@
+{
+  "seed": 42,
+  "runtime_s": 29.6,
+  "note": "metadata-only, 信号未读取; label-derived 字段(description/defect_depth/defect_size)已排除; clean 的 depth/size 恒为 0 → 排除是防标签泄漏",
+  "binary": [
+    {
+      "feature_group": "A_sensor",
+      "protocol": "P0",
+      "n_features": 7,
+      "model": "LR",
+      "auc": 0.5360824742268041,
+      "n_test": 104,
+      "n_def_test": 97,
+      "n_clean_test": 7
+    },
+    {
+      "feature_group": "A_sensor",
+      "protocol": "P0",
+      "n_features": 7,
+      "model": "RF",
+      "auc": 0.5360824742268041,
+      "n_test": 104,
+      "n_def_test": 97,
+      "n_clean_test": 7
+    },
+    {
+      "feature_group": "A_sensor",
+      "protocol": "P1",
+      "n_features": 7,
+      "model": "LR",
+      "auc": 0.5218978102189781,
+      "n_test": 150,
+      "n_def_test": 137,
+      "n_clean_test": 13
+    },
+    {
+      "feature_group": "A_sensor",
+      "protocol": "P1",
+      "n_features": 7,
+      "model": "RF",
+      "auc": 0.5218978102189781,
+      "n_test": 150,
+      "n_def_test": 137,
+      "n_clean_test": 13
+    },
+    {
+      "feature_group": "A_sensor",
+      "protocol": "P3::HP-U300",
+      "n_features": 7,
+      "model": "LR",
+      "auc": 0.5,
+      "n_test": 572,
+      "n_def_test": 545,
+      "n_clean_test": 27
+    },
+    {
+      "feature_group": "A_sensor",
+      "protocol": "P3::HP-U300",
+      "n_features": 7,
+      "model": "RF",
+      "auc": 0.5,
+      "n_test": 572,
+      "n_def_test": 545,
+      "n_clean_test": 27
+    },
+    {
+      "feature_group": "A_sensor",
+      "protocol": "P3::Kohlegelege",
+      "n_features": 7,
+      "model": "LR",
+      "auc": 0.5,
+      "n_test": 71,
+      "n_def_test": 35,
+      "n_clean_test": 36
+    },
+    {
+      "feature_group": "A_sensor",
+      "protocol": "P3::Kohlegelege",
+      "n_features": 7,
+      "model": "RF",
+      "auc": 0.5,
+      "n_test": 71,
+      "n_def_test": 35,
+      "n_clean_test": 36
+    },
+    {
+      "feature_group": "B_material",
+      "protocol": "P0",
+      "n_features": 6,
+      "model": "LR",
+      "auc": 0.7857142857142857,
+      "n_test": 104,
+      "n_def_test": 97,
+      "n_clean_test": 7
+    },
+    {
+      "feature_group": "B_material",
+      "protocol": "P0",
+      "n_features": 6,
+      "model": "RF",
+      "auc": 0.7857142857142857,
+      "n_test": 104,
+      "n_def_test": 97,
+      "n_clean_test": 7
+    },
+    {
+      "feature_group": "B_material",
+      "protocol": "P1",
+      "n_features": 6,
+      "model": "LR",
+      "auc": 0.8913531723750701,
+      "n_test": 150,
+      "n_def_test": 137,
+      "n_clean_test": 13
+    },
+    {
+      "feature_group": "B_material",
+      "protocol": "P1",
+      "n_features": 6,
+      "model": "RF",
+      "auc": 0.8913531723750701,
+      "n_test": 150,
+      "n_def_test": 137,
+      "n_clean_test": 13
+    },
+    {
+      "feature_group": "B_material",
+      "protocol": "P3::HP-U300",
+      "n_features": 6,
+      "model": "LR",
+      "auc": 0.5,
+      "n_test": 572,
+      "n_def_test": 545,
+      "n_clean_test": 27
+    },
+    {
+      "feature_group": "B_material",
+      "protocol": "P3::HP-U300",
+      "n_features": 6,
+      "model": "RF",
+      "auc": 0.5,
+      "n_test": 572,
+      "n_def_test": 545,
+      "n_clean_test": 27
+    },
+    {
+      "feature_group": "B_material",
+      "protocol": "P3::Kohlegelege",
+      "n_features": 6,
+      "model": "LR",
+      "auc": 0.5,
+      "n_test": 71,
+      "n_def_test": 35,
+      "n_clean_test": 36
+    },
+    {
+      "feature_group": "B_material",
+      "protocol": "P3::Kohlegelege",
+      "n_features": 6,
+      "model": "RF",
+      "auc": 0.5,
+      "n_test": 71,
+      "n_def_test": 35,
+      "n_clean_test": 36
+    },
+    {
+      "feature_group": "C_frequency",
+      "protocol": "P0",
+      "n_features": 16,
+      "model": "LR",
+      "auc": 0.8880706921944036,
+      "n_test": 104,
+      "n_def_test": 97,
+      "n_clean_test": 7
+    },
+    {
+      "feature_group": "C_frequency",
+      "protocol": "P0",
+      "n_features": 16,
+      "model": "RF",
+      "auc": 0.8880706921944036,
+      "n_test": 104,
+      "n_def_test": 97,
+      "n_clean_test": 7
+    },
+    {
+      "feature_group": "C_frequency",
+      "protocol": "P1",
+      "n_features": 16,
+      "model": "LR",
+      "auc": 0.9814710836608647,
+      "n_test": 150,
+      "n_def_test": 137,
+      "n_clean_test": 13
+    },
+    {
+      "feature_group": "C_frequency",
+      "protocol": "P1",
+      "n_features": 16,
+      "model": "RF",
+      "auc": 0.9814710836608647,
+      "n_test": 150,
+      "n_def_test": 137,
+      "n_clean_test": 13
+    },
+    {
+      "feature_group": "C_frequency",
+      "protocol": "P3::HP-U300",
+      "n_features": 16,
+      "model": "LR",
+      "auc": 0.8512742099898063,
+      "n_test": 572,
+      "n_def_test": 545,
+      "n_clean_test": 27
+    },
+    {
+      "feature_group": "C_frequency",
+      "protocol": "P3::HP-U300",
+      "n_features": 16,
+      "model": "RF",
+      "auc": 0.8512742099898063,
+      "n_test": 572,
+      "n_def_test": 545,
+      "n_clean_test": 27
+    },
+    {
+      "feature_group": "C_frequency",
+      "protocol": "P3::Kohlegelege",
+      "n_features": 16,
+      "model": "LR",
+      "auc": 0.5654761904761905,
+      "n_test": 71,
+      "n_def_test": 35,
+      "n_clean_test": 36
+    },
+    {
+      "feature_group": "C_frequency",
+      "protocol": "P3::Kohlegelege",
+      "n_features": 16,
+      "model": "RF",
+      "auc": 0.5654761904761905,
+      "n_test": 71,
+      "n_def_test": 35,
+      "n_clean_test": 36
+    },
+    {
+      "feature_group": "D_sensor+material",
+      "protocol": "P0",
+      "n_features": 13,
+      "model": "LR",
+      "auc": 0.7857142857142857,
+      "n_test": 104,
+      "n_def_test": 97,
+      "n_clean_test": 7
+    },
+    {
+      "feature_group": "D_sensor+material",
+      "protocol": "P0",
+      "n_features": 13,
+      "model": "RF",
+      "auc": 0.7857142857142857,
+      "n_test": 104,
+      "n_def_test": 97,
+      "n_clean_test": 7
+    },
+    {
+      "feature_group": "D_sensor+material",
+      "protocol": "P1",
+      "n_features": 13,
+      "model": "LR",
+      "auc": 0.8913531723750701,
+      "n_test": 150,
+      "n_def_test": 137,
+      "n_clean_test": 13
+    },
+    {
+      "feature_group": "D_sensor+material",
+      "protocol": "P1",
+      "n_features": 13,
+      "model": "RF",
+      "auc": 0.8913531723750701,
+      "n_test": 150,
+      "n_def_test": 137,
+      "n_clean_test": 13
+    },
+    {
+      "feature_group": "D_sensor+material",
+      "protocol": "P3::HP-U300",
+      "n_features": 13,
+      "model": "LR",
+      "auc": 0.5,
+      "n_test": 572,
+      "n_def_test": 545,
+      "n_clean_test": 27
+    },
+    {
+      "feature_group": "D_sensor+material",
+      "protocol": "P3::HP-U300",
+      "n_features": 13,
+      "model": "RF",
+      "auc": 0.5,
+      "n_test": 572,
+      "n_def_test": 545,
+      "n_clean_test": 27
+    },
+    {
+      "feature_group": "D_sensor+material",
+      "protocol": "P3::Kohlegelege",
+      "n_features": 13,
+      "model": "LR",
+      "auc": 0.5,
+      "n_test": 71,
+      "n_def_test": 35,
+      "n_clean_test": 36
+    },
+    {
+      "feature_group": "D_sensor+material",
+      "protocol": "P3::Kohlegelege",
+      "n_features": 13,
+      "model": "RF",
+      "auc": 0.5,
+      "n_test": 71,
+      "n_def_test": 35,
+      "n_clean_test": 36
+    },
+    {
+      "feature_group": "E_all_acquisition",
+      "protocol": "P0",
+      "n_features": 62,
+      "model": "LR",
+      "auc": 0.9941089837997055,
+      "n_test": 104,
+      "n_def_test": 97,
+      "n_clean_test": 7
+    },
+    {
+      "feature_group": "E_all_acquisition",
+      "protocol": "P0",
+      "n_features": 62,
+      "model": "RF",
+      "auc": 0.9926362297496318,
+      "n_test": 104,
+      "n_def_test": 97,
+      "n_clean_test": 7
+    },
+    {
+      "feature_group": "E_all_acquisition",
+      "protocol": "P1",
+      "n_features": 62,
+      "model": "LR",
+      "auc": 1.0,
+      "n_test": 150,
+      "n_def_test": 137,
+      "n_clean_test": 13
+    },
+    {
+      "feature_group": "E_all_acquisition",
+      "protocol": "P1",
+      "n_features": 62,
+      "model": "RF",
+      "auc": 1.0,
+      "n_test": 150,
+      "n_def_test": 137,
+      "n_clean_test": 13
+    },
+    {
+      "feature_group": "E_all_acquisition",
+      "protocol": "P3::HP-U300",
+      "n_features": 62,
+      "model": "LR",
+      "auc": 0.9164797825348284,
+      "n_test": 572,
+      "n_def_test": 545,
+      "n_clean_test": 27
+    },
+    {
+      "feature_group": "E_all_acquisition",
+      "protocol": "P3::HP-U300",
+      "n_features": 62,
+      "model": "RF",
+      "auc": 0.9324498810737343,
+      "n_test": 572,
+      "n_def_test": 545,
+      "n_clean_test": 27
+    },
+    {
+      "feature_group": "E_all_acquisition",
+      "protocol": "P3::Kohlegelege",
+      "n_features": 62,
+      "model": "LR",
+      "auc": 0.9404761904761905,
+      "n_test": 71,
+      "n_def_test": 35,
+      "n_clean_test": 36
+    },
+    {
+      "feature_group": "E_all_acquisition",
+      "protocol": "P3::Kohlegelege",
+      "n_features": 62,
+      "model": "RF",
+      "auc": 0.9210317460317461,
+      "n_test": 71,
+      "n_def_test": 35,
+      "n_clean_test": 36
+    }
+  ],
+  "multiclass_defect_type": [
+    {
+      "feature_group": "A_sensor",
+      "protocol": "P0",
+      "test_acc": 0.12121212121212122,
+      "test_bal_acc": 0.21265822784810123,
+      "majority_acc": 0.797979797979798,
+      "n_test": 99
+    },
+    {
+      "feature_group": "B_material",
+      "protocol": "P0",
+      "test_acc": 0.12121212121212122,
+      "test_bal_acc": 0.32694394213381556,
+      "majority_acc": 0.797979797979798,
+      "n_test": 99
+    },
+    {
+      "feature_group": "C_frequency",
+      "protocol": "P0",
+      "test_acc": 0.8484848484848485,
+      "test_bal_acc": 0.33015873015873015,
+      "majority_acc": 0.797979797979798,
+      "n_test": 99
+    },
+    {
+      "feature_group": "D_sensor+material",
+      "protocol": "P0",
+      "test_acc": 0.12121212121212122,
+      "test_bal_acc": 0.32694394213381556,
+      "majority_acc": 0.797979797979798,
+      "n_test": 99
+    },
+    {
+      "feature_group": "E_all_acquisition",
+      "protocol": "P0",
+      "test_acc": 0.9595959595959596,
+      "test_bal_acc": 0.8539682539682539,
+      "majority_acc": 0.797979797979798,
+      "n_test": 99
+    },
+    {
+      "feature_group": "A_sensor",
+      "protocol": "P1",
+      "test_acc": 0.03424657534246575,
+      "test_bal_acc": 0.012820512820512822,
+      "majority_acc": 0.8904109589041096,
+      "n_test": 146
+    },
+    {
+      "feature_group": "B_material",
+      "protocol": "P1",
+      "test_acc": 0.136986301369863,
+      "test_bal_acc": 0.6076923076923076,
+      "majority_acc": 0.8904109589041096,
+      "n_test": 146
+    },
+    {
+      "feature_group": "C_frequency",
+      "protocol": "P1",
+      "test_acc": 0.9452054794520548,
+      "test_bal_acc": 0.7094017094017094,
+      "majority_acc": 0.8904109589041096,
+      "n_test": 146
+    },
+    {
+      "feature_group": "D_sensor+material",
+      "protocol": "P1",
+      "test_acc": 0.136986301369863,
+      "test_bal_acc": 0.6076923076923076,
+      "majority_acc": 0.8904109589041096,
+      "n_test": 146
+    },
+    {
+      "feature_group": "E_all_acquisition",
+      "protocol": "P1",
+      "test_acc": 0.9726027397260274,
+      "test_bal_acc": 0.8119658119658121,
+      "majority_acc": 0.8904109589041096,
+      "n_test": 146
+    }
+  ]
+}

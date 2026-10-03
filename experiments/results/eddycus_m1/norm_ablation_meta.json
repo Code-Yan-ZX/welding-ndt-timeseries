@@ -1,0 +1,70 @@
+{
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "hyperparams": {
+    "epochs": 30,
+    "batch": 32,
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "scheduler": "cosine",
+    "early_stop_patience": 6
+  },
+  "device": "cuda",
+  "runtime_s": 641.7,
+  "input_base": "data/processed/eddycus_pilot/grid_96x384.npy (raw I/Q, holes=per-channel median filled, aspect-preserving resize to 96x384); per-scan stats computed on the padded image (padding≈median fill, 对 median/IQR 类统计影响小, 各 arm 一致)",
+  "probe_protocol": "P1 train/test, logistic, penultimate of P1-trained seed42 scratch RN18; majority baseline included (S13131=93%)",
+  "core_table_sd": [
+    {
+      "arm": "N0_RAW",
+      "P0": 0.008199947515213626,
+      "P1": 0.007643862196018011,
+      "P3::HP-U300": 0.03579266252538972,
+      "P3::Kohlegelege": 0.061728143108581345
+    },
+    {
+      "arm": "N1_per_scan_zscore",
+      "P0": 0.028494397370508476,
+      "P1": 0.10264689120760534,
+      "P3::HP-U300": 0.23622062702228225,
+      "P3::Kohlegelege": 0.03581994951237066
+    },
+    {
+      "arm": "N2_robust_median_iqr",
+      "P0": 0.024599842545640814,
+      "P1": 0.05365707051367926,
+      "P3::HP-U300": 0.06184632543167183,
+      "P3::Kohlegelege": 0.03630030674929936
+    },
+    {
+      "arm": "N3_unit_energy",
+      "P0": 0.010309278350515448,
+      "P1": 0.019076631867171442,
+      "P3::HP-U300": 0.03796432803895125,
+      "P3::Kohlegelege": 0.09259221466287199
+    },
+    {
+      "arm": "N4_magnorm_complex",
+      "P0": 0.014504945216194635,
+      "P1": 0.0846554464141482,
+      "P3::HP-U300": 0.0878119068852444,
+      "P3::Kohlegelege": 0.00045821449935685223
+    },
+    {
+      "arm": "N5_rank_gauss",
+      "P0": 0.021155092220339036,
+      "P1": 0.03627685619825542,
+      "P3::HP-U300": 0.048267039529929195,
+      "P3::Kohlegelege": 0.04405298122659658
+    },
+    {
+      "arm": "N6_phase_only",
+      "P0": 0.0814731658096256,
+      "P1": 0.011670190730391102,
+      "P3::HP-U300": 0.04467537576233839,
+      "P3::Kohlegelege": 0.03855814433640451
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+specimen_cfg,n_scans,n_sensors,sensors,n_sessions,sessions,n_datetime,n_freq_combos,freq_combos,defect_type,defect_present,material,confidence
+eddycus:cfg049953ee,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg05f0be6c,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg078834ad,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg09eaa364,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;6;8;12,clean,False,HP-U300/122C,inferred-metadata
+eddycus:cfg0ac9691e,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg0db095fb,6,1,"S13131P3,3A7,3MHz",1,main-campaign,6,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg0db9e58e,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;6;8;12,clean,False,Kohlegelege ST 50g,inferred-metadata
+eddycus:cfg0e144177,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg0ede77a4,1,1,"S15152P3,3H24,3MHz",1,160809_Jan,1,1,4;8.5;16;22.6,gap,True,0/90 Fabric 565 g/m²,inferred-metadata
+eddycus:cfg0f37abb7,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg0f8eb692,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg11af3464,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;6;8;12,copper_roving,True,HP-U300/122C,inferred-metadata
+eddycus:cfg1388d3a9,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg15504b6a,4,1,"S13131P3,3A7,3MHz",1,main-campaign,4,1,4;6;8;12,mis_orientation,True,HP-U300/122C,inferred-metadata
+eddycus:cfg168cd0e5,2,1,"S13131P3,3A7,3MHz",1,main-campaign,2,1,4;6;8;12,clean,False,Kohlegelege ST 50g,inferred-metadata
+eddycus:cfg16d24afc,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;6;8;12,copper_foil,True,HP-U300/122C,inferred-metadata
+eddycus:cfg18100ce1,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg185141d3,6,1,"S13131P3,3A7,3MHz",1,main-campaign,6,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg19645a43,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg199fdf66,6,1,"S13131P3,3A7,3MHz",1,main-campaign,6,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg1a561983,7,6,"S13131P3,3A7,3MHz;S13132P5,8A6,1MHz;S14150P5,8H9,2MHz;S14152P3,3H24,3MHz;S15172P2,4H8,5MHz;S17257P7H17,0MHz",4,GB_170629;GB_170630;GB_170703;GB_170705,7,4,1.8;4.3;5;7;2;4.1;6.3;7.5;2;4.1;6.3;8.2;3;4.1;6.3;8.2,gap,True,0/90° Fabric 524 g/m²,confirmed-by-session
+eddycus:cfg1ab1b31b,6,1,"S13131P3,3A7,3MHz",1,main-campaign,6,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg1ed9a666,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg1f9cee9d,2,1,"S13131P3,3A7,3MHz",1,main-campaign,2,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg203ce08f,1,1,"S13132P5,8A6,1MHz",1,160722_Jan,1,1,6.1;9.1;14.2;23.5,ondulation,True,0/90 Fabric 565 g/m²,inferred-metadata
+eddycus:cfg21fd0235,6,1,"S13131P3,3A7,3MHz",1,main-campaign,6,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg223285a4,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;6;8;12,clean,False,HP-U300/122C,inferred-metadata
+eddycus:cfg230dd9e1,1,1,"S15152P3,3H24,3MHz",1,160809_Jan,1,1,4;8.5;16;22.6,gap,True,0/90 Fabric 565 g/m²,inferred-metadata
+eddycus:cfg24f8f5b5,2,1,"S13131P3,3A7,3MHz",1,main-campaign,2,1,4;7;8;12,clean,False,HP-U300/122C,inferred-metadata
+eddycus:cfg25152931,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg28063837,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;7;8;12,clean,False,HP-U300/122C,inferred-metadata
+eddycus:cfg285c0e02,4,1,"S13131P3,3A7,3MHz",1,main-campaign,4,1,4;6;8;12,mis_orientation,True,HP-U300/122C,inferred-metadata
+eddycus:cfg2c387731,1,1,"S15152P3,3H24,3MHz",1,160715_Jan,1,1,4;8.5;16;22.6,gap,True,0/90 Fabric 565 g/m²,inferred-metadata
+eddycus:cfg33c634aa,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg37727a98,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg3b4c79cd,4,1,"S13131P3,3A7,3MHz",1,main-campaign,4,1,4;6;8;12,clean,False,Kohlegelege ST 50g,inferred-metadata
+eddycus:cfg3b4e0707,4,4,"S14150P5,8H9,2MHz;S14152P3,3H24,3MHz;S15172P2,4H8,5MHz;S17257P7H17,0MHz",4,GB_170629;GB_170630;GB_170703;GB_170705,4,2,2;4.1;6.3;7.5;2;4.1;6.3;8.2,gap,True,0/90° Fabric 524 g/m²,confirmed-by-session
+eddycus:cfg3c11bc6e,1,1,"S15152P3,3H24,3MHz",1,160809_Jan,1,1,4;8.5;16;22.6,gap,True,0/90 Fabric 565 g/m²,inferred-metadata
+eddycus:cfg3d453410,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg3d93d100,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg3e03f0c0,6,1,"S13131P3,3A7,3MHz",1,main-campaign,6,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg3ef54812,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;6;8;12,clean,False,HP-U300/122C,inferred-metadata
+eddycus:cfg3faa66bf,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg3fe6a401,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;6;8;12,clean,False,HP-U300/122C,inferred-metadata
+eddycus:cfg40e1a732,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg414f073a,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg422a04dc,4,1,"S13131P3,3A7,3MHz",1,main-campaign,4,1,4;6;8;12,mis_orientation,True,HP-U300/122C,inferred-metadata
+eddycus:cfg423fe5c2,4,4,"S14150P5,8H9,2MHz;S14152P3,3H24,3MHz;S15172P2,4H8,5MHz;S17257P7H17,0MHz",4,GB_170629;GB_170630;GB_170703;GB_170705,4,2,2;4.1;6.3;7.5;2;4.1;6.3;8.2,gap,True,0/90° Fabric 524 g/m²,confirmed-by-session
+eddycus:cfg45d11546,2,1,"S13131P3,3A7,3MHz",1,main-campaign,2,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg46f177c8,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;6;8;12,copper_roving,True,HP-U300/122C,inferred-metadata
+eddycus:cfg49a36ca4,4,4,"S14150P5,8H9,2MHz;S14152P3,3H24,3MHz;S15172P2,4H8,5MHz;S17257P7H17,0MHz",4,GB_170629;GB_170630;GB_170703;GB_170705,4,2,2;4.1;6.3;7.5;2;4.1;6.3;8.2,gap,True,0/90° Fabric 524 g/m²,confirmed-by-session
+eddycus:cfg4a5598f1,4,1,"S13131P3,3A7,3MHz",1,main-campaign,4,1,4;6;8;12,clean,False,Kohlegelege ST 50g,inferred-metadata
+eddycus:cfg4c32320b,1,1,"S15152P3,3H24,3MHz",1,160714_Jan,1,1,4;8.5;16;22.6,fuzz_ball,True,0/90 Fabric 565 g/m²,inferred-metadata
+eddycus:cfg4f36bd22,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;6;8;12,copper_roving,True,HP-U300/122C,inferred-metadata
+eddycus:cfg4f94a084,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg526be0ed,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;6;8;12,copper_roving,True,HP-U300/122C,inferred-metadata
+eddycus:cfg54dfe800,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg57cdadcb,1,1,"S13132P5,8A6,1MHz",1,160804_Jan,1,1,6.1;9.1;14.2;23.5,ondulation,True,0/90 Fabric 565 g/m²,inferred-metadata
+eddycus:cfg59b4982e,4,1,"S13131P3,3A7,3MHz",1,main-campaign,4,1,4;6;8;12,mis_orientation,True,HP-U300/122C,inferred-metadata
+eddycus:cfg5a41700e,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;6;8;12,mis_orientation,True,Kohlegelege ST 50g,inferred-metadata
+eddycus:cfg5b05b1b9,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg5b071907,1,1,"S15152P3,3H24,3MHz",1,160714_Jan,1,1,4;8.5;16;22.6,fuzz_ball,True,0/90/45/-45° Fabric 1013 g/m²,inferred-metadata
+eddycus:cfg5b5bb499,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg5b75b921,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg5d0efb89,2,1,"S13131P3,3A7,3MHz",1,main-campaign,2,1,4;6;8;12,clean,False,HP-U300/122C,inferred-metadata
+eddycus:cfg5f7bbfd3,2,1,"S13131P3,3A7,3MHz",1,main-campaign,2,1,4;6;8;12,clean,False,Kohlegelege ST 50g,inferred-metadata
+eddycus:cfg5f88c42a,4,1,"S13131P3,3A7,3MHz",1,main-campaign,4,1,4;6;8;12,mis_orientation,True,HP-U300/122C,inferred-metadata
+eddycus:cfg6443c800,6,1,"S13131P3,3A7,3MHz",1,main-campaign,6,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg6b1e7dc2,4,1,"S13131P3,3A7,3MHz",1,main-campaign,4,1,4;6;8;12,mis_orientation,True,HP-U300/122C,inferred-metadata
+eddycus:cfg6c9f5186,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg6de438e4,1,1,"S13132P5,8A6,1MHz",1,160804_Jan,1,1,6.1;9.1;14.2;23.5,ondulation,True,0/90 Fabric 565 g/m²,inferred-metadata
+eddycus:cfg722b06d4,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;6;8;12,mis_orientation,True,HP-U300/122C,inferred-metadata
+eddycus:cfg728b6167,1,1,"S15152P3,3H24,3MHz",1,160715_Jan,1,1,4;8.5;16;22.6,gap,True,0/90 Fabric 565 g/m²,inferred-metadata
+eddycus:cfg73dc6730,4,1,"S13131P3,3A7,3MHz",1,main-campaign,4,1,4;6;8;12,mis_orientation,True,HP-U300/122C,inferred-metadata
+eddycus:cfg78024103,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;6;8;12,copper_foil,True,HP-U300/122C,inferred-metadata
+eddycus:cfg7812b915,4,4,"S14150P5,8H9,2MHz;S14152P3,3H24,3MHz;S15172P2,4H8,5MHz;S17257P7H17,0MHz",4,GB_170629;GB_170630;GB_170703;GB_170705,4,2,2;4.1;6.3;7.5;2;4.1;6.3;8.2,gap,True,0/90° Fabric 524 g/m²,confirmed-by-session
+eddycus:cfg7a0449d9,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;6;8;12,copper_roving,True,HP-U300/122C,inferred-metadata
+eddycus:cfg7b97ec19,2,1,"S13131P3,3A7,3MHz",1,main-campaign,2,1,4;6;8;12,clean,False,Kohlegelege ST 50g,inferred-metadata
+eddycus:cfg7beba947,6,1,"S13131P3,3A7,3MHz",1,main-campaign,6,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg7c2bb659,6,1,"S13131P3,3A7,3MHz",1,main-campaign,6,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg7f5b74f3,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;6;8;12,ptfe_insert,True,HP-U300/122C,inferred-metadata
+eddycus:cfg7f70c3ff,10,1,"S13131P3,3A7,3MHz",1,main-campaign,10,1,4;6;8;12,clean,False,Kohlegelege ST 50g,inferred-metadata
+eddycus:cfg7fe9c201,1,1,"S15172P2,4H8,5MHz",1,GB_170629,1,1,2;4.1;6.3;7.5,gap,True,0/90° Fabric 524 g/m²,inferred-metadata
+eddycus:cfg814b83f9,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg8197692a,1,1,"S15152P3,3H24,3MHz",1,160715_Jan,1,1,4;8.5;16;22.6,gap,True,0/90 Fabric 565 g/m²,inferred-metadata
+eddycus:cfg819e555a,6,1,"S13131P3,3A7,3MHz",1,main-campaign,6,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg8350a65e,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;6;8;12,ptfe_insert,True,HP-U300/122C,inferred-metadata
+eddycus:cfg8454139f,6,1,"S13131P3,3A7,3MHz",1,main-campaign,6,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg85868e76,6,3,"S13131P3,3A7,3MHz;S13132P5,8A6,1MHz;S15172P2,4H8,5MHz",3,GB_170629;GB_170630;GB_170703,4,3,1.8;4.3;5;7;2;4.1;6.3;7.5;3;4.1;6.3;8.2,gap,True,0/90° Fabric 524 g/m²,confirmed-by-session
+eddycus:cfg8790dddb,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg8afc4729,4,1,"S13131P3,3A7,3MHz",1,main-campaign,4,1,4;6;8;12,mis_orientation,True,HP-U300/122C,inferred-metadata
+eddycus:cfg8e148bda,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg8ee9a7a3,4,1,"S13131P3,3A7,3MHz",1,main-campaign,4,1,4;6;8;12,mis_orientation,True,Kohlegelege ST 50g,inferred-metadata
+eddycus:cfg91248ae2,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg933d0c6e,6,6,"S13131P3,3A7,3MHz;S13132P5,8A6,1MHz;S14150P5,8H9,2MHz;S14152P3,3H24,3MHz;S15172P2,4H8,5MHz;S17257P7H17,0MHz",4,GB_170629;GB_170630;GB_170703;GB_170705,6,4,1.8;4.3;5;7;2;4.1;6.3;7.5;2;4.1;6.3;8.2;3;4.1;6.3;8.2,gap,True,0/90° Fabric 524 g/m²,confirmed-by-session
+eddycus:cfg9579df00,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg95f32e58,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;6;8;12,mis_orientation,True,Kohlegelege ST 50g,inferred-metadata
+eddycus:cfg9618f0c7,2,1,"S13131P3,3A7,3MHz",1,main-campaign,2,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg99d4eeac,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg9c795eb7,4,1,"S13131P3,3A7,3MHz",1,main-campaign,4,1,4;6;8;12,mis_orientation,True,Kohlegelege ST 50g,inferred-metadata
+eddycus:cfg9caadd29,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg9d464917,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfg9e0e0b13,1,1,"S13132P5,8A6,1MHz",1,160720_Jan,1,1,6.1;9.1;14.2;23.5,ondulation,True,0/90 Fabric 565 g/m²,inferred-metadata
+eddycus:cfg9e4f3730,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;6;8;12,clean,False,Kohlegelege ST 50g,inferred-metadata
+eddycus:cfgaa92b593,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfgaf598de1,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;6;8;12,clean,False,HP-U300/122C,inferred-metadata
+eddycus:cfgb154612a,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;6;8;12,copper_foil,True,HP-U300/122C,inferred-metadata
+eddycus:cfgb65980c7,6,1,"S13131P3,3A7,3MHz",1,main-campaign,6,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfgb6ab6f10,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfgbab4762e,4,1,"S13131P3,3A7,3MHz",1,main-campaign,4,1,4;6;8;12,mis_orientation,True,HP-U300/122C,inferred-metadata
+eddycus:cfgbb498b81,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;6;8;12,ptfe_insert,True,HP-U300/122C,inferred-metadata
+eddycus:cfgbdfdccdf,6,1,"S13131P3,3A7,3MHz",1,main-campaign,6,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfgc4f04542,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfgc57a30e1,1,1,"S13132P5,8A6,1MHz",1,160713_Jan,1,1,6.1;9.1;14.2;23.5,ondulation,True,0/90° Fabric 565 g/m²,inferred-metadata
+eddycus:cfgc62df292,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;6;8;12,mis_orientation,True,Kohlegelege ST 50g,inferred-metadata
+eddycus:cfgc6467d10,2,1,"S13131P3,3A7,3MHz",1,main-campaign,2,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfgc6bac598,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;6;8;12,copper_foil,True,HP-U300/122C,inferred-metadata
+eddycus:cfgc7747000,4,1,"S13131P3,3A7,3MHz",1,main-campaign,4,1,4;6;8;12,mis_orientation,True,Kohlegelege ST 50g,inferred-metadata
+eddycus:cfgc80c06ab,4,1,"S13131P3,3A7,3MHz",1,main-campaign,4,1,4;6;8;12,mis_orientation,True,Kohlegelege ST 50g,inferred-metadata
+eddycus:cfgc9a9fc5c,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfgca2e8647,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfgcccf8017,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfgcd2d6ab2,6,1,"S13131P3,3A7,3MHz",1,main-campaign,6,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfgcf402cb9,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;6;8;12,copper_foil,True,HP-U300/122C,inferred-metadata
+eddycus:cfgd1666c60,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;6;8;12,ptfe_insert,True,HP-U300/122C,inferred-metadata
+eddycus:cfgd5048805,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfgdc555cc9,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfgdce0a6d6,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfge32f6f96,4,1,"S13131P3,3A7,3MHz",1,main-campaign,4,1,4;6;8;12,clean,False,HP-U300/122C,inferred-metadata
+eddycus:cfge85a4eee,4,1,"S13131P3,3A7,3MHz",1,main-campaign,4,1,4;6;8;12,copper_foil,True,HP-U300/122C,inferred-metadata
+eddycus:cfge85cbb31,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;6;8;12,copper_roving,True,HP-U300/122C,inferred-metadata
+eddycus:cfge8ab1723,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfge8db928c,1,1,"S15152P3,3H24,3MHz",1,160715_Jan,1,1,4;8.5;16;22.6,fuzz_ball,True,0/90 Fabric 565 g/m²,inferred-metadata
+eddycus:cfgee779bc2,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;6;8;12,ptfe_insert,True,HP-U300/122C,inferred-metadata
+eddycus:cfgf1cda1f3,1,1,"S13132P5,8A6,1MHz",1,160718_Jan,1,1,6.1;9.1;14.2;23.5,ondulation,True,0/90 Fabric 565 g/m²,inferred-metadata
+eddycus:cfgf21c18b7,9,1,"S13131P3,3A7,3MHz",1,main-campaign,9,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfgf5267ca8,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;6;8;12,mis_orientation,True,Kohlegelege ST 50g,inferred-metadata
+eddycus:cfgf73ea869,6,1,"S13131P3,3A7,3MHz",1,main-campaign,6,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfgf76c9f98,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;6;8;12,mis_orientation,True,Kohlegelege ST 50g,inferred-metadata
+eddycus:cfgf7a82c25,3,1,"S13131P3,3A7,3MHz",1,main-campaign,3,1,4;6;8;12,ptfe_insert,True,HP-U300/122C,inferred-metadata
+eddycus:cfgf86b8767,1,1,"S15152P3,3H24,3MHz",1,160714_Jan,1,1,4;8.5;16;22.6,fuzz_ball,True,0/90 Fabric 565 g/m²,inferred-metadata
+eddycus:cfgfb7bf17a,4,1,"S13131P3,3A7,3MHz",1,main-campaign,4,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfgfbf48db8,1,1,"S13131P3,3A7,3MHz",1,main-campaign,1,1,4;6;8;12,mis_orientation,True,HP-U300/122C,inferred-metadata
+eddycus:cfgfc6ce4df,1,1,"S13131P3,3A7,3MHz",1,main-campaign,1,1,4;7;8;12,clean,False,HP-U300/122C,inferred-metadata
+eddycus:cfgfd0889ce,6,1,"S13131P3,3A7,3MHz",1,main-campaign,6,1,4;7;8;12,gap,True,HP-U300/122C,inferred-metadata
+eddycus:cfgff0297e1,4,1,"S13131P3,3A7,3MHz",1,main-campaign,4,1,4;6;8;12,mis_orientation,True,Kohlegelege ST 50g,inferred-metadata

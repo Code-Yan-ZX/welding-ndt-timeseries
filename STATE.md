@@ -30,6 +30,20 @@
   实证，判定 GO**：下一轮先做条件归一化消融（解耦幅值/纹理 shortcut），再考虑
   sensor/material-conditioned encoder 与跨条件 SSL。EddyCus 主 benchmark 化
   仍受"无显式试件 ID"约束（exploratory 级）。详见 `docs/ndt_public_benchmark_pilot.md`。
+- **M1 — Shortcut Decomposition（2026-10-03, 已完成）**：机制分解四件套
+  （metadata-only / amplitude-only / 归一化消融 N0-N6 / paired audit）结论：
+  1. **Gate A 触发**：metadata-only（62 采集标量，不读信号）P1 AUC 1.000、
+     P3 0.92-0.94，超过全部信号方法 → random binary 不得作方法证据；
+  2. **Gate B 不触发**：amplitude-only RF P1 0.997（复现 CNN 剖面），但 7 种
+     逐扫描归一化无一改善 P3 且 sensor-probe 可读性与 P3 解耦 → **P3 坍塌不是
+     amplitude shortcut**，是 clean 生态位 confound + sensor/material-dependent
+     空间/物理表征；
+  3. **Gate C 触发 → GO**；**Gate D conditional**：GB_170629-170705 跨传感器
+     campaign（70 对 confirmed-by-session，defect-only，clean 零配对）；
+  4. **Binary task 降级**：主 benchmark → restricted binary（S13131 内
+     leave-material-out）+ GB 配对检索；M2 最小 hypothesis = defect-side
+     cross-sensor paired alignment（先声明风险：clean 无法配对、7 组/70 对极小）。
+  详见 `docs/eddycus_m1_shortcut_decomposition.md`；结果 `experiments/results/eddycus_m1/`。
 - **下一步（E1/E2 前置）**：先运行 PENELOPE（5 coupon LOOCV）E0 严格基线（scratch 监督），
   再 E1/E2 多源 SSL —— 在 E0 之前不得把多源物理感知 SSL 当作可正式运行的既定方法。
 

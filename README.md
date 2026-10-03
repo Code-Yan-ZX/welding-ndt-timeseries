@@ -155,6 +155,30 @@
     sensor/material-conditioned encoder 与跨条件对比学习。
   - 详情：`docs/ndt_public_benchmark_pilot.md`；结果 `experiments/results/ndt_pilot/`、
     划分 `data/manifests/eddycus_pilot_splits/`、代码 `scripts/pilot_*`。
+- **M1 — Shortcut Decomposition（EddyCus 跨条件泛化失败机制分解）**：
+  - **Gate A（结构性 label confound 实锤）**：完全不读信号、仅用采集元数据
+    （频率组合/栅格尺寸/板温/采集月份等 62 标量）的 RF/LR：P1 AUC **1.000**、
+    P0 0.994、**P3 material-held-out 0.92-0.94**——超过 pilot 全部 7 个信号方法
+    （后者 P3 仅 0.55-0.73）；defect-type 6 类分类 bal-acc 0.81-0.85 也大部分
+    由采集侧决定。
+  - **Amplitude-only（无空间纹理）**：每扫描 172 个全局幅值统计量 RF P1 **0.997** /
+    P3 0.49-0.74——完整复现 CNN 的 P1 高 / P3 坍塌剖面 → CNN 未超越幅值直方图。
+  - **归一化消融（N0-N6 × ResNet18 scratch × 3 seed）**：7 种逐扫描归一化
+    （z-score/robust/unit-energy/mag-norm complex/rank/phase-only）**无一改善 P3**
+    （N0 0.740/0.682 全场最好；最激进 N2 0.447/0.440 最差），但部分 arm 把
+    sensor-ID probe bal-acc 0.64→0.34——**"sensor 可读性"与"held-out 泛化"解耦**。
+  - **机制判定**：失败不是 amplitude shortcut，而是 (i) clean 只存在于单一采集
+    生态位的结构性 confound + (ii) sensor/material-dependent 空间/物理表征
+    （Gate C 触发 → **GO**）。
+  - **Paired audit（Gate D conditional）**：发现显式跨传感器 campaign
+    （GB_170629-170705，Fabric-524 gap 试件 ×6 sensors ×3 orientations）→
+    70 个 confirmed-by-session 跨 sensor 扫描对，但全部 defect-only、clean 零配对。
+  - **Binary task 降级**：主 benchmark 改为 restricted binary（S13131 内
+    leave-material-out）+ 跨条件表征 benchmark（GB 配对检索）；P0/P1 全局
+    binary 降为 sanity check；M2 最小 hypothesis = defect-side cross-sensor
+    paired alignment。
+  - 详情：`docs/eddycus_m1_shortcut_decomposition.md`；结果
+    `experiments/results/eddycus_m1/`、代码 `scripts/m1_eddycus_*`。
 
 > ⚠ 限制：本阶段不进行超 10 GB 的新下载、不自动下载全部 LOTSA/UTSD、不做正式
 > 训练、不跑长时 GPU 任务。公开小数据实验不代表最终课题结论。

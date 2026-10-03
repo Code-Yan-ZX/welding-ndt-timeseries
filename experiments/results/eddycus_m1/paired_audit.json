@@ -1,0 +1,96 @@
+{
+  "confidence_definition": {
+    "confirmed-by-session": "组内 ≥2 传感器 且 共享显式 session 注释（GB_*/ *_Jan campaign，采集端显式记录的多传感器复扫）",
+    "inferred-metadata": "仅 (material,fiber,layup,description,depth,size,thickness) 一致——可能是同型试件的不同物理个体，数据集无显式试件 ID，标记 uncertain"
+  },
+  "n_physical_config_groups": 146,
+  "n_scans": 695,
+  "groups_with_ge2_sensors": 7,
+  "groups_with_ge3_sensors": 7,
+  "mean_sensors_per_multi_sensor_group": 4.43,
+  "sensor_count_hist_of_groups": {
+    "1": 139,
+    "3": 1,
+    "4": 4,
+    "6": 2
+  },
+  "within_scan_frequency_pairing": "每个扫描含 4 频率（f1-f4）→ within-scan 多频率配对=100%（trivial）",
+  "groups_multi_freq_combo_cross_file": 7,
+  "scans_not_in_dominant_freq_combo": 239,
+  "clean_groups": 18,
+  "clean_groups_multi_sensor": 0,
+  "clean_groups_multi_datetime": 17,
+  "per_defect_type_paired_coverage": {
+    "gap": {
+      "n_groups": 79,
+      "n_groups_multi_sensor": 7,
+      "n_groups_ge3_sensors": 7,
+      "n_scans": 492
+    },
+    "clean": {
+      "n_groups": 18,
+      "n_groups_multi_sensor": 0,
+      "n_groups_ge3_sensors": 0,
+      "n_scans": 63
+    },
+    "copper_roving": {
+      "n_groups": 6,
+      "n_groups_multi_sensor": 0,
+      "n_groups_ge3_sensors": 0,
+      "n_scans": 18
+    },
+    "mis_orientation": {
+      "n_groups": 21,
+      "n_groups_multi_sensor": 0,
+      "n_groups_ge3_sensors": 0,
+      "n_scans": 75
+    },
+    "copper_foil": {
+      "n_groups": 6,
+      "n_groups_multi_sensor": 0,
+      "n_groups_ge3_sensors": 0,
+      "n_scans": 19
+    },
+    "ondulation": {
+      "n_groups": 6,
+      "n_groups_multi_sensor": 0,
+      "n_groups_ge3_sensors": 0,
+      "n_scans": 6
+    },
+    "fuzz_ball": {
+      "n_groups": 4,
+      "n_groups_multi_sensor": 0,
+      "n_groups_ge3_sensors": 0,
+      "n_scans": 4
+    },
+    "ptfe_insert": {
+      "n_groups": 6,
+      "n_groups_multi_sensor": 0,
+      "n_groups_ge3_sensors": 0,
+      "n_scans": 18
+    }
+  },
+  "session_overview": {
+    "main-campaign": 643,
+    "GB_170630": 12,
+    "GB_170629": 9,
+    "GB_170703": 9,
+    "GB_170705": 6,
+    "160715_Jan": 4,
+    "160714_Jan": 3,
+    "160809_Jan": 3,
+    "160804_Jan": 2,
+    "160718_Jan": 1,
+    "160713_Jan": 1,
+    "160720_Jan": 1,
+    "160722_Jan": 1
+  },
+  "sessions_multi_sensor": [
+    "GB_170630",
+    "GB_170703"
+  ],
+  "n_cross_sensor_pairs_confirmed": 70,
+  "n_cross_sensor_pairs_all": 70,
+  "defect_only_pairing": "全部跨传感器配对均为 defect 扫描；clean 无跨 sensor 配对",
+  "verdict": "HIGH-VALUE STRUCTURE (conditional): 存在显式采集端记录的跨传感器 campaign（GB_170629-170705 gap 试件 ×6 sensors ×3 orientations；160713-160809_Jan）。但全部配对为 defect 扫描（clean 0 配对），且同一 cfg 组跨 session 是否同一物理试件仍属推断（无显式 specimen ID）。"
+}

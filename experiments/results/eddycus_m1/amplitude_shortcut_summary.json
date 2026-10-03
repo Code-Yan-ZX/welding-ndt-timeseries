@@ -1,0 +1,157 @@
+{
+  "seed": 42,
+  "runtime_s": 106.7,
+  "feature_note": "全局标量统计（valid native grid，无 resize，无逐像素输入）；amp_plus_fft 额外含 log-mag 2D-FFT 全局统计（弱空间信息，仅对照）",
+  "amp_only": {
+    "n_features": 164
+  },
+  "amp_plus_fft": {
+    "n_features": 176
+  },
+  "results": [
+    {
+      "arm": "amp_only",
+      "protocol": "P0",
+      "model": "LR",
+      "auc": 0.9543446244477172,
+      "n_test": 104,
+      "n_def_test": 97,
+      "n_clean_test": 7
+    },
+    {
+      "arm": "amp_only",
+      "protocol": "P0",
+      "model": "RF",
+      "auc": 0.9955817378497791,
+      "n_test": 104,
+      "n_def_test": 97,
+      "n_clean_test": 7
+    },
+    {
+      "arm": "amp_only",
+      "protocol": "P1",
+      "model": "LR",
+      "auc": 0.9876473891072431,
+      "n_test": 150,
+      "n_def_test": 137,
+      "n_clean_test": 13
+    },
+    {
+      "arm": "amp_only",
+      "protocol": "P1",
+      "model": "RF",
+      "auc": 0.9966311061201573,
+      "n_test": 150,
+      "n_def_test": 137,
+      "n_clean_test": 13
+    },
+    {
+      "arm": "amp_only",
+      "protocol": "P3::HP-U300",
+      "model": "LR",
+      "auc": 0.7355759429153925,
+      "n_test": 572,
+      "n_def_test": 545,
+      "n_clean_test": 27
+    },
+    {
+      "arm": "amp_only",
+      "protocol": "P3::HP-U300",
+      "model": "RF",
+      "auc": 0.6351342167855929,
+      "n_test": 572,
+      "n_def_test": 545,
+      "n_clean_test": 27
+    },
+    {
+      "arm": "amp_only",
+      "protocol": "P3::Kohlegelege",
+      "model": "LR",
+      "auc": 0.6753968253968254,
+      "n_test": 71,
+      "n_def_test": 35,
+      "n_clean_test": 36
+    },
+    {
+      "arm": "amp_only",
+      "protocol": "P3::Kohlegelege",
+      "model": "RF",
+      "auc": 0.4916666666666667,
+      "n_test": 71,
+      "n_def_test": 35,
+      "n_clean_test": 36
+    },
+    {
+      "arm": "amp_plus_fft",
+      "protocol": "P0",
+      "model": "LR",
+      "auc": 0.946980854197349,
+      "n_test": 104,
+      "n_def_test": 97,
+      "n_clean_test": 7
+    },
+    {
+      "arm": "amp_plus_fft",
+      "protocol": "P0",
+      "model": "RF",
+      "auc": 0.9889543446244476,
+      "n_test": 104,
+      "n_def_test": 97,
+      "n_clean_test": 7
+    },
+    {
+      "arm": "amp_plus_fft",
+      "protocol": "P1",
+      "model": "LR",
+      "auc": 0.9865244244806288,
+      "n_test": 150,
+      "n_def_test": 137,
+      "n_clean_test": 13
+    },
+    {
+      "arm": "amp_plus_fft",
+      "protocol": "P1",
+      "model": "RF",
+      "auc": 0.9960696238068502,
+      "n_test": 150,
+      "n_def_test": 137,
+      "n_clean_test": 13
+    },
+    {
+      "arm": "amp_plus_fft",
+      "protocol": "P3::HP-U300",
+      "model": "LR",
+      "auc": 0.7743798844716276,
+      "n_test": 572,
+      "n_def_test": 545,
+      "n_clean_test": 27
+    },
+    {
+      "arm": "amp_plus_fft",
+      "protocol": "P3::HP-U300",
+      "model": "RF",
+      "auc": 0.6434250764525995,
+      "n_test": 572,
+      "n_def_test": 545,
+      "n_clean_test": 27
+    },
+    {
+      "arm": "amp_plus_fft",
+      "protocol": "P3::Kohlegelege",
+      "model": "LR",
+      "auc": 0.6904761904761905,
+      "n_test": 71,
+      "n_def_test": 35,
+      "n_clean_test": 36
+    },
+    {
+      "arm": "amp_plus_fft",
+      "protocol": "P3::Kohlegelege",
+      "model": "RF",
+      "auc": 0.513888888888889,
+      "n_test": 71,
+      "n_def_test": 35,
+      "n_clean_test": 36
+    }
+  ]
+}
