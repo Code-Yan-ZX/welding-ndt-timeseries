@@ -1,0 +1,95 @@
+{
+  "seed": 42,
+  "split": "P1(cfg-disjoint) train/test for probes",
+  "extract_inet_s": 1.6,
+  "extract_finetuned_s": 7.6,
+  "probes": {
+    "inet-RN18-frozen": {
+      "sensor_id": {
+        "n_classes": 7,
+        "test_acc": 0.9533333333333334,
+        "test_bal_acc": 0.9097222222222223
+      },
+      "material_id": {
+        "n_classes": 6,
+        "test_acc": 0.88,
+        "test_bal_acc": 0.5470238095238096
+      }
+    },
+    "cnn-inet-RN18-ft(P0,s42)": {
+      "sensor_id": {
+        "n_classes": 7,
+        "test_acc": 0.9733333333333334,
+        "test_bal_acc": 0.9131944444444443
+      },
+      "material_id": {
+        "n_classes": 6,
+        "test_acc": 0.9266666666666666,
+        "test_bal_acc": 0.583387445887446
+      }
+    }
+  },
+  "task1_P1_cnninet_s42_per_group": {
+    "sensor": {
+      "S13131P3,3A7,3MHz": {
+        "n": 144,
+        "n_defect": 131,
+        "n_clean": 13,
+        "auc": 0.9806224310041105
+      },
+      "S13132P5,8A6,1MHz": {
+        "n": 2,
+        "n_defect": 2,
+        "n_clean": 0
+      },
+      "S14150P5,8H9,2MHz": {
+        "n": 1,
+        "n_defect": 1,
+        "n_clean": 0
+      },
+      "S14152P3,3H24,3MHz": {
+        "n": 1,
+        "n_defect": 1,
+        "n_clean": 0
+      },
+      "S15172P2,4H8,5MHz": {
+        "n": 1,
+        "n_defect": 1,
+        "n_clean": 0
+      },
+      "S17257P7H17,0MHz": {
+        "n": 1,
+        "n_defect": 1,
+        "n_clean": 0
+      }
+    },
+    "material": {
+      "0/90 Fabric 565 g/m²": {
+        "n": 1,
+        "n_defect": 1,
+        "n_clean": 0
+      },
+      "0/90° Fabric 524 g/m²": {
+        "n": 7,
+        "n_defect": 7,
+        "n_clean": 0
+      },
+      "HP-U300/122C": {
+        "n": 132,
+        "n_defect": 129,
+        "n_clean": 3,
+        "auc": 0.9896640826873385
+      },
+      "Kohlegelege ST 50g": {
+        "n": 10,
+        "n_defect": 0,
+        "n_clean": 10
+      }
+    }
+  },
+  "tsne_files": [
+    "tsne_cnn-inet-RN18-ft-P0-s42_defect.png",
+    "tsne_cnn-inet-RN18-ft-P0-s42_sensor.png",
+    "tsne_cnn-inet-RN18-ft-P0-s42_material.png"
+  ]
+}

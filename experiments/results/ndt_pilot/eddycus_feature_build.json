@@ -1,0 +1,12 @@
+{
+  "runtime_s": 58.2,
+  "n_scans": 695,
+  "n_built": 695,
+  "n_blocked": 0,
+  "blocked": [],
+  "box": [
+    96,
+    384
+  ],
+  "input_mapping_record": "raw I/Q (float64→float32) → (8,H,W) native grid → holes filled per-channel median → aspect-preserving area-resize into (96,384) + median pad; 幅值未做全局归一化"
+}

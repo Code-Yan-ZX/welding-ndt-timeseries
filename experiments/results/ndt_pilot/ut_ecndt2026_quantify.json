@@ -1,0 +1,695 @@
+{
+  "runtime_s": 51.8,
+  "n_m2k_files": 58,
+  "folders": [
+    "active_dir",
+    "collimation",
+    "echoes",
+    "passive_dir",
+    "remaining_thickness",
+    "single_element"
+  ],
+  "files": {
+    "ut_data/data/collimation/20mm_collimation.m2k": {
+      "time_grid_shape": [
+        2500,
+        1
+      ],
+      "t_start_us": 50.0,
+      "dt_us": 0.008000000000002672,
+      "gain_hw_db": 35.0,
+      "water_path_mm": null,
+      "n_angles": 181
+    },
+    "ut_data/data/collimation/5mm_collimation.m2k": {
+      "time_grid_shape": [
+        2500,
+        1
+      ],
+      "t_start_us": 50.0,
+      "dt_us": 0.008000000000002672,
+      "gain_hw_db": 35.0,
+      "water_path_mm": null,
+      "n_angles": 181
+    },
+    "ut_data/data/collimation/no_collimation.m2k": {
+      "time_grid_shape": [
+        2500,
+        1
+      ],
+      "t_start_us": 50.0,
+      "dt_us": 0.008000000000002672,
+      "gain_hw_db": 35.0,
+      "water_path_mm": null,
+      "n_angles": 181,
+      "ascan_shape": [
+        2500,
+        181,
+        64,
+        10
+      ],
+      "ascan_dtype": "float32"
+    },
+    "ut_data/data/echoes/amplitude_profile.m2k": {
+      "time_grid_shape": [
+        12500,
+        1
+      ],
+      "t_start_us": 0.0,
+      "dt_us": 0.008,
+      "gain_hw_db": 13.4,
+      "water_path_mm": null,
+      "n_angles": 181
+    },
+    "ut_data/data/echoes/only_tube.m2k": {
+      "time_grid_shape": [
+        12500,
+        1
+      ],
+      "t_start_us": 0.0,
+      "dt_us": 0.008,
+      "gain_hw_db": 13.4,
+      "water_path_mm": null,
+      "n_angles": 181
+    },
+    "ut_data/data/echoes/pit_inspection.m2k": {
+      "time_grid_shape": [
+        12500,
+        1
+      ],
+      "t_start_us": 0.0,
+      "dt_us": 0.008,
+      "gain_hw_db": 12.4,
+      "water_path_mm": null,
+      "n_angles": 181,
+      "ascan_shape": [
+        12500,
+        181,
+        64,
+        4
+      ],
+      "ascan_dtype": "float32"
+    },
+    "ut_data/data/remaining_thickness/2nd_row_v1.m2k": {
+      "time_grid_shape": [
+        1875,
+        1
+      ],
+      "t_start_us": 53.01,
+      "dt_us": 0.008000000000002672,
+      "gain_hw_db": 35.0,
+      "water_path_mm": null,
+      "n_angles": 181,
+      "ascan_shape": [
+        1875,
+        181,
+        64,
+        1
+      ],
+      "ascan_dtype": "float32"
+    },
+    "ut_data/data/remaining_thickness/2nd_row_v2.m2k": {
+      "time_grid_shape": [
+        1875,
+        1
+      ],
+      "t_start_us": 53.01,
+      "dt_us": 0.008000000000002672,
+      "gain_hw_db": 35.0,
+      "water_path_mm": null,
+      "n_angles": 181
+    },
+    "ut_data/data/remaining_thickness/2nd_row_v3.m2k": {
+      "time_grid_shape": [
+        1875,
+        1
+      ],
+      "t_start_us": 53.01,
+      "dt_us": 0.008000000000002672,
+      "gain_hw_db": 35.0,
+      "water_path_mm": null,
+      "n_angles": 181
+    },
+    "ut_data/data/remaining_thickness/3rd_row_v1.m2k": {
+      "time_grid_shape": [
+        1875,
+        1
+      ],
+      "t_start_us": 53.01,
+      "dt_us": 0.008000000000002672,
+      "gain_hw_db": 35.0,
+      "water_path_mm": null,
+      "n_angles": 181
+    },
+    "ut_data/data/remaining_thickness/3rd_row_v2.m2k": {
+      "time_grid_shape": [
+        1875,
+        1
+      ],
+      "t_start_us": 53.01,
+      "dt_us": 0.008000000000002672,
+      "gain_hw_db": 35.0,
+      "water_path_mm": null,
+      "n_angles": 181
+    },
+    "ut_data/data/remaining_thickness/3rd_row_v3.m2k": {
+      "time_grid_shape": [
+        1875,
+        1
+      ],
+      "t_start_us": 53.01,
+      "dt_us": 0.008000000000002672,
+      "gain_hw_db": 35.0,
+      "water_path_mm": null,
+      "n_angles": 181
+    },
+    "ut_data/data/remaining_thickness/4th_row_v1.m2k": {
+      "time_grid_shape": [
+        1875,
+        1
+      ],
+      "t_start_us": 53.01,
+      "dt_us": 0.008000000000002672,
+      "gain_hw_db": 35.0,
+      "water_path_mm": null,
+      "n_angles": 181
+    },
+    "ut_data/data/remaining_thickness/4th_row_v2.m2k": {
+      "time_grid_shape": [
+        1875,
+        1
+      ],
+      "t_start_us": 53.01,
+      "dt_us": 0.008000000000002672,
+      "gain_hw_db": 35.0,
+      "water_path_mm": null,
+      "n_angles": 181
+    },
+    "ut_data/data/remaining_thickness/4th_row_v3.m2k": {
+      "time_grid_shape": [
+        1875,
+        1
+      ],
+      "t_start_us": 53.01,
+      "dt_us": 0.008000000000002672,
+      "gain_hw_db": 35.0,
+      "water_path_mm": null,
+      "n_angles": 181
+    },
+    "ut_data/data/remaining_thickness/ref.m2k": {
+      "time_grid_shape": [
+        1875,
+        1
+      ],
+      "t_start_us": 53.01,
+      "dt_us": 0.008000000000002672,
+      "gain_hw_db": 35.0,
+      "water_path_mm": null,
+      "n_angles": 181
+    },
+    "ut_data/data/remaining_thickness/ref2.m2k": {
+      "time_grid_shape": [
+        1875,
+        1
+      ],
+      "t_start_us": 53.01,
+      "dt_us": 0.008000000000002672,
+      "gain_hw_db": 35.0,
+      "water_path_mm": null,
+      "n_angles": 181
+    },
+    "ut_data/data/remaining_thickness/single_element/col_0deg_row_2nd_v1.m2k": {
+      "time_grid_shape": [
+        4375,
+        1
+      ],
+      "t_start_us": 0.0,
+      "dt_us": 0.008000000000000002,
+      "gain_hw_db": 15.0,
+      "water_path_mm": null,
+      "n_angles": null
+    },
+    "ut_data/data/remaining_thickness/single_element/col_0deg_row_2nd_v2.m2k": {
+      "time_grid_shape": [
+        4375,
+        1
+      ],
+      "t_start_us": 0.0,
+      "dt_us": 0.008000000000000002,
+      "gain_hw_db": 15.0,
+      "water_path_mm": null,
+      "n_angles": null
+    },
+    "ut_data/data/remaining_thickness/single_element/col_0deg_row_2nd_v3.m2k": {
+      "time_grid_shape": [
+        4375,
+        1
+      ],
+      "t_start_us": 0.0,
+      "dt_us": 0.008000000000000002,
+      "gain_hw_db": 15.0,
+      "water_path_mm": null,
+      "n_angles": null
+    },
+    "ut_data/data/remaining_thickness/single_element/col_0deg_row_3rd_v1.m2k": {
+      "time_grid_shape": [
+        4375,
+        1
+      ],
+      "t_start_us": 0.0,
+      "dt_us": 0.008000000000000002,
+      "gain_hw_db": 15.0,
+      "water_path_mm": null,
+      "n_angles": null
+    },
+    "ut_data/data/remaining_thickness/single_element/col_0deg_row_3rd_v2.m2k": {
+      "time_grid_shape": [
+        4375,
+        1
+      ],
+      "t_start_us": 0.0,
+      "dt_us": 0.008000000000000002,
+      "gain_hw_db": 15.0,
+      "water_path_mm": null,
+      "n_angles": null
+    },
+    "ut_data/data/remaining_thickness/single_element/col_0deg_row_3rd_v3.m2k": {
+      "time_grid_shape": [
+        4375,
+        1
+      ],
+      "t_start_us": 0.0,
+      "dt_us": 0.008000000000000002,
+      "gain_hw_db": 15.0,
+      "water_path_mm": null,
+      "n_angles": null
+    },
+    "ut_data/data/remaining_thickness/single_element/col_0deg_row_3rd_v4.m2k": {
+      "time_grid_shape": [
+        4375,
+        1
+      ],
+      "t_start_us": 0.0,
+      "dt_us": 0.008000000000000002,
+      "gain_hw_db": 15.0,
+      "water_path_mm": null,
+      "n_angles": null
+    },
+    "ut_data/data/remaining_thickness/single_element/col_0deg_row_4th_v1.m2k": {
+      "time_grid_shape": [
+        4375,
+        1
+      ],
+      "t_start_us": 0.0,
+      "dt_us": 0.008000000000000002,
+      "gain_hw_db": 15.0,
+      "water_path_mm": null,
+      "n_angles": null
+    },
+    "ut_data/data/remaining_thickness/single_element/col_0deg_row_4th_v2.m2k": {
+      "time_grid_shape": [
+        4375,
+        1
+      ],
+      "t_start_us": 0.0,
+      "dt_us": 0.008000000000000002,
+      "gain_hw_db": 15.0,
+      "water_path_mm": null,
+      "n_angles": null
+    },
+    "ut_data/data/remaining_thickness/single_element/col_0deg_row_4th_v3.m2k": {
+      "time_grid_shape": [
+        4375,
+        1
+      ],
+      "t_start_us": 0.0,
+      "dt_us": 0.008000000000000002,
+      "gain_hw_db": 15.0,
+      "water_path_mm": null,
+      "n_angles": null
+    },
+    "ut_data/data/remaining_thickness/single_element/col_45deg_row_2nd_v1.m2k": {
+      "time_grid_shape": [
+        4375,
+        1
+      ],
+      "t_start_us": 0.0,
+      "dt_us": 0.008000000000000002,
+      "gain_hw_db": 15.0,
+      "water_path_mm": null,
+      "n_angles": null
+    },
+    "ut_data/data/remaining_thickness/single_element/col_45deg_row_2nd_v2.m2k": {
+      "time_grid_shape": [
+        4375,
+        1
+      ],
+      "t_start_us": 0.0,
+      "dt_us": 0.008000000000000002,
+      "gain_hw_db": 15.0,
+      "water_path_mm": null,
+      "n_angles": null
+    },
+    "ut_data/data/remaining_thickness/single_element/col_45deg_row_2nd_v3.m2k": {
+      "time_grid_shape": [
+        4375,
+        1
+      ],
+      "t_start_us": 0.0,
+      "dt_us": 0.008000000000000002,
+      "gain_hw_db": 15.0,
+      "water_path_mm": null,
+      "n_angles": null
+    },
+    "ut_data/data/remaining_thickness/single_element/col_45deg_row_3rd_v1.m2k": {
+      "time_grid_shape": [
+        4375,
+        1
+      ],
+      "t_start_us": 0.0,
+      "dt_us": 0.008000000000000002,
+      "gain_hw_db": 15.0,
+      "water_path_mm": null,
+      "n_angles": null
+    },
+    "ut_data/data/remaining_thickness/single_element/col_45deg_row_3rd_v2.m2k": {
+      "time_grid_shape": [
+        4375,
+        1
+      ],
+      "t_start_us": 0.0,
+      "dt_us": 0.008000000000000002,
+      "gain_hw_db": 15.0,
+      "water_path_mm": null,
+      "n_angles": null
+    },
+    "ut_data/data/remaining_thickness/single_element/col_45deg_row_3rd_v3.m2k": {
+      "time_grid_shape": [
+        4375,
+        1
+      ],
+      "t_start_us": 0.0,
+      "dt_us": 0.008000000000000002,
+      "gain_hw_db": 15.0,
+      "water_path_mm": null,
+      "n_angles": null
+    },
+    "ut_data/data/remaining_thickness/single_element/col_45deg_row_4th_v1.m2k": {
+      "time_grid_shape": [
+        4375,
+        1
+      ],
+      "t_start_us": 0.0,
+      "dt_us": 0.008000000000000002,
+      "gain_hw_db": 15.0,
+      "water_path_mm": null,
+      "n_angles": null
+    },
+    "ut_data/data/remaining_thickness/single_element/col_45deg_row_4th_v2.m2k": {
+      "time_grid_shape": [
+        4375,
+        1
+      ],
+      "t_start_us": 0.0,
+      "dt_us": 0.008000000000000002,
+      "gain_hw_db": 15.0,
+      "water_path_mm": null,
+      "n_angles": null
+    },
+    "ut_data/data/remaining_thickness/single_element/col_45deg_row_4th_v3.m2k": {
+      "time_grid_shape": [
+        4375,
+        1
+      ],
+      "t_start_us": 0.0,
+      "dt_us": 0.008000000000000002,
+      "gain_hw_db": 15.0,
+      "water_path_mm": null,
+      "n_angles": null
+    },
+    "ut_data/data/resolution/active_dir/active_dir_single_element_v1.m2k": {
+      "time_grid_shape": [
+        4375,
+        1
+      ],
+      "t_start_us": 0.0,
+      "dt_us": 0.008000000000000002,
+      "gain_hw_db": 15.0,
+      "water_path_mm": null,
+      "n_angles": null
+    },
+    "ut_data/data/resolution/active_dir/active_dir_single_element_v2.m2k": {
+      "time_grid_shape": [
+        4375,
+        1
+      ],
+      "t_start_us": 0.0,
+      "dt_us": 0.008000000000000002,
+      "gain_hw_db": 15.0,
+      "water_path_mm": null,
+      "n_angles": null
+    },
+    "ut_data/data/resolution/active_dir/active_dir_single_element_v3.m2k": {
+      "time_grid_shape": [
+        4375,
+        1
+      ],
+      "t_start_us": 0.0,
+      "dt_us": 0.008000000000000002,
+      "gain_hw_db": 15.0,
+      "water_path_mm": null,
+      "n_angles": null,
+      "ascan_shape": [
+        4375,
+        1,
+        1,
+        41
+      ],
+      "ascan_dtype": "float32"
+    },
+    "ut_data/data/resolution/active_dir/active_dir_xl_focused_1degree_v1.m2k": {
+      "time_grid_shape": [
+        1875,
+        1
+      ],
+      "t_start_us": 53.01,
+      "dt_us": 0.008000000000002672,
+      "gain_hw_db": 35.0,
+      "water_path_mm": null,
+      "n_angles": 181
+    },
+    "ut_data/data/resolution/active_dir/active_dir_xl_focused_1degree_v2.m2k": {
+      "time_grid_shape": [
+        1875,
+        1
+      ],
+      "t_start_us": 53.01,
+      "dt_us": 0.008000000000002672,
+      "gain_hw_db": 35.0,
+      "water_path_mm": null,
+      "n_angles": 181
+    },
+    "ut_data/data/resolution/active_dir/active_dir_xl_planewave_1degree_v1.m2k": {
+      "time_grid_shape": [
+        1875,
+        1
+      ],
+      "t_start_us": 53.01,
+      "dt_us": 0.008000000000002672,
+      "gain_hw_db": 35.0,
+      "water_path_mm": null,
+      "n_angles": 181
+    },
+    "ut_data/data/resolution/active_dir/active_dir_xl_planewave_1degree_v2.m2k": {
+      "time_grid_shape": [
+        1875,
+        1
+      ],
+      "t_start_us": 53.01,
+      "dt_us": 0.008000000000002672,
+      "gain_hw_db": 35.0,
+      "water_path_mm": null,
+      "n_angles": 181
+    },
+    "ut_data/data/resolution/active_dir/ref_xl_focused.m2k": {
+      "time_grid_shape": [
+        1875,
+        1
+      ],
+      "t_start_us": 53.01,
+      "dt_us": 0.008000000000002672,
+      "gain_hw_db": 35.0,
+      "water_path_mm": null,
+      "n_angles": 181
+    },
+    "ut_data/data/resolution/active_dir/ref_xl_planewave.m2k": {
+      "time_grid_shape": [
+        1875,
+        1
+      ],
+      "t_start_us": 53.01,
+      "dt_us": 0.008000000000002672,
+      "gain_hw_db": 35.0,
+      "water_path_mm": null,
+      "n_angles": 181
+    },
+    "ut_data/data/resolution/passive_dir/passive_dir_0degree_v1.m2k": {
+      "time_grid_shape": [
+        1875,
+        1
+      ],
+      "t_start_us": 53.01,
+      "dt_us": 0.008000000000002672,
+      "gain_hw_db": 35.0,
+      "water_path_mm": null,
+      "n_angles": 181
+    },
+    "ut_data/data/resolution/passive_dir/passive_dir_0degree_v2.m2k": {
+      "time_grid_shape": [
+        1875,
+        1
+      ],
+      "t_start_us": 53.01,
+      "dt_us": 0.008000000000002672,
+      "gain_hw_db": 35.0,
+      "water_path_mm": null,
+      "n_angles": 181
+    },
+    "ut_data/data/resolution/passive_dir/passive_dir_0degree_v3.m2k": {
+      "time_grid_shape": [
+        1875,
+        1
+      ],
+      "t_start_us": 53.01,
+      "dt_us": 0.008000000000002672,
+      "gain_hw_db": 35.0,
+      "water_path_mm": null,
+      "n_angles": 181
+    },
+    "ut_data/data/resolution/passive_dir/passive_dir_10degree_v1.m2k": {
+      "time_grid_shape": [
+        1875,
+        1
+      ],
+      "t_start_us": 53.01,
+      "dt_us": 0.008000000000002672,
+      "gain_hw_db": 35.0,
+      "water_path_mm": null,
+      "n_angles": 181
+    },
+    "ut_data/data/resolution/passive_dir/passive_dir_10degree_v2.m2k": {
+      "time_grid_shape": [
+        1875,
+        1
+      ],
+      "t_start_us": 53.01,
+      "dt_us": 0.008000000000002672,
+      "gain_hw_db": 35.0,
+      "water_path_mm": null,
+      "n_angles": 181
+    },
+    "ut_data/data/resolution/passive_dir/passive_dir_10degree_v3.m2k": {
+      "time_grid_shape": [
+        1875,
+        1
+      ],
+      "t_start_us": 53.01,
+      "dt_us": 0.008000000000002672,
+      "gain_hw_db": 35.0,
+      "water_path_mm": null,
+      "n_angles": 181
+    },
+    "ut_data/data/resolution/passive_dir/passive_dir_20degree_v1.m2k": {
+      "time_grid_shape": [
+        1875,
+        1
+      ],
+      "t_start_us": 53.01,
+      "dt_us": 0.008000000000002672,
+      "gain_hw_db": 35.0,
+      "water_path_mm": null,
+      "n_angles": 181
+    },
+    "ut_data/data/resolution/passive_dir/passive_dir_20degree_v2.m2k": {
+      "time_grid_shape": [
+        1875,
+        1
+      ],
+      "t_start_us": 53.01,
+      "dt_us": 0.008000000000002672,
+      "gain_hw_db": 35.0,
+      "water_path_mm": null,
+      "n_angles": 181
+    },
+    "ut_data/data/resolution/passive_dir/passive_dir_20degree_v3.m2k": {
+      "time_grid_shape": [
+        1875,
+        1
+      ],
+      "t_start_us": 53.01,
+      "dt_us": 0.008000000000002672,
+      "gain_hw_db": 35.0,
+      "water_path_mm": null,
+      "n_angles": 181
+    },
+    "ut_data/data/resolution/passive_dir/passive_dir_single_element_v1.m2k": {
+      "time_grid_shape": [
+        4375,
+        1
+      ],
+      "t_start_us": 0.0,
+      "dt_us": 0.008000000000000002,
+      "gain_hw_db": 40.0,
+      "water_path_mm": null,
+      "n_angles": null
+    },
+    "ut_data/data/resolution/passive_dir/passive_dir_single_element_v2.m2k": {
+      "time_grid_shape": [
+        4375,
+        1
+      ],
+      "t_start_us": 0.0,
+      "dt_us": 0.008000000000000002,
+      "gain_hw_db": 40.0,
+      "water_path_mm": null,
+      "n_angles": null
+    },
+    "ut_data/data/resolution/passive_dir/passive_dir_single_element_v3.m2k": {
+      "time_grid_shape": [
+        4375,
+        1
+      ],
+      "t_start_us": 0.0,
+      "dt_us": 0.008000000000000002,
+      "gain_hw_db": 40.0,
+      "water_path_mm": null,
+      "n_angles": null
+    },
+    "ut_data/data/resolution/passive_dir/ref.m2k": {
+      "time_grid_shape": [
+        1875,
+        1
+      ],
+      "t_start_us": 53.01,
+      "dt_us": 0.008000000000002672,
+      "gain_hw_db": 35.0,
+      "water_path_mm": null,
+      "n_angles": 181
+    }
+  },
+  "reproduction_blockers": {
+    "missing_configs": "data/configs/inspection_info.json 不存在于任何公开渠道 (repo data/ 为空且被 .gitignore 忽略; Zenodo 15115255 data.zip 仅含 m2k; 归档 19410833 code.zip 为 repo 拷贝)",
+    "missing_annotations": "data/configs/_annotations.coco.json (COCO 缺陷掩码, 唯一标签来源) 同样缺失 → 无法构建 contain_flaw 标签, 脚本 2 起全部无法运行, 无法复现论文指标",
+    "missing_pretrained": "REPRODUCING.md 声称可在 Zenodo 获取预训练模型从 6_test.py 开始 → 记录中无模型文件",
+    "impact": "严格按作者 protocol 复现 不可行 (阻塞于脚本 1 读取 inspection_info.json); paper-vs-repro 指标对照表无法建立"
+  },
+  "protocol_findings_from_code_reading": {
+    "unit": "S-scan tile: 每次采集(shot) 的 S-scan (time×181角度) 划分为 19×9=171 个 tile",
+    "label": "tile 级二值标签: COCO 掩码缩放 /5 后按 tile 内缺陷像素 >1% 判正",
+    "split": "半监督: 全部 flaw tile 进 test 池, non-flaw tile 按 tile 随机 70/15/15 (random_state=42) 分 train/val-test 池 → 同一 shot 的相邻 tile 同时出现 在 train(normal) 与 test → 存在 specimen/scan 级相邻位置泄漏(设计使然)",
+    "threshold_baseline_leak": "5_threshold_guess.py 的 max_tiles 阈值在整个 dataset (含 train) 上取每 shot 最大值 → 阈值基线自身泄漏",
+    "lof": "pyod LOF novelty=True, n_neighbors=15, p=1, contamination=7%, predict_with_rejection(T=32, delta=0.05); GridSearchCV 默认关闭 (CV_GRIDSEARCH=False), 超参硬编码",
+    "features": "tile 统计(6) + tiles_idx one-hot(170) + PCA50 + FFT 幅值统计(4)",
+    "test_val_split": "test 池再随机 70/30 分 test/validation; validation 含 flaw (contamination 打印), 仅用于 predict_with_rejection 一致性, 未用于调参"
+  }
+}

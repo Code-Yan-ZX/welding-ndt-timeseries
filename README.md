@@ -136,6 +136,25 @@
   - 代码：`src/general_ndt/`（统一样本结构/registry/penelope+eddycus loader/collate/
     数据审计/物理感知掩码/重建+时频一致性目标/leave-one-specimen 划分 + probe），
     `tests/test_general_ndt.py`（22 用例全过）。
+- **NDT 公开 Benchmark Pilot（UT 复现 + EddyCus 审计/基线/shortcut 诊断）**：
+  - **UT（ECNDT2026 LOF 管道缺陷检测）复现失败——非指标偏差而是无法运行**：官方
+    repo/Zenodo 缺 `configs/inspection_info.json` 与 `_annotations.coco.json`
+    （唯一标签来源；repo `.gitignore` 忽略整个 data/，Zenodo 15115255 仅 58 个 m2k，
+    归档 19410833 仅 repo 拷贝，预训练模型也未发布），脚本第 1 步即阻塞；
+    代码审读另发现 tile 级划分同 shot 相邻位置泄漏 + 阈值基线自身泄漏。
+  - **EddyCus 审计**：695 有信号扫描 / 7 传感器（S13131 占 93%）/ 6 材料 / 8 缺陷类 /
+    标签仅 scan 级（无 mask/坐标）/ 栅格不统一（101×451 主流）/ **全部 63 个 clean
+    扫描来自 1 传感器 + 2 材料**（结构性 label confound）。
+  - **Baseline 矩阵（Task1 clean-vs-defect, 7 方法 × P0/P1/P2/P3）**：P0 random
+    AUC 0.93-0.99、P1 配置组不交叉 0.93-0.99，**P3 material-held-out 坍塌到
+    0.55-0.73（所有方法一致，~0.3 AUC gap）**，P2 sensor-held-out TPR@FPR10
+    CNN 仅 0.33-0.50；ViT 冻结特征 P1/P3 接近随机。
+  - **Shortcut 诊断**：微调后缺陷分类器 embedding 的 **sensor-ID 线性探针 98% acc**
+    （material-ID 94%）→ 表征被 sensor/material signature 主导；判定 **GO**，
+    下一轮先做条件归一化消融（幅值 shortcut vs 纹理 shortcut 解耦），再考虑
+    sensor/material-conditioned encoder 与跨条件对比学习。
+  - 详情：`docs/ndt_public_benchmark_pilot.md`；结果 `experiments/results/ndt_pilot/`、
+    划分 `data/manifests/eddycus_pilot_splits/`、代码 `scripts/pilot_*`。
 
 > ⚠ 限制：本阶段不进行超 10 GB 的新下载、不自动下载全部 LOTSA/UTSD、不做正式
 > 训练、不跑长时 GPU 任务。公开小数据实验不代表最终课题结论。

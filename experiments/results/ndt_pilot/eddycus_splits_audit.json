@@ -1,0 +1,133 @@
+{
+  "seed": 42,
+  "n_signal_scans": 695,
+  "P3_folds": {
+    "HP-U300/122C": {
+      "feasible_binary": true,
+      "train": {
+        "defect": 74,
+        "clean": 34
+      },
+      "val": {
+        "false": {
+          "defect": 0,
+          "clean": 2
+        },
+        "true": {
+          "defect": 13,
+          "clean": 0
+        }
+      }
+    },
+    "Kohlegelege ST 50g": {
+      "feasible_binary": true,
+      "train": {
+        "defect": 506,
+        "clean": 18
+      },
+      "val": {
+        "false": {
+          "defect": 0,
+          "clean": 9
+        },
+        "true": {
+          "defect": 91,
+          "clean": 0
+        }
+      }
+    }
+  },
+  "P3_oneclass_only_materials": [
+    "0/90 Fabric 565 g/m²",
+    "0/90/45/-45° Fabric 1013 g/m²",
+    "0/90° Fabric 524 g/m²",
+    "0/90° Fabric 565 g/m²"
+  ],
+  "leakage_audit": {
+    "P0_groups_crossing_splits_by_specimen_cfg": 98,
+    "P0_groups_crossing_splits_by_defect_group": 98,
+    "P1_groups_crossing_splits_by_specimen_cfg": 0,
+    "P1_groups_crossing_splits_by_defect_group": 0,
+    "P2_train_test_share_sensor": false,
+    "P3_train_test_share_material": {
+      "0/90 Fabric 565 g/m²": false,
+      "0/90/45/-45° Fabric 1013 g/m²": false,
+      "0/90° Fabric 524 g/m²": false,
+      "0/90° Fabric 565 g/m²": false,
+      "HP-U300/122C": false,
+      "Kohlegelege ST 50g": false
+    }
+  },
+  "split_sizes": {
+    "P0": {
+      "train": 487,
+      "val": 104,
+      "test": 104
+    },
+    "P1": {
+      "train": 435,
+      "test": 150,
+      "val": 110
+    },
+    "P2": {
+      "train": 559,
+      "val": 90,
+      "test": 46
+    },
+    "P3::0/90 Fabric 565 g/m²": {
+      "train": 591,
+      "val": 90,
+      "test": 14
+    },
+    "P3::0/90/45/-45° Fabric 1013 g/m²": {
+      "train": 604,
+      "val": 90,
+      "test": 1
+    },
+    "P3::0/90° Fabric 524 g/m²": {
+      "train": 556,
+      "val": 103,
+      "test": 36
+    },
+    "P3::0/90° Fabric 565 g/m²": {
+      "train": 604,
+      "val": 90,
+      "test": 1
+    },
+    "P3::HP-U300/122C": {
+      "test": 572,
+      "train": 108,
+      "val": 15
+    },
+    "P3::Kohlegelege ST 50g": {
+      "train": 524,
+      "val": 100,
+      "test": 71
+    }
+  },
+  "P0_defect_rate_by_split": {
+    "train": 0.9055441478439425,
+    "val": 0.9038461538461539,
+    "test": 0.9326923076923077
+  },
+  "P1_defect_rate_by_split": {
+    "train": 0.8988505747126436,
+    "val": 0.9454545454545454,
+    "test": 0.9133333333333333
+  },
+  "feasibility": {
+    "P2_binary_infeasible_reason": "全部 63 个 clean 扫描均来自主传感器 S13131；6 个非主传感器共 46 个 defect 扫描、0 clean → held-out sensor 上无负类，完整二分类不可行",
+    "P2_variant": "P2-onemodel: train=S13131, test=46 defect scans, TPR@FPR10",
+    "P3_binary_feasible_materials": [
+      "HP-U300/122C",
+      "Kohlegelege ST 50g"
+    ],
+    "P3_oneclass_only_materials": [
+      "0/90 Fabric 565 g/m²",
+      "0/90/45/-45° Fabric 1013 g/m²",
+      "0/90° Fabric 524 g/m²",
+      "0/90° Fabric 565 g/m²"
+    ],
+    "P3_infeasible_reason": "Fabric 524/565 与 1013 等材料无 clean 扫描 → 无负类"
+  }
+}

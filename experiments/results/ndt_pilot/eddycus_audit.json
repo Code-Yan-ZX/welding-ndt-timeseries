@@ -1,0 +1,143 @@
+{
+  "n_files": 738,
+  "n_with_signal": 695,
+  "n_metadata_only": 43,
+  "n_sensors_normalized": 7,
+  "sensor_counts": {
+    "S13131P3,3A7,3MHz": 692,
+    "S15152P3,3H24,3MHz": 10,
+    "S15172P2,4H8,5MHz": 9,
+    "S13132P5,8A6,1MHz": 9,
+    "S14150P5,8H9,2MHz": 6,
+    "S14152P3,3H24,3MHz": 6,
+    "S17257P7H17,0MHz": 6
+  },
+  "n_materials": 6,
+  "material_counts": {
+    "HP-U300/122C": 600,
+    "Kohlegelege ST 50g": 86,
+    "0/90° Fabric 524 g/m²": 36,
+    "0/90 Fabric 565 g/m²": 14,
+    "0/90° Fabric 565 g/m²": 1,
+    "0/90/45/-45° Fabric 1013 g/m²": 1
+  },
+  "n_specimen_cfg_groups": 148,
+  "n_defect_groups": 127,
+  "n_clean_cfg_groups": 20,
+  "defect_type_counts": {
+    "gap": 492,
+    "clean": 84,
+    "mis_orientation": 80,
+    "ptfe_insert": 24,
+    "copper_foil": 24,
+    "copper_roving": 24,
+    "ondulation": 6,
+    "fuzz_ball": 4
+  },
+  "defect_present_counts": {
+    "True": 654,
+    "False": 84
+  },
+  "defect_present_with_signal": {
+    "True": 632,
+    "False": 63
+  },
+  "frequency_combo_counts": {
+    "4;7;8;12": 456,
+    "4;6;8;12": 188,
+    "": 42,
+    "2;4.1;6.3;8.2": 18,
+    "4;8.5;16;22.6": 10,
+    "2;4.1;6.3;7.5": 9,
+    "1.8;4.3;5;7": 6,
+    "6.1;9.1;14.2;23.5": 6,
+    "3;4.1;6.3;8.2": 3
+  },
+  "grid_size_counts": {
+    "101.0x451.0": 442,
+    "51.0x451.0": 184,
+    "202.0x1067.0": 34,
+    "101.0x450.0": 15,
+    "501.0x560.0": 9,
+    "251.0x560.0": 6,
+    "37.0x451.0": 1,
+    "51.0x450.0": 1,
+    "203.0x1067.0": 1,
+    "204.0x1067.0": 1,
+    "501.0x564.0": 1
+  },
+  "scans_per_specimen_cfg_hist": {
+    "1": 19,
+    "2": 6,
+    "3": 14,
+    "4": 51,
+    "5": 2,
+    "6": 18,
+    "7": 1,
+    "9": 35,
+    "10": 1,
+    "11": 1
+  },
+  "defect_groups_multi_sensor": 7,
+  "specimen_cfg_multi_sensor": 7,
+  "specimen_cfg_multi_datetime": 129,
+  "label_granularity": "scan-level (HDF5 attrs description); 无 defect mask/bbox/坐标",
+  "grid_size_uniform": false,
+  "per_sensor_defect_clean_with_signal": {
+    "S13131P3,3A7,3MHz": {
+      "defect": 586,
+      "clean": 63
+    },
+    "S13132P5,8A6,1MHz": {
+      "defect": 9,
+      "clean": 0
+    },
+    "S14150P5,8H9,2MHz": {
+      "defect": 6,
+      "clean": 0
+    },
+    "S14152P3,3H24,3MHz": {
+      "defect": 6,
+      "clean": 0
+    },
+    "S15152P3,3H24,3MHz": {
+      "defect": 10,
+      "clean": 0
+    },
+    "S15172P2,4H8,5MHz": {
+      "defect": 9,
+      "clean": 0
+    },
+    "S17257P7H17,0MHz": {
+      "defect": 6,
+      "clean": 0
+    }
+  },
+  "per_material_defect_clean_with_signal": {
+    "0/90 Fabric 565 g/m²": {
+      "defect": 14,
+      "clean": 0
+    },
+    "0/90/45/-45° Fabric 1013 g/m²": {
+      "defect": 1,
+      "clean": 0
+    },
+    "0/90° Fabric 524 g/m²": {
+      "defect": 36,
+      "clean": 0
+    },
+    "0/90° Fabric 565 g/m²": {
+      "defect": 1,
+      "clean": 0
+    },
+    "HP-U300/122C": {
+      "defect": 545,
+      "clean": 27
+    },
+    "Kohlegelege ST 50g": {
+      "defect": 35,
+      "clean": 36
+    }
+  },
+  "scan_table": "experiments/results/ndt_pilot/eddycus_scan_table.csv"
+}

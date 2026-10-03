@@ -24,6 +24,12 @@
   4. 最小 vanilla MAE 训练闭环 + PENELOPE 正式可比 smoke（非方法结果）；
   5. 其余数据准入文档确认 → `phase2_dataset_admission_matrix.md`。
 - **Gate 10 项条件全部满足**（见下"Phase 2A Gate 检查"）。
+- **NDT 公开 Benchmark Pilot（2026-10-03, exploratory）**：UT ECNDT2026 复现**阻塞**
+  （configs/annotations 从未公开）；EddyCus P0/P1 AUC 0.93-0.99 → P3 material-held-out
+  0.55-0.73、P2 sensor-held-out TPR@FPR10 0.33-0.50，sensor-ID probe 98% → **shortcut
+  实证，判定 GO**：下一轮先做条件归一化消融（解耦幅值/纹理 shortcut），再考虑
+  sensor/material-conditioned encoder 与跨条件 SSL。EddyCus 主 benchmark 化
+  仍受"无显式试件 ID"约束（exploratory 级）。详见 `docs/ndt_public_benchmark_pilot.md`。
 - **下一步（E1/E2 前置）**：先运行 PENELOPE（5 coupon LOOCV）E0 严格基线（scratch 监督），
   再 E1/E2 多源 SSL —— 在 E0 之前不得把多源物理感知 SSL 当作可正式运行的既定方法。
 
@@ -157,6 +163,7 @@
 | EddyCus-HDF5 | ✅ 已本地 + 无标签预训练 / cross-config 探索（层级审计后定） | **B/C pending admission** | CC-BY-4.0 |
 | ML-NDT | 🔒 **QUARANTINED**（仅受控消融） | D | LGPL-3.0 |
 | NDT_ML_Flaw | 🔒 **QUARANTINED**（仅受控消融） | D | LGPL-3.0 |
+| UT ECNDT2026 (Kalid et al.) | ⛔ **复现阻塞**（configs/annotations 未公开发布） | C | 数据 CC-BY-4.0 |
 | 合成超声 | ✅ 已本地（预训练扩充） | B | 内部 |
 | external_weld_ut | ⚠ 已本地（无标签/license，待补） | 候选 B | 未知 |
 | Long-term GW SHM | ⏳ 待人工下载 + 合规评估（单结构） | B/C | CC BY-NC-ND |

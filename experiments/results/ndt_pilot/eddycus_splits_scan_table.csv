@@ -1,0 +1,696 @@
+scan_id,sensor,material,defect_present,defect_type,specimen_cfg,defect_group,P0,P1,P2,P3::0/90 Fabric 565 g/m²,P3::0/90/45/-45° Fabric 1013 g/m²,P3::0/90° Fabric 524 g/m²,P3::0/90° Fabric 565 g/m²,P3::HP-U300/122C,P3::Kohlegelege ST 50g
+scan_00001,"S13131P3,3A7,3MHz",HP-U300/122C,False,clean,eddycus:cfg5d0efb89,clean:eddycus:cfg5d0efb89,val,train,train,train,train,train,train,test,train
+scan_00002,"S13131P3,3A7,3MHz",HP-U300/122C,False,clean,eddycus:cfg5d0efb89,clean:eddycus:cfg5d0efb89,train,train,train,train,train,train,train,test,train
+scan_00003,"S13131P3,3A7,3MHz",HP-U300/122C,False,clean,eddycus:cfg24f8f5b5,clean:eddycus:cfg24f8f5b5,val,val,train,train,train,val,train,test,train
+scan_00004,"S13131P3,3A7,3MHz",HP-U300/122C,False,clean,eddycus:cfg24f8f5b5,clean:eddycus:cfg24f8f5b5,train,val,train,train,train,val,train,test,train
+scan_00005,"S13131P3,3A7,3MHz",HP-U300/122C,False,clean,eddycus:cfgfc6ce4df,clean:eddycus:cfgfc6ce4df,train,train,train,train,train,train,train,test,train
+scan_00006,"S13131P3,3A7,3MHz",HP-U300/122C,False,clean,eddycus:cfg28063837,clean:eddycus:cfg28063837,train,train,train,train,train,train,train,test,train
+scan_00007,"S13131P3,3A7,3MHz",HP-U300/122C,False,clean,eddycus:cfg28063837,clean:eddycus:cfg28063837,test,train,train,train,train,train,train,test,train
+scan_00008,"S13131P3,3A7,3MHz",HP-U300/122C,False,clean,eddycus:cfg28063837,clean:eddycus:cfg28063837,train,train,train,train,train,train,train,test,train
+scan_00009,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg45d11546,eddycus:def6cd91026,train,train,train,train,train,train,train,test,train
+scan_00010,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg45d11546,eddycus:def6cd91026,val,train,train,train,train,train,train,test,train
+scan_00011,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg1f9cee9d,eddycus:def2b76e54c,train,train,train,train,train,train,train,test,train
+scan_00012,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg1f9cee9d,eddycus:def2b76e54c,train,train,train,train,train,train,train,test,train
+scan_00013,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg9618f0c7,eddycus:def21076130,train,train,train,train,train,train,train,test,train
+scan_00014,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg9618f0c7,eddycus:def21076130,train,train,train,train,train,train,train,test,train
+scan_00015,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgc6467d10,eddycus:defb60cd3a4,test,train,train,train,train,val,train,test,train
+scan_00016,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgc6467d10,eddycus:defb60cd3a4,train,train,train,train,train,val,train,test,train
+scan_00017,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0f8eb692,eddycus:def4ed81810,train,train,train,train,train,train,train,test,train
+scan_00018,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0f8eb692,eddycus:def4ed81810,train,train,train,train,train,train,train,test,train
+scan_00019,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0f8eb692,eddycus:def4ed81810,train,train,train,train,train,train,train,test,train
+scan_00020,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgaa92b593,eddycus:def6b98f5dd,train,train,train,train,train,train,train,test,train
+scan_00021,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgaa92b593,eddycus:def6b98f5dd,val,train,train,train,train,train,train,test,train
+scan_00022,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgaa92b593,eddycus:def6b98f5dd,train,train,train,train,train,train,train,test,train
+scan_00023,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg049953ee,eddycus:defd6bdabc3,train,val,val,val,val,val,val,test,val
+scan_00024,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg049953ee,eddycus:defd6bdabc3,train,val,val,val,val,val,val,test,val
+scan_00025,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg049953ee,eddycus:defd6bdabc3,train,val,val,val,val,val,val,test,val
+scan_00026,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg25152931,eddycus:defd650205d,train,train,train,train,train,train,train,test,train
+scan_00027,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg25152931,eddycus:defd650205d,train,train,train,train,train,train,train,test,train
+scan_00028,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg25152931,eddycus:defd650205d,train,train,train,train,train,train,train,test,train
+scan_00029,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg5b05b1b9,eddycus:defc1eee313,val,train,train,train,train,train,train,test,train
+scan_00030,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg5b05b1b9,eddycus:defc1eee313,val,train,train,train,train,train,train,test,train
+scan_00031,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg5b05b1b9,eddycus:defc1eee313,test,train,train,train,train,train,train,test,train
+scan_00032,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg5b75b921,eddycus:def7951d5e7,train,train,train,train,train,train,train,test,train
+scan_00033,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg5b75b921,eddycus:def7951d5e7,train,train,train,train,train,train,train,test,train
+scan_00034,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg5b75b921,eddycus:def7951d5e7,train,train,train,train,train,train,train,test,train
+scan_00035,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgc9a9fc5c,eddycus:def92d892e5,train,test,val,val,val,train,val,test,val
+scan_00036,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgc9a9fc5c,eddycus:def92d892e5,val,test,val,val,val,train,val,test,val
+scan_00037,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgc9a9fc5c,eddycus:def92d892e5,test,test,val,val,val,train,val,test,val
+scan_00038,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg40e1a732,eddycus:defa27ceef1,train,train,train,train,train,val,train,test,train
+scan_00039,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg40e1a732,eddycus:defa27ceef1,val,train,train,train,train,val,train,test,train
+scan_00040,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg40e1a732,eddycus:defa27ceef1,train,train,train,train,train,val,train,test,train
+scan_00041,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgfb7bf17a,eddycus:defbd3a9015,val,train,train,train,train,train,train,test,train
+scan_00042,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgfb7bf17a,eddycus:defbd3a9015,train,train,train,train,train,train,train,test,train
+scan_00043,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgfb7bf17a,eddycus:defbd3a9015,train,train,train,train,train,train,train,test,train
+scan_00044,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg19645a43,eddycus:defefbd9242,train,train,train,train,train,train,train,test,train
+scan_00045,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg19645a43,eddycus:defefbd9242,val,train,train,train,train,train,train,test,train
+scan_00046,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg19645a43,eddycus:defefbd9242,val,train,train,train,train,train,train,test,train
+scan_00047,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgfb7bf17a,eddycus:defbd3a9015,val,train,train,train,train,train,train,test,train
+scan_00048,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg078834ad,eddycus:def8e7d523c,train,test,val,val,val,val,val,test,val
+scan_00049,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg078834ad,eddycus:def8e7d523c,test,test,val,val,val,val,val,test,val
+scan_00050,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg078834ad,eddycus:def8e7d523c,train,test,val,val,val,val,val,test,val
+scan_00051,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg33c634aa,eddycus:def742db647,train,test,train,train,train,train,train,test,train
+scan_00052,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg33c634aa,eddycus:def742db647,test,test,train,train,train,train,train,test,train
+scan_00053,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg33c634aa,eddycus:def742db647,train,test,train,train,train,train,train,test,train
+scan_00054,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg3faa66bf,eddycus:def6331eb35,val,train,train,train,train,train,train,test,train
+scan_00055,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg3faa66bf,eddycus:def6331eb35,train,train,train,train,train,train,train,test,train
+scan_00056,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg3faa66bf,eddycus:def6331eb35,val,train,train,train,train,train,train,test,train
+scan_00057,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg1388d3a9,eddycus:def08d97f1f,train,val,train,train,train,train,train,test,train
+scan_00058,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg1388d3a9,eddycus:def08d97f1f,train,val,train,train,train,train,train,test,train
+scan_00059,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg1388d3a9,eddycus:def08d97f1f,train,val,train,train,train,train,train,test,train
+scan_00060,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg3d453410,eddycus:def767f5307,val,train,train,train,train,train,train,test,train
+scan_00061,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg3d453410,eddycus:def767f5307,test,train,train,train,train,train,train,test,train
+scan_00062,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg3d453410,eddycus:def767f5307,test,train,train,train,train,train,train,test,train
+scan_00063,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgdc555cc9,eddycus:def25e6cbd9,train,val,train,train,train,train,train,test,train
+scan_00064,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgdc555cc9,eddycus:def25e6cbd9,train,val,train,train,train,train,train,test,train
+scan_00065,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgdc555cc9,eddycus:def25e6cbd9,val,val,train,train,train,train,train,test,train
+scan_00066,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg414f073a,eddycus:defa1a267c9,train,train,train,train,train,train,train,test,train
+scan_00067,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg414f073a,eddycus:defa1a267c9,val,train,train,train,train,train,train,test,train
+scan_00068,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg414f073a,eddycus:defa1a267c9,train,train,train,train,train,train,train,test,train
+scan_00069,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgc4f04542,eddycus:defea81d923,train,train,val,val,val,train,val,test,train
+scan_00070,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgc4f04542,eddycus:defea81d923,train,train,val,val,val,train,val,test,train
+scan_00071,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgc4f04542,eddycus:defea81d923,train,train,val,val,val,train,val,test,train
+scan_00072,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgd5048805,eddycus:defed560952,test,val,train,train,train,train,train,test,train
+scan_00073,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgd5048805,eddycus:defed560952,train,val,train,train,train,train,train,test,train
+scan_00074,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgd5048805,eddycus:defed560952,train,val,train,train,train,train,train,test,train
+scan_00075,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgca2e8647,eddycus:def9e458ba2,train,test,train,train,train,val,train,test,train
+scan_00076,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgca2e8647,eddycus:def9e458ba2,train,test,train,train,train,val,train,test,train
+scan_00077,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgca2e8647,eddycus:def9e458ba2,train,test,train,train,train,val,train,test,train
+scan_00078,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg9caadd29,eddycus:def8149febc,test,train,val,val,val,val,val,test,train
+scan_00079,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg9caadd29,eddycus:def8149febc,train,train,val,val,val,val,val,test,train
+scan_00080,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg9caadd29,eddycus:def8149febc,train,train,val,val,val,val,val,test,train
+scan_00081,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg05f0be6c,eddycus:def9d317128,val,train,train,train,train,train,train,test,train
+scan_00082,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg05f0be6c,eddycus:def9d317128,train,train,train,train,train,train,train,test,train
+scan_00083,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg05f0be6c,eddycus:def9d317128,train,train,train,train,train,train,train,test,train
+scan_00084,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg54dfe800,eddycus:defb1bb3889,test,test,train,train,train,val,train,test,train
+scan_00085,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg54dfe800,eddycus:defb1bb3889,train,test,train,train,train,val,train,test,train
+scan_00086,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg54dfe800,eddycus:defb1bb3889,train,test,train,train,train,val,train,test,train
+scan_00087,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgdce0a6d6,eddycus:def886c6770,test,test,train,train,train,train,train,test,train
+scan_00088,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgdce0a6d6,eddycus:def886c6770,train,test,train,train,train,train,train,test,train
+scan_00089,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgdce0a6d6,eddycus:def886c6770,train,test,train,train,train,train,train,test,train
+scan_00090,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgb6ab6f10,eddycus:def4d3fad6c,train,test,train,train,train,train,train,test,train
+scan_00091,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgb6ab6f10,eddycus:def4d3fad6c,train,test,train,train,train,train,train,test,train
+scan_00092,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgb6ab6f10,eddycus:def4d3fad6c,test,test,train,train,train,train,train,test,train
+scan_00093,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0f37abb7,eddycus:def73a7dacb,train,train,train,train,train,train,train,test,train
+scan_00094,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0f37abb7,eddycus:def73a7dacb,train,train,train,train,train,train,train,test,train
+scan_00095,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0f37abb7,eddycus:def73a7dacb,train,train,train,train,train,train,train,test,train
+scan_00096,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg18100ce1,eddycus:defefc10f68,train,train,train,train,train,train,train,test,train
+scan_00097,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg18100ce1,eddycus:defefc10f68,test,train,train,train,train,train,train,test,train
+scan_00098,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg18100ce1,eddycus:defefc10f68,val,train,train,train,train,train,train,test,train
+scan_00099,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0ac9691e,eddycus:defac66f738,test,test,val,val,val,val,val,test,val
+scan_00100,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0ac9691e,eddycus:defac66f738,train,test,val,val,val,val,val,test,val
+scan_00101,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0ac9691e,eddycus:defac66f738,test,test,val,val,val,val,val,test,val
+scan_00102,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg9579df00,eddycus:def758a5500,val,test,train,train,train,train,train,test,train
+scan_00103,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg9579df00,eddycus:def758a5500,train,test,train,train,train,train,train,test,train
+scan_00104,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg9579df00,eddycus:def758a5500,train,test,train,train,train,train,train,test,train
+scan_00105,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg8790dddb,eddycus:def93895dc3,train,train,train,train,train,train,train,test,train
+scan_00106,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg8790dddb,eddycus:def93895dc3,train,train,train,train,train,train,train,test,train
+scan_00107,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg8790dddb,eddycus:def93895dc3,train,train,train,train,train,train,train,test,train
+scan_00108,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg6c9f5186,eddycus:def2c545343,test,train,train,train,train,train,train,test,val
+scan_00109,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg6c9f5186,eddycus:def2c545343,train,train,train,train,train,train,train,test,val
+scan_00110,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg6c9f5186,eddycus:def2c545343,train,train,train,train,train,train,train,test,val
+scan_00111,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg814b83f9,eddycus:def3c566448,val,train,train,train,train,train,train,test,train
+scan_00112,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg814b83f9,eddycus:def3c566448,train,train,train,train,train,train,train,test,train
+scan_00113,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg814b83f9,eddycus:def3c566448,train,train,train,train,train,train,train,test,train
+scan_00114,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg8e148bda,eddycus:defc000a57d,train,train,train,train,train,train,train,test,val
+scan_00115,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg8e148bda,eddycus:defc000a57d,train,train,train,train,train,train,train,test,val
+scan_00116,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg8e148bda,eddycus:defc000a57d,test,train,train,train,train,train,train,test,val
+scan_00117,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg4f94a084,eddycus:def1aa74720,test,val,train,train,train,train,train,test,val
+scan_00118,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg4f94a084,eddycus:def1aa74720,train,val,train,train,train,train,train,test,val
+scan_00119,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg4f94a084,eddycus:def1aa74720,train,val,train,train,train,train,train,test,val
+scan_00120,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg5b5bb499,eddycus:def299504c3,val,train,train,train,train,train,train,test,train
+scan_00121,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg5b5bb499,eddycus:def299504c3,test,train,train,train,train,train,train,test,train
+scan_00122,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg5b5bb499,eddycus:def299504c3,val,train,train,train,train,train,train,test,train
+scan_00123,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgf21c18b7,eddycus:def930ad50f,train,train,train,train,train,train,train,test,train
+scan_00124,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgf21c18b7,eddycus:def930ad50f,train,train,train,train,train,train,train,test,train
+scan_00125,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgf21c18b7,eddycus:def930ad50f,val,train,train,train,train,train,train,test,train
+scan_00126,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg3d93d100,eddycus:def158bf391,train,train,train,train,train,train,train,test,train
+scan_00127,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg3d93d100,eddycus:def158bf391,train,train,train,train,train,train,train,test,train
+scan_00128,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg3d93d100,eddycus:def158bf391,train,train,train,train,train,train,train,test,train
+scan_00129,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg91248ae2,eddycus:def378251f8,test,train,train,train,train,train,train,test,val
+scan_00130,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg91248ae2,eddycus:def378251f8,train,train,train,train,train,train,train,test,val
+scan_00131,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg91248ae2,eddycus:def378251f8,train,train,train,train,train,train,train,test,val
+scan_00132,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfge8ab1723,eddycus:def150fe2ce,test,val,train,train,train,train,train,test,train
+scan_00133,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfge8ab1723,eddycus:def150fe2ce,val,val,train,train,train,train,train,test,train
+scan_00134,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfge8ab1723,eddycus:def150fe2ce,train,val,train,train,train,train,train,test,train
+scan_00135,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg37727a98,eddycus:def0a6d342d,train,train,train,train,train,train,train,test,train
+scan_00136,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg37727a98,eddycus:def0a6d342d,val,train,train,train,train,train,train,test,train
+scan_00137,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg37727a98,eddycus:def0a6d342d,train,train,train,train,train,train,train,test,train
+scan_00138,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0e144177,eddycus:def277665a3,train,train,train,train,train,train,train,test,train
+scan_00139,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0e144177,eddycus:def277665a3,val,train,train,train,train,train,train,test,train
+scan_00140,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0e144177,eddycus:def277665a3,train,train,train,train,train,train,train,test,train
+scan_00141,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg9d464917,eddycus:defbd57e629,test,test,train,train,train,val,train,test,train
+scan_00142,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg9d464917,eddycus:defbd57e629,train,test,train,train,train,val,train,test,train
+scan_00143,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg9d464917,eddycus:defbd57e629,train,test,train,train,train,val,train,test,train
+scan_00144,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg1ed9a666,eddycus:def1b5f4353,train,train,train,train,train,val,train,test,val
+scan_00145,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg1ed9a666,eddycus:def1b5f4353,val,train,train,train,train,val,train,test,val
+scan_00146,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg1ed9a666,eddycus:def1b5f4353,train,train,train,train,train,val,train,test,val
+scan_00147,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg99d4eeac,eddycus:def2201dace,train,test,val,val,val,train,val,test,train
+scan_00148,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg99d4eeac,eddycus:def2201dace,test,test,val,val,val,train,val,test,train
+scan_00149,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg99d4eeac,eddycus:def2201dace,train,test,val,val,val,train,val,test,train
+scan_00150,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgcccf8017,eddycus:def05c67e7e,train,train,train,train,train,train,train,test,train
+scan_00151,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgcccf8017,eddycus:def05c67e7e,val,train,train,train,train,train,train,test,train
+scan_00152,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgcccf8017,eddycus:def05c67e7e,test,train,train,train,train,train,train,test,train
+scan_00153,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg819e555a,eddycus:def04fcf642,test,train,train,train,train,train,train,test,train
+scan_00154,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg819e555a,eddycus:def04fcf642,train,train,train,train,train,train,train,test,train
+scan_00155,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg819e555a,eddycus:def04fcf642,train,train,train,train,train,train,train,test,train
+scan_00156,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg8454139f,eddycus:defa7e48ef9,train,test,train,train,train,val,train,test,train
+scan_00157,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg8454139f,eddycus:defa7e48ef9,train,test,train,train,train,val,train,test,train
+scan_00158,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg8454139f,eddycus:defa7e48ef9,train,test,train,train,train,val,train,test,train
+scan_00159,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg1ab1b31b,eddycus:defd4ff3d0b,train,train,val,val,val,train,val,test,train
+scan_00160,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg1ab1b31b,eddycus:defd4ff3d0b,test,train,val,val,val,train,val,test,train
+scan_00161,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg1ab1b31b,eddycus:defd4ff3d0b,train,train,val,val,val,train,val,test,train
+scan_00162,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg3e03f0c0,eddycus:def628b4d11,train,train,train,train,train,train,train,test,train
+scan_00163,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg3e03f0c0,eddycus:def628b4d11,train,train,train,train,train,train,train,test,train
+scan_00164,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg3e03f0c0,eddycus:def628b4d11,train,train,train,train,train,train,train,test,train
+scan_00165,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0db095fb,eddycus:def7a3ebdb3,val,val,train,train,train,train,train,test,train
+scan_00166,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0db095fb,eddycus:def7a3ebdb3,train,val,train,train,train,train,train,test,train
+scan_00167,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0db095fb,eddycus:def7a3ebdb3,train,val,train,train,train,train,train,test,train
+scan_00168,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgcd2d6ab2,eddycus:deffe29af95,train,train,train,train,train,train,train,test,train
+scan_00169,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgcd2d6ab2,eddycus:deffe29af95,test,train,train,train,train,train,train,test,train
+scan_00170,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgcd2d6ab2,eddycus:deffe29af95,train,train,train,train,train,train,train,test,train
+scan_00171,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg078834ad,eddycus:def8e7d523c,train,test,val,val,val,val,val,test,val
+scan_00172,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg078834ad,eddycus:def8e7d523c,test,test,val,val,val,val,val,test,val
+scan_00173,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg078834ad,eddycus:def8e7d523c,test,test,val,val,val,val,val,test,val
+scan_00174,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg33c634aa,eddycus:def742db647,val,test,train,train,train,train,train,test,train
+scan_00175,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg33c634aa,eddycus:def742db647,val,test,train,train,train,train,train,test,train
+scan_00176,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg33c634aa,eddycus:def742db647,train,test,train,train,train,train,train,test,train
+scan_00177,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg3faa66bf,eddycus:def6331eb35,val,train,train,train,train,train,train,test,train
+scan_00178,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg3faa66bf,eddycus:def6331eb35,train,train,train,train,train,train,train,test,train
+scan_00179,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg3faa66bf,eddycus:def6331eb35,train,train,train,train,train,train,train,test,train
+scan_00180,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg1388d3a9,eddycus:def08d97f1f,val,val,train,train,train,train,train,test,train
+scan_00181,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg1388d3a9,eddycus:def08d97f1f,test,val,train,train,train,train,train,test,train
+scan_00182,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg1388d3a9,eddycus:def08d97f1f,train,val,train,train,train,train,train,test,train
+scan_00183,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg3d453410,eddycus:def767f5307,train,train,train,train,train,train,train,test,train
+scan_00184,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg3d453410,eddycus:def767f5307,train,train,train,train,train,train,train,test,train
+scan_00185,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg3d453410,eddycus:def767f5307,test,train,train,train,train,train,train,test,train
+scan_00186,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgdc555cc9,eddycus:def25e6cbd9,train,val,train,train,train,train,train,test,train
+scan_00187,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgdc555cc9,eddycus:def25e6cbd9,train,val,train,train,train,train,train,test,train
+scan_00188,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgdc555cc9,eddycus:def25e6cbd9,train,val,train,train,train,train,train,test,train
+scan_00189,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg414f073a,eddycus:defa1a267c9,train,train,train,train,train,train,train,test,train
+scan_00190,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg414f073a,eddycus:defa1a267c9,train,train,train,train,train,train,train,test,train
+scan_00191,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg414f073a,eddycus:defa1a267c9,train,train,train,train,train,train,train,test,train
+scan_00192,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgc4f04542,eddycus:defea81d923,train,train,val,val,val,train,val,test,train
+scan_00193,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgc4f04542,eddycus:defea81d923,val,train,val,val,val,train,val,test,train
+scan_00194,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgc4f04542,eddycus:defea81d923,val,train,val,val,val,train,val,test,train
+scan_00195,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgd5048805,eddycus:defed560952,train,val,train,train,train,train,train,test,train
+scan_00196,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgd5048805,eddycus:defed560952,train,val,train,train,train,train,train,test,train
+scan_00197,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgd5048805,eddycus:defed560952,train,val,train,train,train,train,train,test,train
+scan_00198,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgca2e8647,eddycus:def9e458ba2,train,test,train,train,train,val,train,test,train
+scan_00199,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgca2e8647,eddycus:def9e458ba2,train,test,train,train,train,val,train,test,train
+scan_00200,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgca2e8647,eddycus:def9e458ba2,val,test,train,train,train,val,train,test,train
+scan_00201,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg9caadd29,eddycus:def8149febc,train,train,val,val,val,val,val,test,train
+scan_00202,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg9caadd29,eddycus:def8149febc,train,train,val,val,val,val,val,test,train
+scan_00203,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg9caadd29,eddycus:def8149febc,test,train,val,val,val,val,val,test,train
+scan_00204,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg05f0be6c,eddycus:def9d317128,train,train,train,train,train,train,train,test,train
+scan_00205,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg05f0be6c,eddycus:def9d317128,test,train,train,train,train,train,train,test,train
+scan_00206,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg05f0be6c,eddycus:def9d317128,train,train,train,train,train,train,train,test,train
+scan_00207,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg54dfe800,eddycus:defb1bb3889,train,test,train,train,train,val,train,test,train
+scan_00208,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg54dfe800,eddycus:defb1bb3889,train,test,train,train,train,val,train,test,train
+scan_00209,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg54dfe800,eddycus:defb1bb3889,val,test,train,train,train,val,train,test,train
+scan_00210,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgdce0a6d6,eddycus:def886c6770,train,test,train,train,train,train,train,test,train
+scan_00211,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgdce0a6d6,eddycus:def886c6770,train,test,train,train,train,train,train,test,train
+scan_00212,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgdce0a6d6,eddycus:def886c6770,val,test,train,train,train,train,train,test,train
+scan_00213,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgb6ab6f10,eddycus:def4d3fad6c,train,test,train,train,train,train,train,test,train
+scan_00214,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgb6ab6f10,eddycus:def4d3fad6c,train,test,train,train,train,train,train,test,train
+scan_00215,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgb6ab6f10,eddycus:def4d3fad6c,train,test,train,train,train,train,train,test,train
+scan_00216,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0f37abb7,eddycus:def73a7dacb,train,train,train,train,train,train,train,test,train
+scan_00217,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0f37abb7,eddycus:def73a7dacb,train,train,train,train,train,train,train,test,train
+scan_00218,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0f37abb7,eddycus:def73a7dacb,val,train,train,train,train,train,train,test,train
+scan_00219,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg18100ce1,eddycus:defefc10f68,val,train,train,train,train,train,train,test,train
+scan_00220,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg18100ce1,eddycus:defefc10f68,val,train,train,train,train,train,train,test,train
+scan_00221,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg18100ce1,eddycus:defefc10f68,train,train,train,train,train,train,train,test,train
+scan_00222,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0ac9691e,eddycus:defac66f738,train,test,val,val,val,val,val,test,val
+scan_00223,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0ac9691e,eddycus:defac66f738,val,test,val,val,val,val,val,test,val
+scan_00224,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0ac9691e,eddycus:defac66f738,train,test,val,val,val,val,val,test,val
+scan_00225,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg9579df00,eddycus:def758a5500,test,test,train,train,train,train,train,test,train
+scan_00226,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg9579df00,eddycus:def758a5500,val,test,train,train,train,train,train,test,train
+scan_00227,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg9579df00,eddycus:def758a5500,val,test,train,train,train,train,train,test,train
+scan_00228,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg8790dddb,eddycus:def93895dc3,train,train,train,train,train,train,train,test,train
+scan_00229,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg8790dddb,eddycus:def93895dc3,train,train,train,train,train,train,train,test,train
+scan_00230,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg8790dddb,eddycus:def93895dc3,train,train,train,train,train,train,train,test,train
+scan_00231,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg6c9f5186,eddycus:def2c545343,val,train,train,train,train,train,train,test,val
+scan_00232,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg6c9f5186,eddycus:def2c545343,test,train,train,train,train,train,train,test,val
+scan_00233,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg6c9f5186,eddycus:def2c545343,val,train,train,train,train,train,train,test,val
+scan_00234,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg814b83f9,eddycus:def3c566448,train,train,train,train,train,train,train,test,train
+scan_00235,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg814b83f9,eddycus:def3c566448,train,train,train,train,train,train,train,test,train
+scan_00236,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg814b83f9,eddycus:def3c566448,train,train,train,train,train,train,train,test,train
+scan_00237,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg8e148bda,eddycus:defc000a57d,test,train,train,train,train,train,train,test,val
+scan_00238,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg8e148bda,eddycus:defc000a57d,test,train,train,train,train,train,train,test,val
+scan_00239,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg8e148bda,eddycus:defc000a57d,train,train,train,train,train,train,train,test,val
+scan_00240,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg4f94a084,eddycus:def1aa74720,train,val,train,train,train,train,train,test,val
+scan_00241,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg4f94a084,eddycus:def1aa74720,train,val,train,train,train,train,train,test,val
+scan_00242,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg4f94a084,eddycus:def1aa74720,val,val,train,train,train,train,train,test,val
+scan_00243,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg5b5bb499,eddycus:def299504c3,train,train,train,train,train,train,train,test,train
+scan_00244,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg5b5bb499,eddycus:def299504c3,val,train,train,train,train,train,train,test,train
+scan_00245,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg5b5bb499,eddycus:def299504c3,test,train,train,train,train,train,train,test,train
+scan_00246,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgf21c18b7,eddycus:def930ad50f,test,train,train,train,train,train,train,test,train
+scan_00247,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgf21c18b7,eddycus:def930ad50f,train,train,train,train,train,train,train,test,train
+scan_00248,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgf21c18b7,eddycus:def930ad50f,train,train,train,train,train,train,train,test,train
+scan_00249,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg3d93d100,eddycus:def158bf391,test,train,train,train,train,train,train,test,train
+scan_00250,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg3d93d100,eddycus:def158bf391,train,train,train,train,train,train,train,test,train
+scan_00251,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg3d93d100,eddycus:def158bf391,train,train,train,train,train,train,train,test,train
+scan_00252,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg91248ae2,eddycus:def378251f8,train,train,train,train,train,train,train,test,val
+scan_00253,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg91248ae2,eddycus:def378251f8,train,train,train,train,train,train,train,test,val
+scan_00254,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg91248ae2,eddycus:def378251f8,test,train,train,train,train,train,train,test,val
+scan_00255,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfge8ab1723,eddycus:def150fe2ce,train,val,train,train,train,train,train,test,train
+scan_00256,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfge8ab1723,eddycus:def150fe2ce,train,val,train,train,train,train,train,test,train
+scan_00257,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfge8ab1723,eddycus:def150fe2ce,val,val,train,train,train,train,train,test,train
+scan_00258,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg37727a98,eddycus:def0a6d342d,train,train,train,train,train,train,train,test,train
+scan_00259,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg37727a98,eddycus:def0a6d342d,train,train,train,train,train,train,train,test,train
+scan_00260,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg37727a98,eddycus:def0a6d342d,test,train,train,train,train,train,train,test,train
+scan_00261,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0e144177,eddycus:def277665a3,test,train,train,train,train,train,train,test,train
+scan_00262,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0e144177,eddycus:def277665a3,train,train,train,train,train,train,train,test,train
+scan_00263,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0e144177,eddycus:def277665a3,train,train,train,train,train,train,train,test,train
+scan_00264,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg9d464917,eddycus:defbd57e629,train,test,train,train,train,val,train,test,train
+scan_00265,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg9d464917,eddycus:defbd57e629,train,test,train,train,train,val,train,test,train
+scan_00266,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg9d464917,eddycus:defbd57e629,train,test,train,train,train,val,train,test,train
+scan_00267,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg1ed9a666,eddycus:def1b5f4353,train,train,train,train,train,val,train,test,val
+scan_00268,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg1ed9a666,eddycus:def1b5f4353,train,train,train,train,train,val,train,test,val
+scan_00269,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg1ed9a666,eddycus:def1b5f4353,train,train,train,train,train,val,train,test,val
+scan_00270,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg99d4eeac,eddycus:def2201dace,train,test,val,val,val,train,val,test,train
+scan_00271,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg99d4eeac,eddycus:def2201dace,train,test,val,val,val,train,val,test,train
+scan_00272,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg99d4eeac,eddycus:def2201dace,test,test,val,val,val,train,val,test,train
+scan_00273,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg185141d3,eddycus:def6cd4e746,train,train,train,train,train,train,train,test,train
+scan_00274,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg185141d3,eddycus:def6cd4e746,train,train,train,train,train,train,train,test,train
+scan_00275,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg185141d3,eddycus:def6cd4e746,train,train,train,train,train,train,train,test,train
+scan_00276,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg199fdf66,eddycus:def080fd20b,train,train,train,train,train,train,train,test,train
+scan_00277,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg199fdf66,eddycus:def080fd20b,train,train,train,train,train,train,train,test,train
+scan_00278,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg199fdf66,eddycus:def080fd20b,train,train,train,train,train,train,train,test,train
+scan_00279,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg7c2bb659,eddycus:def8f45fc8e,test,val,train,train,train,train,train,test,train
+scan_00280,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg7c2bb659,eddycus:def8f45fc8e,train,val,train,train,train,train,train,test,train
+scan_00281,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg7c2bb659,eddycus:def8f45fc8e,val,val,train,train,train,train,train,test,train
+scan_00282,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgf73ea869,eddycus:def8e474bcb,val,train,train,train,train,train,train,test,train
+scan_00283,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgf73ea869,eddycus:def8e474bcb,train,train,train,train,train,train,train,test,train
+scan_00284,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgf73ea869,eddycus:def8e474bcb,train,train,train,train,train,train,train,test,train
+scan_00285,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg6443c800,eddycus:def354ce7da,train,train,train,train,train,train,train,test,train
+scan_00286,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg6443c800,eddycus:def354ce7da,train,train,train,train,train,train,train,test,train
+scan_00287,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg6443c800,eddycus:def354ce7da,train,train,train,train,train,train,train,test,train
+scan_00288,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgb65980c7,eddycus:defbfb3e943,train,test,train,train,train,train,train,test,train
+scan_00289,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgb65980c7,eddycus:defbfb3e943,train,test,train,train,train,train,train,test,train
+scan_00290,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgb65980c7,eddycus:defbfb3e943,test,test,train,train,train,train,train,test,train
+scan_00291,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg7beba947,eddycus:defaf00586f,train,test,train,train,train,val,train,test,train
+scan_00292,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg7beba947,eddycus:defaf00586f,train,test,train,train,train,val,train,test,train
+scan_00293,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg7beba947,eddycus:defaf00586f,train,test,train,train,train,val,train,test,train
+scan_00294,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgfd0889ce,eddycus:def3659287f,train,train,train,train,train,train,train,test,train
+scan_00295,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgfd0889ce,eddycus:def3659287f,train,train,train,train,train,train,train,test,train
+scan_00296,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgfd0889ce,eddycus:def3659287f,train,train,train,train,train,train,train,test,train
+scan_00297,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgbdfdccdf,eddycus:def0672ca40,train,test,train,train,train,train,train,test,val
+scan_00298,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgbdfdccdf,eddycus:def0672ca40,train,test,train,train,train,train,train,test,val
+scan_00299,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgbdfdccdf,eddycus:def0672ca40,test,test,train,train,train,train,train,test,val
+scan_00300,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg21fd0235,eddycus:def4fec16dc,test,test,train,train,train,train,train,test,train
+scan_00301,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg21fd0235,eddycus:def4fec16dc,train,test,train,train,train,train,train,test,train
+scan_00302,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg21fd0235,eddycus:def4fec16dc,train,test,train,train,train,train,train,test,train
+scan_00303,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgcccf8017,eddycus:def05c67e7e,val,train,train,train,train,train,train,test,train
+scan_00304,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgcccf8017,eddycus:def05c67e7e,train,train,train,train,train,train,train,test,train
+scan_00305,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgcccf8017,eddycus:def05c67e7e,train,train,train,train,train,train,train,test,train
+scan_00306,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg819e555a,eddycus:def04fcf642,train,train,train,train,train,train,train,test,train
+scan_00307,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg819e555a,eddycus:def04fcf642,val,train,train,train,train,train,train,test,train
+scan_00308,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg819e555a,eddycus:def04fcf642,val,train,train,train,train,train,train,test,train
+scan_00309,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg8454139f,eddycus:defa7e48ef9,train,test,train,train,train,val,train,test,train
+scan_00310,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg8454139f,eddycus:defa7e48ef9,train,test,train,train,train,val,train,test,train
+scan_00311,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg8454139f,eddycus:defa7e48ef9,test,test,train,train,train,val,train,test,train
+scan_00312,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg1ab1b31b,eddycus:defd4ff3d0b,train,train,val,val,val,train,val,test,train
+scan_00313,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg1ab1b31b,eddycus:defd4ff3d0b,val,train,val,val,val,train,val,test,train
+scan_00314,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg1ab1b31b,eddycus:defd4ff3d0b,train,train,val,val,val,train,val,test,train
+scan_00315,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg3e03f0c0,eddycus:def628b4d11,train,train,train,train,train,train,train,test,train
+scan_00316,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg3e03f0c0,eddycus:def628b4d11,val,train,train,train,train,train,train,test,train
+scan_00317,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg3e03f0c0,eddycus:def628b4d11,train,train,train,train,train,train,train,test,train
+scan_00318,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0db095fb,eddycus:def7a3ebdb3,train,val,train,train,train,train,train,test,train
+scan_00319,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0db095fb,eddycus:def7a3ebdb3,train,val,train,train,train,train,train,test,train
+scan_00320,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0db095fb,eddycus:def7a3ebdb3,val,val,train,train,train,train,train,test,train
+scan_00321,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgcd2d6ab2,eddycus:deffe29af95,val,train,train,train,train,train,train,test,train
+scan_00322,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgcd2d6ab2,eddycus:deffe29af95,test,train,train,train,train,train,train,test,train
+scan_00323,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgcd2d6ab2,eddycus:deffe29af95,train,train,train,train,train,train,train,test,train
+scan_00324,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg078834ad,eddycus:def8e7d523c,train,test,val,val,val,val,val,test,val
+scan_00325,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg078834ad,eddycus:def8e7d523c,train,test,val,val,val,val,val,test,val
+scan_00326,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg078834ad,eddycus:def8e7d523c,train,test,val,val,val,val,val,test,val
+scan_00327,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg33c634aa,eddycus:def742db647,train,test,train,train,train,train,train,test,train
+scan_00328,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg33c634aa,eddycus:def742db647,train,test,train,train,train,train,train,test,train
+scan_00329,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg33c634aa,eddycus:def742db647,val,test,train,train,train,train,train,test,train
+scan_00330,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg3faa66bf,eddycus:def6331eb35,train,train,train,train,train,train,train,test,train
+scan_00331,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg3faa66bf,eddycus:def6331eb35,train,train,train,train,train,train,train,test,train
+scan_00332,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg3faa66bf,eddycus:def6331eb35,test,train,train,train,train,train,train,test,train
+scan_00333,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg1388d3a9,eddycus:def08d97f1f,train,val,train,train,train,train,train,test,train
+scan_00334,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg1388d3a9,eddycus:def08d97f1f,train,val,train,train,train,train,train,test,train
+scan_00335,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg1388d3a9,eddycus:def08d97f1f,train,val,train,train,train,train,train,test,train
+scan_00336,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg3d453410,eddycus:def767f5307,train,train,train,train,train,train,train,test,train
+scan_00337,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg3d453410,eddycus:def767f5307,train,train,train,train,train,train,train,test,train
+scan_00338,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg3d453410,eddycus:def767f5307,test,train,train,train,train,train,train,test,train
+scan_00339,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgdc555cc9,eddycus:def25e6cbd9,val,val,train,train,train,train,train,test,train
+scan_00340,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgdc555cc9,eddycus:def25e6cbd9,train,val,train,train,train,train,train,test,train
+scan_00341,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgdc555cc9,eddycus:def25e6cbd9,train,val,train,train,train,train,train,test,train
+scan_00342,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg414f073a,eddycus:defa1a267c9,train,train,train,train,train,train,train,test,train
+scan_00343,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg414f073a,eddycus:defa1a267c9,train,train,train,train,train,train,train,test,train
+scan_00344,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg414f073a,eddycus:defa1a267c9,train,train,train,train,train,train,train,test,train
+scan_00345,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgc4f04542,eddycus:defea81d923,train,train,val,val,val,train,val,test,train
+scan_00346,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgc4f04542,eddycus:defea81d923,train,train,val,val,val,train,val,test,train
+scan_00347,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgc4f04542,eddycus:defea81d923,train,train,val,val,val,train,val,test,train
+scan_00348,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgd5048805,eddycus:defed560952,train,val,train,train,train,train,train,test,train
+scan_00349,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgd5048805,eddycus:defed560952,train,val,train,train,train,train,train,test,train
+scan_00350,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgd5048805,eddycus:defed560952,train,val,train,train,train,train,train,test,train
+scan_00351,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgca2e8647,eddycus:def9e458ba2,train,test,train,train,train,val,train,test,train
+scan_00352,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgca2e8647,eddycus:def9e458ba2,train,test,train,train,train,val,train,test,train
+scan_00353,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgca2e8647,eddycus:def9e458ba2,test,test,train,train,train,val,train,test,train
+scan_00354,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg9caadd29,eddycus:def8149febc,test,train,val,val,val,val,val,test,train
+scan_00355,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg9caadd29,eddycus:def8149febc,train,train,val,val,val,val,val,test,train
+scan_00356,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg9caadd29,eddycus:def8149febc,train,train,val,val,val,val,val,test,train
+scan_00357,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg05f0be6c,eddycus:def9d317128,test,train,train,train,train,train,train,test,train
+scan_00358,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg05f0be6c,eddycus:def9d317128,val,train,train,train,train,train,train,test,train
+scan_00359,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg05f0be6c,eddycus:def9d317128,train,train,train,train,train,train,train,test,train
+scan_00360,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg54dfe800,eddycus:defb1bb3889,train,test,train,train,train,val,train,test,train
+scan_00361,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg54dfe800,eddycus:defb1bb3889,train,test,train,train,train,val,train,test,train
+scan_00362,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg54dfe800,eddycus:defb1bb3889,train,test,train,train,train,val,train,test,train
+scan_00363,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgdce0a6d6,eddycus:def886c6770,train,test,train,train,train,train,train,test,train
+scan_00364,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgdce0a6d6,eddycus:def886c6770,train,test,train,train,train,train,train,test,train
+scan_00365,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgdce0a6d6,eddycus:def886c6770,train,test,train,train,train,train,train,test,train
+scan_00366,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgb6ab6f10,eddycus:def4d3fad6c,train,test,train,train,train,train,train,test,train
+scan_00367,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgb6ab6f10,eddycus:def4d3fad6c,train,test,train,train,train,train,train,test,train
+scan_00368,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgb6ab6f10,eddycus:def4d3fad6c,val,test,train,train,train,train,train,test,train
+scan_00369,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0f37abb7,eddycus:def73a7dacb,train,train,train,train,train,train,train,test,train
+scan_00370,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0f37abb7,eddycus:def73a7dacb,train,train,train,train,train,train,train,test,train
+scan_00371,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0f37abb7,eddycus:def73a7dacb,train,train,train,train,train,train,train,test,train
+scan_00372,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg18100ce1,eddycus:defefc10f68,train,train,train,train,train,train,train,test,train
+scan_00373,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg18100ce1,eddycus:defefc10f68,train,train,train,train,train,train,train,test,train
+scan_00374,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg18100ce1,eddycus:defefc10f68,test,train,train,train,train,train,train,test,train
+scan_00375,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0ac9691e,eddycus:defac66f738,train,test,val,val,val,val,val,test,val
+scan_00376,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0ac9691e,eddycus:defac66f738,train,test,val,val,val,val,val,test,val
+scan_00377,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0ac9691e,eddycus:defac66f738,train,test,val,val,val,val,val,test,val
+scan_00378,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg9579df00,eddycus:def758a5500,train,test,train,train,train,train,train,test,train
+scan_00379,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg9579df00,eddycus:def758a5500,test,test,train,train,train,train,train,test,train
+scan_00380,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg9579df00,eddycus:def758a5500,train,test,train,train,train,train,train,test,train
+scan_00381,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg8790dddb,eddycus:def93895dc3,train,train,train,train,train,train,train,test,train
+scan_00382,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg8790dddb,eddycus:def93895dc3,train,train,train,train,train,train,train,test,train
+scan_00383,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg8790dddb,eddycus:def93895dc3,train,train,train,train,train,train,train,test,train
+scan_00384,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg6c9f5186,eddycus:def2c545343,test,train,train,train,train,train,train,test,val
+scan_00385,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg6c9f5186,eddycus:def2c545343,train,train,train,train,train,train,train,test,val
+scan_00386,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg6c9f5186,eddycus:def2c545343,train,train,train,train,train,train,train,test,val
+scan_00387,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg814b83f9,eddycus:def3c566448,train,train,train,train,train,train,train,test,train
+scan_00388,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg814b83f9,eddycus:def3c566448,test,train,train,train,train,train,train,test,train
+scan_00389,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg814b83f9,eddycus:def3c566448,train,train,train,train,train,train,train,test,train
+scan_00390,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg8e148bda,eddycus:defc000a57d,train,train,train,train,train,train,train,test,val
+scan_00391,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg8e148bda,eddycus:defc000a57d,test,train,train,train,train,train,train,test,val
+scan_00392,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg8e148bda,eddycus:defc000a57d,train,train,train,train,train,train,train,test,val
+scan_00393,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg4f94a084,eddycus:def1aa74720,train,val,train,train,train,train,train,test,val
+scan_00394,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg4f94a084,eddycus:def1aa74720,test,val,train,train,train,train,train,test,val
+scan_00395,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg4f94a084,eddycus:def1aa74720,val,val,train,train,train,train,train,test,val
+scan_00396,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg5b5bb499,eddycus:def299504c3,train,train,train,train,train,train,train,test,train
+scan_00397,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg5b5bb499,eddycus:def299504c3,train,train,train,train,train,train,train,test,train
+scan_00398,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg5b5bb499,eddycus:def299504c3,train,train,train,train,train,train,train,test,train
+scan_00399,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgf21c18b7,eddycus:def930ad50f,test,train,train,train,train,train,train,test,train
+scan_00400,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgf21c18b7,eddycus:def930ad50f,train,train,train,train,train,train,train,test,train
+scan_00401,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgf21c18b7,eddycus:def930ad50f,train,train,train,train,train,train,train,test,train
+scan_00402,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg3d93d100,eddycus:def158bf391,train,train,train,train,train,train,train,test,train
+scan_00403,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg3d93d100,eddycus:def158bf391,train,train,train,train,train,train,train,test,train
+scan_00404,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg3d93d100,eddycus:def158bf391,train,train,train,train,train,train,train,test,train
+scan_00405,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg91248ae2,eddycus:def378251f8,train,train,train,train,train,train,train,test,val
+scan_00406,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg91248ae2,eddycus:def378251f8,train,train,train,train,train,train,train,test,val
+scan_00407,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg91248ae2,eddycus:def378251f8,test,train,train,train,train,train,train,test,val
+scan_00408,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfge8ab1723,eddycus:def150fe2ce,train,val,train,train,train,train,train,test,train
+scan_00409,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfge8ab1723,eddycus:def150fe2ce,train,val,train,train,train,train,train,test,train
+scan_00410,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfge8ab1723,eddycus:def150fe2ce,train,val,train,train,train,train,train,test,train
+scan_00411,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg37727a98,eddycus:def0a6d342d,train,train,train,train,train,train,train,test,train
+scan_00412,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg37727a98,eddycus:def0a6d342d,train,train,train,train,train,train,train,test,train
+scan_00413,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg37727a98,eddycus:def0a6d342d,train,train,train,train,train,train,train,test,train
+scan_00414,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0e144177,eddycus:def277665a3,val,train,train,train,train,train,train,test,train
+scan_00415,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0e144177,eddycus:def277665a3,train,train,train,train,train,train,train,test,train
+scan_00416,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg0e144177,eddycus:def277665a3,test,train,train,train,train,train,train,test,train
+scan_00417,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg9d464917,eddycus:defbd57e629,train,test,train,train,train,val,train,test,train
+scan_00418,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg9d464917,eddycus:defbd57e629,train,test,train,train,train,val,train,test,train
+scan_00419,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg9d464917,eddycus:defbd57e629,train,test,train,train,train,val,train,test,train
+scan_00420,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg1ed9a666,eddycus:def1b5f4353,train,train,train,train,train,val,train,test,val
+scan_00421,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg1ed9a666,eddycus:def1b5f4353,train,train,train,train,train,val,train,test,val
+scan_00422,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg1ed9a666,eddycus:def1b5f4353,train,train,train,train,train,val,train,test,val
+scan_00423,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg99d4eeac,eddycus:def2201dace,test,test,val,val,val,train,val,test,train
+scan_00424,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg99d4eeac,eddycus:def2201dace,train,test,val,val,val,train,val,test,train
+scan_00425,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg99d4eeac,eddycus:def2201dace,train,test,val,val,val,train,val,test,train
+scan_00426,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg185141d3,eddycus:def6cd4e746,train,train,train,train,train,train,train,test,train
+scan_00427,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg185141d3,eddycus:def6cd4e746,test,train,train,train,train,train,train,test,train
+scan_00428,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg185141d3,eddycus:def6cd4e746,test,train,train,train,train,train,train,test,train
+scan_00429,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg199fdf66,eddycus:def080fd20b,train,train,train,train,train,train,train,test,train
+scan_00430,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg199fdf66,eddycus:def080fd20b,test,train,train,train,train,train,train,test,train
+scan_00431,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg199fdf66,eddycus:def080fd20b,train,train,train,train,train,train,train,test,train
+scan_00432,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg7c2bb659,eddycus:def8f45fc8e,test,val,train,train,train,train,train,test,train
+scan_00433,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg7c2bb659,eddycus:def8f45fc8e,train,val,train,train,train,train,train,test,train
+scan_00434,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg7c2bb659,eddycus:def8f45fc8e,train,val,train,train,train,train,train,test,train
+scan_00435,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgf73ea869,eddycus:def8e474bcb,train,train,train,train,train,train,train,test,train
+scan_00436,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgf73ea869,eddycus:def8e474bcb,train,train,train,train,train,train,train,test,train
+scan_00437,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgf73ea869,eddycus:def8e474bcb,train,train,train,train,train,train,train,test,train
+scan_00438,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg6443c800,eddycus:def354ce7da,train,train,train,train,train,train,train,test,train
+scan_00439,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg6443c800,eddycus:def354ce7da,train,train,train,train,train,train,train,test,train
+scan_00440,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg6443c800,eddycus:def354ce7da,test,train,train,train,train,train,train,test,train
+scan_00441,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgb65980c7,eddycus:defbfb3e943,train,test,train,train,train,train,train,test,train
+scan_00442,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgb65980c7,eddycus:defbfb3e943,test,test,train,train,train,train,train,test,train
+scan_00443,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgb65980c7,eddycus:defbfb3e943,train,test,train,train,train,train,train,test,train
+scan_00444,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg7beba947,eddycus:defaf00586f,test,test,train,train,train,val,train,test,train
+scan_00445,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg7beba947,eddycus:defaf00586f,test,test,train,train,train,val,train,test,train
+scan_00446,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg7beba947,eddycus:defaf00586f,val,test,train,train,train,val,train,test,train
+scan_00447,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgfd0889ce,eddycus:def3659287f,train,train,train,train,train,train,train,test,train
+scan_00448,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgfd0889ce,eddycus:def3659287f,train,train,train,train,train,train,train,test,train
+scan_00449,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgfd0889ce,eddycus:def3659287f,test,train,train,train,train,train,train,test,train
+scan_00450,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgbdfdccdf,eddycus:def0672ca40,train,test,train,train,train,train,train,test,val
+scan_00451,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgbdfdccdf,eddycus:def0672ca40,train,test,train,train,train,train,train,test,val
+scan_00452,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgbdfdccdf,eddycus:def0672ca40,train,test,train,train,train,train,train,test,val
+scan_00453,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg21fd0235,eddycus:def4fec16dc,train,test,train,train,train,train,train,test,train
+scan_00454,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg21fd0235,eddycus:def4fec16dc,train,test,train,train,train,train,train,test,train
+scan_00455,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfg21fd0235,eddycus:def4fec16dc,val,test,train,train,train,train,train,test,train
+scan_00456,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgcccf8017,eddycus:def05c67e7e,val,train,train,train,train,train,train,test,train
+scan_00457,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgcccf8017,eddycus:def05c67e7e,val,train,train,train,train,train,train,test,train
+scan_00458,"S13131P3,3A7,3MHz",HP-U300/122C,True,gap,eddycus:cfgcccf8017,eddycus:def05c67e7e,train,train,train,train,train,train,train,test,train
+scan_00459,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg3b4c79cd,clean:eddycus:cfg3b4c79cd,train,train,train,train,train,train,train,train,test
+scan_00466,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfgc80c06ab,eddycus:def254df1d2,train,train,train,train,train,train,train,train,test
+scan_00467,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfgff0297e1,eddycus:defbf0a1d72,train,train,train,train,train,train,train,train,test
+scan_00468,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfg8ee9a7a3,eddycus:defcfc0dc8c,val,val,train,train,train,train,train,val,test
+scan_00469,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfg9c795eb7,eddycus:defe592829b,train,train,val,val,val,val,val,val,test
+scan_00470,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfgc7747000,eddycus:defea192216,test,val,val,val,val,train,val,train,test
+scan_00471,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg4a5598f1,clean:eddycus:cfg4a5598f1,val,train,train,train,train,train,train,train,test
+scan_00473,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg7f70c3ff,clean:eddycus:cfg7f70c3ff,val,test,train,train,train,train,train,train,test
+scan_00474,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg7f70c3ff,clean:eddycus:cfg7f70c3ff,val,test,train,train,train,train,train,train,test
+scan_00475,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg7f70c3ff,clean:eddycus:cfg7f70c3ff,train,test,train,train,train,train,train,train,test
+scan_00477,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg7b97ec19,clean:eddycus:cfg7b97ec19,train,train,train,train,train,train,train,val,test
+scan_00478,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg7b97ec19,clean:eddycus:cfg7b97ec19,train,train,train,train,train,train,train,val,test
+scan_00480,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfgbab4762e,eddycus:def0573fdd9,val,train,train,train,train,train,train,test,train
+scan_00481,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg8afc4729,eddycus:def39fafb30,train,val,train,train,train,val,train,test,train
+scan_00482,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg422a04dc,eddycus:def8c4ff9dd,train,val,train,train,train,train,train,test,train
+scan_00483,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg5f88c42a,eddycus:defbc313351,test,val,train,train,train,train,train,test,train
+scan_00484,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg6b1e7dc2,eddycus:defd65d5a5f,train,train,train,train,train,train,train,test,train
+scan_00491,"S13131P3,3A7,3MHz",HP-U300/122C,False,clean,eddycus:cfge32f6f96,clean:eddycus:cfge32f6f96,train,val,train,train,train,train,train,test,train
+scan_00492,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg722b06d4,eddycus:defe06100f4,train,train,val,val,val,train,val,test,train
+scan_00493,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg59b4982e,eddycus:defa4a19db3,val,train,train,train,train,train,train,test,train
+scan_00494,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg285c0e02,eddycus:def3d9d934e,test,train,train,train,train,train,train,test,train
+scan_00495,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg73dc6730,eddycus:def2bf40ae1,val,val,train,train,train,train,train,test,train
+scan_00496,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg15504b6a,eddycus:def817b5c49,train,val,train,train,train,train,train,test,train
+scan_00501,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_foil,eddycus:cfge85a4eee,eddycus:def51408d9c,train,train,train,train,train,val,train,test,train
+scan_00507,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_roving,eddycus:cfg11af3464,eddycus:def3a1745ab,train,train,train,train,train,train,train,test,train
+scan_00508,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_roving,eddycus:cfge85cbb31,eddycus:def78976cb6,train,test,train,train,train,train,train,test,train
+scan_00511,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg168cd0e5,clean:eddycus:cfg168cd0e5,train,train,train,train,train,train,train,train,test
+scan_00513,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg168cd0e5,clean:eddycus:cfg168cd0e5,train,train,train,train,train,train,train,train,test
+scan_00515,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg0db9e58e,clean:eddycus:cfg0db9e58e,train,train,train,train,train,train,train,train,test
+scan_00517,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg0db9e58e,clean:eddycus:cfg0db9e58e,train,train,train,train,train,train,train,train,test
+scan_00518,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg5f7bbfd3,clean:eddycus:cfg5f7bbfd3,train,train,train,train,train,train,train,train,test
+scan_00520,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg5f7bbfd3,clean:eddycus:cfg5f7bbfd3,val,train,train,train,train,train,train,train,test
+scan_00523,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg3b4c79cd,clean:eddycus:cfg3b4c79cd,train,train,train,train,train,train,train,train,test
+scan_00524,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfg5a41700e,eddycus:defd8c43638,train,train,train,train,train,train,train,train,test
+scan_00525,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfgf76c9f98,eddycus:defb2d525ce,train,train,train,train,train,train,train,val,test
+scan_00526,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfg95f32e58,eddycus:def7bfb3f38,train,train,train,train,train,train,train,train,test
+scan_00527,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfgc62df292,eddycus:def389638a0,train,train,train,train,train,val,train,train,test
+scan_00528,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfgf5267ca8,eddycus:deff1a66fde,val,train,train,train,train,train,train,train,test
+scan_00530,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfgc80c06ab,eddycus:def254df1d2,train,train,train,train,train,train,train,train,test
+scan_00531,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfgff0297e1,eddycus:defbf0a1d72,train,train,train,train,train,train,train,train,test
+scan_00532,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfg8ee9a7a3,eddycus:defcfc0dc8c,val,val,train,train,train,train,train,val,test
+scan_00533,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfg9c795eb7,eddycus:defe592829b,train,train,val,val,val,val,val,val,test
+scan_00534,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfgc7747000,eddycus:defea192216,train,val,val,val,val,train,val,train,test
+scan_00535,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg4a5598f1,clean:eddycus:cfg4a5598f1,train,train,train,train,train,train,train,train,test
+scan_00536,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg9e4f3730,clean:eddycus:cfg9e4f3730,train,train,train,train,train,train,train,train,test
+scan_00537,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg7f70c3ff,clean:eddycus:cfg7f70c3ff,train,test,train,train,train,train,train,train,test
+scan_00539,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg7f70c3ff,clean:eddycus:cfg7f70c3ff,train,test,train,train,train,train,train,train,test
+scan_00541,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfgbab4762e,eddycus:def0573fdd9,test,train,train,train,train,train,train,test,train
+scan_00542,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg8afc4729,eddycus:def39fafb30,train,val,train,train,train,val,train,test,train
+scan_00543,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg422a04dc,eddycus:def8c4ff9dd,train,val,train,train,train,train,train,test,train
+scan_00544,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg5f88c42a,eddycus:defbc313351,train,val,train,train,train,train,train,test,train
+scan_00545,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg6b1e7dc2,eddycus:defd65d5a5f,val,train,train,train,train,train,train,test,train
+scan_00546,"S13131P3,3A7,3MHz",HP-U300/122C,True,ptfe_insert,eddycus:cfgd1666c60,eddycus:def5681ef73,train,test,train,train,train,train,train,test,train
+scan_00547,"S13131P3,3A7,3MHz",HP-U300/122C,True,ptfe_insert,eddycus:cfgf7a82c25,eddycus:defa6ec1143,train,train,val,val,val,train,val,test,train
+scan_00548,"S13131P3,3A7,3MHz",HP-U300/122C,True,ptfe_insert,eddycus:cfg7f5b74f3,eddycus:def9c969eb4,train,train,train,train,train,train,train,test,train
+scan_00549,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_foil,eddycus:cfgcf402cb9,eddycus:def7f42055f,train,train,train,train,train,train,train,test,train
+scan_00550,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_foil,eddycus:cfg16d24afc,eddycus:def1e08fdda,train,train,train,train,train,train,train,test,train
+scan_00551,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_foil,eddycus:cfgb154612a,eddycus:def8d0c0337,test,train,train,train,train,train,train,test,val
+scan_00552,"S13131P3,3A7,3MHz",HP-U300/122C,False,clean,eddycus:cfge32f6f96,clean:eddycus:cfge32f6f96,test,val,train,train,train,train,train,test,train
+scan_00553,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg722b06d4,eddycus:defe06100f4,test,train,val,val,val,train,val,test,train
+scan_00554,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg59b4982e,eddycus:defa4a19db3,train,train,train,train,train,train,train,test,train
+scan_00555,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg285c0e02,eddycus:def3d9d934e,train,train,train,train,train,train,train,test,train
+scan_00556,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg73dc6730,eddycus:def2bf40ae1,val,val,train,train,train,train,train,test,train
+scan_00557,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg15504b6a,eddycus:def817b5c49,train,val,train,train,train,train,train,test,train
+scan_00558,"S13131P3,3A7,3MHz",HP-U300/122C,True,ptfe_insert,eddycus:cfg8350a65e,eddycus:def47cad126,train,train,train,train,train,train,train,test,train
+scan_00559,"S13131P3,3A7,3MHz",HP-U300/122C,True,ptfe_insert,eddycus:cfgbb498b81,eddycus:deff4605863,train,train,train,train,train,train,train,test,train
+scan_00560,"S13131P3,3A7,3MHz",HP-U300/122C,True,ptfe_insert,eddycus:cfgee779bc2,eddycus:defa955ba82,train,train,val,val,val,train,val,test,train
+scan_00561,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_foil,eddycus:cfg78024103,eddycus:def2b9655df,train,train,train,train,train,train,train,test,train
+scan_00562,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_foil,eddycus:cfge85a4eee,eddycus:def51408d9c,train,train,train,train,train,val,train,test,train
+scan_00563,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_foil,eddycus:cfgc6bac598,eddycus:def4b4e6bf3,train,train,train,train,train,train,train,test,train
+scan_00564,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_roving,eddycus:cfg4f36bd22,eddycus:defc39e03aa,train,train,train,train,train,train,train,test,train
+scan_00565,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_roving,eddycus:cfg526be0ed,eddycus:defd71132ef,train,train,val,val,val,train,val,test,train
+scan_00566,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_roving,eddycus:cfg46f177c8,eddycus:deff51d8b79,test,train,train,train,train,train,train,test,train
+scan_00567,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_roving,eddycus:cfg7a0449d9,eddycus:def28a3d933,val,train,train,train,train,train,train,test,train
+scan_00570,"S13131P3,3A7,3MHz",HP-U300/122C,False,clean,eddycus:cfg09eaa364,clean:eddycus:cfg09eaa364,train,test,val,val,val,val,val,test,val
+scan_00571,"S13131P3,3A7,3MHz",HP-U300/122C,False,clean,eddycus:cfg223285a4,clean:eddycus:cfg223285a4,train,train,val,val,val,train,val,test,val
+scan_00572,"S13131P3,3A7,3MHz",HP-U300/122C,False,clean,eddycus:cfg3ef54812,clean:eddycus:cfg3ef54812,train,train,train,train,train,train,train,test,val
+scan_00573,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg0db9e58e,clean:eddycus:cfg0db9e58e,train,train,train,train,train,train,train,train,test
+scan_00574,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg0db9e58e,clean:eddycus:cfg0db9e58e,test,train,train,train,train,train,train,train,test
+scan_00575,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg0db9e58e,clean:eddycus:cfg0db9e58e,train,train,train,train,train,train,train,train,test
+scan_00576,"S13131P3,3A7,3MHz",HP-U300/122C,False,clean,eddycus:cfgaf598de1,clean:eddycus:cfgaf598de1,test,train,train,train,train,train,train,test,train
+scan_00577,"S13131P3,3A7,3MHz",HP-U300/122C,False,clean,eddycus:cfg3fe6a401,clean:eddycus:cfg3fe6a401,train,train,val,val,val,train,val,test,train
+scan_00578,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg3b4c79cd,clean:eddycus:cfg3b4c79cd,train,train,train,train,train,train,train,train,test
+scan_00579,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfg5a41700e,eddycus:defd8c43638,train,train,train,train,train,train,train,train,test
+scan_00580,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfgf76c9f98,eddycus:defb2d525ce,train,train,train,train,train,train,train,val,test
+scan_00581,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfg95f32e58,eddycus:def7bfb3f38,train,train,train,train,train,train,train,train,test
+scan_00582,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfgc62df292,eddycus:def389638a0,train,train,train,train,train,val,train,train,test
+scan_00583,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfgf5267ca8,eddycus:deff1a66fde,train,train,train,train,train,train,train,train,test
+scan_00585,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfgc80c06ab,eddycus:def254df1d2,val,train,train,train,train,train,train,train,test
+scan_00586,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfgff0297e1,eddycus:defbf0a1d72,train,train,train,train,train,train,train,train,test
+scan_00587,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfg8ee9a7a3,eddycus:defcfc0dc8c,train,val,train,train,train,train,train,val,test
+scan_00588,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfg9c795eb7,eddycus:defe592829b,val,train,val,val,val,val,val,val,test
+scan_00589,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfgc7747000,eddycus:defea192216,train,val,val,val,val,train,val,train,test
+scan_00590,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg4a5598f1,clean:eddycus:cfg4a5598f1,val,train,train,train,train,train,train,train,test
+scan_00591,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg9e4f3730,clean:eddycus:cfg9e4f3730,train,train,train,train,train,train,train,train,test
+scan_00592,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg7f70c3ff,clean:eddycus:cfg7f70c3ff,train,test,train,train,train,train,train,train,test
+scan_00593,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg7f70c3ff,clean:eddycus:cfg7f70c3ff,val,test,train,train,train,train,train,train,test
+scan_00595,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfgbab4762e,eddycus:def0573fdd9,train,train,train,train,train,train,train,test,train
+scan_00596,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg8afc4729,eddycus:def39fafb30,train,val,train,train,train,val,train,test,train
+scan_00597,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg422a04dc,eddycus:def8c4ff9dd,train,val,train,train,train,train,train,test,train
+scan_00598,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg5f88c42a,eddycus:defbc313351,train,val,train,train,train,train,train,test,train
+scan_00599,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg6b1e7dc2,eddycus:defd65d5a5f,train,train,train,train,train,train,train,test,train
+scan_00600,"S13131P3,3A7,3MHz",HP-U300/122C,True,ptfe_insert,eddycus:cfgd1666c60,eddycus:def5681ef73,train,test,train,train,train,train,train,test,train
+scan_00601,"S13131P3,3A7,3MHz",HP-U300/122C,True,ptfe_insert,eddycus:cfgf7a82c25,eddycus:defa6ec1143,train,train,val,val,val,train,val,test,train
+scan_00602,"S13131P3,3A7,3MHz",HP-U300/122C,True,ptfe_insert,eddycus:cfg7f5b74f3,eddycus:def9c969eb4,train,train,train,train,train,train,train,test,train
+scan_00603,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_foil,eddycus:cfgcf402cb9,eddycus:def7f42055f,test,train,train,train,train,train,train,test,train
+scan_00604,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_foil,eddycus:cfg16d24afc,eddycus:def1e08fdda,train,train,train,train,train,train,train,test,train
+scan_00605,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_foil,eddycus:cfgb154612a,eddycus:def8d0c0337,train,train,train,train,train,train,train,test,val
+scan_00606,"S13131P3,3A7,3MHz",HP-U300/122C,False,clean,eddycus:cfge32f6f96,clean:eddycus:cfge32f6f96,train,val,train,train,train,train,train,test,train
+scan_00607,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg722b06d4,eddycus:defe06100f4,val,train,val,val,val,train,val,test,train
+scan_00608,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg59b4982e,eddycus:defa4a19db3,val,train,train,train,train,train,train,test,train
+scan_00609,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg285c0e02,eddycus:def3d9d934e,test,train,train,train,train,train,train,test,train
+scan_00610,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg73dc6730,eddycus:def2bf40ae1,train,val,train,train,train,train,train,test,train
+scan_00611,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg15504b6a,eddycus:def817b5c49,test,val,train,train,train,train,train,test,train
+scan_00612,"S13131P3,3A7,3MHz",HP-U300/122C,True,ptfe_insert,eddycus:cfg8350a65e,eddycus:def47cad126,test,train,train,train,train,train,train,test,train
+scan_00613,"S13131P3,3A7,3MHz",HP-U300/122C,True,ptfe_insert,eddycus:cfgbb498b81,eddycus:deff4605863,val,train,train,train,train,train,train,test,train
+scan_00614,"S13131P3,3A7,3MHz",HP-U300/122C,True,ptfe_insert,eddycus:cfgee779bc2,eddycus:defa955ba82,test,train,val,val,val,train,val,test,train
+scan_00615,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_foil,eddycus:cfg78024103,eddycus:def2b9655df,train,train,train,train,train,train,train,test,train
+scan_00616,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_foil,eddycus:cfge85a4eee,eddycus:def51408d9c,train,train,train,train,train,val,train,test,train
+scan_00617,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_foil,eddycus:cfgc6bac598,eddycus:def4b4e6bf3,train,train,train,train,train,train,train,test,train
+scan_00618,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_roving,eddycus:cfg4f36bd22,eddycus:defc39e03aa,train,train,train,train,train,train,train,test,train
+scan_00619,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_roving,eddycus:cfg526be0ed,eddycus:defd71132ef,train,train,val,val,val,train,val,test,train
+scan_00620,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_roving,eddycus:cfg46f177c8,eddycus:deff51d8b79,train,train,train,train,train,train,train,test,train
+scan_00621,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_roving,eddycus:cfg7a0449d9,eddycus:def28a3d933,train,train,train,train,train,train,train,test,train
+scan_00622,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_roving,eddycus:cfg11af3464,eddycus:def3a1745ab,train,train,train,train,train,train,train,test,train
+scan_00623,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_roving,eddycus:cfge85cbb31,eddycus:def78976cb6,train,test,train,train,train,train,train,test,train
+scan_00624,"S13131P3,3A7,3MHz",HP-U300/122C,False,clean,eddycus:cfg09eaa364,clean:eddycus:cfg09eaa364,train,test,val,val,val,val,val,test,val
+scan_00625,"S13131P3,3A7,3MHz",HP-U300/122C,False,clean,eddycus:cfg09eaa364,clean:eddycus:cfg09eaa364,train,test,val,val,val,val,val,test,val
+scan_00626,"S13131P3,3A7,3MHz",HP-U300/122C,False,clean,eddycus:cfg223285a4,clean:eddycus:cfg223285a4,train,train,val,val,val,train,val,test,val
+scan_00627,"S13131P3,3A7,3MHz",HP-U300/122C,False,clean,eddycus:cfg223285a4,clean:eddycus:cfg223285a4,train,train,val,val,val,train,val,test,val
+scan_00628,"S13131P3,3A7,3MHz",HP-U300/122C,False,clean,eddycus:cfg3ef54812,clean:eddycus:cfg3ef54812,train,train,train,train,train,train,train,test,val
+scan_00629,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg0db9e58e,clean:eddycus:cfg0db9e58e,test,train,train,train,train,train,train,train,test
+scan_00630,"S13131P3,3A7,3MHz",HP-U300/122C,False,clean,eddycus:cfgaf598de1,clean:eddycus:cfgaf598de1,train,train,train,train,train,train,train,test,train
+scan_00631,"S13131P3,3A7,3MHz",HP-U300/122C,False,clean,eddycus:cfg3fe6a401,clean:eddycus:cfg3fe6a401,train,train,val,val,val,train,val,test,train
+scan_00632,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg3b4c79cd,clean:eddycus:cfg3b4c79cd,test,train,train,train,train,train,train,train,test
+scan_00633,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfg5a41700e,eddycus:defd8c43638,train,train,train,train,train,train,train,train,test
+scan_00634,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfgf76c9f98,eddycus:defb2d525ce,train,train,train,train,train,train,train,val,test
+scan_00635,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfg95f32e58,eddycus:def7bfb3f38,train,train,train,train,train,train,train,train,test
+scan_00636,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfgc62df292,eddycus:def389638a0,train,train,train,train,train,val,train,train,test
+scan_00637,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfgf5267ca8,eddycus:deff1a66fde,train,train,train,train,train,train,train,train,test
+scan_00639,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfgc80c06ab,eddycus:def254df1d2,test,train,train,train,train,train,train,train,test
+scan_00640,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfgff0297e1,eddycus:defbf0a1d72,train,train,train,train,train,train,train,train,test
+scan_00641,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfg8ee9a7a3,eddycus:defcfc0dc8c,test,val,train,train,train,train,train,val,test
+scan_00642,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfg9c795eb7,eddycus:defe592829b,train,train,val,val,val,val,val,val,test
+scan_00643,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,True,mis_orientation,eddycus:cfgc7747000,eddycus:defea192216,train,val,val,val,val,train,val,train,test
+scan_00644,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg4a5598f1,clean:eddycus:cfg4a5598f1,val,train,train,train,train,train,train,train,test
+scan_00645,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg9e4f3730,clean:eddycus:cfg9e4f3730,train,train,train,train,train,train,train,train,test
+scan_00646,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg7f70c3ff,clean:eddycus:cfg7f70c3ff,train,test,train,train,train,train,train,train,test
+scan_00647,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg7f70c3ff,clean:eddycus:cfg7f70c3ff,train,test,train,train,train,train,train,train,test
+scan_00648,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg7f70c3ff,clean:eddycus:cfg7f70c3ff,test,test,train,train,train,train,train,train,test
+scan_00650,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfgbab4762e,eddycus:def0573fdd9,val,train,train,train,train,train,train,test,train
+scan_00651,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg8afc4729,eddycus:def39fafb30,train,val,train,train,train,val,train,test,train
+scan_00652,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg422a04dc,eddycus:def8c4ff9dd,train,val,train,train,train,train,train,test,train
+scan_00653,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg5f88c42a,eddycus:defbc313351,train,val,train,train,train,train,train,test,train
+scan_00654,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg6b1e7dc2,eddycus:defd65d5a5f,train,train,train,train,train,train,train,test,train
+scan_00655,"S13131P3,3A7,3MHz",HP-U300/122C,True,ptfe_insert,eddycus:cfgd1666c60,eddycus:def5681ef73,train,test,train,train,train,train,train,test,train
+scan_00656,"S13131P3,3A7,3MHz",HP-U300/122C,True,ptfe_insert,eddycus:cfgf7a82c25,eddycus:defa6ec1143,test,train,val,val,val,train,val,test,train
+scan_00657,"S13131P3,3A7,3MHz",HP-U300/122C,True,ptfe_insert,eddycus:cfg7f5b74f3,eddycus:def9c969eb4,train,train,train,train,train,train,train,test,train
+scan_00658,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_foil,eddycus:cfgcf402cb9,eddycus:def7f42055f,train,train,train,train,train,train,train,test,train
+scan_00659,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_foil,eddycus:cfg16d24afc,eddycus:def1e08fdda,train,train,train,train,train,train,train,test,train
+scan_00660,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_foil,eddycus:cfgb154612a,eddycus:def8d0c0337,val,train,train,train,train,train,train,test,val
+scan_00661,"S13131P3,3A7,3MHz",HP-U300/122C,False,clean,eddycus:cfge32f6f96,clean:eddycus:cfge32f6f96,train,val,train,train,train,train,train,test,train
+scan_00662,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg59b4982e,eddycus:defa4a19db3,train,train,train,train,train,train,train,test,train
+scan_00663,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg285c0e02,eddycus:def3d9d934e,train,train,train,train,train,train,train,test,train
+scan_00664,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg73dc6730,eddycus:def2bf40ae1,train,val,train,train,train,train,train,test,train
+scan_00665,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfg15504b6a,eddycus:def817b5c49,train,val,train,train,train,train,train,test,train
+scan_00666,"S13131P3,3A7,3MHz",HP-U300/122C,True,ptfe_insert,eddycus:cfg8350a65e,eddycus:def47cad126,train,train,train,train,train,train,train,test,train
+scan_00667,"S13131P3,3A7,3MHz",HP-U300/122C,True,ptfe_insert,eddycus:cfgbb498b81,eddycus:deff4605863,train,train,train,train,train,train,train,test,train
+scan_00668,"S13131P3,3A7,3MHz",HP-U300/122C,True,ptfe_insert,eddycus:cfgee779bc2,eddycus:defa955ba82,train,train,val,val,val,train,val,test,train
+scan_00669,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_foil,eddycus:cfg78024103,eddycus:def2b9655df,train,train,train,train,train,train,train,test,train
+scan_00670,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_foil,eddycus:cfge85a4eee,eddycus:def51408d9c,train,train,train,train,train,val,train,test,train
+scan_00671,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_foil,eddycus:cfgc6bac598,eddycus:def4b4e6bf3,test,train,train,train,train,train,train,test,train
+scan_00672,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_roving,eddycus:cfg4f36bd22,eddycus:defc39e03aa,val,train,train,train,train,train,train,test,train
+scan_00673,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_roving,eddycus:cfg526be0ed,eddycus:defd71132ef,train,train,val,val,val,train,val,test,train
+scan_00674,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_roving,eddycus:cfg46f177c8,eddycus:deff51d8b79,train,train,train,train,train,train,train,test,train
+scan_00675,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_roving,eddycus:cfg7a0449d9,eddycus:def28a3d933,train,train,train,train,train,train,train,test,train
+scan_00676,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_roving,eddycus:cfg11af3464,eddycus:def3a1745ab,train,train,train,train,train,train,train,test,train
+scan_00677,"S13131P3,3A7,3MHz",HP-U300/122C,True,copper_roving,eddycus:cfge85cbb31,eddycus:def78976cb6,train,test,train,train,train,train,train,test,train
+scan_00678,"S13131P3,3A7,3MHz",HP-U300/122C,True,mis_orientation,eddycus:cfgfbf48db8,eddycus:defa73c9325,train,train,val,val,val,train,val,test,val
+scan_00681,"S13131P3,3A7,3MHz",HP-U300/122C,False,clean,eddycus:cfg3ef54812,clean:eddycus:cfg3ef54812,train,train,train,train,train,train,train,test,val
+scan_00682,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg0db9e58e,clean:eddycus:cfg0db9e58e,train,train,train,train,train,train,train,train,test
+scan_00683,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg0db9e58e,clean:eddycus:cfg0db9e58e,train,train,train,train,train,train,train,train,test
+scan_00684,"S13131P3,3A7,3MHz",Kohlegelege ST 50g,False,clean,eddycus:cfg0db9e58e,clean:eddycus:cfg0db9e58e,val,train,train,train,train,train,train,train,test
+scan_00685,"S13131P3,3A7,3MHz",HP-U300/122C,False,clean,eddycus:cfgaf598de1,clean:eddycus:cfgaf598de1,train,train,train,train,train,train,train,test,train
+scan_00686,"S13131P3,3A7,3MHz",HP-U300/122C,False,clean,eddycus:cfg3fe6a401,clean:eddycus:cfg3fe6a401,train,train,val,val,val,train,val,test,train
+scan_00687,"S15172P2,4H8,5MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg1a561983,eddycus:def8657c5da,train,test,test,train,train,test,train,train,train
+scan_00688,"S15172P2,4H8,5MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg3b4e0707,eddycus:def12836f0b,train,train,test,train,train,test,train,train,val
+scan_00689,"S15172P2,4H8,5MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg423fe5c2,eddycus:def02e3fa18,train,train,test,train,train,test,train,train,train
+scan_00690,"S13131P3,3A7,3MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg1a561983,eddycus:def8657c5da,train,test,train,train,train,test,train,train,train
+scan_00691,"S13132P5,8A6,1MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg1a561983,eddycus:def8657c5da,train,test,test,train,train,test,train,train,train
+scan_00692,"S13131P3,3A7,3MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg1a561983,eddycus:def8657c5da,train,test,train,train,train,test,train,train,train
+scan_00693,"S14150P5,8H9,2MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg1a561983,eddycus:def8657c5da,val,test,test,train,train,test,train,train,train
+scan_00694,"S14150P5,8H9,2MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg3b4e0707,eddycus:def12836f0b,train,train,test,train,train,test,train,train,val
+scan_00695,"S14150P5,8H9,2MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg423fe5c2,eddycus:def02e3fa18,train,train,test,train,train,test,train,train,train
+scan_00696,"S14152P3,3H24,3MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg1a561983,eddycus:def8657c5da,train,test,test,train,train,test,train,train,train
+scan_00697,"S14152P3,3H24,3MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg423fe5c2,eddycus:def02e3fa18,train,train,test,train,train,test,train,train,train
+scan_00698,"S14152P3,3H24,3MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg3b4e0707,eddycus:def12836f0b,test,train,test,train,train,test,train,train,val
+scan_00699,"S17257P7H17,0MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg1a561983,eddycus:def8657c5da,val,test,test,train,train,test,train,train,train
+scan_00700,"S17257P7H17,0MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg3b4e0707,eddycus:def12836f0b,train,train,test,train,train,test,train,train,val
+scan_00701,"S17257P7H17,0MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg423fe5c2,eddycus:def02e3fa18,val,train,test,train,train,test,train,train,train
+scan_00702,"S13132P5,8A6,1MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg933d0c6e,eddycus:def5aa6da95,test,val,test,train,train,test,train,train,val
+scan_00703,"S13131P3,3A7,3MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg933d0c6e,eddycus:def5aa6da95,val,val,train,train,train,test,train,train,val
+scan_00704,"S15172P2,4H8,5MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg933d0c6e,eddycus:def5aa6da95,train,val,test,train,train,test,train,train,val
+scan_00705,"S15172P2,4H8,5MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg49a36ca4,eddycus:defdb8d4602,val,val,test,train,train,test,train,train,train
+scan_00706,"S15172P2,4H8,5MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg7812b915,eddycus:def8a2f05b6,val,val,test,train,train,test,train,train,train
+scan_00707,"S14152P3,3H24,3MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg933d0c6e,eddycus:def5aa6da95,train,val,test,train,train,test,train,train,val
+scan_00708,"S14152P3,3H24,3MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg49a36ca4,eddycus:defdb8d4602,train,val,test,train,train,test,train,train,train
+scan_00709,"S14152P3,3H24,3MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg7812b915,eddycus:def8a2f05b6,train,val,test,train,train,test,train,train,train
+scan_00710,"S14150P5,8H9,2MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg933d0c6e,eddycus:def5aa6da95,test,val,test,train,train,test,train,train,val
+scan_00711,"S14150P5,8H9,2MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg7812b915,eddycus:def8a2f05b6,train,val,test,train,train,test,train,train,train
+scan_00712,"S14150P5,8H9,2MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg49a36ca4,eddycus:defdb8d4602,train,val,test,train,train,test,train,train,train
+scan_00713,"S17257P7H17,0MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg933d0c6e,eddycus:def5aa6da95,train,val,test,train,train,test,train,train,val
+scan_00714,"S17257P7H17,0MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg7812b915,eddycus:def8a2f05b6,train,val,test,train,train,test,train,train,train
+scan_00715,"S17257P7H17,0MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg49a36ca4,eddycus:defdb8d4602,train,val,test,train,train,test,train,train,train
+scan_00716,"S13131P3,3A7,3MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg85868e76,eddycus:defd9e91f6e,train,train,val,val,val,test,val,train,train
+scan_00717,"S13131P3,3A7,3MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg85868e76,eddycus:defd9e91f6e,train,train,val,val,val,test,val,train,train
+scan_00718,"S13131P3,3A7,3MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg85868e76,eddycus:defd9e91f6e,train,train,val,val,val,test,val,train,train
+scan_00719,"S13132P5,8A6,1MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg85868e76,eddycus:defd9e91f6e,train,train,test,train,train,test,train,train,train
+scan_00720,"S15172P2,4H8,5MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg85868e76,eddycus:defd9e91f6e,train,train,test,train,train,test,train,train,train
+scan_00721,"S15172P2,4H8,5MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg85868e76,eddycus:defd9e91f6e,test,train,test,train,train,test,train,train,train
+scan_00722,"S15172P2,4H8,5MHz",0/90° Fabric 524 g/m²,True,gap,eddycus:cfg7fe9c201,eddycus:defa1241d2d,test,train,test,train,train,test,train,train,train
+scan_00723,"S13132P5,8A6,1MHz",0/90° Fabric 565 g/m²,True,ondulation,eddycus:cfgc57a30e1,eddycus:defcd1ba791,train,train,test,train,train,train,test,train,train
+scan_00724,"S15152P3,3H24,3MHz",0/90/45/-45° Fabric 1013 g/m²,True,fuzz_ball,eddycus:cfg5b071907,eddycus:def9010a658,train,train,test,train,test,train,train,train,train
+scan_00725,"S15152P3,3H24,3MHz",0/90 Fabric 565 g/m²,True,fuzz_ball,eddycus:cfgf86b8767,eddycus:def08107ff8,test,train,test,test,train,train,train,train,train
+scan_00726,"S15152P3,3H24,3MHz",0/90 Fabric 565 g/m²,True,fuzz_ball,eddycus:cfg4c32320b,eddycus:def077e42d3,train,val,test,test,train,train,train,train,train
+scan_00727,"S15152P3,3H24,3MHz",0/90 Fabric 565 g/m²,True,fuzz_ball,eddycus:cfge8db928c,eddycus:def9010a658,train,train,test,test,train,train,train,train,train
+scan_00728,"S15152P3,3H24,3MHz",0/90 Fabric 565 g/m²,True,gap,eddycus:cfg8197692a,eddycus:def10a2a4f5,val,train,test,test,train,train,train,train,val
+scan_00729,"S15152P3,3H24,3MHz",0/90 Fabric 565 g/m²,True,gap,eddycus:cfg728b6167,eddycus:def8ad444d2,val,train,test,test,train,train,train,train,train
+scan_00730,"S15152P3,3H24,3MHz",0/90 Fabric 565 g/m²,True,gap,eddycus:cfg2c387731,eddycus:defc0d5587e,train,train,test,test,train,train,train,train,train
+scan_00731,"S13132P5,8A6,1MHz",0/90 Fabric 565 g/m²,True,ondulation,eddycus:cfgf1cda1f3,eddycus:def34924f53,train,train,test,test,train,train,train,train,train
+scan_00732,"S13132P5,8A6,1MHz",0/90 Fabric 565 g/m²,True,ondulation,eddycus:cfg203ce08f,eddycus:def0315b909,train,test,test,test,train,train,train,val,train
+scan_00733,"S13132P5,8A6,1MHz",0/90 Fabric 565 g/m²,True,ondulation,eddycus:cfg9e0e0b13,eddycus:def0aabb573,train,train,test,test,train,train,train,train,train
+scan_00734,"S13132P5,8A6,1MHz",0/90 Fabric 565 g/m²,True,ondulation,eddycus:cfg6de438e4,eddycus:def1116985f,train,train,test,test,train,train,train,val,train
+scan_00735,"S13132P5,8A6,1MHz",0/90 Fabric 565 g/m²,True,ondulation,eddycus:cfg57cdadcb,eddycus:def03273adb,test,train,test,test,train,train,train,train,train
+scan_00736,"S15152P3,3H24,3MHz",0/90 Fabric 565 g/m²,True,gap,eddycus:cfg230dd9e1,eddycus:def05c9745b,val,train,test,test,train,train,train,train,val
+scan_00737,"S15152P3,3H24,3MHz",0/90 Fabric 565 g/m²,True,gap,eddycus:cfg3c11bc6e,eddycus:def9b7b6649,val,val,test,test,train,train,train,train,train
+scan_00738,"S15152P3,3H24,3MHz",0/90 Fabric 565 g/m²,True,gap,eddycus:cfg0ede77a4,eddycus:def5291a116,train,train,test,test,train,train,train,train,train
