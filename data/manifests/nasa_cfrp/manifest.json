@@ -1,0 +1,49 @@
+{
+  "dataset": "NASA PCoE Composites (CFRP fatigue, PZT guided wave + X-ray)",
+  "downloaded_at": "2026-10-04",
+  "source_url": "https://phm-datasets.s3.amazonaws.com/NASA/2.+Composites.zip",
+  "source_page": "https://www.nasa.gov/intelligent-systems-division/discovery-and-systems-health/pcoe/pcoe-data-set-repository/",
+  "notes": "Legacy portal datasets.phl.pdx.edu is dead (NXDOMAIN 2026-10-03); S3 bucket is the current official host per NASA PCoE repository page.",
+  "files": [
+    {
+      "path": "data/raw/nasa_cfrp/2.Composites.zip",
+      "size_bytes": 4638330974,
+      "sha256": "5b0a4e71069f4133aeeb0b733ad66f3af9e17015a6f455daa74bc0939733e1e4",
+      "integrity": "zip testzip() clean; byte size matches HTTP Content-Length exactly"
+    }
+  ],
+  "structure": {
+    "outer_zip": ["Layup1.zip", "Layup2.zip", "Layup3.zip"],
+    "layups": {
+      "Layup1": "[02/904]s, coupons L1S11,S12,S17,S18,S19",
+      "Layup2": "[0/902/45/-45/90]s, coupons L2S11,S12,S17,S18,S20",
+      "Layup3": "[902/45/-45]2s, coupons L3S11,S13,S14,S20"
+    },
+    "per_coupon_dirs": ["LogBook xlsx", "PZT-data (mat)", "StrainData", "XRay (jpg by cycle)"],
+    "pzt_config": "two 6-PZT SMART Layers (Acellent): 6 actuators (1-6) + 6 sensors (7-12); 36 trajectories x 7 frequencies (150-450 kHz step 50) = 252 paths",
+    "signal": {"samples": 2000, "sampling_rate_hz": 1200000, "duration_ms": 1.667, "values": "raw ADC-like counts stored as float32"},
+    "session_mat_fields": ["cycles", "load [kips]", "condition (loaded/clamped/traction free)", "path_data(1,252)", "straingage_data", "XRay_data"],
+    "known_gaps": [
+      "L3S13, L3S14: no X-ray images, only hand-traced drawings",
+      "L1S18, L1S17: X-ray film photos only",
+      "several coupons lack strain-gauge data (L1S17,L1S18,L2S18,L2S17,L2S20,L3S18,L3S20)"
+    ]
+  },
+  "provenance_docs": "data/raw/nasa_cfrp/2. Composites/docs_extracted/ (README.pdf + 4 papers, identical across layups)",
+  "extracted_inventory_2026-10-04": {
+    "L1_S11": {"mat": 225, "xray": 15},
+    "L1_S12": {"mat": 166, "xray": 21},
+    "L1_S18": {"mat": 180, "xray": 12},
+    "L1_S19": {"mat": 85, "xray": 14},
+    "L2_S11": {"mat": 197, "xray": 26},
+    "L2_S17": {"mat": 108, "xray": 16},
+    "L2_S18": {"mat": 110, "xray": 15},
+    "L2_S20": {"mat": 107, "xray": 11},
+    "L3_S11": {"mat": 139, "xray": 27},
+    "L3_S13": {"mat": 194, "xray": 5},
+    "L3_S14": {"mat": 44, "xray": 0},
+    "L3_S18": {"mat": 134, "xray": 13},
+    "L3_S20": {"mat": 123, "xray": 46},
+    "note": "counts case-insensitive; dir names vary (XRay/XRays, .jpg/.JPG, PZT-data/PZTdata)"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "dataset": "Open Guided Waves - dataset #1 (CFRP plate, 28 damage scenarios D1-D28)",
+  "downloaded_at": "2026-10-04",
+  "source_page": "https://openguidedwaves.de/downloads/ (OGW dataset #1 -> Guided wave basic measurement data)",
+  "source_url": "https://nextcloud.faserinstitut.de/index.php/s/UfcaKdsx1imUrTm (zip: https://nextcloud.faserinstitut.de/public.php/dav/files/UfcaKdsx1imUrTm/?accept=zip)",
+  "notes": "Legacy domain openguidedwaves.org is DEAD (NXDOMAIN via 8.8.8.8, 2026-10-03). The .de site is the live official host. FIBRE NextCloud is the primary storage; no checksums or download scripts are published by OGW.",
+  "files": [
+    {
+      "path": "data/raw/ogw/ogw1_dataset.zip",
+      "size_bytes": 15007231780,
+      "sha256": "b85fd77cff855b796e51306c3e3cbad28b26ccf8468fe54271ffb91f6df273da",
+      "integrity": "zip testzip() clean"
+    }
+  ],
+  "structure": {
+    "acquisition_dirs": 90,
+    "composition": "60 baseline (pristine, interleaved between damage insertions) + D1..D28 + multi-damage dirs D25_D28, D14_D25_D28",
+    "per_dir": "12 HDF5 files pc_f{40..260 step 20}kHz.h5, ~13.9 MB each",
+    "h5_content": {
+      "pitchcatch/catch": "(66, 13108) float64, 66 one-way pitch-catch paths x 13108 samples @ 10 MHz (1.31 ms)",
+      "pitchcatch/pitch": "(66, 13108)",
+      "command/pitchcatch/channels": "(66, 2) uint8 tx/rx, tx 0..10, rx 1..11",
+      "excitation": "5-cycle tone burst, per-file carrier 40-260 kHz",
+      "environment": "CTC/Temperature, CTC/Humidity, timestamp",
+      "device": "RAMMSbone acquisition"
+    },
+    "plate": "500x500x2 mm CFRP, 12 PZT (T1-T6 y=470mm, T7-T12 y=30mm, x=50..450 step 80); damage = removable aluminium disc, 28 positions D1-D28 (7 clusters x 4)"
+  },
+  "license": "free academic use with citation of Moll et al., Struct. Health Monit. 18(5-6) 1903-1914, 2019, DOI 10.1177/1475921718817169"
+}

@@ -1,0 +1,269 @@
+{
+  "config": {
+    "coupon": "L1S11",
+    "excitation_khz": 250.0,
+    "bandpass_khz": [
+      20.0,
+      30.0
+    ],
+    "grid_wh": [
+      152,
+      178
+    ],
+    "cycles": [
+      1,
+      10000,
+      20000,
+      30000,
+      40000
+    ],
+    "condition_filter": "loaded",
+    "velocity_ms": 5200.0,
+    "direct_gate_us": 8.0,
+    "seed": 0,
+    "actuator_xy": {
+      "1": [
+        139.7,
+        0.0
+      ],
+      "2": [
+        114.3,
+        0.0
+      ],
+      "3": [
+        88.89999999999999,
+        0.0
+      ],
+      "4": [
+        63.5,
+        0.0
+      ],
+      "5": [
+        38.099999999999994,
+        0.0
+      ],
+      "6": [
+        12.7,
+        0.0
+      ]
+    },
+    "receiver_xy": {
+      "7": [
+        12.7,
+        178.0
+      ],
+      "8": [
+        38.099999999999994,
+        178.0
+      ],
+      "9": [
+        63.5,
+        178.0
+      ],
+      "10": [
+        88.89999999999999,
+        178.0
+      ],
+      "11": [
+        114.3,
+        178.0
+      ],
+      "12": [
+        139.7,
+        178.0
+      ]
+    }
+  },
+  "approximations": {
+    "frequency_scale": "VERIFIED: paper kHz = 10 x stored-signal scale. Actuator reference for file frequency==250 peaks at 25.2 kHz (fs=1.2 MHz); a data-scale 23-27 kHz band is the literal mapping of the paper's 230-270 kHz.",
+    "velocity_source": "paper \u00a75.1.2: Fig 8 velocity curves are ABAQUS simulations of each layup; experimental signals are NOT used to estimate velocity. Experimental first arrivals here are multi-modal/dispersive (no consistent single-mode ToF), so the paper's own choice (simulation velocity) is reproduced: uniform 5.2 km/s from Fig 8a reading; sensitivity 4.4/5.6 km/s.",
+    "sensor_geometry": "even 25.4 mm pitch, rows at y=0 / y=178 (paper gives no numbers)",
+    "filter": "4th-order Butterworth, zero-phase filtfilt for imaging (paper: no order stated); record starts with a quiet pre-arrival segment so t=0 = excitation start is consistent across paths",
+    "das_signal": "|Hilbert envelope| sampled at the delayed time, summed over the 6 receivers per actuator, then averaged over actuators (paper Eq 1 with omega=1, Fig 12b). A per-path time gate removes the direct arrival (t < ToF_direct + margin) because pixels on the straight actuator-receiver line share the direct-path delay and would otherwise light up as vertical stripes (verified without gate). The paper does not state a gate; this is a standard pitch-catch DAS practice required to obtain damage-focused images.",
+    "baseline_subtraction": "time-domain subtraction of the matching cycle-0 baseline acquisition (same condition 'Loaded', closest actuation load) before DAS. Paper \u00a75.1.2 describes baseline subtraction for the simulation branch; without it the experimental DAS image is dominated by direct-path/boundary energy (verified), which contradicts the paper's damage-focused Fig 13a, so the experimental branch must subtract a baseline too (exact matching rule unstated).",
+    "time_window": "full 2000-sample record (1.667 ms); paper does not state a window",
+    "condition": "first 'Loaded' mat per cycle used (clamped/traction-free variants exist)"
+  },
+  "runs": [
+    {
+      "cycle": 1,
+      "velocity_ms": 5200.0,
+      "tag": "primary",
+      "mat": "L1S11_1_1_1.mat",
+      "baseline_mat": "L1S11_0_1_16.mat",
+      "condition": "loaded",
+      "load_kips": 3.997,
+      "n_paths": 36,
+      "left_half_energy": 3587.1373252047106,
+      "right_half_energy": 4175.967129838983
+    },
+    {
+      "cycle": 1,
+      "velocity_ms": 4400.0,
+      "tag": "sens_4400",
+      "mat": "L1S11_1_1_1.mat",
+      "baseline_mat": "L1S11_0_1_16.mat",
+      "condition": "loaded",
+      "load_kips": 3.997,
+      "n_paths": 36,
+      "left_half_energy": 3899.768159262041,
+      "right_half_energy": 4546.986104566133
+    },
+    {
+      "cycle": 1,
+      "velocity_ms": 5600.0,
+      "tag": "sens_5600",
+      "mat": "L1S11_1_1_1.mat",
+      "baseline_mat": "L1S11_0_1_16.mat",
+      "condition": "loaded",
+      "load_kips": 3.997,
+      "n_paths": 36,
+      "left_half_energy": 3687.9273257481345,
+      "right_half_energy": 4353.647198083831
+    },
+    {
+      "cycle": 10000,
+      "velocity_ms": 5200.0,
+      "tag": "primary",
+      "mat": "L1S11_10000_1_1.mat",
+      "baseline_mat": "L1S11_0_1_8.mat",
+      "condition": "loaded",
+      "load_kips": 4.013,
+      "n_paths": 36,
+      "left_half_energy": 3281.9885686329317,
+      "right_half_energy": 4193.881644779422
+    },
+    {
+      "cycle": 10000,
+      "velocity_ms": 4400.0,
+      "tag": "sens_4400",
+      "mat": "L1S11_10000_1_1.mat",
+      "baseline_mat": "L1S11_0_1_8.mat",
+      "condition": "loaded",
+      "load_kips": 4.013,
+      "n_paths": 36,
+      "left_half_energy": 3535.1972701323034,
+      "right_half_energy": 4716.397736781756
+    },
+    {
+      "cycle": 10000,
+      "velocity_ms": 5600.0,
+      "tag": "sens_5600",
+      "mat": "L1S11_10000_1_1.mat",
+      "baseline_mat": "L1S11_0_1_8.mat",
+      "condition": "loaded",
+      "load_kips": 4.013,
+      "n_paths": 36,
+      "left_half_energy": 3287.1225343590063,
+      "right_half_energy": 4108.493948856669
+    },
+    {
+      "cycle": 20000,
+      "velocity_ms": 5200.0,
+      "tag": "primary",
+      "mat": "L1S11_20000_1_1.mat",
+      "baseline_mat": "L1S11_0_1_8.mat",
+      "condition": "loaded",
+      "load_kips": 4.003,
+      "n_paths": 36,
+      "left_half_energy": 2222.1068220128964,
+      "right_half_energy": 3506.8950681438055
+    },
+    {
+      "cycle": 20000,
+      "velocity_ms": 4400.0,
+      "tag": "sens_4400",
+      "mat": "L1S11_20000_1_1.mat",
+      "baseline_mat": "L1S11_0_1_8.mat",
+      "condition": "loaded",
+      "load_kips": 4.003,
+      "n_paths": 36,
+      "left_half_energy": 2464.1542373037782,
+      "right_half_energy": 3931.463158751897
+    },
+    {
+      "cycle": 20000,
+      "velocity_ms": 5600.0,
+      "tag": "sens_5600",
+      "mat": "L1S11_20000_1_1.mat",
+      "baseline_mat": "L1S11_0_1_8.mat",
+      "condition": "loaded",
+      "load_kips": 4.003,
+      "n_paths": 36,
+      "left_half_energy": 2217.4307682962385,
+      "right_half_energy": 3386.50032626681
+    },
+    {
+      "cycle": 30000,
+      "velocity_ms": 5200.0,
+      "tag": "primary",
+      "mat": "L1S11_30000_1_1.mat",
+      "baseline_mat": "L1S11_0_1_16.mat",
+      "condition": "loaded",
+      "load_kips": 3.999,
+      "n_paths": 36,
+      "left_half_energy": 3694.274101719427,
+      "right_half_energy": 4079.7225768030303
+    },
+    {
+      "cycle": 30000,
+      "velocity_ms": 4400.0,
+      "tag": "sens_4400",
+      "mat": "L1S11_30000_1_1.mat",
+      "baseline_mat": "L1S11_0_1_16.mat",
+      "condition": "loaded",
+      "load_kips": 3.999,
+      "n_paths": 36,
+      "left_half_energy": 4185.590254938568,
+      "right_half_energy": 4622.462322878701
+    },
+    {
+      "cycle": 30000,
+      "velocity_ms": 5600.0,
+      "tag": "sens_5600",
+      "mat": "L1S11_30000_1_1.mat",
+      "baseline_mat": "L1S11_0_1_16.mat",
+      "condition": "loaded",
+      "load_kips": 3.999,
+      "n_paths": 36,
+      "left_half_energy": 3609.9943548385304,
+      "right_half_energy": 3960.921450724196
+    },
+    {
+      "cycle": 40000,
+      "velocity_ms": 5200.0,
+      "tag": "primary",
+      "mat": "L1S11_40000_1_1.mat",
+      "baseline_mat": "L1S11_0_1_8.mat",
+      "condition": "loaded",
+      "load_kips": 4.013,
+      "n_paths": 36,
+      "left_half_energy": 4474.917792820059,
+      "right_half_energy": 4031.0366872964987
+    },
+    {
+      "cycle": 40000,
+      "velocity_ms": 4400.0,
+      "tag": "sens_4400",
+      "mat": "L1S11_40000_1_1.mat",
+      "baseline_mat": "L1S11_0_1_8.mat",
+      "condition": "loaded",
+      "load_kips": 4.013,
+      "n_paths": 36,
+      "left_half_energy": 5202.109685072393,
+      "right_half_energy": 4670.806295394911
+    },
+    {
+      "cycle": 40000,
+      "velocity_ms": 5600.0,
+      "tag": "sens_5600",
+      "mat": "L1S11_40000_1_1.mat",
+      "baseline_mat": "L1S11_0_1_8.mat",
+      "condition": "loaded",
+      "load_kips": 4.013,
+      "n_paths": 36,
+      "left_half_energy": 4271.687486657265,
+      "right_half_energy": 3891.745124331053
+    }
+  ]
+}

@@ -36,3 +36,4 @@ experiments/results/m0_2c_eddycus_audit_full.json
 # wrt-sam reproduction: checkpoints are huge, only metrics/history are committed
 experiments/wrt-sam/**/*.pt
 experiments/wrt-sam/**/gdxray58_vis/
+docs/papers/
